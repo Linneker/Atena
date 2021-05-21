@@ -84,5 +84,12 @@ namespace imagem.bar.francisco.api.Controllers.Account
         {
             return _mapper.Map<Task<List<DespesaViewModel>>>(_despesaApplication.GetDespesaOrderByMaiorValorAsync());
         }
+
+        [Authorize("Bearer")]
+        [HttpGet("GetDespesaByCompetenciaId/{competencia}")]
+        public List<DespesaViewModel> GetDespesaByCompeetenciaId(Guid competenciaId)
+        {
+            return _mapper.Map<List<DespesaViewModel>>(_despesaApplication.GetDespesaByCompetenciaId(competenciaId));
+        }
     }
 }

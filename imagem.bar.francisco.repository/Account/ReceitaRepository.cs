@@ -104,5 +104,15 @@ namespace imagem.bar.francisco.repository.Account
                          select dps).ToListAsync();
             return query;
         }
+
+        public List<Receita> GetReceitaByCompetenciaId(Guid competenciaId)
+        {
+            var query = (from dps in _db.Receitas
+                         join comp in _db.Competencias on dps.CompetenciaId equals comp.Id
+                         where dps.CompetenciaId == competenciaId
+                         orderby dps.Valor descending
+                         select dps).ToList();
+            return query;
+        }
     }
 }

@@ -52,7 +52,7 @@ namespace imagem.bar.francisco.api
         {
             Configuration = configuration;
         }
-
+        private string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -115,13 +115,27 @@ namespace imagem.bar.francisco.api
                 paramsValidation.ClockSkew = TimeSpan.Zero;
             });
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://localhost:4200",
+                                                          "https://localhost:4200",
+                                                          "https://bardochiquinho.acmesistemas.com.br/",
+                                                          "https://bardochiquinho.acmesistemas.com.br/api/").
+                                                          AllowAnyHeader().
+                                                          AllowAnyMethod().
+                                                          AllowAnyOrigin();
+                                  });
+            });
+
             services.AddAuthorization(auth =>
             {
                 auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
                     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
                     .RequireAuthenticatedUser().Build());
             });
-
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -141,6 +155,7 @@ namespace imagem.bar.francisco.api
             }
 
             app.UseHttpsRedirection();
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseRouting();
 

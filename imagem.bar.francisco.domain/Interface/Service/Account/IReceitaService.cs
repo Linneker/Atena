@@ -18,5 +18,7 @@ namespace imagem.bar.francisco.domain.Interface.Service.Account
         Task<List<Receita>> GetReceitaByCompetenciaMesOrderByMaiorValorAsync(int mes);
         List<Receita> GetReceitaByPeriodoCompetenciaOrderByMaiorValor(int ano, int mes);
         Task<List<Receita>> GetReceitaByPeriodoCompetenciaOrderByMaiorValorAsync(int ano, int mes);
+        List<Receita> GetReceitaByCompetenciaId(Guid competenciaId);
+
     }
 }

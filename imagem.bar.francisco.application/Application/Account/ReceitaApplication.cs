@@ -57,6 +57,11 @@ namespace imagem.bar.francisco.application.Application.Account
             return _receitaService.GetReceitaByPeriodoCompetenciaOrderByMaiorValorAsync(ano, mes);
         }
 
+        public List<Receita> GetReceitaByCompetenciaId(Guid competenciaId)
+        {
+            return _receitaService.GetReceitaByCompetenciaId(competenciaId);
+        }
+
         public List<Receita> GetReceitaOrderByMaiorValor()
         {
             return _receitaService.GetReceitaOrderByMaiorValor();

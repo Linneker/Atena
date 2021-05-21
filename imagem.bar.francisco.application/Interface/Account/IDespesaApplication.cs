@@ -18,5 +18,6 @@ namespace imagem.bar.francisco.application.Interface.Account
         Task<List<Despesa>> GetDespesaByCompetenciaMesOrderByMaiorValorAsync(int mes);
         List<Despesa> GetDespesaByPeriodoCompetenciaOrderByMaiorValor(int ano, int mes);
         Task<List<Despesa>> GetDespesaByPeriodoCompetenciaOrderByMaiorValorAsync(int ano, int mes);
+        List<Despesa> GetDespesaByCompetenciaId(Guid guid);
     }
 }

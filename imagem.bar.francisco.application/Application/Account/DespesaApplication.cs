@@ -37,6 +37,11 @@ namespace imagem.bar.francisco.application.Application.Account
             return _despesaService.GetDespesaByCompetenciaAnoOrderByMaiorValorAsync(ano);
         }
 
+        public List<Despesa> GetDespesaByCompetenciaId(Guid guid)
+        {
+            return _despesaService.GetDespesaByCompetenciaId(guid);
+        }
+
         public List<Despesa> GetDespesaByCompetenciaMesOrderByMaiorValor(int mes)
         {
             return _despesaService.GetDespesaByCompetenciaMesOrderByMaiorValor(mes);

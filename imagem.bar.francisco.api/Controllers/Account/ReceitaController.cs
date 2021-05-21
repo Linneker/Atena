@@ -84,5 +84,11 @@ namespace imagem.bar.francisco.api.Controllers.Account
         {
             return _mapper.Map<Task<List<ReceitaViewModel>>>(_receitaApplication.GetReceitaOrderByMaiorValorAsync());
         }
+        [Authorize("Bearer")]
+        [HttpGet("GetReceitaByCompetenciaId/{competenciaId}")]
+        public List<ReceitaViewModel> GetReceitaByCompetenciaId(Guid competenciaId)
+        {
+            return _mapper.Map<List<ReceitaViewModel>>(_receitaApplication.GetReceitaByCompetenciaId(competenciaId));
+        }
     }
 }

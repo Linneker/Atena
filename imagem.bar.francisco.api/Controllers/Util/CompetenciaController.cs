@@ -2,6 +2,7 @@
 using imagem.bar.francisco.api.ViewModel.Util;
 using imagem.bar.francisco.application.Interface.Util;
 using imagem.bar.francisco.domain.DTO.Util;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,6 +23,13 @@ namespace imagem.bar.francisco.api.Controllers.Util
         {
             _mapper = mapper;
             _competenciaApplication = competenciaApplication;
+        }
+
+        [Authorize("Bearer")]
+        [HttpGet("GetComptenciaByAnoAndMes/{ano}/{mes}")]
+        public CompetenciaViewModel GetComptenciaByAnoAndMes(int ano, int mes)
+        {
+            return _mapper.Map<CompetenciaViewModel>(_competenciaApplication.GetComptenciaByAnoAndMes(ano, mes));
         }
     }
 }
