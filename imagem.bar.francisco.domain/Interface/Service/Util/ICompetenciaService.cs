@@ -14,5 +14,6 @@ namespace imagem.bar.francisco.domain.Interface.Service.Util
         Task<List<Competencia>> GetComptenciasByAnoAsync(int ano);
         List<Competencia> GetComptenciasByMes(int mes);
         Task<List<Competencia>> GetComptenciasByMesAsync(int mes);
+        List<Competencia> GetCompetenciasOrderByDesc();
     }
 }

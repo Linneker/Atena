@@ -17,59 +17,84 @@ namespace imagem.bar.francisco.domain.Service.Account
             _despesaRepository = despesaRepository;
         }
 
-        public List<Despesa> GetDespesaByCompetenciaAnoAndCompetenciaMesOrderByMaiorValor(int ano, int mes)
+        public List<Despesa> GetDespesasByCompetenciaAnoAndCompetenciaMesOrderByMaiorValor(int ano, int mes)
         {
-            return _despesaRepository.GetDespesaByCompetenciaAnoAndCompetenciaMesOrderByMaiorValor(ano, mes);
+            return _despesaRepository.GetDespesasByCompetenciaAnoAndCompetenciaMesOrderByMaiorValor(ano, mes);
         }
 
-        public Task<List<Despesa>> GetDespesaByCompetenciaAnoAndCompetenciaMesOrderByMaiorValorAsync(int ano, int mes)
+        public Task<List<Despesa>> GetDespesasByCompetenciaAnoAndCompetenciaMesOrderByMaiorValorAsync(int ano, int mes)
         {
-            return _despesaRepository.GetDespesaByCompetenciaAnoAndCompetenciaMesOrderByMaiorValorAsync(ano, mes);
+            return _despesaRepository.GetDespesasByCompetenciaAnoAndCompetenciaMesOrderByMaiorValorAsync(ano, mes);
         }
 
-        public List<Despesa> GetDespesaByCompetenciaAnoOrderByMaiorValor(int ano)
+        public List<Despesa> GetDespesasByCompetenciaAnoOrderByMaiorValor(int ano)
         {
-            return _despesaRepository.GetDespesaByCompetenciaAnoOrderByMaiorValor(ano);
+            return _despesaRepository.GetDespesasByCompetenciaAnoOrderByMaiorValor(ano);
         }
 
-        public Task<List<Despesa>> GetDespesaByCompetenciaAnoOrderByMaiorValorAsync(int ano)
+        public Task<List<Despesa>> GetDespesasByCompetenciaAnoOrderByMaiorValorAsync(int ano)
         {
-            return _despesaRepository.GetDespesaByCompetenciaAnoOrderByMaiorValorAsync(ano);
+            return _despesaRepository.GetDespesasByCompetenciaAnoOrderByMaiorValorAsync(ano);
         }
 
-        public List<Despesa> GetDespesaByCompetenciaId(Guid guid)
+        public List<Despesa> GetDespesasByCompetenciaId(Guid guid)
         {
-            return _despesaRepository.GetDespesaByCompetenciaId(guid);
+            return _despesaRepository.GetDespesasByCompetenciaId(guid);
         }
 
-        public List<Despesa> GetDespesaByCompetenciaMesOrderByMaiorValor(int mes)
+        public List<Despesa> GetDespesasByCompetenciaMesOrderByMaiorValor(int mes)
         {
-            return _despesaRepository.GetDespesaByCompetenciaMesOrderByMaiorValor(mes);
+            return _despesaRepository.GetDespesasByCompetenciaMesOrderByMaiorValor(mes);
         }
 
-        public Task<List<Despesa>> GetDespesaByCompetenciaMesOrderByMaiorValorAsync(int mes)
+        public Task<List<Despesa>> GetDespesasByCompetenciaMesOrderByMaiorValorAsync(int mes)
         {
-            return _despesaRepository.GetDespesaByCompetenciaMesOrderByMaiorValorAsync(mes);
+            return _despesaRepository.GetDespesasByCompetenciaMesOrderByMaiorValorAsync(mes);
         }
 
-        public List<Despesa> GetDespesaByPeriodoCompetenciaOrderByMaiorValor(int ano, int mes)
+        public List<Despesa> GetDespesasByPeriodoCompetenciaOrderByMaiorValor(int ano, int mes)
         {
-            return _despesaRepository.GetDespesaByPeriodoCompetenciaOrderByMaiorValor(ano, mes);
+            return _despesaRepository.GetDespesasByPeriodoCompetenciaOrderByMaiorValor(ano, mes);
         }
 
-        public Task<List<Despesa>> GetDespesaByPeriodoCompetenciaOrderByMaiorValorAsync(int ano, int mes)
+        public Task<List<Despesa>> GetDespesasByPeriodoCompetenciaOrderByMaiorValorAsync(int ano, int mes)
         {
-            return _despesaRepository.GetDespesaByPeriodoCompetenciaOrderByMaiorValorAsync(ano, mes);
+            return _despesaRepository.GetDespesasByPeriodoCompetenciaOrderByMaiorValorAsync(ano, mes);
         }
 
-        public List<Despesa> GetDespesaOrderByMaiorValor()
+        public List<Despesa> GetDespesasMaisExpressisvasDoMes()
         {
-            return _despesaRepository.GetDespesaOrderByMaiorValor();
+            return _despesaRepository.GetDespesasMaisExpressisvasDoMes();
         }
 
-        public Task<List<Despesa>> GetDespesaOrderByMaiorValorAsync()
+        public List<Despesa> GetDespesasOrderByMaiorValor()
         {
-            return _despesaRepository.GetDespesaOrderByMaiorValorAsync();
+            return _despesaRepository.GetDespesasOrderByMaiorValor();
+        }
+
+        public Task<List<Despesa>> GetDespesasOrderByMaiorValorAsync()
+        {
+            return _despesaRepository.GetDespesasOrderByMaiorValorAsync();
+        }
+
+        public decimal GetDespesaTotalAnual()
+        {
+            return _despesaRepository.GetDespesaTotalAnual();
+        }
+
+        public decimal GetDespesaTotalByAno(int ano)
+        {
+            return _despesaRepository.GetDespesaTotalAnual();
+        }
+
+        public decimal GetDespesaTotalByMes(int mes)
+        {
+            return _despesaRepository.GetDespesaTotalByMes(mes);
+        }
+
+        public decimal GetDespesaTotalMes()
+        {
+            return _despesaRepository.GetDespesaTotalMes();
         }
     }
 }

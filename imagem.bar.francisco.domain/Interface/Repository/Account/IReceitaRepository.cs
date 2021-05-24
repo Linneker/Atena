@@ -8,17 +8,22 @@ namespace imagem.bar.francisco.domain.Interface.Repository.Account
 {
     public interface IReceitaRepository : IRepositoryBase<Receita>
     {
-        List<Receita> GetReceitaOrderByMaiorValor();
-        Task<List<Receita>> GetReceitaOrderByMaiorValorAsync();
-        List<Receita> GetReceitaByCompetenciaAnoAndCompetenciaMesOrderByMaiorValor(int ano, int mes);
-        Task<List<Receita>> GetReceitaByCompetenciaAnoAndCompetenciaMesOrderByMaiorValorAsync(int ano, int mes);
-        List<Receita> GetReceitaByCompetenciaAnoOrderByMaiorValor(int ano);
-        Task<List<Receita>> GetReceitaByCompetenciaAnoOrderByMaiorValorAsync(int ano);
-        List<Receita> GetReceitaByCompetenciaMesOrderByMaiorValor(int mes);
-        Task<List<Receita>> GetReceitaByCompetenciaMesOrderByMaiorValorAsync(int mes);
-        List<Receita> GetReceitaByPeriodoCompetenciaOrderByMaiorValor(int ano, int mes);
-        Task<List<Receita>> GetReceitaByPeriodoCompetenciaOrderByMaiorValorAsync(int ano, int mes);
-        List<Receita> GetReceitaByCompetenciaId(Guid competenciaId);
+        List<Receita> GetReceitasOrderByMaiorValor();
+        Task<List<Receita>> GetReceitasOrderByMaiorValorAsync();
+        List<Receita> GetReceitasByCompetenciaAnoAndCompetenciaMesOrderByMaiorValor(int ano, int mes);
+        Task<List<Receita>> GetReceitasByCompetenciaAnoAndCompetenciaMesOrderByMaiorValorAsync(int ano, int mes);
+        List<Receita> GetReceitasByCompetenciaAnoOrderByMaiorValor(int ano);
+        Task<List<Receita>> GetReceitasByCompetenciaAnoOrderByMaiorValorAsync(int ano);
+        List<Receita> GetReceitasByCompetenciaMesOrderByMaiorValor(int mes);
+        Task<List<Receita>> GetReceitasByCompetenciaMesOrderByMaiorValorAsync(int mes);
+        List<Receita> GetReceitasByPeriodoCompetenciaOrderByMaiorValor(int ano, int mes);
+        Task<List<Receita>> GetReceitasByPeriodoCompetenciaOrderByMaiorValorAsync(int ano, int mes);
+        List<Receita> GetReceitasByCompetenciaId(Guid competenciaId);
+        List<Receita> GetReceitasMaisExpressisvasDoMes();
+        decimal GetReceitaTotalMes();
+        decimal GetReceitaTotalAnual();
+        decimal GetReceitaTotalByMes(int mes);
+        decimal GetReceitaTotalByAno(int ano);
 
     }
 }

@@ -13,6 +13,14 @@ namespace imagem.bar.francisco.domain.DTO.Util
             FluxosDeCasas = new HashSet<FluxoDeCaixa>();
             Receitas = new HashSet<Receita>();
         }
+        public Competencia(int ano, int mes)
+        {
+            Ano = ano;
+            Mes = mes;
+            Despesas = new HashSet<Despesa>();
+            FluxosDeCasas = new HashSet<FluxoDeCaixa>();
+            Receitas = new HashSet<Receita>();
+        }
 
         public int Ano { get; set; }
         public int Mes { get; set; }

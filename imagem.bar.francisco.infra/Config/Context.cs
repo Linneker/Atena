@@ -29,7 +29,7 @@ namespace imagem.bar.francisco.infra.Config
 
         public DbSet<Competencia> Competencias { get; set; }
         public DbSet<AutorizacaoApi> AutorizacaoApis { get; set; }
-
+        public DbSet<Usuario> Usuarios { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CompetenciaMap());
@@ -41,6 +41,8 @@ namespace imagem.bar.francisco.infra.Config
             modelBuilder.ApplyConfiguration(new FluxoDeCaixaDespesaMap());
             
             modelBuilder.ApplyConfiguration(new AutorizacaoApiMap());
+            modelBuilder.ApplyConfiguration(new UsuarioMap());
+
 
         }
     }

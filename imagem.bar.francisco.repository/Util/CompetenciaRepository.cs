@@ -15,6 +15,14 @@ namespace imagem.bar.francisco.repository.Util
         {
         }
 
+        public List<Competencia> GetCompetenciasOrderByDesc()
+        {
+            var query = (from competencia in _db.Competencias
+                          orderby competencia.Ano descending, competencia.Mes descending
+                          select competencia).ToList();
+            return query;
+        }
+
         public Competencia GetComptenciaByAnoAndMes(int ano, int mes)
         {
             var query = (from competencia in _db.Competencias

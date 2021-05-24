@@ -17,59 +17,83 @@ namespace imagem.bar.francisco.domain.Service.Account
             _receitaRepository = receitaRepository;
         }
 
-        public List<Receita> GetReceitaByCompetenciaAnoAndCompetenciaMesOrderByMaiorValor(int ano, int mes)
+        public List<Receita> GetReceitasByCompetenciaAnoAndCompetenciaMesOrderByMaiorValor(int ano, int mes)
         {
-            return _receitaRepository.GetReceitaByCompetenciaAnoAndCompetenciaMesOrderByMaiorValor(ano, mes);
+            return _receitaRepository.GetReceitasByCompetenciaAnoAndCompetenciaMesOrderByMaiorValor(ano, mes);
                 }
 
-        public Task<List<Receita>> GetReceitaByCompetenciaAnoAndCompetenciaMesOrderByMaiorValorAsync(int ano, int mes)
+        public Task<List<Receita>> GetReceitasByCompetenciaAnoAndCompetenciaMesOrderByMaiorValorAsync(int ano, int mes)
         {
-            return _receitaRepository.GetReceitaByCompetenciaAnoAndCompetenciaMesOrderByMaiorValorAsync(ano, mes);
+            return _receitaRepository.GetReceitasByCompetenciaAnoAndCompetenciaMesOrderByMaiorValorAsync(ano, mes);
         }
 
-        public List<Receita> GetReceitaByCompetenciaAnoOrderByMaiorValor(int ano)
+        public List<Receita> GetReceitasByCompetenciaAnoOrderByMaiorValor(int ano)
         {
-            return _receitaRepository.GetReceitaByCompetenciaAnoOrderByMaiorValor(ano);
+            return _receitaRepository.GetReceitasByCompetenciaAnoOrderByMaiorValor(ano);
         }
 
-        public Task<List<Receita>> GetReceitaByCompetenciaAnoOrderByMaiorValorAsync(int ano)
+        public Task<List<Receita>> GetReceitasByCompetenciaAnoOrderByMaiorValorAsync(int ano)
         {
-            return _receitaRepository.GetReceitaByCompetenciaAnoOrderByMaiorValorAsync(ano);
+            return _receitaRepository.GetReceitasByCompetenciaAnoOrderByMaiorValorAsync(ano);
         }
 
-        public List<Receita> GetReceitaByCompetenciaMesOrderByMaiorValor(int mes)
+        public List<Receita> GetReceitasByCompetenciaMesOrderByMaiorValor(int mes)
         {
-            return _receitaRepository.GetReceitaByCompetenciaMesOrderByMaiorValor(mes);
+            return _receitaRepository.GetReceitasByCompetenciaMesOrderByMaiorValor(mes);
         }
 
-        public Task<List<Receita>> GetReceitaByCompetenciaMesOrderByMaiorValorAsync(int mes)
+        public Task<List<Receita>> GetReceitasByCompetenciaMesOrderByMaiorValorAsync(int mes)
         {
-            return _receitaRepository.GetReceitaByCompetenciaMesOrderByMaiorValorAsync(mes);
+            return _receitaRepository.GetReceitasByCompetenciaMesOrderByMaiorValorAsync(mes);
         }
 
-        public List<Receita> GetReceitaByPeriodoCompetenciaOrderByMaiorValor(int ano, int mes)
+        public List<Receita> GetReceitasByPeriodoCompetenciaOrderByMaiorValor(int ano, int mes)
         {
-            return _receitaRepository.GetReceitaByPeriodoCompetenciaOrderByMaiorValor(ano, mes);
+            return _receitaRepository.GetReceitasByPeriodoCompetenciaOrderByMaiorValor(ano, mes);
         }
 
-        public Task<List<Receita>> GetReceitaByPeriodoCompetenciaOrderByMaiorValorAsync(int ano, int mes)
+        public Task<List<Receita>> GetReceitasByPeriodoCompetenciaOrderByMaiorValorAsync(int ano, int mes)
         {
-            return _receitaRepository.GetReceitaByPeriodoCompetenciaOrderByMaiorValorAsync(ano, mes);
+            return _receitaRepository.GetReceitasByPeriodoCompetenciaOrderByMaiorValorAsync(ano, mes);
         }
 
-        public List<Receita> GetReceitaByCompetenciaId(Guid competenciaId)
+        public List<Receita> GetReceitasByCompetenciaId(Guid competenciaId)
         {
-            return _receitaRepository.GetReceitaByCompetenciaId(competenciaId);
+            return _receitaRepository.GetReceitasByCompetenciaId(competenciaId);
         }
 
-        public List<Receita> GetReceitaOrderByMaiorValor()
+        public List<Receita> GetReceitasOrderByMaiorValor()
         {
-            return _receitaRepository.GetReceitaOrderByMaiorValor();
+            return _receitaRepository.GetReceitasOrderByMaiorValor();
         }
 
-        public Task<List<Receita>> GetReceitaOrderByMaiorValorAsync()
+        public Task<List<Receita>> GetReceitasOrderByMaiorValorAsync()
         {
-            return _receitaRepository.GetReceitaOrderByMaiorValorAsync();
+            return _receitaRepository.GetReceitasOrderByMaiorValorAsync();
+        }
+
+        public List<Receita> GetReceitasMaisExpressisvasDoMes()
+        {
+            return _receitaRepository.GetReceitasMaisExpressisvasDoMes();
+        }
+
+        public decimal GetReceitaTotalMes()
+        {
+            return _receitaRepository.GetReceitaTotalMes();
+        }
+        public decimal GetReceitaTotalAnual()
+        {
+            return _receitaRepository.GetReceitaTotalAnual();
+        }
+
+        public decimal GetReceitaTotalByMes(int mes)
+        {
+            return _receitaRepository.GetReceitaTotalByMes(mes);
+        }
+
+        public decimal GetReceitaTotalByAno(int ano)
+        {
+            return _receitaRepository.GetReceitaTotalByAno(ano);
         }
     }
 }

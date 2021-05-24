@@ -1,4 +1,5 @@
 ﻿using imagem.bar.francisco.application.Interface.Util;
+using imagem.bar.francisco.domain.DTO.Enum;
 using imagem.bar.francisco.domain.DTO.Util;
 using imagem.bar.francisco.domain.Interface.Service.Util;
 using System;
@@ -12,9 +13,26 @@ namespace imagem.bar.francisco.application.Application.Util
     {
         private readonly ICompetenciaService _competenciaService;
 
-        public CompetenciaApplication(ICompetenciaService competenciaService):base(competenciaService)
+        public CompetenciaApplication(ICompetenciaService competenciaService) : base(competenciaService)
         {
             _competenciaService = competenciaService;
+        }
+
+        public Competencia CadastraCompetenciaSeNaoExistir()
+        {
+            Competencia competencia = GetComptenciaByAnoAndMes(DateTime.Now.Year, DateTime.Now.Month);
+            if (competencia is null)
+            {
+                competencia = new Competencia(DateTime.Now.Year, DateTime.Now.Month);
+                this.Add(competencia, "COMPETÊNCIA");
+            }
+            return competencia;
+        }
+
+        public List<Competencia> GetCompetenciasOrderByDesc()
+        {
+          CadastraCompetenciaSeNaoExistir();
+          return _competenciaService.GetCompetenciasOrderByDesc();
         }
 
         public Competencia GetComptenciaByAnoAndMes(int ano, int mes)

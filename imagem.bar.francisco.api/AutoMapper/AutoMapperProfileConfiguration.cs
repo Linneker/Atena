@@ -54,6 +54,8 @@ namespace imagem.bar.francisco.api.AutoMapper
             CreateMap<AutorizacaoApiViewModel, AutorizacaoApi>();
             CreateMap<AutorizacaoApi, AutorizacaoApiViewModel>();
 
+            CreateMap<Usuario, UsuarioViewModel>();
+            CreateMap<UsuarioViewModel,Usuario>();
 
         }
     }

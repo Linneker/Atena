@@ -28,67 +28,105 @@ namespace imagem.bar.francisco.api.Controllers.Account
         [HttpGet("GetReceitaByCompetenciaAnoAndCompetenciaMesOrderByMaiorValor/{ano}/{mes}")]
         public List<ReceitaViewModel> GetReceitaByCompetenciaAnoAndCompetenciaMesOrderByMaiorValor(int ano, int mes)
         {
-            return _mapper.Map<List<ReceitaViewModel>>(_receitaApplication.GetReceitaByCompetenciaAnoAndCompetenciaMesOrderByMaiorValor(ano, mes));
+            return _mapper.Map<List<ReceitaViewModel>>(_receitaApplication.GetReceitasByCompetenciaAnoAndCompetenciaMesOrderByMaiorValor(ano, mes));
         }
         [Authorize("Bearer")]
         [HttpGet("GetReceitaByCompetenciaAnoAndCompetenciaMesOrderByMaiorValorAsync/{ano}/{mes}")]
         public Task<List<ReceitaViewModel>> GetReceitaByCompetenciaAnoAndCompetenciaMesOrderByMaiorValorAsync(int ano, int mes)
         {
-            return _mapper.Map<Task<List<ReceitaViewModel>>>(_receitaApplication.GetReceitaByCompetenciaAnoAndCompetenciaMesOrderByMaiorValorAsync(ano, mes));
+            return _mapper.Map<Task<List<ReceitaViewModel>>>(_receitaApplication.GetReceitasByCompetenciaAnoAndCompetenciaMesOrderByMaiorValorAsync(ano, mes));
         }
         [Authorize("Bearer")]
         [HttpGet("GetReceitaByCompetenciaAnoOrderByMaiorValor/{ano}")]
         public List<ReceitaViewModel> GetReceitaByCompetenciaAnoOrderByMaiorValor(int ano)
         {
-            return _mapper.Map<List<ReceitaViewModel>>(_receitaApplication.GetReceitaByCompetenciaAnoOrderByMaiorValor(ano));
+            return _mapper.Map<List<ReceitaViewModel>>(_receitaApplication.GetReceitasByCompetenciaAnoOrderByMaiorValor(ano));
         }
         [Authorize("Bearer")]
         [HttpGet("GetReceitaByCompetenciaAnoOrderByMaiorValorAsync/{ano}")]
         public Task<List<ReceitaViewModel>> GetReceitaByCompetenciaAnoOrderByMaiorValorAsync(int ano)
         {
-            return _mapper.Map<Task<List<ReceitaViewModel>>>(_receitaApplication.GetReceitaByCompetenciaAnoOrderByMaiorValorAsync(ano));
+            return _mapper.Map<Task<List<ReceitaViewModel>>>(_receitaApplication.GetReceitasByCompetenciaAnoOrderByMaiorValorAsync(ano));
         }
         [Authorize("Bearer")]
         [HttpGet("GetReceitaByCompetenciaMesOrderByMaiorValor/{mes}")]
         public List<ReceitaViewModel> GetReceitaByCompetenciaMesOrderByMaiorValor(int mes)
         {
-            return _mapper.Map<List<ReceitaViewModel>>(_receitaApplication.GetReceitaByCompetenciaMesOrderByMaiorValor(mes));
+            return _mapper.Map<List<ReceitaViewModel>>(_receitaApplication.GetReceitasByCompetenciaMesOrderByMaiorValor(mes));
         }
         [Authorize("Bearer")]
         [HttpGet("GetReceitaByCompetenciaMesOrderByMaiorValorAsync/{mes}")]
         public Task<List<ReceitaViewModel>> GetReceitaByCompetenciaMesOrderByMaiorValorAsync(int mes)
         {
-            return _mapper.Map<Task<List<ReceitaViewModel>>>(_receitaApplication.GetReceitaByCompetenciaMesOrderByMaiorValorAsync(mes));
+            return _mapper.Map<Task<List<ReceitaViewModel>>>(_receitaApplication.GetReceitasByCompetenciaMesOrderByMaiorValorAsync(mes));
         }
         [Authorize("Bearer")]
         [HttpGet("GetReceitaByPeriodoCompetenciaOrderByMaiorValor/{ano}/{mes}")]
         public List<ReceitaViewModel> GetReceitaByPeriodoCompetenciaOrderByMaiorValor(int ano, int mes)
         {
-            return _mapper.Map<List<ReceitaViewModel>>(_receitaApplication.GetReceitaByPeriodoCompetenciaOrderByMaiorValor(ano, mes));
+            return _mapper.Map<List<ReceitaViewModel>>(_receitaApplication.GetReceitasByPeriodoCompetenciaOrderByMaiorValor(ano, mes));
         }
         [Authorize("Bearer")]
         [HttpGet("GetReceitaByPeriodoCompetenciaOrderByMaiorValorAsync/{ano}/{mes}")]
         public Task<List<ReceitaViewModel>> GetReceitaByPeriodoCompetenciaOrderByMaiorValorAsync(int ano, int mes)
         {
-            return _mapper.Map<Task<List<ReceitaViewModel>>>(_receitaApplication.GetReceitaByPeriodoCompetenciaOrderByMaiorValorAsync(ano, mes));
+            return _mapper.Map<Task<List<ReceitaViewModel>>>(_receitaApplication.GetReceitasByPeriodoCompetenciaOrderByMaiorValorAsync(ano, mes));
         }
         [Authorize("Bearer")]
         [HttpGet("GetReceitaOrderByMaiorValor")]
         public List<ReceitaViewModel> GetReceitaOrderByMaiorValor()
         {
-            return _mapper.Map<List<ReceitaViewModel>>(_receitaApplication.GetReceitaOrderByMaiorValor());
+            return _mapper.Map<List<ReceitaViewModel>>(_receitaApplication.GetReceitasOrderByMaiorValor());
         }
         [Authorize("Bearer")]
         [HttpGet("GetReceitaOrderByMaiorValorAsync")]
         public Task<List<ReceitaViewModel>> GetReceitaOrderByMaiorValorAsync()
         {
-            return _mapper.Map<Task<List<ReceitaViewModel>>>(_receitaApplication.GetReceitaOrderByMaiorValorAsync());
+            return _mapper.Map<Task<List<ReceitaViewModel>>>(_receitaApplication.GetReceitasOrderByMaiorValorAsync());
         }
+
         [Authorize("Bearer")]
         [HttpGet("GetReceitaByCompetenciaId/{competenciaId}")]
         public List<ReceitaViewModel> GetReceitaByCompetenciaId(Guid competenciaId)
         {
-            return _mapper.Map<List<ReceitaViewModel>>(_receitaApplication.GetReceitaByCompetenciaId(competenciaId));
+            return _mapper.Map<List<ReceitaViewModel>>(_receitaApplication.GetReceitasByCompetenciaId(competenciaId));
         }
+
+
+        [Authorize("Bearer")]
+        [HttpGet("GetReceitasMaisExpressisvasDoMes")]
+        public List<ReceitaViewModel> GetReceitasMaisExpressisvasDoMes()
+        {
+            return _mapper.Map<List<ReceitaViewModel>>(_receitaApplication.GetReceitasMaisExpressisvasDoMes());
+        }
+
+        [Authorize("Bearer")]
+        [HttpGet("GetReceitaTotalMes")]
+        public decimal GetDespesaTotalMes()
+        {
+            return _receitaApplication.GetReceitaTotalMes();
+        }
+
+        [Authorize("Bearer")]
+        [HttpGet("GetReceitaTotalAnual")]
+        public decimal GetReceitaTotalAnual()
+        {
+            return _receitaApplication.GetReceitaTotalAnual();
+        }
+
+        [Authorize("Bearer")]
+        [HttpGet("GetReceitaTotalByMes/{mes}")]
+        public decimal GetReceitaTotalByMes(int mes)
+        {
+            return _receitaApplication.GetReceitaTotalByMes(mes);
+        }
+
+        [Authorize("Bearer")]
+        [HttpGet("GetReceitaTotalByAno/{ano}")]
+        public decimal GetReceitaTotalByAno(int ano)
+        {
+            return _receitaApplication.GetReceitaTotalByAno(ano);
+        }
+
     }
 }

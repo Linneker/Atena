@@ -244,6 +244,45 @@ namespace imagem.bar.francisco.infra.Migrations
                     b.ToTable("AutorizacaoApi");
                 });
 
+            modelBuilder.Entity("imagem.bar.francisco.domain.DTO.Seguranca.Usuario", b =>
+                {
+                    b.Property<byte[]>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<DateTime?>("DataCriacao")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("DataInativacao")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("DataModificacao")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Login")
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)");
+
+                    b.Property<string>("Nome")
+                        .HasMaxLength(400)
+                        .HasColumnType("varchar(400)");
+
+                    b.Property<string>("Senha")
+                        .HasMaxLength(400)
+                        .HasColumnType("varchar(400)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Login")
+                        .IsUnique();
+
+                    b.ToTable("Usuario");
+                });
+
             modelBuilder.Entity("imagem.bar.francisco.domain.DTO.Util.Competencia", b =>
                 {
                     b.Property<byte[]>("Id")

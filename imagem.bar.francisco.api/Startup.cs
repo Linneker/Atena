@@ -68,12 +68,15 @@ namespace imagem.bar.francisco.api
             services.AddTransient<ICompetenciaApplication, CompetenciaApplication>();
             services.AddTransient<IAutorizacaoApiApplication, AutorizacaoApiApplication>();
 
+            services.AddTransient<IUsuarioApplication, UsuarioApplication>();
+
             services.AddTransient<IServiceBase<AbstractEntity>, ServiceBase<AbstractEntity>>();
             services.AddTransient<IDespesaService, DespesaService>();
             services.AddTransient<IReceitaService, ReceitaService>();
             services.AddTransient<IFluxoDeCaixaService, FluxoDeCaixaService>();
             services.AddTransient<ICompetenciaService, CompetenciaService>();
             services.AddTransient<IAutorizacaoApiService, AutorizacaoApiService>();
+            services.AddTransient<IUsuarioService, UsuarioService>();
 
             services.AddTransient<IRepositoryBase<AbstractEntity>, RepositoryBase<AbstractEntity>>();
             services.AddTransient<IDespesaRepository, DespesaRepository>();
@@ -81,6 +84,7 @@ namespace imagem.bar.francisco.api
             services.AddTransient<IFluxoDeCaixaRepository, FluxoDeCaixaRepository>();
             services.AddTransient<ICompetenciaRepository, CompetenciaRepository>();
             services.AddTransient<IAutorizacaoApiRepository, AutorizacaoApiRepository>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
 
             var signingConfigurations = new SigningConfigurations();
             services.AddSingleton(signingConfigurations);

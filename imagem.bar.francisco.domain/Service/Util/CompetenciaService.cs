@@ -17,6 +17,11 @@ namespace imagem.bar.francisco.domain.Service.Util
             _competenciaRepository = competenciaRepository;
         }
 
+        public List<Competencia> GetCompetenciasOrderByDesc()
+        {
+            return _competenciaRepository.GetCompetenciasOrderByDesc();
+        }
+
         public Competencia GetComptenciaByAnoAndMes(int ano, int mes)
         {
             return _competenciaRepository.GetComptenciaByAnoAndMes(ano, mes);

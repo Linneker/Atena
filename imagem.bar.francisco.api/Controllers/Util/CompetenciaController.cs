@@ -31,5 +31,14 @@ namespace imagem.bar.francisco.api.Controllers.Util
         {
             return _mapper.Map<CompetenciaViewModel>(_competenciaApplication.GetComptenciaByAnoAndMes(ano, mes));
         }
+
+        [Authorize("Bearer")]
+        [HttpGet("GetCompetenciasOrderByDesc")]
+        public List<CompetenciaViewModel> GetCompetenciasOrderByDesc()
+        {
+            return _mapper.Map<List<CompetenciaViewModel>>(_competenciaApplication.GetCompetenciasOrderByDesc());
+        }
+
+        
     }
 }

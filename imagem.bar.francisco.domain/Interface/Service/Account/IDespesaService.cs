@@ -8,16 +8,21 @@ namespace imagem.bar.francisco.domain.Interface.Service.Account
 {
     public interface IDespesaService : IServiceBase<Despesa>
     {
-        List<Despesa> GetDespesaOrderByMaiorValor();
-        Task<List<Despesa>> GetDespesaOrderByMaiorValorAsync();
-        List<Despesa> GetDespesaByCompetenciaAnoAndCompetenciaMesOrderByMaiorValor(int ano, int mes);
-        Task<List<Despesa>> GetDespesaByCompetenciaAnoAndCompetenciaMesOrderByMaiorValorAsync(int ano, int mes);
-        List<Despesa> GetDespesaByCompetenciaAnoOrderByMaiorValor(int ano);
-        Task<List<Despesa>> GetDespesaByCompetenciaAnoOrderByMaiorValorAsync(int ano);
-        List<Despesa> GetDespesaByCompetenciaMesOrderByMaiorValor(int mes);
-        Task<List<Despesa>> GetDespesaByCompetenciaMesOrderByMaiorValorAsync(int mes);
-        List<Despesa> GetDespesaByPeriodoCompetenciaOrderByMaiorValor(int ano, int mes);
-        Task<List<Despesa>> GetDespesaByPeriodoCompetenciaOrderByMaiorValorAsync(int ano, int mes);
-        List<Despesa> GetDespesaByCompetenciaId(Guid guid);
+        List<Despesa> GetDespesasOrderByMaiorValor();
+        Task<List<Despesa>> GetDespesasOrderByMaiorValorAsync();
+        List<Despesa> GetDespesasByCompetenciaAnoAndCompetenciaMesOrderByMaiorValor(int ano, int mes);
+        Task<List<Despesa>> GetDespesasByCompetenciaAnoAndCompetenciaMesOrderByMaiorValorAsync(int ano, int mes);
+        List<Despesa> GetDespesasByCompetenciaAnoOrderByMaiorValor(int ano);
+        Task<List<Despesa>> GetDespesasByCompetenciaAnoOrderByMaiorValorAsync(int ano);
+        List<Despesa> GetDespesasByCompetenciaMesOrderByMaiorValor(int mes);
+        Task<List<Despesa>> GetDespesasByCompetenciaMesOrderByMaiorValorAsync(int mes);
+        List<Despesa> GetDespesasByPeriodoCompetenciaOrderByMaiorValor(int ano, int mes);
+        Task<List<Despesa>> GetDespesasByPeriodoCompetenciaOrderByMaiorValorAsync(int ano, int mes);
+        List<Despesa> GetDespesasByCompetenciaId(Guid guid);
+        List<Despesa> GetDespesasMaisExpressisvasDoMes();
+        decimal GetDespesaTotalMes();
+        decimal GetDespesaTotalAnual();
+        decimal GetDespesaTotalByMes(int mes);
+        decimal GetDespesaTotalByAno(int ano);
     }
 }
