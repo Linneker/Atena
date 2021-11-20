@@ -1,0 +1,9 @@
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.domain\bin\Debug\netstandard2.1\imagem.bar.francisco.domain.deps.json
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.domain\bin\Debug\netstandard2.1\imagem.bar.francisco.domain.dll
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.domain\bin\Debug\netstandard2.1\imagem.bar.francisco.domain.pdb
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.domain\obj\Debug\netstandard2.1\imagem.bar.francisco.domain.AssemblyInfoInputs.cache
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.domain\obj\Debug\netstandard2.1\imagem.bar.francisco.domain.AssemblyInfo.cs
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.domain\obj\Debug\netstandard2.1\imagem.bar.francisco.domain.csproj.CoreCompileInputs.cache
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.domain\obj\Debug\netstandard2.1\imagem.bar.francisco.domain.dll
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.domain\obj\Debug\netstandard2.1\imagem.bar.francisco.domain.pdb
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.domain\obj\Debug\netstandard2.1\imagem.bar.francisco.domain.csproj.AssemblyReference.cache

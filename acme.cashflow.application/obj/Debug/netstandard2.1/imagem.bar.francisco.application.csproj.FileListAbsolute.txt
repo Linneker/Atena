@@ -1,0 +1,12 @@
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.application\bin\Debug\netstandard2.1\imagem.bar.francisco.application.deps.json
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.application\bin\Debug\netstandard2.1\imagem.bar.francisco.application.dll
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.application\bin\Debug\netstandard2.1\imagem.bar.francisco.application.pdb
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.application\bin\Debug\netstandard2.1\imagem.bar.francisco.domain.dll
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.application\bin\Debug\netstandard2.1\imagem.bar.francisco.domain.pdb
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.application\obj\Debug\netstandard2.1\imagem.bar.francisco.application.AssemblyInfoInputs.cache
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.application\obj\Debug\netstandard2.1\imagem.bar.francisco.application.AssemblyInfo.cs
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.application\obj\Debug\netstandard2.1\imagem.bar.francisco.application.csproj.CoreCompileInputs.cache
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.application\obj\Debug\netstandard2.1\imagem.bar.francisco.application.csproj.CopyComplete
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.application\obj\Debug\netstandard2.1\imagem.bar.francisco.application.dll
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.application\obj\Debug\netstandard2.1\imagem.bar.francisco.application.pdb
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.application\obj\Debug\netstandard2.1\imagem.bar.francisco.application.csproj.AssemblyReference.cache

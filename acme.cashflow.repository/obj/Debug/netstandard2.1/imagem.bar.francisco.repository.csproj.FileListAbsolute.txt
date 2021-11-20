@@ -1,0 +1,14 @@
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.repository\bin\Debug\netstandard2.1\imagem.bar.francisco.repository.deps.json
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.repository\bin\Debug\netstandard2.1\imagem.bar.francisco.repository.dll
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.repository\bin\Debug\netstandard2.1\imagem.bar.francisco.repository.pdb
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.repository\bin\Debug\netstandard2.1\imagem.bar.francisco.domain.dll
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.repository\bin\Debug\netstandard2.1\imagem.bar.francisco.infra.dll
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.repository\bin\Debug\netstandard2.1\imagem.bar.francisco.domain.pdb
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.repository\bin\Debug\netstandard2.1\imagem.bar.francisco.infra.pdb
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.repository\obj\Debug\netstandard2.1\imagem.bar.francisco.repository.AssemblyInfoInputs.cache
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.repository\obj\Debug\netstandard2.1\imagem.bar.francisco.repository.AssemblyInfo.cs
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.repository\obj\Debug\netstandard2.1\imagem.bar.francisco.repository.csproj.CoreCompileInputs.cache
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.repository\obj\Debug\netstandard2.1\imagem.bar.francisco.repository.csproj.CopyComplete
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.repository\obj\Debug\netstandard2.1\imagem.bar.francisco.repository.dll
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.repository\obj\Debug\netstandard2.1\imagem.bar.francisco.repository.pdb
+C:\Users\linne\source\repos\BarDoSenhorFrancisco\imagem.bar.francisco.repository\obj\Debug\netstandard2.1\imagem.bar.francisco.repository.csproj.AssemblyReference.cache
