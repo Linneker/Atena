@@ -22,7 +22,9 @@ namespace acme.cashflow.infra.Map.Security
 
             builder.Property(t => t.Login).HasMaxLength(500);
             builder.Property(t => t.Senha).HasMaxLength(400);
-            builder.Property(t => t.Nome).HasMaxLength(400);
+            builder.Property(t => t.TermoDeAceite);
+            
+            builder.HasOne(t => t.Pessoa).WithMany(t=>t.Usuarios).HasForeignKey(t=>t.PessoaId);
 
             builder.HasIndex(t => t.Login).IsUnique();
 

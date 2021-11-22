@@ -11,6 +11,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using acme.cashflow.api.ViewModel.Person;
+using acme.cashflow.domain.DTO.Person;
+using acme.cashflow.api.ViewModel.Product;
+using acme.cashflow.domain.DTO.Product;
 
 namespace acme.cashflow.api.AutoMapper
 {
@@ -56,6 +60,41 @@ namespace acme.cashflow.api.AutoMapper
 
             CreateMap<Usuario, UsuarioViewModel>();
             CreateMap<UsuarioViewModel,Usuario>();
+            
+            CreateMap<Permissao, PermissaoViewModel>();
+            CreateMap<PermissaoViewModel, Permissao>();
+            
+            CreateMap<PermissaoUsuario, PermissaoUsuarioViewModel>();
+            CreateMap<PermissaoUsuarioViewModel, PermissaoUsuario>();
+
+            CreateMap<Divida, DividaViewModel>();
+            CreateMap<DividaViewModel, Divida>();
+            CreateMap<Pagamento, PagamentoViewModel>();
+            CreateMap<PagamentoViewModel, Pagamento>();
+
+
+            CreateMap<Pessoa, PessoaViewModel>();
+            CreateMap<PessoaViewModel, Pessoa>();
+            CreateMap<Fornecedor, FornecedorViewModel>();
+            CreateMap<FornecedorViewModel, Fornecedor>();
+
+            CreateMap<Compra, CompraViewModel>();
+            CreateMap<CompraViewModel, Compra>();
+            
+            CreateMap<CompraProduto, CompraProdutoViewModel>();
+            CreateMap<CompraProdutoViewModel, CompraProduto>();
+            
+            CreateMap<Produto, ProdutoViewModel>();
+            CreateMap<ProdutoViewModel, Produto>();
+            
+            CreateMap<Venda, VendaViewModel>();
+            CreateMap<VendaViewModel, Venda>();
+            
+            CreateMap<VendaProduto, VendaProdutoViewModel>();
+            CreateMap<VendaProdutoViewModel, VendaProduto>();
+
+            CreateMap<Parametro, ParametroViewModel>();
+            CreateMap<ParametroViewModel, Parametro>();
 
         }
     }

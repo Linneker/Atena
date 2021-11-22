@@ -12,6 +12,9 @@ namespace acme.cashflow.domain.DTO.Person
         public Pessoa()
         {
             Usuarios = new HashSet<Usuario>();
+            Vendas = new HashSet<Venda>();
+            Dividas = new HashSet<Divida>();
+            Pagamentos = new HashSet<Pagamento>();
         }
 
         public string Nome { get; set; }
@@ -23,6 +26,7 @@ namespace acme.cashflow.domain.DTO.Person
         public virtual ICollection<Usuario> Usuarios { get; set; }
         public virtual ICollection<Pagamento> Pagamentos{ get; set; }
         public virtual ICollection<Venda> Vendas{ get; set; }
+        public virtual ICollection<Divida> Dividas { get; set; }
 
     }
 }
