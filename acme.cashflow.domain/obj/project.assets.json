@@ -836,28 +836,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\linne\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\lblytner\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.domain\\acme.cashflow.domain.csproj",
+      "projectUniqueName": "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.domain\\acme.cashflow.domain.csproj",
       "projectName": "acme.cashflow.domain",
-      "projectPath": "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.domain\\acme.cashflow.domain.csproj",
-      "packagesPath": "C:\\Users\\linne\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.domain\\obj\\",
+      "projectPath": "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.domain\\acme.cashflow.domain.csproj",
+      "packagesPath": "C:\\Users\\lblytner\\.nuget\\packages\\",
+      "outputPath": "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.domain\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\linne\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\lblytner\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.1"
@@ -910,7 +902,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

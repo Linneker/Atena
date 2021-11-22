@@ -1,27 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.repository\\acme.cashflow.repository.csproj": {}
+    "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.repository\\acme.cashflow.repository.csproj": {}
   },
   "projects": {
-    "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.domain\\acme.cashflow.domain.csproj": {
+    "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.domain\\acme.cashflow.domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.domain\\acme.cashflow.domain.csproj",
+        "projectUniqueName": "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.domain\\acme.cashflow.domain.csproj",
         "projectName": "acme.cashflow.domain",
-        "projectPath": "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.domain\\acme.cashflow.domain.csproj",
-        "packagesPath": "C:\\Users\\linne\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.domain\\obj\\",
+        "projectPath": "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.domain\\acme.cashflow.domain.csproj",
+        "packagesPath": "C:\\Users\\lblytner\\.nuget\\packages\\",
+        "outputPath": "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.domain\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\linne\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\lblytner\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
@@ -74,28 +68,22 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.infra\\acme.cashflow.infra.csproj": {
+    "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.infra\\acme.cashflow.infra.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.infra\\acme.cashflow.infra.csproj",
+        "projectUniqueName": "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.infra\\acme.cashflow.infra.csproj",
         "projectName": "acme.cashflow.infra",
-        "projectPath": "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.infra\\acme.cashflow.infra.csproj",
-        "packagesPath": "C:\\Users\\linne\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.infra\\obj\\",
+        "projectPath": "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.infra\\acme.cashflow.infra.csproj",
+        "packagesPath": "C:\\Users\\lblytner\\.nuget\\packages\\",
+        "outputPath": "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.infra\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\linne\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\lblytner\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
@@ -108,8 +96,8 @@
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {
-              "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.domain\\acme.cashflow.domain.csproj": {
-                "projectPath": "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.domain\\acme.cashflow.domain.csproj"
+              "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.domain\\acme.cashflow.domain.csproj": {
+                "projectPath": "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.domain\\acme.cashflow.domain.csproj"
               }
             }
           }
@@ -164,28 +152,22 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.repository\\acme.cashflow.repository.csproj": {
+    "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.repository\\acme.cashflow.repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.repository\\acme.cashflow.repository.csproj",
+        "projectUniqueName": "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.repository\\acme.cashflow.repository.csproj",
         "projectName": "acme.cashflow.repository",
-        "projectPath": "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.repository\\acme.cashflow.repository.csproj",
-        "packagesPath": "C:\\Users\\linne\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.repository\\obj\\",
+        "projectPath": "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.repository\\acme.cashflow.repository.csproj",
+        "packagesPath": "C:\\Users\\lblytner\\.nuget\\packages\\",
+        "outputPath": "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.repository\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\linne\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\lblytner\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
@@ -198,11 +180,11 @@
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {
-              "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.domain\\acme.cashflow.domain.csproj": {
-                "projectPath": "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.domain\\acme.cashflow.domain.csproj"
+              "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.domain\\acme.cashflow.domain.csproj": {
+                "projectPath": "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.domain\\acme.cashflow.domain.csproj"
               },
-              "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.infra\\acme.cashflow.infra.csproj": {
-                "projectPath": "C:\\Users\\linne\\source\\repos\\CashFlow\\acme.cashflow.infra\\acme.cashflow.infra.csproj"
+              "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.infra\\acme.cashflow.infra.csproj": {
+                "projectPath": "D:\\projetos\\Teste-Projeto\\bar.francisco\\acme.cashflow.infra\\acme.cashflow.infra.csproj"
               }
             }
           }
@@ -231,7 +213,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
