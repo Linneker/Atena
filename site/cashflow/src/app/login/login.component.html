@@ -1,0 +1,27 @@
+<h1>Login</h1>
+
+<div class="form">
+  <div class="mb-3 row">
+    <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-10">
+      <input type="text"  [(ngModel)]="login.Login" class="form-control" id="staticEmail" value="">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" [(ngModel)]="login.Senha" id="inputPassword">
+    </div>
+  </div>
+  <div>
+    <div class="mb-3 row">
+      <div class="col-sm-11">
+       </div>
+      <div class="col-sm-1">
+        <button type="button" class="btn btn-primary" id="btnLogin" (click)="Login()">
+        Login
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
