@@ -368,3 +368,4 @@ _ReSharper.*
 bin
 obj
 packages
+!package.json

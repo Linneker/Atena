@@ -25,7 +25,6 @@ namespace acme.cashflow.api.Controllers.Security
             _usuarioApplication = usuarioApplication;
         }
         
-        [Authorize("Bearer")]
         [HttpPost("Login")]
         public UsuarioViewModel Login(UsuarioViewModel usuario)
         {
