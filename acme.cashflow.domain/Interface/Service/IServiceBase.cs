@@ -2,6 +2,7 @@
 using acme.cashflow.domain.DTO.Util;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,7 +20,7 @@ namespace acme.cashflow.domain.Interface.Service
         Task<TEntity> GetByIdAsync(Guid id);
         List<TEntity> GetAll();
         Task<List<TEntity>> GetAllAsync();
-
+        IQueryable<TEntity> GetQueryables();
         void Dispose();
         Notification Commit();
         Task<Notification> CommitAsync();

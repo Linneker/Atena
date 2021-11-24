@@ -67,6 +67,10 @@ namespace acme.cashflow.api.Controllers
         [Authorize("Bearer")]
         [HttpGet("GetById/Async/{id}")]
         public virtual Task<TEntityViewModel> GetByIdAsync(Guid id) => _mapper.Map<Task<TEntityViewModel>>(_applicationBase.GetByIdAsync(id));
+        
+        [Authorize("Bearer")]
+        [HttpGet("GetQueryables")]
+        public virtual IQueryable<TEntityViewModel> GetQueryables(Guid id) => _mapper.Map<IQueryable<TEntityViewModel>>(_applicationBase.GetQueryables());
 
         [Authorize("Bearer")]
         [HttpPut]

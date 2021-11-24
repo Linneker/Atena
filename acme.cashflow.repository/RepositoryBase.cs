@@ -111,6 +111,8 @@ namespace acme.cashflow.repository
 
 
         public List<TEntity> GetAll() => _db.Set<TEntity>().ToList();
+        public IQueryable<TEntity> GetQueryables() => _db.Set<TEntity>().AsNoTracking().AsQueryable();
+
 
         public Task<List<TEntity>> GetAllAsync() => _db.Set<TEntity>().ToListAsync();
 

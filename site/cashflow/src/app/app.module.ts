@@ -9,22 +9,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorModule } from './auth/interceptor.module';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     BrowserModule,
     InterceptorModule,
     UsuarioModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [
-    UsuarioService,
     TokenInterceptorService,
     {
       provide: HTTP_INTERCEPTORS,
