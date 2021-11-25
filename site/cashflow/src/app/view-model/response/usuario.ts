@@ -1,13 +1,13 @@
 import { Pessoa } from './pessoa';
 export class UsuarioResponse{
-  Login: string = "";
-  Senha : string = "";
-  TermoDeAceite: string = "";
-  PessoaId: string = "";
-  Pessoa : Pessoa= new Pessoa();
-  PermissaoUsuarios : any;
-  Pagamentos : any;
-  Dividas: any;
-  Compras: any;
-  Vendas: any;
+  login: string = "";
+  senha : string = "";
+  termoDeAceite: string = "";
+  pessoaId: string = "";
+  pessoa : Pessoa= new Pessoa();
+  permissaoUsuarios : any;
+  pagamentos : any;
+  dividas: any;
+  compras: any;
+  vendas: any;
 }

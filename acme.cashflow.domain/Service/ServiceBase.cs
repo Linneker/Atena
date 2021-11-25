@@ -4,6 +4,7 @@ using acme.cashflow.domain.Interface.Repository;
 using acme.cashflow.domain.Interface.Service;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -85,6 +86,11 @@ namespace acme.cashflow.domain.Service
         public Task<TEntity> GetByIdAsync(Guid id)
         {
             return _repositoryBase.GetByIdAsync(id);
+        }
+
+        public IQueryable<TEntity> GetQueryables()
+        {
+            return _repositoryBase.GetQueryables();
         }
 
         public TEntity Update(TEntity entity)

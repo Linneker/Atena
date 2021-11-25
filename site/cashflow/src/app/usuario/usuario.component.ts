@@ -10,15 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsuarioComponent implements OnInit {
 
+  tableUsuarios : UsuarioResponse[] = [];
 
-  constructor(private usuarioService : UsuarioService, private authorizationService : AuthorizationService ) {
-      authorizationService.setCompetencias();
-   }
+  constructor(private usuarioService: UsuarioService, private authorizationService: AuthorizationService) {
+    authorizationService.setCompetencias();
+  }
 
   ngOnInit(): void {
     debugger;
     this.usuarioService.getAll("Usuario").subscribe({
-      next:(t: UsuarioResponse[])=> {
+      next: (t: any) => {
+        this.tableUsuarios = t.$values;
+        console.log(this.tableUsuarios);
         console.log(t);
       }
     });

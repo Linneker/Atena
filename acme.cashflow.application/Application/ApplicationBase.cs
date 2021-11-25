@@ -204,7 +204,9 @@ namespace acme.cashflow.application.Application
             return _serviceBase.GetByIdAsync(id);
         }
 
-
-
+        public IQueryable<TEntity> GetQueryables()
+        {
+            return _serviceBase.GetQueryables();
+        }
     }
 }
