@@ -23,5 +23,10 @@ export class LoginComponent implements OnInit {
     console.log(this.login);
     this.usuarioService.Login(this.login.Login,this.login.Senha)
   }
+  Registrar():void{
 
+  }
+  EsqueceuSenha():void{
+
+  }
 }
