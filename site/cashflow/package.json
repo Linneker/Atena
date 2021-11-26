@@ -19,7 +19,6 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
-    "@coreui/angular": "^2.11.2",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@types/chart.js": "^2.9.34",
     "angular-bootstrap-md": "^12.1.0",

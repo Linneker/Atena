@@ -59,6 +59,7 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
+
 namespace acme.cashflow.api
 {
     public class Startup
@@ -75,6 +76,8 @@ namespace acme.cashflow.api
         {
             services.AddEntityFrameworkMySQL().AddDbContext<Context>(op => op.UseMySQL(Configuration.GetConnectionString("BarFrancisco")));
 
+            
+            
             //Application
             services.AddTransient<IApplicationBase<AbstractEntity>, ApplicationBase<AbstractEntity>>();
             services.AddTransient<IDespesaApplication, DespesaApplication>();
@@ -200,7 +203,6 @@ namespace acme.cashflow.api
                                                           AllowAnyOrigin();
                                   });
             });
-
             services.AddAuthorization(auth =>
             {
                 auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
@@ -244,6 +246,7 @@ namespace acme.cashflow.api
                     }
                 });
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -267,6 +270,7 @@ namespace acme.cashflow.api
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }
