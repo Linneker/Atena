@@ -1,4 +1,3 @@
-import { BsModalService } from 'ngx-bootstrap/modal';
 import {Router} from "@angular/router"
 import { Component, Input, OnInit } from '@angular/core';
 
@@ -12,14 +11,14 @@ export class AlertModalComponent implements OnInit {
   @Input() mensagem : string = "";
   @Input() tipo: string ="success";
   @Input() redirectTo: string = "/";
-  constructor(private modalService: BsModalService,private router: Router) { }
+  @Input() titulo: string = "";
+  constructor(private router: Router) { }
+
 
   ngOnInit(): void {
   }
 
   redirect(){
-    this.modalService.hide();
-    this.router.navigate([this.redirectTo])
-
+    this.router.navigate([this.redirectTo]);
   }
 }

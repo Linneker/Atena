@@ -20,8 +20,8 @@ namespace acme.cashflow.infra.Map.Account
             builder.Property(t => t.DataInativacao).IsRequired(false);
             builder.Property(t => t.Status).HasDefaultValue(EnumStatus.Ativo);
 
-            builder.HasOne(t => t.Usuario).WithMany(t => t.Dividas).HasForeignKey(t => t.UsuarioId);
-            builder.HasOne(t => t.Pessoa).WithMany(t => t.Dividas).HasForeignKey(t => t.PessoaId);
+            builder.HasOne(t => t.Usuario).WithMany(t => t.Dividas).HasForeignKey(t => t.ClienteId);
+            builder.HasOne(t => t.Cliente).WithMany(t => t.Dividas).HasForeignKey(t => t.PessoaId);
             builder.HasOne(t => t.Fornecedor).WithMany(t => t.Dividas).HasForeignKey(t => t.FornecedorId);
             builder.HasOne(t => t.Competencia).WithMany(t => t.Dividas).HasForeignKey(t => t.CompetenciaId);
         }

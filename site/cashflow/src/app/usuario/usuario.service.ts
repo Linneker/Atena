@@ -14,8 +14,8 @@ export class UsuarioService extends  RequestDefaultService<UsuarioRequest,Usuari
   mostrarMenu : boolean = false;
   usuarioAutenticado: boolean = false;
 
-  constructor(protected httpClient: HttpClient, private router : Router) {
-    super( httpClient);
+  constructor(httpClient: HttpClient, private router : Router) {
+    super(httpClient);
   }
 
   Login(login: string, senha: string): void

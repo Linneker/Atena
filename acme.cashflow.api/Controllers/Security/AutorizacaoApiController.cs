@@ -30,8 +30,8 @@ namespace acme.cashflow.api.Controllers.Security
             _autorizacaoApiApplication = autorizacaoApiApplication;
             _mapper = mapper;
         }
-        [HttpPost("Add")]
-        public override ResponseApiViewModel Add(AutorizacaoApiViewModel entity)
+        [HttpPost("AddicionandoSemAutenticacao")]
+        public ResponseApiViewModel AddicionandoSemAutenticacao(AutorizacaoApiViewModel entity)
         {
             ResponseApiViewModel apiViewModel = _mapper.Map<ResponseApiViewModel>(_autorizacaoApiApplication.Add(_mapper.Map<AutorizacaoApi>(entity), NOME_SERVICO));
             this.HttpContext.Response.StatusCode = (int)apiViewModel.ResponseHttp;

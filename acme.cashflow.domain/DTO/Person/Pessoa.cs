@@ -7,12 +7,10 @@ using System.Text;
 
 namespace acme.cashflow.domain.DTO.Person
 {
-    public class Pessoa : AbstractEntity
+    public abstract class Pessoa : AbstractEntity
     {
         public Pessoa()
         {
-            Usuarios = new HashSet<Usuario>();
-            Vendas = new HashSet<Venda>();
             Dividas = new HashSet<Divida>();
             Pagamentos = new HashSet<Pagamento>();
         }
@@ -23,9 +21,7 @@ namespace acme.cashflow.domain.DTO.Person
         public string Celular { get; set; }
         public DateTime DataNascimento { get; set; }
 
-        public virtual ICollection<Usuario> Usuarios { get; set; }
         public virtual ICollection<Pagamento> Pagamentos{ get; set; }
-        public virtual ICollection<Venda> Vendas{ get; set; }
         public virtual ICollection<Divida> Dividas { get; set; }
 
     }

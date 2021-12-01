@@ -16,11 +16,11 @@ namespace acme.cashflow.domain.DTO.Account
         public DateTime DataCompra { get; set; }
         public Guid? PessoaId { get; set; }
         public Guid? FornecedorId { get; set; }
-        public Guid UsuarioId { get; set; }
+        public Guid ClienteId { get; set; }
         public Guid CompetenciaId { get; set; }
 
         public virtual Competencia Competencia { get; set; }
-        public virtual Pessoa Pessoa { get; set; }
+        public virtual Cliente Cliente { get; set; }
         public virtual Fornecedor Fornecedor { get; set; }
         public virtual Usuario Usuario { get; set; }
 

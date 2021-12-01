@@ -15,12 +15,17 @@ export class LoginComponent implements OnInit {
   mostrarMenu: boolean = false;
 
   ngOnInit(): void {
+    this.login = new UsuarioRequest();
   }
 
   Login():void
   {
     debugger;
     console.log(this.login);
+    if(this.login.Login ==''){
+      alert("ERRO PREENCHA O LOGIN");
+      return;;
+    }
     this.usuarioService.Login(this.login.Login,this.login.Senha)
   }
   Registrar():void{

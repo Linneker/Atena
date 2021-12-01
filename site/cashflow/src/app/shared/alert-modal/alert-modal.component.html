@@ -1,9 +1,17 @@
-<div class="alert alert-{{tipo}}" role="alert">
-  <div class="d-flex justify-content-center">
-    {{mensagem}}
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{titulo}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {{mensagem}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-{{tipo}}" data-bs-dismiss="alert" aria-label="Close" (click)="redirect()">Ok</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+      </div>
+    </div>
   </div>
-  <div classe="float-left">
-    <button type="button" class="btn btn-{{tipo}}" data-bs-dismiss="alert" aria-label="Close" (click)="redirect()">Ok</button>
-  </div>
-
 </div>

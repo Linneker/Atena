@@ -1,6 +1,7 @@
 ﻿using acme.cashflow.api.ViewModel.Account;
 using acme.cashflow.api.ViewModel.Person;
 using acme.cashflow.api.ViewModel.Product;
+using acme.cashflow.domain.DTO.Seguranca;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -56,7 +57,7 @@ namespace acme.cashflow.api.ViewModel.Security
         {
             UnicodeEncoding UE = new UnicodeEncoding();
             byte[] HashValue, MessageBytes = UE.GetBytes(valor);
-            SHA512Managed SHhash = new SHA512Managed();
+            Criptografia SHhash = new Criptografia();
             string strHex = "";
             HashValue = SHhash.ComputeHash(MessageBytes);
             foreach (byte b in HashValue)

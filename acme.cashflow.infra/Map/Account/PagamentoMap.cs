@@ -28,8 +28,8 @@ namespace acme.cashflow.infra.Map.Account
             builder.Property(t => t.Parcelado).HasDefaultValue(false);
             builder.Property(t => t.ValorPago);
 
-            builder.HasOne(t => t.Usuario).WithMany(t => t.Pagamentos).HasForeignKey(t => t.UsuarioId);
-            builder.HasOne(t => t.Pessoa).WithMany(t => t.Pagamentos).HasForeignKey(t => t.PessoaId);
+            builder.HasOne(t => t.Usuario).WithMany(t => t.Pagamentos).HasForeignKey(t => t.ClienteId);
+            builder.HasOne(t => t.Cliente).WithMany(t => t.Pagamentos).HasForeignKey(t => t.PessoaId);
             builder.HasOne(t => t.Fornecedor).WithMany(t => t.Pagamentos).HasForeignKey(t => t.FornecedorId);
             builder.HasOne(t => t.Competencia).WithMany(t => t.Pagamentos).HasForeignKey(t => t.CompetenciaId);
         }

@@ -1,0 +1,18 @@
+<div class="m-5">
+  <table class="table">
+    <thead class="thead-ligth">
+      <tr>
+        <th>Login</th>
+        <th>Termo De Aceite</th>
+        <th>PessoaId</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of tableUsuarios ; let i =index">
+        <th>{{ user.login }}</th>
+        <th>{{ user.termoDeAceite? "Aceito": "Recusado" }}</th>
+        <th>{{ user.pessoaId }}</th>
+      </tr>
+    </tbody>
+  </table>
+</div>
