@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ERP", "ERP", "{A0AEEDF8-E3C3-4196-AF48-89166591C812}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "acme.atena.api", "src\ERP\acme.atena.api\acme.atena.api.csproj", "{D9C3BA5F-CD6D-4818-A952-9F72116D4C40}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "acme.atena.application", "src\ERP\acme.atena.application\acme.atena.application.csproj", "{0802D159-2AC6-4F2E-884C-8CBF562F0A49}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "acme.atena.domain", "src\ERP\acme.atena.domain\acme.atena.domain.csproj", "{2504C6ED-C073-4BF9-B374-62093E5AF311}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "acme.atena.infra", "src\ERP\acme.atena.infra\acme.atena.infra.csproj", "{C692604D-EDD5-4A9A-BCE8-D7DAFCC51553}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "acme.atena.repository", "src\ERP\acme.atena.repository\acme.atena.repository.csproj", "{189304F9-4F1C-4D18-A403-AFC20BBF0000}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9C3BA5F-CD6D-4818-A952-9F72116D4C40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9C3BA5F-CD6D-4818-A952-9F72116D4C40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9C3BA5F-CD6D-4818-A952-9F72116D4C40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9C3BA5F-CD6D-4818-A952-9F72116D4C40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0802D159-2AC6-4F2E-884C-8CBF562F0A49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0802D159-2AC6-4F2E-884C-8CBF562F0A49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0802D159-2AC6-4F2E-884C-8CBF562F0A49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0802D159-2AC6-4F2E-884C-8CBF562F0A49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2504C6ED-C073-4BF9-B374-62093E5AF311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2504C6ED-C073-4BF9-B374-62093E5AF311}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2504C6ED-C073-4BF9-B374-62093E5AF311}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2504C6ED-C073-4BF9-B374-62093E5AF311}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C692604D-EDD5-4A9A-BCE8-D7DAFCC51553}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C692604D-EDD5-4A9A-BCE8-D7DAFCC51553}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C692604D-EDD5-4A9A-BCE8-D7DAFCC51553}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C692604D-EDD5-4A9A-BCE8-D7DAFCC51553}.Release|Any CPU.Build.0 = Release|Any CPU
+		{189304F9-4F1C-4D18-A403-AFC20BBF0000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{189304F9-4F1C-4D18-A403-AFC20BBF0000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{189304F9-4F1C-4D18-A403-AFC20BBF0000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{189304F9-4F1C-4D18-A403-AFC20BBF0000}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D9C3BA5F-CD6D-4818-A952-9F72116D4C40} = {A0AEEDF8-E3C3-4196-AF48-89166591C812}
+		{0802D159-2AC6-4F2E-884C-8CBF562F0A49} = {A0AEEDF8-E3C3-4196-AF48-89166591C812}
+		{2504C6ED-C073-4BF9-B374-62093E5AF311} = {A0AEEDF8-E3C3-4196-AF48-89166591C812}
+		{C692604D-EDD5-4A9A-BCE8-D7DAFCC51553} = {A0AEEDF8-E3C3-4196-AF48-89166591C812}
+		{189304F9-4F1C-4D18-A403-AFC20BBF0000} = {A0AEEDF8-E3C3-4196-AF48-89166591C812}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2E83BE21-2611-4F98-B6AA-355874201EEE}
+	EndGlobalSection
+EndGlobal
