@@ -22,7 +22,7 @@ namespace acme.atena.infra.Map.Account
             builder.Property(t => t.DataInativacao).IsRequired(false);
             builder.Property(t => t.Status).HasDefaultValue(EnumStatus.Ativo);
 
-            builder.HasOne(t => t.Pagamento).WithMany(t => t.Pagamentos).HasForeignKey(t => t.PagamentoId);
+            builder.HasOne(t => t.Pagamento).WithMany(t => t.PagamentosFormasPagamentos).HasForeignKey(t => t.PagamentoId);
             builder.HasOne(t => t.FormaPagamento).WithMany(t => t.PagamentoFormaPagamentos).HasForeignKey(t => t.FormaPagamentoId);
 
         }

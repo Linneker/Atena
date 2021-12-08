@@ -21,6 +21,7 @@ using acme.atena.domain.Interface.Repository.Inventory;
 using acme.atena.domain.Interface.Repository.Person;
 using acme.atena.domain.Interface.Repository.Product;
 using acme.atena.domain.Interface.Repository.Security;
+using acme.atena.domain.Interface.Repository.UnitOfWork;
 using acme.atena.domain.Interface.Repository.Util;
 using acme.atena.domain.Interface.Service;
 using acme.atena.domain.Interface.Service.Account;
@@ -43,6 +44,7 @@ using acme.atena.repository.Inventory;
 using acme.atena.repository.Person;
 using acme.atena.repository.Product;
 using acme.atena.repository.Security;
+using acme.atena.repository.UnitOfWork;
 using acme.atena.repository.Util;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -93,6 +95,7 @@ namespace acme.atena.api
             services.AddTransient<IFluxoDeCaixaApplication, FluxoDeCaixaApplication>();
             services.AddTransient<IDividaApplication, DividaApplication>();
             services.AddTransient<IPagamentoApplication, PagamentoApplication>();
+            services.AddTransient<IPagamentoVendaApplication, PagamentoVendaApplication>();
 
             services.AddTransient<IEstoqueApplication, EstoqueApplication>();
             services.AddTransient<IEstoqueProdutoApplication, EstoqueProdutoApplication>();
@@ -128,6 +131,7 @@ namespace acme.atena.api
             services.AddTransient<IFluxoDeCaixaService, FluxoDeCaixaService>();
             services.AddTransient<IDividaService, DividaService>();
             services.AddTransient<IPagamentoService, PagamentoService>();
+            services.AddTransient<IPagamentoVendaService, PagamentoVendaService>();
 
             services.AddTransient<IEstoqueService, EstoqueService>();
             services.AddTransient<IEstoqueProdutoService, EstoqueProdutoService>();
@@ -176,6 +180,7 @@ namespace acme.atena.api
             services.AddTransient<IVendaProdutoRepository, VendaProdutoRepository>();
             services.AddTransient<IDevolucaoCompraRepository, DevolucaoCompraRepository>();
             services.AddTransient<IDevolucaoVendaRepository, DevolucaoVendaRepository>();
+            services.AddTransient<IPagamentoVendaRepository, PagamentoVendaRepository>();
 
             services.AddTransient<IEmpresaRepository, EmpresaRepository>();
             services.AddTransient<IClienteRepository, ClienteRepository>();
@@ -189,6 +194,7 @@ namespace acme.atena.api
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
             services.AddTransient<IPermissaoRepository, PermissaoRepository>();
             services.AddTransient<IPermissaoUsuarioRepository, PermissaoUsuarioRepository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddTransient<UnitOfWorkFilter>();
 
@@ -252,7 +258,7 @@ namespace acme.atena.api
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CASH FLOW", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Atena", Version = "v1" });
                 c.AddSecurityDefinition(
                     "Bearer",
                     new OpenApiSecurityScheme

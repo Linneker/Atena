@@ -20,7 +20,7 @@ namespace acme.atena.api.ViewModel.Account
         public Guid CompetenciaId { get; set; }
 
         public virtual CompetenciaViewModel Competencia { get; set; }
-        public virtual PessoaViewModel Pessoa { get; set; }
+        public virtual ClienteViewModel Pessoa { get; set; }
         public virtual FornecedorViewModel Fornecedor { get; set; }
         public virtual UsuarioViewModel Usuario { get; set; }
 

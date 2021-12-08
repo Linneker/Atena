@@ -2,6 +2,7 @@
 using acme.atena.application.Interface.Product;
 using acme.atena.domain.DTO.Product;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -23,6 +24,13 @@ namespace acme.atena.api.Controllers.Product
         {
             _vendaApplication = vendaApplication;
             _mapper = mapper;
+        }
+        [Authorize("Bearer")]
+        [UnitOfWorkFilter]
+        [HttpPut("{empresaId}", Name = "Conclusao")]
+        public void Conclusao(Guid empresaId, [FromBody] VendaViewModel venda)
+        {
+            _vendaApplication.Conclusao(_mapper.Map<Venda>(venda), empresaId);
         }
     }
 }

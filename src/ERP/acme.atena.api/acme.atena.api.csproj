@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <UserSecretsId>0b3bd831-bba4-4955-9b6a-337bcf9830f9</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
@@ -39,6 +39,10 @@
     <ProjectReference Include="..\acme.atena.domain\acme.atena.domain.csproj" />
     <ProjectReference Include="..\acme.atena.infra\acme.atena.infra.csproj" />
     <ProjectReference Include="..\acme.atena.repository\acme.atena.repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\Inventory\" />
   </ItemGroup>
 
 </Project>

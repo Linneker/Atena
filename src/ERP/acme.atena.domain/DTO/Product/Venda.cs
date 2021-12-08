@@ -17,25 +17,28 @@ namespace acme.atena.domain.DTO.Product
             PagamentosVendas = new HashSet<PagamentoVenda>();
         }
 
-        public Venda(DateTime dataVenda, decimal valorTotal, Guid usuarioId, Guid pessoaId) : this()
+        public Venda(DateTime dataVenda, decimal valorTotal, Guid usuarioId, Guid pessoaId, decimal? valorPago = null) : this()
         {
             DataVenda = dataVenda;
             ValorTotal = valorTotal;
             UsuarioId = usuarioId;
             ClienteId = pessoaId;
+            ValorPago = valorPago;
         }
 
-        public Venda(DateTime dataVenda, decimal valorTotal, Guid usuarioId, Guid pessoaId, ICollection<VendaProduto> vendasProdutos)
+        public Venda(DateTime dataVenda, decimal valorTotal, Guid usuarioId, Guid pessoaId, ICollection<VendaProduto> vendasProdutos, decimal? valorPago = null)
         {
             DataVenda = dataVenda;
             ValorTotal = valorTotal;
             UsuarioId = usuarioId;
             ClienteId = pessoaId;
             VendasProdutos = vendasProdutos;
+            ValorPago = valorPago;
         }
 
         public DateTime DataVenda { get; set; }
         public decimal ValorTotal { get; set; }
+        public decimal? ValorPago { get; set; }
 
         public Guid UsuarioId { get; set; }
         public Guid? ClienteId { get; set; }

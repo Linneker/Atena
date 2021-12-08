@@ -28,7 +28,7 @@ namespace acme.atena.api.ViewModel.Security
             Senha = SHA512(senha);
         }
 
-        public UsuarioViewModel(string login, string senha, PessoaViewModel pessoa) : this(login, senha)
+        public UsuarioViewModel(string login, string senha, ClienteViewModel pessoa) : this(login, senha)
         {
             Pessoa = pessoa;
         }
@@ -36,7 +36,7 @@ namespace acme.atena.api.ViewModel.Security
         {
             PessoaId = pessoaId;
         }
-        public UsuarioViewModel(string login, string senha, Guid pessoaId, PessoaViewModel pessoa) : this(login, senha, pessoaId)
+        public UsuarioViewModel(string login, string senha, Guid pessoaId, ClienteViewModel pessoa) : this(login, senha, pessoaId)
         {
             Pessoa = pessoa;
         }
@@ -46,7 +46,7 @@ namespace acme.atena.api.ViewModel.Security
         public bool TermoDeAceite { get; set; }
 
         public Guid PessoaId { get; set; }
-        public PessoaViewModel Pessoa { get; set; }
+        public ClienteViewModel Pessoa { get; set; }
         public virtual ICollection<PermissaoUsuarioViewModel> PermissaoUsuarios { get; set; }
         public virtual ICollection<PagamentoViewModel> Pagamentos { get; set; }
         public virtual ICollection<DividaViewModel> Dividas { get; set; }

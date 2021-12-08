@@ -38,7 +38,7 @@ namespace acme.atena.domain.DTO.Account
         public virtual Empresa Empresa { get; set; }
         public virtual PagamentoVenda PagamentoVenda { get; set; }
 
-        public virtual ICollection<PagamentoFormaPagamento> Pagamentos { get; set; } = new HashSet<PagamentoFormaPagamento>();
+        public virtual ICollection<PagamentoFormaPagamento> PagamentosFormasPagamentos { get; set; } = new HashSet<PagamentoFormaPagamento>();
 
     }
 }

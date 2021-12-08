@@ -8,6 +8,19 @@ namespace acme.atena.domain.DTO.Account
 {
     public class PagamentoFormaPagamento : AbstractEntity
     {
+        public PagamentoFormaPagamento()
+        {
+        }
+
+        public PagamentoFormaPagamento(Guid pagamentoId, Guid formaPagamentoId)
+        {
+            PagamentoId = pagamentoId;
+            FormaPagamentoId = formaPagamentoId;
+        }
+        public PagamentoFormaPagamento(Guid formaPagamentoId)
+        {
+            FormaPagamentoId = formaPagamentoId;
+        }
         public Guid PagamentoId { get; set; }
         public Guid FormaPagamentoId { get; set; }
 

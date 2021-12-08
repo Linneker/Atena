@@ -1,4 +1,5 @@
-﻿using acme.atena.api.ViewModel.Person;
+﻿using acme.atena.api.ViewModel.Account;
+using acme.atena.api.ViewModel.Person;
 using acme.atena.api.ViewModel.Security;
 using acme.atena.api.ViewModel.Util;
 using System;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace acme.atena.api.ViewModel.Product
 {
-    public class VendaViewModel : AbstractEntityViewModel
+    public class VendaViewModel : AbstractEntityCompetenciaViewModel
     {
         public VendaViewModel()
         {
@@ -37,13 +38,11 @@ namespace acme.atena.api.ViewModel.Product
 
         public Guid UsuarioId { get; set; }
         public Guid PessoaId { get; set; }
-        public Guid CompetenciaId { get; set; }
 
         public virtual UsuarioViewModel Usuario { get; set; }
-        public virtual PessoaViewModel Pessoa { get; set; }
-        public virtual CompetenciaViewModel Competencia { get; set; }
-        public virtual ICollection<VendaProdutoViewModel> VendasProdutos { get; set; }         
-
+        public virtual ClienteViewModel Pessoa { get; set; }
+        public virtual ICollection<VendaProdutoViewModel> VendasProdutos { get; set; }
+        public virtual ICollection<PagamentoVendaViewModel> PagamentosVendas { get; set; }
 
     }
 }

@@ -13,7 +13,7 @@ namespace acme.atena.api.Controllers.Person
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PessoaController : BaseApiController<Cliente, PessoaViewModel>
+    public class PessoaController : BaseApiController<Cliente, ClienteViewModel>
     {
         private readonly IClienteApplication _pessoaApplication;
         private readonly IMapper _mapper;

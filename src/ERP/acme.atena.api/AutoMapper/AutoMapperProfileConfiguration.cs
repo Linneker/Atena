@@ -15,6 +15,10 @@ using acme.atena.api.ViewModel.Person;
 using acme.atena.domain.DTO.Person;
 using acme.atena.api.ViewModel.Product;
 using acme.atena.domain.DTO.Product;
+using acme.atena.api.ViewModel.Product.Price;
+using acme.atena.domain.DTO.Product.Price;
+using acme.atena.domain.DTO.Inventory;
+using acme.atena.api.ViewModel.Inventory;
 
 namespace acme.atena.api.AutoMapper
 {
@@ -73,8 +77,8 @@ namespace acme.atena.api.AutoMapper
             CreateMap<PagamentoViewModel, Pagamento>();
 
 
-            CreateMap<Pessoa, PessoaViewModel>();
-            CreateMap<PessoaViewModel, Pessoa>();
+            CreateMap<Cliente, ClienteViewModel>();
+            CreateMap<ClienteViewModel, Cliente>();
             CreateMap<Fornecedor, FornecedorViewModel>();
             CreateMap<FornecedorViewModel, Fornecedor>();
 
@@ -96,6 +100,40 @@ namespace acme.atena.api.AutoMapper
             CreateMap<Parametro, ParametroViewModel>();
             CreateMap<ParametroViewModel, Parametro>();
 
+            CreateMap<Empresa, EmpresaViewModel>();
+            CreateMap<EmpresaViewModel, Empresa>();
+
+            CreateMap<Endereco, EnderecoViewModel>();
+            CreateMap<EnderecoViewModel, Endereco>();
+
+            CreateMap<EnderecoEmpresa, EnderecoEmpresaViewModel>();
+            CreateMap<EnderecoEmpresaViewModel, EnderecoEmpresa>();
+
+            CreateMap<EnderecoUsuario, EnderecoUsuarioViewModel>();
+            CreateMap<EnderecoUsuarioViewModel, EnderecoUsuario>();
+
+            CreateMap<EnderecoFornecedor, EnderecoFornecedorViewModel>();
+            CreateMap<EnderecoFornecedorViewModel, EnderecoFornecedor>();
+
+            CreateMap<TipoValorProduto, TipoValorProdutoViewModel>();
+            CreateMap<TipoValorProdutoViewModel, TipoValorProduto>();
+
+            CreateMap<ValorProduto, ValorProdutoViewModel>();
+            CreateMap<ValorProdutoViewModel, ValorProduto>();
+
+            CreateMap<Estoque, EstoqueViewModel>();
+            CreateMap<EstoqueViewModel, Estoque>();
+
+            CreateMap<EntradaProdutoEstoque, EntradaProdutoEstoqueViewModel>();
+            CreateMap<EntradaProdutoEstoqueViewModel, EntradaProdutoEstoque>();
+
+            CreateMap<SaidaProdutoEstoque, SaidaProdutoEstoqueViewModel>();
+            CreateMap<SaidaProdutoEstoqueViewModel, SaidaProdutoEstoque>();
+
+            CreateMap<EstoqueProduto, EstoqueProdutoViewModel>();
+            CreateMap<EstoqueProdutoViewModel, EstoqueProduto>();
+
+            
         }
     }
 }
