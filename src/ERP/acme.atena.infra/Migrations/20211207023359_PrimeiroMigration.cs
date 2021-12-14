@@ -1468,7 +1468,7 @@ namespace acme.atena.infra.Migrations
 
             migrationBuilder.InsertData("Usuario",
              new string[] { "Id", "Nome", "CpfCnpj", "Email", "Celular", "DataNascimento", "Login", "Senha", "TermoDeAceite", "DataCriacao", "Status" },
-             new object[] { "UUID_TO_BIN('0CE57EBC-D000-4DCD-B7CA-3A868DF0E673')", "Root", "12486468609", "linneker.blytner@gmail.com", "(35)99244-5418", "1994-05-05", "root", Usuario.SHA512("0CE57EBCD0004DCDB7CA3A868DF0E673"), true, DateTime.Now, 0 });
+             new object[] { "UUID_TO_BIN('0CE57EBC-D000-4DCD-B7CA-3A868DF0E673')", "Root", "12486468609", "linneker.blytner@gmail.com", "(35)99244-5418", "1994-05-05", "root", Usuario.SHA512(Usuario.SHA512(Usuario.SHA512("0CE57EBCD0004DCDB7CA3A868DF0E673"))), true, DateTime.Now, 0 });
 
             migrationBuilder.InsertData("PermissaoUsuario",
              new string[] { "Id", "Read", "Add", "Delete", "Update", "UsuarioId", "PermissaoId", "DataCriacao", "Status" },

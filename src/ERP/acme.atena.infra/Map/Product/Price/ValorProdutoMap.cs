@@ -24,7 +24,7 @@ namespace acme.atena.infra.Map.Product.Price
             builder.Property(t => t.Status).HasDefaultValue(EnumStatus.Ativo);
 
             builder.HasOne(t => t.Produto).WithMany(t => t.ValorProdutos).HasForeignKey(t => t.ProdutoId);
-            builder.HasOne(t => t.TipoValorProduto).WithMany(t => t.ValorProdutos).HasForeignKey(t => t.ProdutoId);
+            builder.HasOne(t => t.TipoValorProduto).WithMany(t => t.ValorProdutos).HasForeignKey(t => t.TipoValorProdutoId);
         }
     }
 }

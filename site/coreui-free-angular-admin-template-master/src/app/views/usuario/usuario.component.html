@@ -2,16 +2,23 @@
   <table class="table">
     <thead class="thead-ligth">
       <tr>
+        <th>Nome</th>
         <th>Login</th>
+        <th>Cpf</th>
+        <th>E-mail</th>
+        <th>Celular</th>
         <th>Termo De Aceite</th>
-        <th>PessoaId</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let user of tableUsuarios ; let i =index">
+        <th>{{ user.nome }}</th>
         <th>{{ user.login }}</th>
+        <th>{{ user.cpfCnpj }}</th>
+        <th>{{ user.email }}</th>
+        <th>{{ user.celular }}</th>
         <th>{{ user.termoDeAceite? "Aceito": "Recusado" }}</th>
-        <th>{{ user.pessoaId }}</th>
+
       </tr>
     </tbody>
   </table>

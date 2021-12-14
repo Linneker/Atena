@@ -3,7 +3,9 @@ using acme.atena.domain.DTO.Seguranca;
 using acme.atena.domain.Interface.Service.Security;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace acme.atena.application.Application.Security
 {
@@ -19,6 +21,11 @@ namespace acme.atena.application.Application.Security
         public Usuario Login(string usuario, string senha)
         {
             return _usuarioService.Login(usuario, senha);
+        }
+
+        public Task<IQueryable<Usuario>> RecuperaUsuariosComPermissaoAssync()
+        {
+            return _usuarioService.RecuperaUsuariosComPermissaoAssync();
         }
     }
 }

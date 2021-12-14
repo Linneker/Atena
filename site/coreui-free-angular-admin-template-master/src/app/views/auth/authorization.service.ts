@@ -30,6 +30,7 @@ export class AuthorizationService {
   }
 
   autorizacaoApi(): Observable<AutorizacaoApiResponse> {
+    debugger;
     return this.httpClient.post<AutorizacaoApiResponse>(this.autorizacaoURl, this._request, {
       headers: new HttpHeaders()
     });

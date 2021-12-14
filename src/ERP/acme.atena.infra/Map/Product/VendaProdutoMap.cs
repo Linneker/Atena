@@ -24,7 +24,7 @@ namespace acme.atena.infra.Map.Product
 
             builder.HasOne(t => t.Competencia).WithMany(t => t.VendasProdutos).HasForeignKey(t => t.CompetenciaId);
             builder.HasOne(t => t.Produto).WithMany(t => t.VendasProdutos).HasForeignKey(t => t.ProdutoId);
-            builder.HasOne(t => t.Venda).WithMany(t => t.VendasProdutos).HasForeignKey(t => t.ProdutoId);
+            builder.HasOne(t => t.Venda).WithMany(t => t.VendasProdutos).HasForeignKey(t => t.VendaId);
 
         }
     }

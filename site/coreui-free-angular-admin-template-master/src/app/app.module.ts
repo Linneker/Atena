@@ -44,6 +44,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { UsuarioModule } from './views/usuario/usuario.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ProdutoComponent } from './views/produto/produto.component';
+import { CookieConsertComponent } from './views/cookie-consert/cookie-consert.component';
 
 @NgModule({
   imports: [
@@ -69,7 +71,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     ...APP_CONTAINERS,
     P404Component,
     P500Component,
-    RegisterComponent
+    RegisterComponent,
+    ProdutoComponent,
+    CookieConsertComponent
   ],
   providers: [
     TokenInterceptorService,

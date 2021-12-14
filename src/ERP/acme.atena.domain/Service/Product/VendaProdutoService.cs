@@ -43,7 +43,7 @@ namespace acme.atena.domain.Service.Product
             SaidaProdutoEstoque entradaProdutoEstoque = new SaidaProdutoEstoque(vendaProduto.ProdutoId, estoqueId, vendaProduto.QuantidadeVedida);
             _saidaProdutoEstoqueService.Add(entradaProdutoEstoque);
 
-            
+
         }
     }
 }

@@ -20,7 +20,8 @@ export class UsuarioComponent implements OnInit {
     debugger;
     this.usuarioService.getAll("Usuario").subscribe({
       next: (t: any) => {
-        this.tableUsuarios = t.$values;
+       debugger;
+        this.tableUsuarios = t;
         console.log(this.tableUsuarios);
         console.log(t);
       }

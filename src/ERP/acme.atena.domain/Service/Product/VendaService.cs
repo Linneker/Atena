@@ -40,12 +40,12 @@ namespace acme.atena.domain.Service.Product
                     Produto produto = t.Produto is null ? await _produtoService.GetProdutoJoinEstoqueProdutoByIdAsync(t.ProdutoId) : t.Produto;
                     if (produto is not null && produto.EstoqueProdutos.Sum(t => t.QuantidadeProduto) >= t.QuantidadeVedida)
                     {
-                        if (produto.EstoqueProdutos.Where(f=>f.ProdutoId==t.ProdutoId).FirstOrDefault().QuantidadeProduto >= t.QuantidadeVedida)
+                        if (produto.EstoqueProdutos.Where(f => f.ProdutoId == t.ProdutoId).FirstOrDefault().QuantidadeProduto >= t.QuantidadeVedida)
                         {
                             this.AddAsync(venda);
                         }
                     }
-                    else if(produto is not null && produto.EstoqueProdutos.Sum(t => t.QuantidadeProduto) < t.Produto.ComprasProdutos.FirstOrDefault().QuantidadeComprada)
+                    else if (produto is not null && produto.EstoqueProdutos.Sum(t => t.QuantidadeProduto) < t.Produto.ComprasProdutos.FirstOrDefault().QuantidadeComprada)
                     {
                         throw (new Exception($"Não há produto suficiente " + (estoques.Count > 1 ? "nos Estoques" : "no Estoque") + "!"));
                     }

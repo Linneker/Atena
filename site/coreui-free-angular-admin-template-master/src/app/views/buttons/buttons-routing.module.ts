@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ButtonsComponent } from './buttons.component';
 import { DropdownsComponent } from './dropdowns.component';
 import { BrandButtonsComponent } from './brand-buttons.component';
+import { UsuarioComponent } from '../usuario/usuario.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,13 @@ const routes: Routes = [
         component: BrandButtonsComponent,
         data: {
           title: 'Brand buttons'
+        }
+      },
+      {
+        path: 'usuario',
+        component: UsuarioComponent,
+        data: {
+          title: 'Usuario'
         }
       }
     ]

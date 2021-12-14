@@ -3,8 +3,11 @@ export class UsuarioResponse{
   login: string = "";
   senha : string = "";
   termoDeAceite: string = "";
-  pessoaId: string = "";
-  pessoa : Pessoa= new Pessoa();
+  nome:string = "";
+  cpfCnpj: string;
+  email: string ;
+  celular:string;
+  dataNascimento: Date;
   permissaoUsuarios : any;
   pagamentos : any;
   dividas: any;

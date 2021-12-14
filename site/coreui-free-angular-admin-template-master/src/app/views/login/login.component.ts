@@ -19,6 +19,7 @@ export class LoginComponent {
   ) {}
 
   ngOnInit() {
+    debugger;
     if (sessionStorage.getItem("jwt") == null) {
       this.authorizationService.setCompetencias();
     }
