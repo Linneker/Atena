@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using acme.atena.api.Configurations.Filtler;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace acme.atena.api.Controllers
 {
@@ -47,8 +48,8 @@ namespace acme.atena.api.Controllers
             _applicationBase.Delete(id);
         }
         private void Dispose() => _applicationBase.Dispose();
-
-        [Authorize("Bearer")]
+        [EnableQuery]
+        //[Authorize("Bearer")]
         [HttpGet]
         public virtual List<TEntityViewModel> GetAll() => _mapper.Map<List<TEntityViewModel>>(_applicationBase.GetAll());
 
@@ -64,9 +65,10 @@ namespace acme.atena.api.Controllers
         [HttpGet("GetById/Async/{id}")]
         public virtual Task<TEntityViewModel> GetByIdAsync(Guid id) => _mapper.Map<Task<TEntityViewModel>>(_applicationBase.GetByIdAsync(id));
 
-        [Authorize("Bearer")]
+        [EnableQuery]
+        //[Authorize("Bearer")]
         [HttpGet("GetQueryables")]
-        public virtual IQueryable<TEntityViewModel> GetQueryables(Guid id) => _mapper.Map<IQueryable<TEntityViewModel>>(_applicationBase.GetQueryables());
+        public virtual IQueryable<TEntity> GetQueryables() => _applicationBase.GetQueryables();
 
         [Authorize("Bearer")]
         [UnitOfWorkFilter]

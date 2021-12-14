@@ -14,7 +14,6 @@ using Microsoft.Extensions.Logging;
 
 namespace acme.atena.api.Controllers.Security
 {
-    [EnableQuery]
     [Route("api/[controller]")]
     [ApiController]
     public class UsuarioController : BaseApiController<Usuario, UsuarioViewModel>
@@ -41,7 +40,8 @@ namespace acme.atena.api.Controllers.Security
             }
                 return Ok(usuarioRetorno);
         }
-        [Authorize("Bearer")]
+        [EnableQuery]
+        //[Authorize("Bearer")]
         [HttpGet("RecuperaUsuariosComPermissaoAssync")]
         public Task<IQueryable<Usuario>> RecuperaUsuariosComPermissaoAssync()
         {

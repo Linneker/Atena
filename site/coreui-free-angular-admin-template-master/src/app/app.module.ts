@@ -45,7 +45,8 @@ import { ChartsModule } from 'ng2-charts';
 import { UsuarioModule } from './views/usuario/usuario.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProdutoComponent } from './views/produto/produto.component';
-import { CookieConsertComponent } from './views/cookie-consert/cookie-consert.component';
+import { CookieConsertService } from './views/cookie-consert/cookie-consert.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   imports: [
@@ -72,10 +73,11 @@ import { CookieConsertComponent } from './views/cookie-consert/cookie-consert.co
     P404Component,
     P500Component,
     RegisterComponent,
-    ProdutoComponent,
-    CookieConsertComponent
+    ProdutoComponent
   ],
   providers: [
+    CookieService,
+    CookieConsertService,
     TokenInterceptorService,
     {
       provide: HTTP_INTERCEPTORS,

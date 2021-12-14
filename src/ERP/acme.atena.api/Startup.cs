@@ -151,15 +151,14 @@ namespace acme.atena.api
             });
             services.AddAuthorization(auth =>
             {
-                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder() 
                     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
                     .RequireAuthenticatedUser().Build());
             });
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
-            services.AddControllers()
-                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+            services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles)
                 .AddOData((opt, srv) =>
                     {
                         opt.AddRouteComponents(GetEdmModel()).Filter()

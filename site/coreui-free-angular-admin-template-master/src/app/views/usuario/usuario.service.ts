@@ -1,3 +1,4 @@
+import { CookieConsertService } from '../cookie-consert/cookie-consert.service';
 import { UsuarioRequest } from './../../view-model/request/usuario';
 import { UsuarioResponse } from './../../view-model/response/usuario';
 import { RequestDefaultService } from './../auth/request-default.service';
@@ -14,7 +15,7 @@ export class UsuarioService extends  RequestDefaultService<UsuarioRequest,Usuari
   mostrarMenu : boolean = false;
   usuarioAutenticado: boolean = false;
 
-  constructor(httpClient: HttpClient, private router : Router) {
+  constructor(httpClient: HttpClient, private router : Router,private cookie: CookieConsertService ) {
     super(httpClient);
   }
 
@@ -29,6 +30,7 @@ export class UsuarioService extends  RequestDefaultService<UsuarioRequest,Usuari
       next: (usuario: UsuarioResponse)=>{
         if(usuario != null){
           this.usuarioAutenticado = true;
+          this.cookie.setObjectCookie("usuario",this.usuarioAutenticado);
           this.router.navigate(['/dashboard']);
         }
         else{
