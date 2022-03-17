@@ -49,7 +49,7 @@ namespace acme.atena.api.Controllers
         }
         private void Dispose() => _applicationBase.Dispose();
         [EnableQuery]
-        //[Authorize("Bearer")]
+        [Authorize("Bearer")]
         [HttpGet]
         public virtual List<TEntityViewModel> GetAll() => _mapper.Map<List<TEntityViewModel>>(_applicationBase.GetAll());
 
@@ -66,7 +66,7 @@ namespace acme.atena.api.Controllers
         public virtual Task<TEntityViewModel> GetByIdAsync(Guid id) => _mapper.Map<Task<TEntityViewModel>>(_applicationBase.GetByIdAsync(id));
 
         [EnableQuery]
-        //[Authorize("Bearer")]
+        [Authorize("Bearer")]
         [HttpGet("GetQueryables")]
         public virtual IQueryable<TEntity> GetQueryables() => _applicationBase.GetQueryables();
 

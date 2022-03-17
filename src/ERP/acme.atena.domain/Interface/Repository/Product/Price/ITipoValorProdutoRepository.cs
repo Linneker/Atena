@@ -9,5 +9,6 @@ namespace acme.atena.domain.Interface.Repository.Product.Price
 {
     public interface ITipoValorProdutoRepository : IRepositoryBase<TipoValorProduto>
     {
+        Task<TipoValorProduto> GetTipoValorProdutoByNomeAsync(string nome);
     }
 }

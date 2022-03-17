@@ -4,6 +4,7 @@ using acme.atena.application.Application.Account;
 using acme.atena.application.Application.Inventory;
 using acme.atena.application.Application.Person;
 using acme.atena.application.Application.Product;
+using acme.atena.application.Application.Product.Price;
 using acme.atena.application.Application.Security;
 using acme.atena.application.Application.Util;
 using acme.atena.application.Interface;
@@ -11,6 +12,7 @@ using acme.atena.application.Interface.Account;
 using acme.atena.application.Interface.Inventory;
 using acme.atena.application.Interface.Person;
 using acme.atena.application.Interface.Product;
+using acme.atena.application.Interface.Product.Price;
 using acme.atena.application.Interface.Security;
 using acme.atena.application.Interface.Util;
 using acme.atena.domain.DTO;
@@ -21,6 +23,7 @@ using acme.atena.domain.Interface.Repository.Account;
 using acme.atena.domain.Interface.Repository.Inventory;
 using acme.atena.domain.Interface.Repository.Person;
 using acme.atena.domain.Interface.Repository.Product;
+using acme.atena.domain.Interface.Repository.Product.Price;
 using acme.atena.domain.Interface.Repository.Security;
 using acme.atena.domain.Interface.Repository.UnitOfWork;
 using acme.atena.domain.Interface.Repository.Util;
@@ -29,6 +32,7 @@ using acme.atena.domain.Interface.Service.Account;
 using acme.atena.domain.Interface.Service.Inventory;
 using acme.atena.domain.Interface.Service.Person;
 using acme.atena.domain.Interface.Service.Product;
+using acme.atena.domain.Interface.Service.Product.Price;
 using acme.atena.domain.Interface.Service.Security;
 using acme.atena.domain.Interface.Service.Util;
 using acme.atena.domain.Service;
@@ -36,6 +40,7 @@ using acme.atena.domain.Service.Account;
 using acme.atena.domain.Service.Inventory;
 using acme.atena.domain.Service.Person;
 using acme.atena.domain.Service.Product;
+using acme.atena.domain.Service.Product.Price;
 using acme.atena.domain.Service.Security;
 using acme.atena.domain.Service.Util;
 using acme.atena.infra.Config;
@@ -44,6 +49,7 @@ using acme.atena.repository.Account;
 using acme.atena.repository.Inventory;
 using acme.atena.repository.Person;
 using acme.atena.repository.Product;
+using acme.atena.repository.Product.Price;
 using acme.atena.repository.Security;
 using acme.atena.repository.UnitOfWork;
 using acme.atena.repository.Util;
@@ -141,12 +147,11 @@ namespace acme.atena.api
                                   builder =>
                                   {
                                       builder.WithOrigins("http://localhost:4200",
-                                                          "https://localhost:4200",
-                                                          "https://bardochiquinho.acmesistemas.com.br/",
-                                                          "https://bardochiquinho.acmesistemas.com.br/api/").
+                                                          "https://localhost:4200").
                                                           AllowAnyHeader().
                                                           AllowAnyMethod().
-                                                          AllowAnyOrigin();
+                                                          AllowAnyOrigin().
+                                                          Build();
                                   });
             });
             services.AddAuthorization(auth =>
@@ -158,18 +163,19 @@ namespace acme.atena.api
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
-            services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles)
+            services.AddControllers()
+                .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles)
                 .AddOData((opt, srv) =>
                     {
                         opt.AddRouteComponents(GetEdmModel()).Filter()
-                   .Count()
-                   .Expand()
-                   .OrderBy()
-                   .SkipToken()
-                   .EnableQueryFeatures()
-                   .Select();
+                        .Count()
+                        .Expand()
+                        .OrderBy()
+                        .SkipToken()
+                        .EnableQueryFeatures()
+                        .Select();
                         srv.CreateScope();
-                    });
+                     });
 
             services.AddSwaggerGen(c =>
             {
@@ -258,6 +264,8 @@ namespace acme.atena.api
             services.AddTransient<IVendaProdutoApplication, VendaProdutoApplication>();
             services.AddTransient<IDevolucaoCompraApplication, DevolucaoCompraApplication>();
             services.AddTransient<IDevolucaoVendaApplication, DevolucaoVendaApplication>();
+            services.AddTransient<ITipoProdutoApplication, TipoProdutoApplication>();
+            services.AddTransient<ITipoValorProdutoApplication, TipoValorProdutoApplication>();
 
             services.AddTransient<IClienteApplication, ClienteApplication>();
             services.AddTransient<IFornecedorApplication, FornecedorApplication>();
@@ -294,6 +302,8 @@ namespace acme.atena.api
             services.AddTransient<IVendaProdutoService, VendaProdutoService>();
             services.AddTransient<IDevolucaoCompraService, DevolucaoCompraService>();
             services.AddTransient<IDevolucaoVendaService, DevolucaoVendaService>();
+            services.AddTransient<ITipoProdutoService, TipoProdutoService>();
+            services.AddTransient<ITipoValorProdutoService, TipoValorProdutoService>();
 
             services.AddTransient<IEmpresaService, EmpresaService>();
             services.AddTransient<IClienteService, ClienteService>();
@@ -329,6 +339,9 @@ namespace acme.atena.api
             services.AddTransient<IDevolucaoCompraRepository, DevolucaoCompraRepository>();
             services.AddTransient<IDevolucaoVendaRepository, DevolucaoVendaRepository>();
             services.AddTransient<IPagamentoVendaRepository, PagamentoVendaRepository>();
+            services.AddTransient<ITipoProdutoRepository, TipoProdutoRepository>();
+            services.AddTransient<ITipoValorProdutoRepository, TipoValorProdutoRepository>();
+
 
             services.AddTransient<IEmpresaRepository, EmpresaRepository>();
             services.AddTransient<IClienteRepository, ClienteRepository>();
@@ -394,8 +407,28 @@ namespace acme.atena.api
       .OrderBy()
       .Page()
       .Select();
+
+            builder.EntitySet<TipoProduto>(nameof(TipoProduto))
+      .EntityType
+      .Filter()
+      .Count()
+      .Expand()
+      .OrderBy()
+      .Page()
+      .Select();
+            builder.EntitySet<Produto>(nameof(Produto))
+.EntityType
+.Filter()
+.Count()
+.Expand()
+.OrderBy()
+.Page()
+.Select();
+
             var valor = builder.GetEdmModel();
             return valor;
+
+
         }
 
         private static readonly ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>

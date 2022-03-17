@@ -27,7 +27,7 @@ namespace acme.atena.domain.Service
             }
         }
 
-        public void  AddAsync(TEntity entity)
+        public virtual void  AddAsync(TEntity entity)
         {
             if (entity.IsValid())
             {

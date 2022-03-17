@@ -1,0 +1,67 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12 mb-12">
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="dados-pessoais" role="tabpanel" aria-labelledby="dados-pessoais-tab">
+          <div class="modal-body">
+            <div class="col-sm-12">
+              <div class="card">
+                <div class="card-header">
+                  <strong>Produto</strong>
+                  <small></small>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="company">Nome</label>
+                    <input type="text" class="form-control" id="nome" [(ngModel)]="produto.nome" placeholder="Entre com o Nome do Produto">
+                  </div>
+                  <div class="form-group">
+                    <label for="company">Descrição</label>
+                    <input type="text" class="form-control" id="nome" [(ngModel)]="produto.descricao" placeholder="Entre com o Tipo do Produto">
+                  </div>
+                  <div class="form-group">
+                    <label for="company">Código</label>
+                    <input type="text" class="form-control" id="nome" [(ngModel)]="produto.codigo" placeholder="Entre com o Tipo do Produto">
+                  </div>
+                  <div class="form-group">
+                    <label for="dataNascimentoLabel">Vencimento</label>
+                    <div class="input-group">
+                      <input class="form-control" placeholder="dd/mm/yyyy"
+                 name="d2" #c2="ngModel" [(ngModel)]="dataVencimento" ngbDatepicker #d2="ngbDatepicker">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"></button>
+                      </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="permissao">Tipo Produto</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
+                    </div>
+                    <select type="tipo_produto" id="tipo_produto" name="tipo_produto" [(ngModel)]="produto.tipoProdutoId" class="form-control" placeholder="Tipo Produto">
+                      <option *ngFor="let tipoProdutoAtual of tipoProdutos" value="{{tipoProdutoAtual.id}}">{{tipoProdutoAtual.nome}}</option>
+                    </select>
+                  </div>
+                </div>
+                  <div class="form-group">
+                    <label for="company">Valor Compra</label>
+                    <input type="text" class="form-control" id="nome" [(ngModel)]="valorCompraProduto" placeholder="Valor compra Produto">
+                  </div>
+                  <div class="form-group">
+                    <label for="company">Margem de Lucro</label>
+                    <input type="text" class="form-control" id="nome" [(ngModel)]="margemDeLucro" placeholder="Margem de Lucro %">
+                  </div>
+                </div>
+              </div>
+            </div><!--/.col-->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+            <button type="button" class="btn btn-primary" (click)="salvar ($event)">Salvar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

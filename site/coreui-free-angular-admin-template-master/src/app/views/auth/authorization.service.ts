@@ -9,7 +9,7 @@ import { AutorizacaoApiResponse } from '../../view-model/response/autorizacao-ap
 })
 export class AuthorizationService {
 
-  private autorizacaoURl: string = "https://bardochiquinho.acmesistemas.com.br/api/AutorizacaoApi";
+  private autorizacaoURl: string = "https://localhost:5001/api/AutorizacaoApi";
   _request: AutorizacaoApiRequest = new AutorizacaoApiRequest();
   _autoricaoApiResponse: AutorizacaoApiResponse = new AutorizacaoApiResponse();
 
@@ -17,16 +17,22 @@ export class AuthorizationService {
   constructor(protected httpClient: HttpClient) { }
 
   setCompetencias(): void {
-    this.autorizacaoApi().subscribe({
-      next: (autorizcaoApiResponse: AutorizacaoApiResponse) => {
-        debugger;
-        this._autoricaoApiResponse = autorizcaoApiResponse;
-        sessionStorage.setItem("jwt",this._autoricaoApiResponse.accessToken);
-        sessionStorage.setItem("expiration",this._autoricaoApiResponse.expiration);
+    debugger;
+    const jwt = sessionStorage.getItem('jwt') || 'teste';
+    let tokenValido = (Date.parse(sessionStorage.getItem("expiration")) >= Date.now());
 
-      },
-      error: err => console.log("ERRO: ", err)
-    });
+    if( jwt=='teste' || !tokenValido){
+      this.autorizacaoApi().subscribe({
+        next: (autorizcaoApiResponse: AutorizacaoApiResponse) => {
+          debugger;
+          this._autoricaoApiResponse = autorizcaoApiResponse;
+          sessionStorage.setItem("jwt",this._autoricaoApiResponse.accessToken);
+          sessionStorage.setItem("expiration",this._autoricaoApiResponse.expiration);
+
+        },
+        error: err => console.log("ERRO: ", err)
+      });
+    }
   }
 
   autorizacaoApi(): Observable<AutorizacaoApiResponse> {

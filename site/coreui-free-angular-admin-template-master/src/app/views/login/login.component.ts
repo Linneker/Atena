@@ -11,7 +11,7 @@ import { UsuarioService } from "../usuario/usuario.service";
 export class LoginComponent {
   login: UsuarioRequest = new UsuarioRequest();
   mostrarMenu: boolean = false;
-
+  nomeLogin: string = "Login";
   constructor(
     private usuarioService: UsuarioService,
     private router: Router,
@@ -19,10 +19,7 @@ export class LoginComponent {
   ) {}
 
   ngOnInit() {
-    debugger;
-    if (sessionStorage.getItem("jwt") == null) {
-      this.authorizationService.setCompetencias();
-    }
+
   }
 
   Login(): void {
@@ -33,7 +30,7 @@ export class LoginComponent {
       alert("ERRO PREENCHA O LOGIN");
       return;
     }
-
+    this.nomeLogin = "Carregando...";
     this.usuarioService.Login(this.login.Login, this.login.Senha);
   }
 }

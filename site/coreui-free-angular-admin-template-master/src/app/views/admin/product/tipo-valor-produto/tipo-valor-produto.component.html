@@ -1,0 +1,109 @@
+<div *ngIf="permissaoSistema.add && acessoPermitido">
+  <button type="button" class="btn btn-primary mr-1" data-toggle="modal" (click)="openCadastro()">
+    Cadastro
+  </button>
+</div>
+
+<div *ngIf="permissaoSistema.read && acessoPermitido; then acssPermitido else acessoNegado"></div>
+<ng-template #acssPermitido>
+<div class="m-5">
+
+  <table class="table table-striped table-hover table-bordered">
+    <thead class="thead-ligth">
+      <tr>
+        <th>Nome</th>
+        <th>Data Cadastro</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tipoValorProduto of tiposValoresProdutos">
+        <th>{{ tipoValorProduto.nome }}</th>
+        <th>{{ tipoValorProduto.dataCriacao }}</th>
+        <th>
+          <div *ngIf="permissaoSistema.update && permissaoSistema.delete">
+            <button type="button" class="btn btn-warning mr-1" data-toggle="modal" (click)="openAtualizar(tipoValorProduto.id)">
+              Atualizar
+            </button>
+            <button type="button" class="btn btn-primary mr-1" data-toggle="modal" (click)="openDeletar(tipoValorProduto.id)">
+              Delete
+            </button>
+          </div>
+          <div *ngIf="permissaoSistema.update && !permissaoSistema.delete">
+            <button type="button" class="btn btn-warning mr-1" data-toggle="modal" (click)="openAtualizar(tipoValorProduto.id)">
+              Atualizar
+            </button>
+          </div>
+          <div *ngIf="!permissaoSistema.update && permissaoSistema.delete">
+            <button type="button" class="btn btn-primary mr-1" data-toggle="modal" (click)="openDeletar(tipoValorProduto.id)">
+              Delete
+            </button>
+          </div>
+      </th>
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-right">
+   <!-- <pagination-controls (pageChange)="paginaAtual = $event"
+      previousLabel="Anterior"
+       nextLabel="Próximo"
+        autoHide="true"
+        responsive="true"
+        screenReaderPaginationLabel="Pagination"
+        screenReaderPageLabel="page"
+        screenReaderCurrentLabel="You're on page"
+></pagination-controls>-->
+  </div>
+</div>
+
+<div bsModal #largeModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Cadastro Tipo Valor Produto</h4>
+        <button type="button" class="close" (click)="largeModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-cadastro-tipo-valor-produto [largeModal]="largeModal" [listaTiposValoresProdutos]="tiposValoresProdutos" ></app-cadastro-tipo-valor-produto>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div bsModal #largeModalEdit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Atualiza Departamento</h4>
+        <button type="button" class="close" (click)="largeModalEdit.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!--<app-atualiza-departamento [largeModal]="largeModalEdit" [departamentoEdit]="departamentoEditRemove"></app-atualiza-departamento>
+        --></div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div bsModal #largeModalRemove="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Remover Departamento</h4>
+        <button type="button" class="close" (click)="largeModalRemove.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!--<app-remove-departamento [largeModal]="largeModalRemove" [departamentoRemove]="departamentoEditRemove" [listaDeparamento]="departamentoTabelaResponse" ></app-remove-departamento>
+        --></div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</ng-template>
+<ng-template #acessoNegado>
+ACESSO NEGADO!
+</ng-template>

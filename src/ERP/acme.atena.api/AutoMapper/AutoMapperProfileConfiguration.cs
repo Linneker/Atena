@@ -90,7 +90,10 @@ namespace acme.atena.api.AutoMapper
             
             CreateMap<Produto, ProdutoViewModel>();
             CreateMap<ProdutoViewModel, Produto>();
-            
+
+            CreateMap<TipoProduto, TipoProdutoViewModel>();
+            CreateMap<TipoProdutoViewModel, TipoProduto>();
+
             CreateMap<Venda, VendaViewModel>();
             CreateMap<VendaViewModel, Venda>();
             

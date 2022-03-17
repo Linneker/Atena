@@ -1,3 +1,6 @@
+import { AuthGuard } from './views/auth/auth-guard.service';
+import { PipeModule } from './views/pipe/pipe.module';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { TokenInterceptorService } from './views/auth/token-interceptor.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -27,13 +30,6 @@ const APP_CONTAINERS = [
   DefaultLayoutComponent
 ];
 
-import {
-  AppAsideModule,
-  AppBreadcrumbModule,
-  AppHeaderModule,
-  AppFooterModule,
-  AppSidebarModule,
-} from '@coreui/angular';
 
 // Import routing module
 import { AppRoutingModule } from './app.routing';
@@ -44,9 +40,12 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { UsuarioModule } from './views/usuario/usuario.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ProdutoComponent } from './views/produto/produto.component';
 import { CookieConsertService } from './views/cookie-consert/cookie-consert.service';
 import { CookieService } from 'ngx-cookie-service';
+import { AppAsideModule, AppBreadcrumbModule, AppFooterModule, AppHeaderModule, AppSidebarModule } from '@coreui/angular';
+import { SharedModule } from './views/shared/shared.module';
+import { TipoProdutoComponent } from './views/admin/product/tipo-produto/tipo-produto.component';
+import { AdminModule } from './views/admin/admin.module';
 
 @NgModule({
   imports: [
@@ -65,20 +64,24 @@ import { CookieService } from 'ngx-cookie-service';
     ChartsModule,
     IconModule,
     IconSetModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    ModalModule.forRoot(),
+    PipeModule,
+    SharedModule,
+    AdminModule
   ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
     P404Component,
     P500Component,
-    RegisterComponent,
-    ProdutoComponent
+    RegisterComponent
   ],
   providers: [
     CookieService,
     CookieConsertService,
     TokenInterceptorService,
+    AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

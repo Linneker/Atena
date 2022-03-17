@@ -14,7 +14,7 @@ namespace acme.atena.domain.DTO.Seguranca
             {
                 Key = new RsaSecurityKey(provider.ExportParameters(true));
             }
-            SigningCredentials = new SigningCredentials(Key, SecurityAlgorithms.RsaSha256Signature);
+            SigningCredentials = new SigningCredentials(Key, SecurityAlgorithms.RsaSha512Signature);
         }
     }
 }

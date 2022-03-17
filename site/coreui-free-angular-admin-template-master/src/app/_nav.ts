@@ -97,10 +97,38 @@ export const navItems: INavData[] = [
     ]
   },
   {
+    name: 'Configuração Produto',
+    url: '/admin',
+    icon: 'icon-cursor',
+    children: [
+      {
+        name: 'Produto',
+        url: '/admin/product/produto',
+        icon: 'icon-star'
+
+      },
+      {
+        name: 'Tipo Produto',
+        url: '/admin/product/tipo-produto',
+        icon: 'icon-star'
+      },
+      {
+        name: 'Tipo Valor Produto',
+        url: '/admin/product/tipo-valor-produto',
+        icon: 'icon-star'
+      }
+    ]
+  },
+  {
     name: 'Buttons',
     url: '/buttons',
     icon: 'icon-cursor',
     children: [
+      {
+        name: 'Usuario',
+        url: '/buttons/usuario',
+        icon: 'icon-star'
+      },
       {
         name: 'Buttons',
         url: '/buttons/buttons',

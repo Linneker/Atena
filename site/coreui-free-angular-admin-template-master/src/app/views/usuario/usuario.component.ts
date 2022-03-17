@@ -1,8 +1,12 @@
-import { UsuarioResponse } from './../../view-model/response/usuario';
+import { EnderecoService } from './../util/endereco.service';
+import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
+import { UsuarioResponse } from '../../view-model/response/security/usuario';
 import { AuthorizationService } from './../auth/authorization.service';
 import { UsuarioService } from './usuario.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CookieConsertService } from '../cookie-consert/cookie-consert.service';
+import { BsModalRef, BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
+import { ModalComponent } from '../shared/modal/modal.component';
 
 @Component({
   selector: 'app-usuario',
@@ -11,24 +15,34 @@ import { CookieConsertService } from '../cookie-consert/cookie-consert.service';
 })
 export class UsuarioComponent implements OnInit {
 
+  @ViewChild('largeModal') public largeModal: ModalDirective;
+
   tableUsuarios : UsuarioResponse[] = [];
+  bsModalRef: BsModalRef = new BsModalRef();
 
   constructor(private usuarioService: UsuarioService, private authorizationService: AuthorizationService,
-    private cookie: CookieConsertService ) {
+    private cookie: CookieConsertService ,
+    private modalService: BsModalService) {
     authorizationService.setCompetencias();
   }
 
   ngOnInit(): void {
-    debugger;
-    var valor = this.cookie.getCookie("usuario");
+    var valor  = JSON.parse(this.cookie.getCookie("usuario"));
+
     this.usuarioService.getAll("Usuario").subscribe({
       next: (t: any) => {
-       debugger;
         this.tableUsuarios = t;
-        console.log(this.tableUsuarios);
-        console.log(t);
       }
     });
   }
-
+  openCadastro(){
+    //this.modalService.show(CadastroUsuarioComponent);
+    this.largeModal.show();
+  }
+  openModal(){
+    this.bsModalRef = this.modalService.show(ModalComponent);
+    this.bsModalRef.content.titulo= "Titulo";
+    this.bsModalRef.content.campos= "<app-cadastro-usuario></app-cadastro-usuario>";
+    this.bsModalRef.content.botaoSalvar = "<button type='button' class='btn btn-primary'>Save changes</button>";
+  }
 }

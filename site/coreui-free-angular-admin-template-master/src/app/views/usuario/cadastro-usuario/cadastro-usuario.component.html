@@ -1,0 +1,198 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12 mb-12">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="dados-pessoais-tab" data-bs-toggle="tab" data-bs-target="#dados-pessoais" type="button" role="tab" aria-controls="dados-pessoais" aria-selected="true">Dados Pessoais</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="endereco-tab" data-bs-toggle="tab" data-bs-target="#endereco" type="button" role="tab" aria-controls="endereco" aria-selected="false">Endereço</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="dados-usuario-tab" data-bs-toggle="tab" data-bs-target="#dados-usuario" type="button" role="tab" aria-controls="dados-usuario" aria-selected="false">Dados Usuario</button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="dados-pessoais" role="tabpanel" aria-labelledby="dados-pessoais-tab">
+          <div class="modal-body">
+            <div class="col-sm-12">
+              <div class="card">
+                <div class="card-header">
+                  <strong>Dados</strong>
+                  <small>Pessoais</small>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="company">Nome</label>
+                    <input type="text" class="form-control" id="nome" [(ngModel)]="usuario.nome" placeholder="Entre com o nome do funcionario">
+                  </div>
+                  <div class="form-group">
+                    <label for="company">Cpf</label>
+                    <input type="text" class="form-control" id="cpf" [(ngModel)]="usuario.cpfCnpj" placeholder="Entre com CPF">
+
+                  </div>
+                  <div class="form-group">
+                    <label for="street">E-mail</label>
+                    <input type="text" class="form-control" id="email" [(ngModel)]="usuario.email" placeholder="Entre com seu e-mail">
+                  </div>
+                  <div class="form-group">
+                    <label for="Celular">Celular</label>
+                    <input type="text" class="form-control" id="celular" [(ngModel)]="usuario.celular"  placeholder="Entre com seu celular">
+                  </div>
+                  <div class="form-group">
+                    <label for="dataNascimentoLabel">Data de Nasicmento</label>
+                    <div class="input-group">
+                      <input class="form-control" placeholder="dd/mm/yyyy"
+                 name="d2" #c2="ngModel" [(ngModel)]="dataNascimento" ngbDatepicker #d2="ngbDatepicker">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"></button>
+                      </div>
+                  </div>
+                </div>
+          </div>
+              </div>
+            </div><!--/.col-->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+            <button type="button" class="btn btn-primary" (click)="proximoEndereco ($event)">Proximo</button>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="endereco" role="tabpanel" aria-labelledby="endereco-tab">
+          <div class="modal-body">
+            <div class="col-sm-12">
+              <div class="card">
+                <div class="card-header">
+                  <strong>Dados</strong>
+                  <small>Pessoais</small>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="cep">Cep</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="cep" [(ngModel)]="enderecoUsuario.endereco.cep" placeholder="Entre com cep">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" (click)="pesquisarCep()" type="button"><i class="fa fa-search"></i></button>
+                      </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pais">Pais</label>
+                    <input type="text" class="form-control" id="pais" [(ngModel)]="enderecoUsuario.endereco.pais" placeholder="Entre com pais">
+
+                  </div>
+                  <div class="form-group">
+                    <label for="estado">Estado</label>
+                    <input type="text" class="form-control" id="estado" [(ngModel)]="enderecoUsuario.endereco.estado" placeholder="Entre com estado">
+                  </div>
+                  <div class="form-group">
+                    <label for="cidade">Cidade</label>
+                    <input type="text" class="form-control" id="cidade" [(ngModel)]="enderecoUsuario.endereco.cidade"  placeholder="Entre com cidade">
+                  </div>
+                  <div class="form-group">
+                      <label for="bairro">Bairro</label>
+                      <input type="text" class="form-control" id="bairro" name="bairro"[(ngModel)]="enderecoUsuario.endereco.bairro"  placeholder="Entre com bairro">
+                </div>
+                <div class="form-group">
+                    <label for="rua">Rua</label>
+                    <input type="text" class="form-control" id="rua" [(ngModel)]="enderecoUsuario.endereco.rua"  placeholder="Entre com rua">
+                </div>
+                <div class="form-group">
+                  <label for="numero">Numero</label>
+                  <input type="text" class="form-control" id="numero" [(ngModel)]="enderecoUsuario.numero"  placeholder="Entre com numero">
+                </div>
+                <div class="form-group">
+                  <label for="complemento">Complemento</label>
+                  <input type="text" class="form-control" id="complemento" [(ngModel)]="enderecoUsuario.complemento"  placeholder="Entre com complemento">
+                </div>
+            </div>
+          </div>
+        </div><!--/.col-->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="anteriorDadosPessoa($event)">Anterior</button>
+            <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+            <button type="button" class="btn btn-primary"  (click)="proximoDadosUsuario($event)">Proximo</button>
+          </div>
+      </div>
+        <div class="tab-pane fade" id="dados-usuario" role="tabpanel" aria-labelledby="dados-usuario-tab">
+          <div class="card-body">
+            <form action="" method="post">
+              <div class="form-group">
+                <label for="login">Login</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-user"></i></span>
+                  </div>
+                  <input type="text" id="login" name="login"  [(ngModel)]="usuario.login" class="form-control" placeholder="Username">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="senha">Senha</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
+                  </div>
+                  <input type="password" id="senha" name="senha" [(ngModel)]="usuario.senha" class="form-control" placeholder="Password" autocomplete="current-password">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="permissao">Permissão</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
+                  </div>
+                  <select type="permissao" id="permissao" name="permissao" [(ngModel)]="permissaoUsuario.permissaoId" class="form-control" placeholder="Permissões">
+                    <option *ngFor="let permissaoAtual of permissoes" value="{{permissaoAtual.id}}">{{permissaoAtual.nome}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="termo-de-aceite" style="margin-left: 42%;">Termo de Aceite</label>
+                <div class="input-group">
+                  <label class="switch switch-label switch-success" style="margin-left: 45%;">
+                    <input id="termo-de-aceite" name ="termo-de-aceite" type="checkbox" class="switch-input" [(ngModel)]="usuario.termoDeAceite">
+                    <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group" style="margin-left: 15%;">
+                  <label for="permissao-read">Leitura</label>
+                  <label class="switch switch-label switch-success">
+                    <input id="permissao-read" name ="permissao-read" type="checkbox" class="switch-input" [(ngModel)]="permissaoUsuario.read">
+                    <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+                  </label>
+                  &nbsp;&nbsp;&nbsp;
+                  <label for="permissao-add">Cadastro</label>
+                  <label class="switch switch-label switch-success">
+                    <input id="permissao-add" name ="permissao-add" type="checkbox" class="switch-input" [(ngModel)]="permissaoUsuario.add">
+                    <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+                  </label>
+                  &nbsp;&nbsp;&nbsp;
+                  <label for="permissao-update">Atualização</label>
+                  <label class="switch switch-label switch-success">
+                    <input id="permissao-update" name ="permissao-update" type="checkbox" class="switch-input" [(ngModel)]="permissaoUsuario.update">
+                    <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+                  </label>
+                  &nbsp;&nbsp;&nbsp;
+                  <label for="permissao-remove">Remoção</label>
+                  <label class="switch switch-label switch-success">
+                    <input id="permissao-remove" name ="permissao-remove" type="checkbox" class="switch-input" [(ngModel)]="permissaoUsuario.delete">
+                    <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+                  </label>
+              </div>
+            </div>
+          </form>
+         </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="anteriorEndereco($event)">Anterior</button>
+            <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+            <button type="button" class="btn btn-primary" (click)="salvar()">Salvar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

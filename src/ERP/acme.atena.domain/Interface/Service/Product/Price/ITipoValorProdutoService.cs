@@ -9,5 +9,6 @@ namespace acme.atena.domain.Interface.Service.Product.Price
 {
     public interface ITipoValorProdutoService : IServiceBase<TipoValorProduto>
     {
+        Task<TipoValorProduto> GetTipoValorProdutoByNomeAsync(string nome);
     }
 }

@@ -1,3 +1,4 @@
+import { AuthGuard } from './views/auth/auth-guard.service';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -12,8 +13,8 @@ import { RegisterComponent } from './views/register/register.component';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
     pathMatch: 'full',
+    redirectTo: 'login'
   },
   {
     path: '404',
@@ -81,8 +82,13 @@ export const routes: Routes = [
       {
         path: 'widgets',
         loadChildren: () => import('./views/widgets/widgets.module').then(m => m.WidgetsModule)
+      },
+      {
+        path: 'admin',
+        loadChildren: () => import('./views/admin/admin.module').then(m => m.AdminModule)
       }
-    ]
+    ],
+    canActivate: [AuthGuard]
   },
   { path: '**', component: P404Component }
 ];

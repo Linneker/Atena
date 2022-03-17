@@ -1407,7 +1407,7 @@ namespace acme.atena.infra.Migrations
 
             migrationBuilder.InsertData("Permissao",
                new string[] { "Id", "Nome", "Nivel", "DataCriacao", "Status" },
-               new object[] { "UUID_TO_BIN(UUID())", "Gerente_Geral", 2, DateTime.Now, 0 });
+               new object[] { "UUID_TO_BIN(UUID())", "Gerente Geral", 2, DateTime.Now, 0 });
 
             migrationBuilder.InsertData("Permissao",
                new string[] { "Id", "Nome", "Nivel", "DataCriacao", "Status" },
@@ -1415,30 +1415,30 @@ namespace acme.atena.infra.Migrations
 
             migrationBuilder.InsertData("Permissao",
                new string[] { "Id", "Nome", "Nivel", "DataCriacao", "Status" },
-               new object[] { "UUID_TO_BIN(UUID())", "Gerente_RH", 3, DateTime.Now, 0 });
+               new object[] { "UUID_TO_BIN(UUID())", "Gerente RH", 3, DateTime.Now, 0 });
 
             migrationBuilder.InsertData("Permissao",
                new string[] { "Id", "Nome", "Nivel", "DataCriacao", "Status" },
-               new object[] { "UUID_TO_BIN(UUID())", "Gerente_Fiscal", 3, DateTime.Now, 0 });
+               new object[] { "UUID_TO_BIN(UUID())", "Gerente Fiscal", 3, DateTime.Now, 0 });
 
             migrationBuilder.InsertData("Permissao",
                new string[] { "Id", "Nome", "Nivel", "DataCriacao", "Status" },
-               new object[] { "UUID_TO_BIN(UUID())", "Gerente_Administracao", 3, DateTime.Now, 0 });
+               new object[] { "UUID_TO_BIN(UUID())", "Gerente Administracao", 3, DateTime.Now, 0 });
 
             migrationBuilder.InsertData("Permissao",
                new string[] { "Id", "Nome", "Nivel", "DataCriacao", "Status" },
-               new object[] { "UUID_TO_BIN(UUID())", "Gerente_Contabil", 3, DateTime.Now, 0 });
+               new object[] { "UUID_TO_BIN(UUID())", "Gerente Contabil", 3, DateTime.Now, 0 });
             migrationBuilder.InsertData("Permissao",
                new string[] { "Id", "Nome", "Nivel", "DataCriacao", "Status" },
-               new object[] { "UUID_TO_BIN(UUID())", "Gerente_Venda", 3, DateTime.Now, 0 });
+               new object[] { "UUID_TO_BIN(UUID())", "Gerente Venda", 3, DateTime.Now, 0 });
 
             migrationBuilder.InsertData("Permissao",
                new string[] { "Id", "Nome", "Nivel", "DataCriacao", "Status" },
-               new object[] { "UUID_TO_BIN(UUID())", "Gerente_Compra", 3, DateTime.Now, 0 });
+               new object[] { "UUID_TO_BIN(UUID())", "Gerente Compra", 3, DateTime.Now, 0 });
 
             migrationBuilder.InsertData("Permissao",
                new string[] { "Id", "Nome", "Nivel", "DataCriacao", "Status" },
-               new object[] { "UUID_TO_BIN(UUID())", "Gerente_Logistica", 3, DateTime.Now, 0 });
+               new object[] { "UUID_TO_BIN(UUID())", "Gerente Logistica", 3, DateTime.Now, 0 });
 
             migrationBuilder.InsertData("Permissao",
               new string[] { "Id", "Nome", "Nivel", "DataCriacao", "Status" },

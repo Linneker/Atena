@@ -41,7 +41,7 @@ namespace acme.atena.api.Controllers.Security
                 return Ok(usuarioRetorno);
         }
         [EnableQuery]
-        //[Authorize("Bearer")]
+        [Authorize("Bearer")]
         [HttpGet("RecuperaUsuariosComPermissaoAssync")]
         public Task<IQueryable<Usuario>> RecuperaUsuariosComPermissaoAssync()
         {

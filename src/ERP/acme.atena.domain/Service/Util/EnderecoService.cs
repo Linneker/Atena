@@ -18,5 +18,15 @@ namespace acme.atena.domain.Service.Util
         {
             _enderecoRepository = repositoryBase;
         }
+
+        public Endereco GetEnderecoByCep(string cep)
+        {
+            return _enderecoRepository.GetEnderecoByCep(cep);
+        }
+
+        public Task<Endereco> GetEnderecoByCepAsync(string cep)
+        {
+            return _enderecoRepository.GetEnderecoByCepAsync(cep);
+        }
     }
 }

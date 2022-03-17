@@ -9,5 +9,7 @@ namespace acme.atena.domain.Interface.Service.Util
 {
     public interface IEnderecoService: IServiceBase<Endereco>
     {
+        Endereco GetEnderecoByCep(string cep);
+        Task<Endereco> GetEnderecoByCepAsync(string cep);
     }
 }

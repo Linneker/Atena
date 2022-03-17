@@ -17,5 +17,10 @@ namespace acme.atena.domain.Service.Product.Price
         {
             _tipoValorProdutoRepository = tipoValorProdutoRepository;
         }
+
+        public Task<TipoValorProduto> GetTipoValorProdutoByNomeAsync(string nome)
+        {
+            return _tipoValorProdutoRepository.GetTipoValorProdutoByNomeAsync(nome);
+        }
     }
 }
