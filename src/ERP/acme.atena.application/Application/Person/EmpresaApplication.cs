@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace acme.atena.application.Application.Person
 {
-    public class EmpresaApplication : ApplicationBase<Empresa>, IEmpresaApplication
+    public class EmpresaApplication : ServiceBase<Empresa>, IEmpresaApplication
     {
         private readonly IEmpresaService _empresaService;
 

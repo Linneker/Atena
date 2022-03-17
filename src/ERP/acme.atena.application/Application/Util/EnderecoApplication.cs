@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace acme.atena.application.Application.Util
 {
-    public class EnderecoApplication : ApplicationBase<Endereco>, IEnderecoApplication
+    public class EnderecoApplication : ServiceBase<Endereco>, IEnderecoApplication
     {
         private readonly IEnderecoService _enderecoService;
 

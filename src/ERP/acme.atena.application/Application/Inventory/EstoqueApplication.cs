@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace acme.atena.application.Application.Inventory
 {
-    public class EstoqueApplication : ApplicationBase<Estoque>, IEstoqueApplication
+    public class EstoqueApplication : ServiceBase<Estoque>, IEstoqueApplication
     {
         private readonly IEstoqueService _estoqueService;
 

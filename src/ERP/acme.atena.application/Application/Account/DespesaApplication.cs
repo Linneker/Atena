@@ -1,18 +1,18 @@
-﻿using acme.atena.application.Interface.Account;
-using acme.atena.domain.DTO.Account;
+﻿using acme.atena.domain.DTO.Account;
+using acme.atena.domain.Interface.Repository.Account;
 using acme.atena.domain.Interface.Service.Account;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace acme.atena.application.Application.Account
+namespace acme.atena.application.Service.Account
 {
-    public class DespesaApplication : ApplicationBase<Despesa>, IDespesaApplication
+    public class DespesaApplication : ServiceBase<Despesa>, IDespesaService
     {
-        private readonly IDespesaService _despesaService;
+        private readonly IDespesaRepository _despesaService;
 
-        public DespesaApplication(IDespesaService despesaService):base(despesaService)
+        public DespesaApplication(IDespesaRepository despesaService):base(despesaService)
         {
             _despesaService = despesaService;
         }

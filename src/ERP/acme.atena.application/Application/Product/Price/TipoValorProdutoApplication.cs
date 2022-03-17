@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace acme.atena.application.Application.Product.Price
 {
-    public class TipoValorProdutoApplication: ApplicationBase<TipoValorProduto>, ITipoValorProdutoApplication
+    public class TipoValorProdutoApplication: ServiceBase<TipoValorProduto>, ITipoValorProdutoApplication
     {
         private readonly ITipoValorProdutoService _tipoValorProdutoApplication;
 

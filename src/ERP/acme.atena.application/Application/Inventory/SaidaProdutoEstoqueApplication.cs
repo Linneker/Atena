@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace acme.atena.application.Application.Inventory
 {
-    public class SaidaProdutoEstoqueApplication : ApplicationBase<SaidaProdutoEstoque>, ISaidaProdutoEstoqueApplication
+    public class SaidaProdutoEstoqueApplication : ServiceBase<SaidaProdutoEstoque>, ISaidaProdutoEstoqueApplication
     {
         private readonly ISaidaProdutoEstoqueService _saidaProdutoEstoqueService;
 

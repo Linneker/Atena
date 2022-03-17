@@ -7,7 +7,7 @@ using System.Text;
 
 namespace acme.atena.application.Application.Person
 {
-    public class ClienteApplication: ApplicationBase<Cliente>, IClienteApplication
+    public class ClienteApplication: ServiceBase<Cliente>, IClienteApplication
     {
         private readonly IClienteService _pessoaService;
 

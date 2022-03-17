@@ -64,6 +64,7 @@ namespace acme.atena.infra.Config
         public DbSet<AutorizacaoApi> AutorizacaoApis { get; set; }
         public DbSet<Permissao> Permissaos { get; set; }
         public DbSet<PermissaoUsuario> PermissaoUsuarios { get; set; }
+        public DbSet<Tela> Telas{ get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         
         public DbSet<Competencia> Competencias { get; set; }

@@ -12,7 +12,7 @@ namespace acme.atena.domain.Interface.Service
     {
         void Add(TEntity entity);
         void Update(TEntity entity);
-        void AddAsync(TEntity entity);
+        Task AddAsync(TEntity entity);
         void Delete(TEntity entity);
         void Delete(Guid id);
         

@@ -34,11 +34,12 @@ namespace acme.atena.repository
             }
         }
 
-        public void AddAsync(TEntity entity)
+        public Task AddAsync(TEntity entity)
         {
             try
             {
                 _db.AddAsync(entity);
+                return Task.CompletedTask;
             }
             catch (Exception e)
             {

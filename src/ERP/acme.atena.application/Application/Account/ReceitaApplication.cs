@@ -1,18 +1,19 @@
-﻿using acme.atena.application.Interface.Util;
-using acme.atena.domain.DTO.Account;
+﻿using acme.atena.domain.DTO.Account;
+using acme.atena.domain.Interface.Repository.Account;
 using acme.atena.domain.Interface.Service.Account;
+using acme.atena.domain.Interface.Service.Util;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace acme.atena.application.Application.Account
+namespace acme.atena.application.Service.Account
 {
-    public class ReceitaApplication : ApplicationBase<Receita>, IReceitaApplication
+    public class ReceitaApplication : ServiceBase<Receita>, IReceitaService
     {
-        private readonly IReceitaService _receitaService;
-        private readonly ICompetenciaApplication _competenciaApplication;
-        public ReceitaApplication(IReceitaService receitaService, ICompetenciaApplication competenciaApplication) :base(receitaService)
+        private readonly IReceitaRepository _receitaService;
+        private readonly ICompetenciaService _competenciaApplication;
+        public ReceitaApplication(IReceitaRepository receitaService, ICompetenciaService competenciaApplication) :base(receitaService)
         {
             _receitaService = receitaService;
             _competenciaApplication = competenciaApplication;

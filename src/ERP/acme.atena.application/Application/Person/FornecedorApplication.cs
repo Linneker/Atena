@@ -8,7 +8,7 @@ using System.Text;
 
 namespace acme.atena.application.Application.Person
 {
-    public class FornecedorApplication : ApplicationBase<Fornecedor>, IFornecedorApplication
+    public class FornecedorApplication : ServiceBase<Fornecedor>, IFornecedorApplication
     {
         private readonly IFornecedorService _fornecedorService;
         public FornecedorApplication(IFornecedorService repositoryBase) : base(repositoryBase)

@@ -1,19 +1,27 @@
-﻿using acme.atena.application.Interface.Util;
+﻿
 using acme.atena.domain.DTO.Account;
+using acme.atena.domain.Interface.Repository.Account;
 using acme.atena.domain.Interface.Service.Account;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace acme.atena.application.Application.Account
+namespace acme.atena.application.Service.Account
 {
-    public class FluxoDeCaixaApplication : ApplicationBase<FluxoDeCaixa>, IFluxoDeCaixaApplication
+    public class FluxoDeCaixaApplication : ServiceBase<FluxoDeCaixa>, IFluxoDeCaixaService
     {
-        private readonly IFluxoDeCaixaService _fluxoDeCaixaService;
+        private readonly IFluxoDeCaixaRepository _fluxoDeCaixaRepository;
+        private readonly IDespesaService _despesaService;
+        private readonly IReceitaService _receitaService;
 
-        public FluxoDeCaixaApplication(IFluxoDeCaixaService fluxoDeCaixaService):base(fluxoDeCaixaService)
+        public FluxoDeCaixaApplication(IFluxoDeCaixaRepository fluxoDeCaixaService):base(fluxoDeCaixaService)
         {
-            _fluxoDeCaixaService = fluxoDeCaixaService;
+            _fluxoDeCaixaRepository = fluxoDeCaixaService;
+        }
+
+        public void FechamentoDeCaixa()
+        {
+            _fluxoDeCaixaRepository.GetAll();
         }
     }
 }
