@@ -1,6 +1,6 @@
 ﻿using acme.atena.api.ViewModel.Account;
-using acme.atena.application.Interface.Account;
 using acme.atena.domain.DTO.Account;
+using acme.atena.domain.Interface.Service.Account;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +16,10 @@ namespace acme.atena.api.Controllers.Account
     public class PagamentoController : BaseApiController<Pagamento,PagamentoViewModel>
     {
         private readonly IMapper _mapper;
-        private readonly IPagamentoApplication _pagamentoApplication;
+        private readonly IPagamentoService _pagamentoApplication;
         private const string NOME_SERVICO = "PAGAMENTO";
 
-        public PagamentoController(IMapper mapper, IPagamentoApplication pagamentoApplication):base(mapper, pagamentoApplication, NOME_SERVICO)
+        public PagamentoController(IMapper mapper, IPagamentoService pagamentoApplication):base(mapper, pagamentoApplication, NOME_SERVICO)
         {
             _mapper = mapper;
             _pagamentoApplication = pagamentoApplication;

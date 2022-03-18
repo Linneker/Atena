@@ -1,6 +1,6 @@
 ﻿using acme.atena.api.ViewModel.Product;
-using acme.atena.application.Interface.Product;
 using acme.atena.domain.DTO.Product;
+using acme.atena.domain.Interface.Service.Product;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,11 +15,11 @@ namespace acme.atena.api.Controllers.Product
     [ApiController]
     public class CompraController : BaseApiController<Compra,CompraViewModel>
     {
-        private readonly ICompraApplication _compraApplication;
+        private readonly ICompraService _compraApplication;
         private readonly IMapper _mapper;
         private const string NOME_SERVICO = "COMPRA";
 
-        public CompraController(ICompraApplication compraApplication, IMapper mapper): base(mapper,compraApplication,NOME_SERVICO)
+        public CompraController(ICompraService compraApplication, IMapper mapper): base(mapper,compraApplication,NOME_SERVICO)
         {
             _compraApplication = compraApplication;
             _mapper = mapper;

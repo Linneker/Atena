@@ -1,5 +1,5 @@
-﻿using acme.atena.application.Interface.Product.Price;
-using acme.atena.domain.DTO.Product.Price;
+﻿using acme.atena.domain.DTO.Product.Price;
+using acme.atena.domain.Interface.Repository.Product.Price;
 using acme.atena.domain.Interface.Service;
 using acme.atena.domain.Interface.Service.Product.Price;
 using System;
@@ -8,13 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace acme.atena.application.Application.Product.Price
+namespace acme.atena.application.Service.Product.Price
 {
-    public class TipoValorProdutoApplication: ServiceBase<TipoValorProduto>, ITipoValorProdutoApplication
+    public class TipoValorProdutoService: ServiceBase<TipoValorProduto>, ITipoValorProdutoService
     {
-        private readonly ITipoValorProdutoService _tipoValorProdutoApplication;
+        private readonly ITipoValorProdutoRepository _tipoValorProdutoApplication;
 
-        public TipoValorProdutoApplication(ITipoValorProdutoService tipoValorProdutoApplication) : base(tipoValorProdutoApplication)
+        public TipoValorProdutoService(ITipoValorProdutoRepository tipoValorProdutoApplication) : base(tipoValorProdutoApplication)
         {
             _tipoValorProdutoApplication = tipoValorProdutoApplication; 
         }

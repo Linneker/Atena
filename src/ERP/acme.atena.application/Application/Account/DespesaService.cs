@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace acme.atena.application.Service.Account
 {
-    public class DespesaApplication : ServiceBase<Despesa>, IDespesaService
+    public class DespesaService : ServiceBase<Despesa>, IDespesaService
     {
         private readonly IDespesaRepository _despesaService;
 
-        public DespesaApplication(IDespesaRepository despesaService):base(despesaService)
+        public DespesaService(IDespesaRepository despesaService):base(despesaService)
         {
             _despesaService = despesaService;
         }

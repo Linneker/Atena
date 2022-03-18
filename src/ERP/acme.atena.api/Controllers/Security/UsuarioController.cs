@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using acme.atena.api.ViewModel.Security;
-using acme.atena.application.Interface.Security;
 using acme.atena.domain.DTO.Seguranca;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -11,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.OData.Query;
 using Microsoft.Extensions.Logging;
+using acme.atena.domain.Interface.Service.Security;
 
 namespace acme.atena.api.Controllers.Security
 {
@@ -19,10 +19,10 @@ namespace acme.atena.api.Controllers.Security
     public class UsuarioController : BaseApiController<Usuario, UsuarioViewModel>
     {
         private IMapper _mapper;
-        private IUsuarioApplication _usuarioApplication;
+        private IUsuarioService _usuarioApplication;
         private const string NOME_SERVICO = "USUARIO";
         private readonly ILogger<UsuarioController> _logger;
-        public UsuarioController(IMapper mapper, IUsuarioApplication usuarioApplication,
+        public UsuarioController(IMapper mapper, IUsuarioService usuarioApplication,
             ILogger<UsuarioController> logger) : base(mapper, usuarioApplication, NOME_SERVICO)
         {
             _mapper = mapper;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace acme.atena.application.Application.Product.Price
+namespace acme.atena.application.Service.Product.Price
 {
     public class ValorProdutoService
     {

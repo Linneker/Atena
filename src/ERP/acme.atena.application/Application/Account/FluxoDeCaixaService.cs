@@ -8,13 +8,13 @@ using System.Text;
 
 namespace acme.atena.application.Service.Account
 {
-    public class FluxoDeCaixaApplication : ServiceBase<FluxoDeCaixa>, IFluxoDeCaixaService
+    public class FluxoDeCaixaService : ServiceBase<FluxoDeCaixa>, IFluxoDeCaixaService
     {
         private readonly IFluxoDeCaixaRepository _fluxoDeCaixaRepository;
         private readonly IDespesaService _despesaService;
         private readonly IReceitaService _receitaService;
 
-        public FluxoDeCaixaApplication(IFluxoDeCaixaRepository fluxoDeCaixaService):base(fluxoDeCaixaService)
+        public FluxoDeCaixaService(IFluxoDeCaixaRepository fluxoDeCaixaService):base(fluxoDeCaixaService)
         {
             _fluxoDeCaixaRepository = fluxoDeCaixaService;
         }

@@ -1,6 +1,6 @@
 ﻿using acme.atena.api.ViewModel.Product;
-using acme.atena.application.Interface.Product;
 using acme.atena.domain.DTO.Product;
+using acme.atena.domain.Interface.Service.Product;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,11 +15,11 @@ namespace acme.atena.api.Controllers.Product
     [ApiController]
     public class ProdutoController : BaseApiController<Produto, ProdutoViewModel>
     {
-        private readonly IProdutoApplication _produtoApplication;
+        private readonly IProdutoService _produtoApplication;
         private readonly IMapper _mapper;
         private const string NOME_SERVICO = "PRODUTO";
 
-        public ProdutoController(IProdutoApplication produtoApplication, IMapper mapper):base(mapper,produtoApplication,NOME_SERVICO)
+        public ProdutoController(IProdutoService produtoApplication, IMapper mapper):base(mapper,produtoApplication,NOME_SERVICO)
         {
             _produtoApplication = produtoApplication;
             _mapper = mapper;

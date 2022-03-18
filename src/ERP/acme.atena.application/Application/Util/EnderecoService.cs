@@ -1,5 +1,5 @@
-﻿using acme.atena.application.Interface.Util;
-using acme.atena.domain.DTO.Util;
+﻿using acme.atena.domain.DTO.Util;
+using acme.atena.domain.Interface.Repository.Util;
 using acme.atena.domain.Interface.Service.Util;
 using RestSharp;
 using System;
@@ -8,13 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace acme.atena.application.Application.Util
+namespace acme.atena.application.Service.Util
 {
-    public class EnderecoApplication : ServiceBase<Endereco>, IEnderecoApplication
+    public class EnderecoService : ServiceBase<Endereco>, IEnderecoService
     {
-        private readonly IEnderecoService _enderecoService;
+        private readonly IEnderecoRepository _enderecoService;
 
-        public EnderecoApplication(IEnderecoService enderecoService) : base(enderecoService)
+        public EnderecoService(IEnderecoRepository enderecoService) : base(enderecoService)
         {
             _enderecoService = enderecoService;
         }
@@ -45,7 +45,7 @@ namespace acme.atena.application.Application.Util
             Endereco endereco = await _enderecoService.GetEnderecoByCepAsync(cep);
             if (endereco is null)
             {
-                RequestDefaultApplication requestDefault = new RequestDefaultApplication();
+                RequestDefaultService requestDefault = new RequestDefaultService();
 
                 var queryResult = await requestDefault.RequestCompleta<EnderecoViaCep, string>("", new ConfiguracaoServico($"https://viacep.com.br/ws/", cep, "/json", false, domain.DTO.Enum.EnumTypeService.GET, "", ""));
                 endereco = new Endereco()

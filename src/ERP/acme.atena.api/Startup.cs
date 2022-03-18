@@ -1,32 +1,8 @@
 using acme.atena.api.Controllers;
-using acme.atena.application.Application;
-using acme.atena.application.Application.Account;
-using acme.atena.application.Application.Inventory;
-using acme.atena.application.Application.Person;
-using acme.atena.application.Application.Product;
-using acme.atena.application.Application.Product.Price;
-using acme.atena.application.Application.Security;
-using acme.atena.application.Application.Util;
-using acme.atena.application.Interface;
-using acme.atena.application.Interface.Account;
-using acme.atena.application.Interface.Inventory;
-using acme.atena.application.Interface.Person;
-using acme.atena.application.Interface.Product;
-using acme.atena.application.Interface.Product.Price;
-using acme.atena.application.Interface.Security;
-using acme.atena.application.Interface.Util;
+using acme.atena.config.DI;
 using acme.atena.domain.DTO;
 using acme.atena.domain.DTO.Product;
 using acme.atena.domain.DTO.Seguranca;
-using acme.atena.domain.Interface.Repository;
-using acme.atena.domain.Interface.Repository.Account;
-using acme.atena.domain.Interface.Repository.Inventory;
-using acme.atena.domain.Interface.Repository.Person;
-using acme.atena.domain.Interface.Repository.Product;
-using acme.atena.domain.Interface.Repository.Product.Price;
-using acme.atena.domain.Interface.Repository.Security;
-using acme.atena.domain.Interface.Repository.UnitOfWork;
-using acme.atena.domain.Interface.Repository.Util;
 using acme.atena.domain.Interface.Service;
 using acme.atena.domain.Interface.Service.Account;
 using acme.atena.domain.Interface.Service.Inventory;
@@ -35,24 +11,7 @@ using acme.atena.domain.Interface.Service.Product;
 using acme.atena.domain.Interface.Service.Product.Price;
 using acme.atena.domain.Interface.Service.Security;
 using acme.atena.domain.Interface.Service.Util;
-using acme.atena.domain.Service;
-using acme.atena.domain.Service.Account;
-using acme.atena.domain.Service.Inventory;
-using acme.atena.domain.Service.Person;
-using acme.atena.domain.Service.Product;
-using acme.atena.domain.Service.Product.Price;
-using acme.atena.domain.Service.Security;
-using acme.atena.domain.Service.Util;
 using acme.atena.infra.Config;
-using acme.atena.repository;
-using acme.atena.repository.Account;
-using acme.atena.repository.Inventory;
-using acme.atena.repository.Person;
-using acme.atena.repository.Product;
-using acme.atena.repository.Product.Price;
-using acme.atena.repository.Security;
-using acme.atena.repository.UnitOfWork;
-using acme.atena.repository.Util;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -242,123 +201,8 @@ namespace acme.atena.api
         }
         public IServiceCollection InjecaoDependencia(IServiceCollection services)
         {
-            //Application
-            services.AddTransient<IApplicationBase<AbstractEntity>, ApplicationBase<AbstractEntity>>();
-            services.AddTransient<IDespesaApplication, DespesaApplication>();
-            services.AddTransient<IReceitaApplication, ReceitaApplication>();
-            services.AddTransient<IFluxoDeCaixaApplication, FluxoDeCaixaApplication>();
-            services.AddTransient<IDividaApplication, DividaApplication>();
-            services.AddTransient<IPagamentoApplication, PagamentoApplication>();
-            services.AddTransient<IPagamentoVendaApplication, PagamentoVendaApplication>();
-
-            services.AddTransient<IEstoqueApplication, EstoqueApplication>();
-            services.AddTransient<IEstoqueProdutoApplication, EstoqueProdutoApplication>();
-            services.AddTransient<IEntradaProdutoEstoqueApplication, EntradaProdutoEstoqueApplication>();
-            services.AddTransient<ISaidaProdutoEstoqueApplication, SaidaProdutoEstoqueApplication>();
-
-
-            services.AddTransient<ICompraApplication, CompraApplication>();
-            services.AddTransient<ICompraProdutoApplication, CompraProdutoApplication>();
-            services.AddTransient<IProdutoApplication, ProdutoApplication>();
-            services.AddTransient<IVendaApplication, VendaApplication>();
-            services.AddTransient<IVendaProdutoApplication, VendaProdutoApplication>();
-            services.AddTransient<IDevolucaoCompraApplication, DevolucaoCompraApplication>();
-            services.AddTransient<IDevolucaoVendaApplication, DevolucaoVendaApplication>();
-            services.AddTransient<ITipoProdutoApplication, TipoProdutoApplication>();
-            services.AddTransient<ITipoValorProdutoApplication, TipoValorProdutoApplication>();
-
-            services.AddTransient<IClienteApplication, ClienteApplication>();
-            services.AddTransient<IFornecedorApplication, FornecedorApplication>();
-            services.AddTransient<IEmpresaApplication, EmpresaApplication>();
-
-            services.AddTransient<ICompetenciaApplication, CompetenciaApplication>();
-            services.AddTransient<IParametroApplication, ParametroApplication>();
-            services.AddTransient<IEnderecoApplication, EnderecoApplication>();
-
-            services.AddTransient<IAutorizacaoApiApplication, AutorizacaoApiApplication>();
-            services.AddTransient<IUsuarioApplication, UsuarioApplication>();
-            services.AddTransient<IPermissaoApplication, PermissaoApplication>();
-            services.AddTransient<IPermissaoUsuarioApplication, PermissaoUsuarioApplication>();
-
-            //SERVICE
-            services.AddTransient<IServiceBase<AbstractEntity>, ServiceBase<AbstractEntity>>();
-            services.AddTransient<IDespesaService, DespesaService>();
-            services.AddTransient<IReceitaService, ReceitaService>();
-            services.AddTransient<IFluxoDeCaixaService, FluxoDeCaixaService>();
-            services.AddTransient<IDividaService, DividaService>();
-            services.AddTransient<IPagamentoService, PagamentoService>();
-            services.AddTransient<IPagamentoVendaService, PagamentoVendaService>();
-
-            services.AddTransient<IEstoqueService, EstoqueService>();
-            services.AddTransient<IEstoqueProdutoService, EstoqueProdutoService>();
-            services.AddTransient<IEntradaProdutoEstoqueService, EntradaProdutoEstoqueService>();
-            services.AddTransient<ISaidaProdutoEstoqueService, SaidaProdutoEstoqueService>();
-
-
-            services.AddTransient<ICompraService, CompraService>();
-            services.AddTransient<ICompraProdutoService, CompraProdutoService>();
-            services.AddTransient<IProdutoService, ProdutoService>();
-            services.AddTransient<IVendaService, VendaService>();
-            services.AddTransient<IVendaProdutoService, VendaProdutoService>();
-            services.AddTransient<IDevolucaoCompraService, DevolucaoCompraService>();
-            services.AddTransient<IDevolucaoVendaService, DevolucaoVendaService>();
-            services.AddTransient<ITipoProdutoService, TipoProdutoService>();
-            services.AddTransient<ITipoValorProdutoService, TipoValorProdutoService>();
-
-            services.AddTransient<IEmpresaService, EmpresaService>();
-            services.AddTransient<IClienteService, ClienteService>();
-            services.AddTransient<IFornecedorService, FornecedorService>();
-
-            services.AddTransient<ICompetenciaService, CompetenciaService>();
-            services.AddTransient<IParametroService, ParametroService>();
-            services.AddTransient<IEnderecoService, EnderecoService>();
-
-            services.AddTransient<IAutorizacaoApiService, AutorizacaoApiService>();
-            services.AddTransient<IUsuarioService, UsuarioService>();
-            services.AddTransient<IPermissaoService, PermissaoService>();
-            services.AddTransient<IPermissaoUsuarioService, PermissaoUsuarioService>();
-
-            //REPOSITORY
-            services.AddTransient<IRepositoryBase<AbstractEntity>, RepositoryBase<AbstractEntity>>();
-            services.AddTransient<IDespesaRepository, DespesaRepository>();
-            services.AddTransient<IReceitaRepository, ReceitaRepository>();
-            services.AddTransient<IFluxoDeCaixaRepository, FluxoDeCaixaRepository>();
-            services.AddTransient<IDividaRepository, DividaRepository>();
-            services.AddTransient<IPagamentoRepository, PagamentoRepository>();
-
-            services.AddTransient<IEstoqueRepository, EstoqueRepository>();
-            services.AddTransient<IEstoqueProdutoRepository, EstoqueProdutoRepository>();
-            services.AddTransient<IEntradaProdutoEstoqueRepository, EntradaProdutoEstoqueRepository>();
-            services.AddTransient<ISaidaProdutoEstoqueRepository, SaidaProdutoEstoqueRepository>();
-
-            services.AddTransient<ICompraRepository, CompraRepository>();
-            services.AddTransient<ICompraProdutoRepository, CompraProdutoRepository>();
-            services.AddTransient<IProdutoRepository, ProdutoRepository>();
-            services.AddTransient<IVendaRepository, VendaRepository>();
-            services.AddTransient<IVendaProdutoRepository, VendaProdutoRepository>();
-            services.AddTransient<IDevolucaoCompraRepository, DevolucaoCompraRepository>();
-            services.AddTransient<IDevolucaoVendaRepository, DevolucaoVendaRepository>();
-            services.AddTransient<IPagamentoVendaRepository, PagamentoVendaRepository>();
-            services.AddTransient<ITipoProdutoRepository, TipoProdutoRepository>();
-            services.AddTransient<ITipoValorProdutoRepository, TipoValorProdutoRepository>();
-
-
-            services.AddTransient<IEmpresaRepository, EmpresaRepository>();
-            services.AddTransient<IClienteRepository, ClienteRepository>();
-            services.AddTransient<IFornecedorRepository, FornecedorRepository>();
-
-            services.AddTransient<ICompetenciaRepository, CompetenciaRepository>();
-            services.AddTransient<IParametroRepository, ParametroRepository>();
-            services.AddTransient<IEnderecoRepository, EnderecoRepository>();
-
-            services.AddTransient<IAutorizacaoApiRepository, AutorizacaoApiRepository>();
-            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
-            services.AddTransient<IPermissaoRepository, PermissaoRepository>();
-            services.AddTransient<IPermissaoUsuarioRepository, PermissaoUsuarioRepository>();
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
-
             services.AddTransient<UnitOfWorkFilter>();
-
+            services.DI();
             return services;
         }
 

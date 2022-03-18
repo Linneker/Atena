@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using acme.atena.api.ViewModel.Account;
-using acme.atena.application.Interface.Account;
 using acme.atena.domain.DTO.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -9,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using acme.atena.domain.Interface.Service.Account;
 
 namespace acme.atena.api.Controllers.Account
 {
@@ -17,9 +17,9 @@ namespace acme.atena.api.Controllers.Account
     public class DespesaController : BaseApiController<Despesa,DespesaViewModel>
     {
         private IMapper _mapper;
-        private IDespesaApplication _despesaApplication;
+        private IDespesaService _despesaApplication;
         private const string NOME_SERVICO = "DESPESA";
-        public DespesaController(IMapper mapper, IDespesaApplication despesaApplication) : base(mapper, despesaApplication, NOME_SERVICO)
+        public DespesaController(IMapper mapper, IDespesaService despesaApplication) : base(mapper, despesaApplication, NOME_SERVICO)
         {
             _mapper = mapper;
             _despesaApplication = despesaApplication;

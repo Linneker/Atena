@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace acme.atena.application.Service.Account
 {
-    public class ReceitaApplication : ServiceBase<Receita>, IReceitaService
+    public class ReceitaService : ServiceBase<Receita>, IReceitaService
     {
         private readonly IReceitaRepository _receitaService;
         private readonly ICompetenciaService _competenciaApplication;
-        public ReceitaApplication(IReceitaRepository receitaService, ICompetenciaService competenciaApplication) :base(receitaService)
+        public ReceitaService(IReceitaRepository receitaService, ICompetenciaService competenciaApplication) :base(receitaService)
         {
             _receitaService = receitaService;
             _competenciaApplication = competenciaApplication;

@@ -8,11 +8,11 @@ using System.Text;
 
 namespace acme.atena.application.Service.Account
 {
-    public class DividaApplication: ServiceBase<Divida>, IDividaService
+    public class DividaService: ServiceBase<Divida>, IDividaService
     {
         private readonly IDividaRepository _dividaService;
 
-        public DividaApplication(IDividaRepository dividaService):base(dividaService)
+        public DividaService(IDividaRepository dividaService):base(dividaService)
         {
             _dividaService = dividaService;
         }

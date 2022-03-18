@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using acme.atena.api.ViewModel.Security;
 using acme.atena.api.ViewModel.Util;
-using acme.atena.application.Interface.Security;
 using acme.atena.domain.DTO.Seguranca;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +14,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using acme.atena.api.Configurations.Filtler;
+using acme.atena.domain.Interface.Service.Security;
 
 namespace acme.atena.api.Controllers.Security
 {
@@ -22,11 +22,11 @@ namespace acme.atena.api.Controllers.Security
     [ApiController]
     public class AutorizacaoApiController : BaseApiController<AutorizacaoApi,AutorizacaoApiViewModel>
     {
-        private readonly IAutorizacaoApiApplication _autorizacaoApiApplication;
+        private readonly IAutorizacaoApiService _autorizacaoApiApplication;
         private readonly IMapper _mapper;
         private const string NOME_SERVICO = "AUTORIZAÇÃO API";
 
-        public AutorizacaoApiController(IAutorizacaoApiApplication autorizacaoApiApplication, IMapper mapper):base(mapper, autorizacaoApiApplication, NOME_SERVICO)
+        public AutorizacaoApiController(IAutorizacaoApiService autorizacaoApiApplication, IMapper mapper):base(mapper, autorizacaoApiApplication, NOME_SERVICO)
         {
             _autorizacaoApiApplication = autorizacaoApiApplication;
             _mapper = mapper;

@@ -9,9 +9,9 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace acme.atena.application.Application.Util
+namespace acme.atena.application.Service.Util
 {
-    internal class RequestDefaultApplication
+    internal class RequestDefaultService
     {
         public async Task<TEntity> RequestCompleta<TEntity, TRequest>(TRequest request, ConfiguracaoServico configuracao)
           where TEntity : class

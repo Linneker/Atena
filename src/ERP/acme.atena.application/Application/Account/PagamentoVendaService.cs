@@ -1,5 +1,4 @@
-﻿using acme.atena.application.Interface.Account;
-using acme.atena.domain.DTO.Account;
+﻿using acme.atena.domain.DTO.Account;
 using acme.atena.domain.DTO.Enum;
 using acme.atena.domain.DTO.Product;
 using acme.atena.domain.Interface.Repository.Account;
@@ -13,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace acme.atena.application.Service.Account
 {
-    public class PagamentoVendaApplication : ServiceBase<PagamentoVenda>, IPagamentoVendaService
+    public class PagamentoVendaService : ServiceBase<PagamentoVenda>, IPagamentoVendaService
     {
         public readonly IPagamentoVendaRepository _pagamentoVendaRepository;
         private readonly IPagamentoService _pagamentoService;
 
-        public PagamentoVendaApplication(IPagamentoVendaRepository pagamentoVendaService, IPagamentoService _pagamentoService) : base(pagamentoVendaService)
+        public PagamentoVendaService(IPagamentoVendaRepository pagamentoVendaService, IPagamentoService _pagamentoService) : base(pagamentoVendaService)
         {
             _pagamentoVendaRepository = pagamentoVendaService;
         }

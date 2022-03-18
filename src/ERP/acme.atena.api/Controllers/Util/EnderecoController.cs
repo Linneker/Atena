@@ -1,6 +1,6 @@
 ﻿using acme.atena.api.ViewModel.Util;
-using acme.atena.application.Interface.Util;
 using acme.atena.domain.DTO.Util;
+using acme.atena.domain.Interface.Service.Util;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -15,10 +15,10 @@ namespace acme.atena.api.Controllers.Util
     public class EnderecoController : BaseApiController<Endereco,EnderecoViewModel>
     {
         private IMapper _mapper;
-        private IEnderecoApplication _enderecoApplication;
+        private IEnderecoService _enderecoApplication;
         private const string NOME_SERVICO = "ENDEREÇO";
 
-        public EnderecoController(IMapper mapper, IEnderecoApplication enderecoApplication)
+        public EnderecoController(IMapper mapper, IEnderecoService enderecoApplication)
             :base(mapper,enderecoApplication,NOME_SERVICO)
         {
             _mapper = mapper;

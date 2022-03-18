@@ -7,11 +7,11 @@ using System.Text;
 
 namespace acme.atena.application.Service.Account
 {
-    public class PagamentoApplication: ServiceBase<Pagamento>, IPagamentoService
+    public class PagamentoService: ServiceBase<Pagamento>, IPagamentoService
     {
         private readonly IPagamentoRepository _pagamentoService;
 
-        public PagamentoApplication(IPagamentoRepository pagamentoService):base(pagamentoService)
+        public PagamentoService(IPagamentoRepository pagamentoService):base(pagamentoService)
         {
             _pagamentoService = pagamentoService;
         }

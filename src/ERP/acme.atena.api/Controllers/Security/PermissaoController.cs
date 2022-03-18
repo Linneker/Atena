@@ -1,6 +1,6 @@
 ﻿using acme.atena.api.ViewModel.Security;
-using acme.atena.application.Interface.Security;
 using acme.atena.domain.DTO.Seguranca;
+using acme.atena.domain.Interface.Service.Security;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,11 +15,11 @@ namespace acme.atena.api.Controllers.Security
     [ApiController]
     public class PermissaoController : BaseApiController<Permissao,PermissaoViewModel>
     {
-        private readonly IPermissaoApplication _permissaoApplication;
+        private readonly IPermissaoService _permissaoApplication;
         private readonly IMapper _mapper;
         private const string NOME_SERVICO = "PERMISSÃO";
 
-        public PermissaoController(IPermissaoApplication permissaoApplication, IMapper mapper):base(mapper, permissaoApplication, NOME_SERVICO)
+        public PermissaoController(IPermissaoService permissaoApplication, IMapper mapper):base(mapper, permissaoApplication, NOME_SERVICO)
         {
             _permissaoApplication = permissaoApplication;
             _mapper = mapper;

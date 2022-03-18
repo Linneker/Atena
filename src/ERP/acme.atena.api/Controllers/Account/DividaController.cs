@@ -1,6 +1,6 @@
 ﻿using acme.atena.api.ViewModel.Account;
-using acme.atena.application.Interface.Account;
 using acme.atena.domain.DTO.Account;
+using acme.atena.domain.Interface.Service.Account;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +16,10 @@ namespace acme.atena.api.Controllers.Account
     public class DividaController : BaseApiController<Divida,DividaViewModel>
     {
         private readonly IMapper _mapper;
-        private readonly IDividaApplication _dividaApplication;
+        private readonly IDividaService _dividaApplication;
         private const string NOME_SERVICO = "DIVIDA";
 
-        public DividaController(IMapper mapper, IDividaApplication dividaApplication):base(mapper,dividaApplication,NOME_SERVICO)
+        public DividaController(IMapper mapper, IDividaService dividaApplication):base(mapper,dividaApplication,NOME_SERVICO)
         {
             _mapper = mapper;
             _dividaApplication = dividaApplication;

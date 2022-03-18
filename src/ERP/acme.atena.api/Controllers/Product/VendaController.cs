@@ -1,6 +1,6 @@
 ﻿using acme.atena.api.ViewModel.Product;
-using acme.atena.application.Interface.Product;
 using acme.atena.domain.DTO.Product;
+using acme.atena.domain.Interface.Service.Product;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -16,11 +16,11 @@ namespace acme.atena.api.Controllers.Product
     [ApiController]
     public class VendaController : BaseApiController<Venda,VendaViewModel>
     {
-        private readonly IVendaApplication _vendaApplication;
+        private readonly IVendaService _vendaApplication;
         private readonly IMapper _mapper;
         private const string NOME_SERVICO = "VENDA";
 
-        public VendaController(IVendaApplication vendaApplication, IMapper mapper):base(mapper,vendaApplication, NOME_SERVICO)
+        public VendaController(IVendaService vendaApplication, IMapper mapper):base(mapper,vendaApplication, NOME_SERVICO)
         {
             _vendaApplication = vendaApplication;
             _mapper = mapper;

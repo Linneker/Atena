@@ -1,5 +1,5 @@
-﻿using acme.atena.application.Interface.Inventory;
-using acme.atena.domain.DTO.Inventory;
+﻿using acme.atena.domain.DTO.Inventory;
+using acme.atena.domain.Interface.Repository.Inventory;
 using acme.atena.domain.Interface.Service.Inventory;
 using System;
 using System.Collections.Generic;
@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace acme.atena.application.Application.Inventory
+namespace acme.atena.application.Service.Inventory
 {
-    public class EstoqueProdutoApplication: ServiceBase<EstoqueProduto>, IEstoqueProdutoApplication
+    public class EstoqueProdutoService: ServiceBase<EstoqueProduto>, IEstoqueProdutoService
     {
 
-        private readonly IEstoqueProdutoService _estoqueProdutoService;
+        private readonly IEstoqueProdutoRepository _estoqueProdutoService;
 
-        public EstoqueProdutoApplication(IEstoqueProdutoService estoqueProdutoService):base(estoqueProdutoService)
+        public EstoqueProdutoService(IEstoqueProdutoRepository estoqueProdutoService):base(estoqueProdutoService)
         {
             _estoqueProdutoService = estoqueProdutoService;
         }
