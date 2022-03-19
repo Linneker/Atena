@@ -10,6 +10,6 @@ namespace acme.atena.domain.Interface.Service.Account
 {
     public interface IPagamentoVendaService: IServiceBase<PagamentoVenda>
     {
-        void ConcluirPagamentoAsync(List<PagamentoVenda> pagamentoVendas, Venda venda);
+        Task ConcluirPagamentoAsync(List<PagamentoVenda> pagamentoVendas, Venda venda);
     }
 }

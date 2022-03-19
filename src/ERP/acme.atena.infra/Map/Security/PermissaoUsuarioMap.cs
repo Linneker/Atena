@@ -20,11 +20,9 @@ namespace acme.atena.infra.Map.Security
             builder.Property(t => t.DataInativacao).IsRequired(false);
             builder.Property(t => t.Status).HasDefaultValue(EnumStatus.Ativo);
 
-            builder.Property(t => t.Read).HasDefaultValue(true);
-            builder.Property(t => t.Add).HasDefaultValue(false);
-            builder.Property(t => t.Delete).HasDefaultValue(false);
-            builder.Property(t => t.Update).HasDefaultValue(false);
+            builder.Property(t => t.Acesso);
 
+            builder.HasOne(t => t.Tela).WithMany(t => t.PermissaoUsuarios).HasForeignKey(t => t.TelaId);
             builder.HasOne(t => t.Usuario).WithMany(t => t.PermissaoUsuarios).HasForeignKey(t => t.UsuarioId);
             builder.HasOne(t => t.Permissao).WithMany(t => t.PermissaoUsuarios).HasForeignKey(t => t.PermissaoId);
 

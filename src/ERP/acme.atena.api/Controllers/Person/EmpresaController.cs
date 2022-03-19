@@ -1,10 +1,9 @@
 ﻿using acme.atena.api.Configurations.Filtler;
 using acme.atena.api.DTO.Person;
 using acme.atena.api.ViewModel.Person;
-using acme.atena.application.Interface;
-using acme.atena.application.Interface.Person;
 using acme.atena.domain.DTO.Person;
 using acme.atena.domain.DTO.Util;
+using acme.atena.domain.Interface.Service.Person;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +13,10 @@ namespace acme.atena.api.Controllers.Person
 {
     public class EmpresaController : BaseApiController<Empresa, EmpresaViewModel>
     {
-        private readonly IEmpresaApplication _empresaApplication;
+        private readonly IEmpresaService _empresaApplication;
         private readonly IMapper _mapper;
         private const string SERVICO = "EMPRESA";
-        public EmpresaController(IMapper mapper, IEmpresaApplication empresaApplication) : base(mapper, empresaApplication, SERVICO)
+        public EmpresaController(IMapper mapper, IEmpresaService empresaApplication) : base(mapper, empresaApplication, SERVICO)
         {
             _mapper = mapper;
             _empresaApplication = empresaApplication;

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using acme.atena.api.ViewModel.Account;
-using acme.atena.application.Interface.Util;
 using acme.atena.domain.DTO.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -9,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using acme.atena.domain.Interface.Service.Account;
 
 namespace acme.atena.api.Controllers.Account
 {
@@ -17,9 +17,9 @@ namespace acme.atena.api.Controllers.Account
     public class ReceitaController : BaseApiController<Receita,ReceitaViewModel>
     {
         private IMapper _mapper;
-        private IReceitaApplication _receitaApplication;
+        private IReceitaService _receitaApplication;
         private const string NOME_SERVICO = "RECEITA";
-        public ReceitaController(IMapper mapper, IReceitaApplication receitaApplication):base(mapper, receitaApplication, NOME_SERVICO)
+        public ReceitaController(IMapper mapper, IReceitaService receitaApplication):base(mapper, receitaApplication, NOME_SERVICO)
         {
             _mapper = mapper;
             _receitaApplication = receitaApplication;

@@ -1,6 +1,6 @@
 ﻿using acme.atena.api.ViewModel.Util;
-using acme.atena.application.Interface.Util;
 using acme.atena.domain.DTO.Util;
+using acme.atena.domain.Interface.Service.Util;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,11 +15,11 @@ namespace acme.atena.api.Controllers.Util
     [ApiController]
     public class ParametroController : BaseApiController<Parametro, ParametroViewModel>
     {
-        private readonly IParametroApplication _parametroApplication;
+        private readonly IParametroService _parametroApplication;
         private readonly IMapper _mapper;
         private const string NOME_SERVICO = "PARAMETRO";
 
-        public ParametroController(IParametroApplication parametroApplication, IMapper mapper):base(mapper, parametroApplication,NOME_SERVICO)
+        public ParametroController(IParametroService parametroApplication, IMapper mapper):base(mapper, parametroApplication,NOME_SERVICO)
         {
             _parametroApplication = parametroApplication;
             _mapper = mapper;

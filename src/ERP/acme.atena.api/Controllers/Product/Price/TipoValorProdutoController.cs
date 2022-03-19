@@ -1,8 +1,6 @@
 ﻿using acme.atena.api.ViewModel.Product.Price;
-using acme.atena.application.Interface;
-using acme.atena.application.Interface.Product;
-using acme.atena.application.Interface.Product.Price;
 using acme.atena.domain.DTO.Product.Price;
+using acme.atena.domain.Interface.Service.Product.Price;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -15,9 +13,9 @@ namespace acme.atena.api.Controllers.Product.Price
     [ApiController]
     public class TipoValorProdutoController : BaseApiController<TipoValorProduto, TipoValorProdutoViewModel>
     {
-        private readonly ITipoValorProdutoApplication _tipoProdutoApplication;
+        private readonly ITipoValorProdutoService _tipoProdutoApplication;
 
-        public TipoValorProdutoController(IMapper mapper, ITipoValorProdutoApplication tipoProdutoApplication) : base(mapper, tipoProdutoApplication, "Tipo Valor Produto")
+        public TipoValorProdutoController(IMapper mapper, ITipoValorProdutoService tipoProdutoApplication) : base(mapper, tipoProdutoApplication, "Tipo Valor Produto")
         {
             _tipoProdutoApplication = tipoProdutoApplication; 
         }

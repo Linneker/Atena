@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using acme.atena.api.ViewModel;
 using acme.atena.api.ViewModel.Util;
-using acme.atena.application.Interface;
 using acme.atena.domain.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -12,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using acme.atena.api.Configurations.Filtler;
 using Microsoft.AspNetCore.OData.Query;
+using acme.atena.domain.Interface.Service;
 
 namespace acme.atena.api.Controllers
 {
@@ -20,8 +20,8 @@ namespace acme.atena.api.Controllers
     public class BaseApiController<TEntity, TEntityViewModel> : ControllerBase where TEntity : AbstractEntity where TEntityViewModel : AbstractEntityViewModel
     {
         private readonly IMapper _mapper;
-        private IApplicationBase<TEntity> _applicationBase;
-        public BaseApiController(IMapper mapper, IApplicationBase<TEntity> applicationBase, string servico)
+        private IServiceBase<TEntity> _applicationBase;
+        public BaseApiController(IMapper mapper, IServiceBase<TEntity> applicationBase, string servico)
         {
             _mapper = mapper;
             _applicationBase = applicationBase;

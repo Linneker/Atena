@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using acme.atena.api.ViewModel.Util;
-using acme.atena.application.Interface.Util;
 using acme.atena.domain.DTO.Util;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -9,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using acme.atena.domain.Interface.Service.Util;
 
 namespace acme.atena.api.Controllers.Util
 {
@@ -17,9 +17,9 @@ namespace acme.atena.api.Controllers.Util
     public class CompetenciaController : BaseApiController<Competencia,CompetenciaViewModel>
     {
         private IMapper _mapper;
-        private ICompetenciaApplication _competenciaApplication;
+        private ICompetenciaService _competenciaApplication;
         private const string NOME_SERVICO = "COMPETENCIA";
-        public CompetenciaController(IMapper mapper, ICompetenciaApplication competenciaApplication) : base(mapper, competenciaApplication, NOME_SERVICO)
+        public CompetenciaController(IMapper mapper, ICompetenciaService competenciaApplication) : base(mapper, competenciaApplication, NOME_SERVICO)
         {
             _mapper = mapper;
             _competenciaApplication = competenciaApplication;
