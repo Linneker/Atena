@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -9,7 +10,7 @@ import { AutorizacaoApiResponse } from '../../view-model/response/autorizacao-ap
 })
 export class AuthorizationService {
 
-  private autorizacaoURl: string = "https://localhost:5001/api/AutorizacaoApi";
+  private autorizacaoURl: string = environment.url+"AutorizacaoApi";
   _request: AutorizacaoApiRequest = new AutorizacaoApiRequest();
   _autoricaoApiResponse: AutorizacaoApiResponse = new AutorizacaoApiResponse();
 
