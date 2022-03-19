@@ -8,13 +8,14 @@ import { RequestDefaultService } from './../auth/request-default.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService extends  RequestDefaultService<UsuarioRequest,UsuarioResponse>{
 
-  receitaUrl: string = "https://localhost:5001/api/Usuario";
+  receitaUrl: string = environment.url+ "Usuario";
   mostrarMenu : boolean = false;
   usuarioAutenticado: boolean = false;
 
@@ -51,6 +52,8 @@ export class UsuarioService extends  RequestDefaultService<UsuarioRequest,Usuari
       },
       error: (e) =>{
         alert(e.error);
+        console.log(e);
+        console.log(e.error);
       }
     });
   }

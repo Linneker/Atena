@@ -116,6 +116,22 @@ namespace acme.atena.api
             services.AddSingleton(tokenConfigurations);
 
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://localhost:4200",
+                                                          "https://localhost:4200",
+                                                          "https://localhost:5001",
+                                                          "https://bardochiquinho.acmesistemas.com.br",
+                                                          "http://atena.acmesistemas.com.br")
+                                                            .AllowAnyHeader()
+                                                            .AllowAnyMethod();
+                                  });
+            });
+
+
             services.AddAuthentication(authOptions =>
             {
                 authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -141,19 +157,6 @@ namespace acme.atena.api
 
             });
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
-                                  builder =>
-                                  {
-                                      builder.WithOrigins("http://localhost:4200",
-                                                          "https://localhost:4200").
-                                                          AllowAnyHeader().
-                                                          AllowAnyMethod().
-                                                          AllowAnyOrigin().
-                                                          Build();
-                                  });
-            });
             services.AddAuthorization(auth =>
             {
                 auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder() 
@@ -226,9 +229,9 @@ namespace acme.atena.api
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "acme.atena.api v1"));
 
             app.UseHttpsRedirection();
-            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseRouting();
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 
