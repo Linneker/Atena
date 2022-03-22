@@ -20,8 +20,9 @@ namespace acme.atena.repository.Security
             var query = (from user in _db.Usuarios
                          join userPerm in _db.PermissaoUsuarios on user.Id equals userPerm.UsuarioId
                          join perm in _db.Permissaos on userPerm.PermissaoId equals perm.Id
+                         join tela in _db.Telas on userPerm.TelaId equals tela.Id
                          where user.Login.Equals(usuario.Login) && user.Senha.Equals(usuario.Senha)
-                         select user).Include(t=>t.PermissaoUsuarios).ThenInclude(t=>new { t.Permissao, t.Tela }).FirstOrDefaultAsync();
+                         select user).Include(t=>t.PermissaoUsuarios).ThenInclude(t=>t.Permissao).ThenInclude(t=>t.PermissaoUsuarios).ThenInclude(t=>t.Tela).FirstOrDefaultAsync();
             return query;
         }
 

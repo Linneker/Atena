@@ -21,10 +21,12 @@ namespace acme.atena.api.Controllers
     {
         private readonly IMapper _mapper;
         private IServiceBase<TEntity> _applicationBase;
+        private string _servico;
         public BaseApiController(IMapper mapper, IServiceBase<TEntity> applicationBase, string servico)
         {
             _mapper = mapper;
             _applicationBase = applicationBase;
+            _servico = servico;
         }
         [Authorize("Bearer")]
         [UnitOfWorkFilter]
@@ -51,8 +53,11 @@ namespace acme.atena.api.Controllers
         [EnableQuery]
         [Authorize("Bearer")]
         [HttpGet]
-        public virtual List<TEntityViewModel> GetAll() => _mapper.Map<List<TEntityViewModel>>(_applicationBase.GetAll());
-
+        public virtual List<TEntity> GetAll()
+        {
+            var valor = (_applicationBase.GetAll());
+            return valor;
+        }
         [Authorize("Bearer")]
         [HttpGet("GetAll/Async")]
         public Task<List<TEntityViewModel>> GetAllAsync() => _mapper.Map<Task<List<TEntityViewModel>>>(_applicationBase.GetAllAsync());

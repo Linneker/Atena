@@ -1511,7 +1511,7 @@ namespace acme.atena.infra.Migrations
                     b.Property<byte[]>("TelaSistemaFilhaId")
                         .HasColumnType("varbinary(16)");
 
-                    b.Property<bool?>("Title")
+                    b.Property<byte?>("Title")
                         .HasMaxLength(255)
                         .HasColumnType("tinyint(255)");
 

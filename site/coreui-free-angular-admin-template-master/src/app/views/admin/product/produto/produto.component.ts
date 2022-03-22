@@ -54,11 +54,13 @@ export class ProdutoComponent implements OnInit {
   }
 
   openAtualizar(id){
+
     this.produtoEditRemove = this.produtos.filter((depart)=>depart.id == id)[0];
     this.largeModalEdit.show();
   }
 
   openDeletar(id){
+    debugger;
     this.produtoEditRemove = this.produtos.filter((depart)=>depart.id == id)[0];
     this.largeModalRemove.show();
   }

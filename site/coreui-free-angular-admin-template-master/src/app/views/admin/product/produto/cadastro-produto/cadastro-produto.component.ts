@@ -61,16 +61,16 @@ export class CadastroProdutoComponent implements OnInit {
   salvar(evento):void{
     var valorProduto : ValorProduto = new ValorProduto();
     valorProduto.tipoValorProdutoId = this.tipoValorProdutoCompraId;
-    valorProduto.valor = this.valorCompraProduto;
+    valorProduto.valor = Number(this.valorCompraProduto.toString().replace(',','.'));
     this.produto.valorProdutos.push(valorProduto);
 
     valorProduto = new ValorProduto();
     valorProduto.tipoValorProdutoId = this.tipoValorProdutoVendaId;
-    valorProduto.valor = Number(Number(this.valorCompraProduto) + Number(Number(this.valorCompraProduto * this.margemDeLucro)/100));
+    valorProduto.valor = Number(Number(this.valorCompraProduto.toString().replace(',','.')) + Number(Number(Number(this.valorCompraProduto.toString().replace(',','.')) * this.margemDeLucro)/100));
     this.produto.valorProdutos.push(valorProduto);
     console.log(valorProduto.valor);
     this.produto.validade = null;
-
+    debugger;
     this.produtoService.add(this.produto,"Produto/Add").subscribe({
       next:(sucesso)=>{
         this.mensagemCad("Produto cadastrado com sucesso","success","");
