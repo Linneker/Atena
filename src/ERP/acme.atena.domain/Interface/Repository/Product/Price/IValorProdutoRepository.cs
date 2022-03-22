@@ -9,5 +9,6 @@ namespace acme.atena.domain.Interface.Repository.Product.Price
 {
     public interface IValorProdutoRepository : IRepositoryBase<ValorProduto>
     {
+        Task<ValorProduto> GetValorProdutoByProdutoIdAsync(Guid produtoId);
     }
 }

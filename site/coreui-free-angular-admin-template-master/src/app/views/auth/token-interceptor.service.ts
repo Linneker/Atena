@@ -11,8 +11,7 @@ export class TokenInterceptorService implements HttpInterceptor {
 
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    debugger;
-    const jwt = sessionStorage.getItem('jwt') || 'teste';
+    const jwt = sessionStorage.getItem('jwt') || 'erro401';
     let tokenValido = (Date.parse(sessionStorage.getItem("expiration")) >= Date.now());
 
 

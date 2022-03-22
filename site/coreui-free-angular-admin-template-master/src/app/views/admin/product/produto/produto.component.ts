@@ -6,6 +6,7 @@ import { ProdutoService } from './produto.service';
 import { CookieConsertService } from '../../../cookie-consert/cookie-consert.service';
 import { AuthorizationService } from '../../../auth/authorization.service';
 import { UsuarioResponse } from '../../../../view-model/response/security/usuario';
+import { PermissaoAcesso } from '../../../../view-model/util/permissa-acessos';
 
 @Component({
   selector: 'app-produto',
@@ -21,6 +22,8 @@ export class ProdutoComponent implements OnInit {
   acessoPermitido: boolean = false;
   permissaoSistema: PermissaoUsuario = new PermissaoUsuario();
   produtos: Produto[]=[];
+  acessos: string="";
+  permissaoAcesso: PermissaoAcesso = new PermissaoAcesso();
 
   produtoEditRemove: Produto = new Produto();
 
@@ -31,11 +34,10 @@ export class ProdutoComponent implements OnInit {
 
   ngOnInit(): void {
     var valor : UsuarioResponse= JSON.parse(this.cookie.getCookie("usuario"));
-    valor.permissaoUsuarios.forEach(permissao => {
-      this.acessoPermitido = permissao.permissao.nome == "Root" ||  permissao.permissao.nome == "Administrador";
-      this.permissaoSistema = permissao;
-    });
+    this.permissaoAcesso = this.authorizationService.hasAutorization("Produto");
+
     debugger;
+
     this.produtosService.getAll("Produto").subscribe({
       next:(t)=>{
           debugger;

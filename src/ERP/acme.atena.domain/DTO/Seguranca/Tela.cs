@@ -11,12 +11,12 @@ namespace acme.atena.domain.DTO.Seguranca
         public string Name { get; set; }
         public string Url { get; set;}
         public string Icon { get; set;}
-        public bool Title { get; set; } = false;
+        public bool? Title { get; set; } = false;
         public bool IsPrincipal { get; set; }
         public string Class { get; set; }
         public string Variant { get; set; }
 
-        public Guid TelaSistemaFilhaId { get; set; }
+        public Guid? TelaSistemaFilhaId { get; set; }
 
         public Tela TelaSistemaFilha { get; set; }
 

@@ -9,7 +9,7 @@ namespace acme.atena.domain.Interface.Repository.Security
 {
     public interface IUsuarioRepository : IRepositoryBase<Usuario>
     {
-        Usuario Login(Usuario usuario);
+        Task<Usuario> Login(Usuario usuario);
         Task<IQueryable<Usuario>> RecuperaUsuariosComPermissaoAssync();
     }
 }

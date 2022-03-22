@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using acme.atena.infra.Config;
 
 namespace acme.atena.infra.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220320025817_removendoTelaSistema")]
+    partial class removendoTelaSistema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1508,9 +1510,6 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<byte[]>("TelaSistemaFilhaId")
-                        .HasColumnType("varbinary(16)");
-
                     b.Property<bool?>("Title")
                         .HasMaxLength(255)
                         .HasColumnType("tinyint(255)");
@@ -1526,8 +1525,6 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TelaSistemaFilhaId");
 
                     b.ToTable("Tela");
                 });
@@ -2487,16 +2484,6 @@ namespace acme.atena.infra.Migrations
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("acme.atena.domain.DTO.Seguranca.Tela", b =>
-                {
-                    b.HasOne("acme.atena.domain.DTO.Seguranca.Tela", "TelaSistemaFilha")
-                        .WithMany("TelasSistemasFilhas")
-                        .HasForeignKey("TelaSistemaFilhaId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("TelaSistemaFilha");
-                });
-
             modelBuilder.Entity("acme.atena.domain.DTO.Util.EnderecoCliente", b =>
                 {
                     b.HasOne("acme.atena.domain.DTO.Person.Cliente", "Cliente")
@@ -2710,8 +2697,6 @@ namespace acme.atena.infra.Migrations
             modelBuilder.Entity("acme.atena.domain.DTO.Seguranca.Tela", b =>
                 {
                     b.Navigation("PermissaoUsuarios");
-
-                    b.Navigation("TelasSistemasFilhas");
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Seguranca.Usuario", b =>

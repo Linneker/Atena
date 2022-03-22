@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using acme.atena.infra.Config;
 
 namespace acme.atena.infra.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220319215046_modificandoPermissaoUsuario")]
+    partial class modificandoPermissaoUsuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1509,6 +1511,7 @@ namespace acme.atena.infra.Migrations
                         .HasDefaultValue(0);
 
                     b.Property<byte[]>("TelaSistemaFilhaId")
+                        .IsRequired()
                         .HasColumnType("varbinary(16)");
 
                     b.Property<bool?>("Title")
@@ -2492,7 +2495,8 @@ namespace acme.atena.infra.Migrations
                     b.HasOne("acme.atena.domain.DTO.Seguranca.Tela", "TelaSistemaFilha")
                         .WithMany("TelasSistemasFilhas")
                         .HasForeignKey("TelaSistemaFilhaId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("TelaSistemaFilha");
                 });

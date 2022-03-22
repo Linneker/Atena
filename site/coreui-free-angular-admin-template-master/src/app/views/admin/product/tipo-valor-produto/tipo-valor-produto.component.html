@@ -1,10 +1,10 @@
-<div *ngIf="permissaoSistema.add && acessoPermitido">
+<div *ngIf="permissaoAcesso.add">
   <button type="button" class="btn btn-primary mr-1" data-toggle="modal" (click)="openCadastro()">
     Cadastro
   </button>
 </div>
 
-<div *ngIf="permissaoSistema.read && acessoPermitido; then acssPermitido else acessoNegado"></div>
+<div *ngIf="permissaoAcesso.read; then acssPermitido else acessoNegado"></div>
 <ng-template #acssPermitido>
 <div class="m-5">
 
@@ -21,7 +21,7 @@
         <th>{{ tipoValorProduto.nome }}</th>
         <th>{{ tipoValorProduto.dataCriacao }}</th>
         <th>
-          <div *ngIf="permissaoSistema.update && permissaoSistema.delete">
+          <div *ngIf="permissaoAcesso.update && permissaoAcesso.delete">
             <button type="button" class="btn btn-warning mr-1" data-toggle="modal" (click)="openAtualizar(tipoValorProduto.id)">
               Atualizar
             </button>
@@ -29,12 +29,12 @@
               Delete
             </button>
           </div>
-          <div *ngIf="permissaoSistema.update && !permissaoSistema.delete">
+          <div *ngIf="permissaoAcesso.update && !permissaoAcesso.delete">
             <button type="button" class="btn btn-warning mr-1" data-toggle="modal" (click)="openAtualizar(tipoValorProduto.id)">
               Atualizar
             </button>
           </div>
-          <div *ngIf="!permissaoSistema.update && permissaoSistema.delete">
+          <div *ngIf="!permissaoAcesso.update && permissaoAcesso.delete">
             <button type="button" class="btn btn-primary mr-1" data-toggle="modal" (click)="openDeletar(tipoValorProduto.id)">
               Delete
             </button>

@@ -28,8 +28,10 @@ namespace acme.atena.infra.Map.Security
             builder.Property(t => t.Class).HasMaxLength(255).IsRequired(false);
             builder.Property(t => t.Icon).HasMaxLength(255).IsRequired(false);
             builder.Property(t => t.IsPrincipal).HasDefaultValue(false);
-            builder.Property(t => t.Title).HasMaxLength(255).IsRequired(false);
-            
+            builder.Property(t => t.Title).HasMaxLength(255);
+            builder.Property(t => t.TelaSistemaFilhaId);
+
+
             builder.HasOne(t => t.TelaSistemaFilha).WithMany(t => t.TelasSistemasFilhas).HasForeignKey(t => t.TelaSistemaFilhaId);
 
         }

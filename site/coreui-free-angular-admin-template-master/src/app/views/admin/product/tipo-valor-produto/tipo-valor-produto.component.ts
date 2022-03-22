@@ -6,6 +6,7 @@ import { AuthorizationService } from '../../../auth/authorization.service';
 import { CookieConsertService } from '../../../cookie-consert/cookie-consert.service';
 import { TipoValorProdutoService } from './tipo-valor-produto.service';
 import { UsuarioResponse } from '../../../../view-model/response/security/usuario';
+import { PermissaoAcesso } from '../../../../view-model/util/permissa-acessos';
 
 @Component({
   selector: 'app-tipo-valor-produto',
@@ -21,6 +22,7 @@ export class TipoValorProdutoComponent implements OnInit {
   acessoPermitido: boolean = false;
   permissaoSistema: PermissaoUsuario = new PermissaoUsuario();
   tiposValoresProdutos: TipoValorProduto[]=[];
+  permissaoAcesso: PermissaoAcesso = new PermissaoAcesso();
 
   constructor(private authorizationService: AuthorizationService,
     private cookie: CookieConsertService,
@@ -29,11 +31,8 @@ export class TipoValorProdutoComponent implements OnInit {
 
     ngOnInit(): void {
       var valor : UsuarioResponse= JSON.parse(this.cookie.getCookie("usuario"));
-      valor.permissaoUsuarios.forEach(permissao => {
-      this.acessoPermitido = permissao.permissao.nome == "Root" ||  permissao.permissao.nome == "Administrador";
-      this.permissaoSistema = permissao;
-    });
-    this.tipoValorProdutosService.getAll("TipoValorProduto").subscribe({
+      this.permissaoAcesso = this.authorizationService.hasAutorization("Produto");
+      this.tipoValorProdutosService.getAll("TipoValorProduto").subscribe({
       next:(t)=>{
           debugger;
           this.tiposValoresProdutos = t;

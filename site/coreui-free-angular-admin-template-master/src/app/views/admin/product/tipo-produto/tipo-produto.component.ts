@@ -8,6 +8,7 @@ import { PermissaoUsuario } from '../../../../view-model/response/security/permi
 import { TipoProduto } from '../../../../view-model/response/product/tipo-produto';
 import { TipoProdutoService } from './tipo-produto.service';
 import { isDebuggerStatement } from 'typescript';
+import { PermissaoAcesso } from '../../../../view-model/util/permissa-acessos';
 
 @Component({
   selector: 'app-tipo-produto',
@@ -25,6 +26,7 @@ export class TipoProdutoComponent implements OnInit {
   tiposProdutos: TipoProduto[]=[];
 
   tipoProdutoEditRemove: TipoProduto = new TipoProduto();
+  permissaoAcesso: PermissaoAcesso = new PermissaoAcesso();
 
   constructor(private authorizationService: AuthorizationService,
     private cookie: CookieConsertService ,
@@ -33,10 +35,9 @@ export class TipoProdutoComponent implements OnInit {
 
   ngOnInit(): void {
     var valor : UsuarioResponse= JSON.parse(this.cookie.getCookie("usuario"));
-    valor.permissaoUsuarios.forEach(permissao => {
-      this.acessoPermitido = permissao.permissao.nome == "Root" ||  permissao.permissao.nome == "Administrador";
-      this.permissaoSistema = permissao;
-    });
+
+    this.permissaoAcesso = this.authorizationService.hasAutorization("Produto");
+
     debugger;
     this.tipoProdutosService.getAll("TipoProduto").subscribe({
       next:(t)=>{

@@ -41,7 +41,8 @@ namespace acme.atena.config.DI.Pacotes
             services.AddTransient<IEstoqueProdutoService, EstoqueProdutoService>();
             services.AddTransient<IEntradaProdutoEstoqueService, EntradaProdutoEstoqueService>();
             services.AddTransient<ISaidaProdutoEstoqueService, SaidaProdutoEstoqueService>();
-
+            services.AddTransient<IValorProdutoService, ValorProdutoService>();
+            
 
             services.AddTransient<ICompraService, CompraService>();
             services.AddTransient<ICompraProdutoService, CompraProdutoService>();

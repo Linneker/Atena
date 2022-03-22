@@ -53,7 +53,7 @@ namespace acme.atena.config.DI.Pacotes
             services.AddTransient<IPagamentoVendaRepository, PagamentoVendaRepository>();
             services.AddTransient<ITipoProdutoRepository, TipoProdutoRepository>();
             services.AddTransient<ITipoValorProdutoRepository, TipoValorProdutoRepository>();
-
+            services.AddTransient<IValorProdutoRepository, ValorProdutoRepository>();
 
             services.AddTransient<IEmpresaRepository, EmpresaRepository>();
             services.AddTransient<IClienteRepository, ClienteRepository>();

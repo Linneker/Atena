@@ -31,9 +31,9 @@ namespace acme.atena.api.Controllers.Security
         }
         
         [HttpPost("Login")]
-        public IActionResult Login(UsuarioViewModel usuario)
+        public async Task<IActionResult> Login(UsuarioViewModel usuario)
         {
-            var usuarioRetorno = _mapper.Map<UsuarioViewModel>(_usuarioApplication.Login(usuario.Login, usuario.Senha));
+            var usuarioRetorno = await _usuarioApplication.Login(usuario.Login, usuario.Senha);
             if(usuarioRetorno is null)
             {
                 return BadRequest(new { Mensagem = "Login/Senha Invalidos!", Descricao="Verifique os dados informados, e tente novamente!"});

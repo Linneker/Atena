@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { UsuarioService } from '../usuario/usuario.service';
 import { AuthorizationService } from './authorization.service';
+import { UsuarioResponse } from '../../view-model/response/security/usuario';
+import { PermissaoAcesso } from '../../view-model/util/permissa-acessos';
 
 @Injectable()
 export class AuthGuard implements CanActivate{
@@ -28,4 +30,6 @@ export class AuthGuard implements CanActivate{
     return false;
 
   }
+
+
 }

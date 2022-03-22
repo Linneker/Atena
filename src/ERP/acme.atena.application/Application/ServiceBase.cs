@@ -13,7 +13,7 @@ namespace acme.atena.application.Service
     public class ServiceBase<TEntity> : IServiceBase<TEntity> where TEntity : AbstractEntity
     {
         private readonly IRepositoryBase<TEntity> _repositoryBase;
-
+        
         public ServiceBase(IRepositoryBase<TEntity> repositoryBase)
         {
             _repositoryBase = repositoryBase;
@@ -37,12 +37,12 @@ namespace acme.atena.application.Service
         }
 
 
-        public void Delete(TEntity entity)
+        public virtual void Delete(TEntity entity)
         {
             _repositoryBase.Delete(entity);
         }
 
-        public void Delete(Guid id)
+        public virtual void Delete(Guid id)
         {
             _repositoryBase.Delete(id);
         }

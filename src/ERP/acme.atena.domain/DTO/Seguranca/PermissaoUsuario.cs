@@ -8,7 +8,7 @@ namespace acme.atena.domain.DTO.Seguranca
     {
         public string Acesso { get; set; }
 
-        public Guid TelaId { get; set; }
+        public Guid? TelaId { get; set; }
 
         public Tela Tela { get; set; }
         public Guid UsuarioId { get; set; }

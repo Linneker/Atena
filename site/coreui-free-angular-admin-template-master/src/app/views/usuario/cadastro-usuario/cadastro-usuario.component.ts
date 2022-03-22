@@ -11,6 +11,7 @@ import { Component, OnInit, Injectable, ElementRef, Input } from '@angular/core'
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { TipoProduto } from '../../../view-model/response/product/tipo-produto';
+import { PermissaoAcesso } from '../../../view-model/util/permissa-acessos';
 
 
 
@@ -55,6 +56,7 @@ export class CadastroUsuarioComponent implements OnInit {
   permissaoUsuario: PermissaoUsuario = new PermissaoUsuario();
   permissao : Permissao = new Permissao();
   dataNascimento: any;
+  permissaoAcesso: PermissaoAcesso = new PermissaoAcesso();
 
   @Input() largeModal:BsModalRef;
   bsModalRef: BsModalRef = new BsModalRef();

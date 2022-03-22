@@ -48,7 +48,7 @@ namespace acme.atena.application.Service.Security
             }
             throw new Exception("Dados invalidos!");
         }
-        public Usuario Login(string login, string senha)
+        public Task<Usuario> Login(string login, string senha)
         {
 
             return _usuarioRepository.Login(new Usuario(login, senha));
