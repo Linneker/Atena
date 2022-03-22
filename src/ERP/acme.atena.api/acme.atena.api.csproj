@@ -39,8 +39,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\acme.atena.di\acme.atena.config.csproj" />
     <ProjectReference Include="..\acme.atena.application\acme.atena.application.csproj" />
+    <ProjectReference Include="..\acme.atena.config\acme.atena.config.csproj" />
     <ProjectReference Include="..\acme.atena.domain\acme.atena.domain.csproj" />
     <ProjectReference Include="..\acme.atena.infra\acme.atena.infra.csproj" />
     <ProjectReference Include="..\acme.atena.repository\acme.atena.repository.csproj" />

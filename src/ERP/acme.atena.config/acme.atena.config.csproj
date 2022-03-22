@@ -11,9 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\ERP\acme.atena.application\acme.atena.application.csproj" />
-    <ProjectReference Include="..\src\ERP\acme.atena.domain\acme.atena.domain.csproj" />
-    <ProjectReference Include="..\src\ERP\acme.atena.repository\acme.atena.repository.csproj" />
+    <ProjectReference Include="..\acme.atena.application\acme.atena.application.csproj" />
+    <ProjectReference Include="..\acme.atena.domain\acme.atena.domain.csproj" />
+    <ProjectReference Include="..\acme.atena.repository\acme.atena.repository.csproj" />
   </ItemGroup>
 
 </Project>
