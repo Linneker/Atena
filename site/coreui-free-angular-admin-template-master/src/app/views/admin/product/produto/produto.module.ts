@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CadastroProdutoComponent } from './cadastro-produto/cadastro-produto.component';
+import { RemoveProdutoComponent } from './remove-produto/remove-produto.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { CadastroProdutoComponent } from './cadastro-produto/cadastro-produto.co
   ],
   declarations: [
     ProdutoComponent,
-    CadastroProdutoComponent
+    CadastroProdutoComponent,
+    RemoveProdutoComponent
   ]
 })
 export class ProdutoModule { }

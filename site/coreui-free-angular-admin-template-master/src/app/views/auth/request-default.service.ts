@@ -3,13 +3,14 @@ import { TokenInterceptorService } from './token-interceptor.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ResponseApi } from '../../view-model/response/util/response-api';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RequestDefaultService<T,P> extends TokenInterceptorService{
 
-  receitaUrlBase: string ="https://localhost:5001/api/";
+  receitaUrlBase: string =environment.url;
 
   constructor(protected httpClient: HttpClient)  {
     super();

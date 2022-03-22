@@ -19,27 +19,27 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let tipoProduto of produtos">
-        <th>{{ tipoProduto.nome }}</th>
-        <th>{{ tipoProduto.descricao }}</th>
-        <th>{{ tipoProduto.codigo }}</th>
-        <th>{{ tipoProduto.dataCriacao }}</th>
+      <tr *ngFor="let produto of produtos">
+        <th>{{ produto.nome }}</th>
+        <th>{{ produto.descricao }}</th>
+        <th>{{ produto.codigo }}</th>
+        <th>{{ produto.dataCriacao }}</th>
         <th>
           <div *ngIf="permissaoSistema.update && permissaoSistema.delete">
-            <button type="button" class="btn btn-warning mr-1" data-toggle="modal" (click)="openAtualizar(tipoProduto.id)">
+            <button type="button" class="btn btn-warning mr-1" data-toggle="modal" (click)="openAtualizar(produto.id)">
               Atualizar
             </button>
-            <button type="button" class="btn btn-primary mr-1" data-toggle="modal" (click)="openDeletar(tipoProduto.id)">
+            <button type="button" class="btn btn-primary mr-1" data-toggle="modal" (click)="openDeletar(produto.id)">
               Delete
             </button>
           </div>
           <div *ngIf="permissaoSistema.update && !permissaoSistema.delete">
-            <button type="button" class="btn btn-warning mr-1" data-toggle="modal" (click)="openAtualizar(tipoProduto.id)">
+            <button type="button" class="btn btn-warning mr-1" data-toggle="modal" (click)="openAtualizar(produto.id)">
               Atualizar
             </button>
           </div>
           <div *ngIf="!permissaoSistema.update && permissaoSistema.delete">
-            <button type="button" class="btn btn-primary mr-1" data-toggle="modal" (click)="openDeletar(tipoProduto.id)">
+            <button type="button" class="btn btn-primary mr-1" data-toggle="modal" (click)="openDeletar(produto.id)">
               Delete
             </button>
           </div>
@@ -96,14 +96,14 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Produto Departamento</h4>
+        <h4 class="modal-title">Produto</h4>
         <button type="button" class="close" (click)="largeModalRemove.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <!--<app-remove-tipo-produto [largeModal]="largeModalRemove" [tipoProdutoRemove]="tipoProdutoEditRemove" [listaTiposProdutos]="tiposProdutos" ></app-remove-tipo-produto>
-        --></div>
+        <app-remove-produto [largeModal]="largeModalRemove" [produtoRemove]="produtoEditRemove" [listaProdutos]="produtos" ></app-remove-produto>
+        </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

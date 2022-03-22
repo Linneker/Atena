@@ -57,6 +57,7 @@
     "node-forge": "^1.2.1",
     "rxjs": "^6.6.6",
     "simple-line-icons": "^2.5.5",
+    "timers": "^0.1.1",
     "ts-helpers": "^1.1.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
