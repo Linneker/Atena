@@ -14,6 +14,7 @@ namespace acme.atena.domain.DTO.Inventory
         public long QuantidadeMaxima { get; set; }
         public long QuantidadeMinima { get; set; }
         public long QuantidadeProduto { get; set; }
+       
 
         public virtual Estoque Estoque { get; set; }
         public virtual Produto Produto { get; set; }

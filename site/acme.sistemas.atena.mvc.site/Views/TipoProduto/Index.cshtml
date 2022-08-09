@@ -1,0 +1,56 @@
+﻿@model IEnumerable<acme.atena.application.Handler.TipoProdutos.Command.TipoProdutoCommand>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="card-body">
+
+    <h1>Tipo Produto</h1>
+
+    <p>
+        <a asp-action="Criar" class="btn btn-primary">Cadastrar</a>
+    </p>
+    <table id="example1" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descricao)
+                </th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descricao)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new {  id=item.Id  },new {@class="btn btn-sm btn-warning"})
+                        @Html.ActionLink("Detalhes", "Details", new {  id=item.Id  },new {@class="btn btn-sm btn-success"})
+                        @Html.ActionLink("Remover", "Delete", new {  id=item.Id  },new {@class="btn btn-sm btn-danger"})
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+</script>

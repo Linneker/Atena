@@ -23,6 +23,8 @@ namespace acme.atena.infra.Map.Product
             builder.Property(t => t.Descricao).HasMaxLength(2000);
             builder.Property(t => t.Validade).IsRequired(false);
 
+            builder.HasOne(t => t.CodigoProduto).WithMany(t=>t.Produtos).HasForeignKey(t=>t.Codigo);
+
             builder.HasOne(t => t.TipoProduto).WithMany(t => t.Produtos).HasForeignKey(t => t.TipoProdutoId);
         }
     }

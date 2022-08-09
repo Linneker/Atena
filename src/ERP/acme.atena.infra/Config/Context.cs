@@ -109,8 +109,8 @@ namespace acme.atena.infra.Config
                     item.SetScale(4);
                 }
             }
-         
 
+            modelBuilder.HasSequence<long>("CodigoProduto").IncrementsBy(1);
 
         }
     }

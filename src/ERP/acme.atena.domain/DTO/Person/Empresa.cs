@@ -15,7 +15,7 @@ namespace acme.atena.domain.DTO.Person
         public Empresa EmpresaMatriz { get; set; }
 
         public string RazaoSocial { get; set; }
-        public virtual ICollection<Estoque> Estoque { get; set; }
+        public virtual ICollection<Estoque> Estoques { get; set; }
         public virtual ICollection<EnderecoEmpresa> EnderecoEmpresas { get; set; } = new HashSet<EnderecoEmpresa>();
     }
 }

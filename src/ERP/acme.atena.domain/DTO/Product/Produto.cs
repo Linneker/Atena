@@ -1,5 +1,6 @@
 ﻿using acme.atena.domain.DTO.Inventory;
 using acme.atena.domain.DTO.Product.Price;
+using acme.atena.domain.DTO.Product.Sequence;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,6 +25,8 @@ namespace acme.atena.domain.DTO.Product
         public DateTime? Validade { get; set; }
         public Guid TipoProdutoId { get; set; }
         public TipoProduto TipoProduto { get; set; }
+
+        public virtual CodigoProduto CodigoProduto { get;set;}
         public virtual ICollection<ValorProduto> ValorProdutos { get; set; }
         public virtual ICollection<VendaProduto> VendasProdutos { get; set; }
         public virtual ICollection<CompraProduto> ComprasProdutos { get; set; }

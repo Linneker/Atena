@@ -1,4 +1,5 @@
 ﻿using acme.atena.domain.DTO.Account;
+using acme.atena.domain.DTO.Inventory;
 using acme.atena.domain.DTO.Product;
 using acme.atena.domain.DTO.Util;
 using System;
@@ -18,6 +19,7 @@ namespace acme.atena.domain.DTO.Person
         public string NomeFantasia { get; set; }
         public string InscricaoMunicipal { get; set; }
 
+        public virtual ICollection<EntradaProdutoEstoqueFornecedor> EntradaProdutoEstoqueFornecedor { get; set; } = new HashSet<EntradaProdutoEstoqueFornecedor>();
         public virtual ICollection<Compra> Compras{ get; set; }
         public virtual ICollection<EnderecoFornecedor> EnderecoFornecedores{ get; set; }
     }

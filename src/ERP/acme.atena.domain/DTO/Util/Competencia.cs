@@ -46,6 +46,6 @@ namespace acme.atena.domain.DTO.Util
         public virtual ICollection<EntradaProdutoEstoque> EntradaProdutoEstoques { get; set; } = new HashSet<EntradaProdutoEstoque>();
         public virtual ICollection<SaidaProdutoEstoque> SaidaProdutoEstoques { get; set; } = new HashSet<SaidaProdutoEstoque>();
         public virtual ICollection<PagamentoVenda> PagamentosVendas { get; set; } = new HashSet<PagamentoVenda>();
-        
+        public virtual ICollection<FluxoCaixaEstoque> FluxoCaixaEstoques { get; set; } = new HashSet<FluxoCaixaEstoque>();
     }
 }

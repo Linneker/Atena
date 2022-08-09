@@ -36,10 +36,25 @@ export class AuthorizationService {
         },
         error: err => console.log("ERRO: ", err)
       });
+    }else{
+      this.reAutorizacaoApi().subscribe({
+        next: (autorizcaoApiResponse: AutorizacaoApiResponse) => {
+          debugger;
+          this._autoricaoApiResponse = autorizcaoApiResponse;
+          sessionStorage.setItem("jwt",this._autoricaoApiResponse.accessToken);
+          sessionStorage.setItem("expiration",this._autoricaoApiResponse.expiration);
+        },
+        error: err => console.log("ERRO: ", err)
+      });
     }
   }
 
   autorizacaoApi(): Observable<AutorizacaoApiResponse> {
+    return this.httpClient.post<AutorizacaoApiResponse>(this.autorizacaoURl, this._request, {
+      headers: new HttpHeaders()
+    });
+  }
+  reAutorizacaoApi(): Observable<AutorizacaoApiResponse> {
     return this.httpClient.post<AutorizacaoApiResponse>(this.autorizacaoURl, this._request, {
       headers: new HttpHeaders()
     });

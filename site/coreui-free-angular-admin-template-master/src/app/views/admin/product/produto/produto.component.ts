@@ -1,12 +1,13 @@
 import { Produto } from './../../../../view-model/response/product/produto';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
 import { PermissaoUsuario } from '../../../../view-model/response/security/permissao-usuario';
 import { ProdutoService } from './produto.service';
 import { CookieConsertService } from '../../../cookie-consert/cookie-consert.service';
 import { AuthorizationService } from '../../../auth/authorization.service';
 import { UsuarioResponse } from '../../../../view-model/response/security/usuario';
 import { PermissaoAcesso } from '../../../../view-model/util/permissa-acessos';
+import { ModalComponent } from '../../../shared/modal/modal.component';
 
 @Component({
   selector: 'app-produto',
@@ -24,6 +25,7 @@ export class ProdutoComponent implements OnInit {
   produtos: Produto[]=[];
   acessos: string="";
   permissaoAcesso: PermissaoAcesso = new PermissaoAcesso();
+  bsModalRef: BsModalRef = new BsModalRef();
 
   produtoEditRemove: Produto = new Produto();
 
@@ -44,6 +46,11 @@ export class ProdutoComponent implements OnInit {
           this.produtos = t;
       },
       error:(e)=>{
+        if(e.status == 401){
+
+        }else{
+          this.mensagemCad(e.mensagem,e.status,"");
+        }
           console.log(e);
       }
     });
@@ -63,5 +70,12 @@ export class ProdutoComponent implements OnInit {
     debugger;
     this.produtoEditRemove = this.produtos.filter((depart)=>depart.id == id)[0];
     this.largeModalRemove.show();
+  }
+  mensagemCad(mensagem:string, tipo:string,redirectTo:string){
+    this.bsModalRef = this.modalService.show(ModalComponent);
+    this.bsModalRef.content.tipo= tipo;
+    this.bsModalRef.content.mensagem= mensagem;
+    this.bsModalRef.content.redirectTo = redirectTo;//'/receita';
+    this.bsModalRef.content.abrindoDentroDeUmModal = true;
   }
 }
