@@ -57,9 +57,9 @@ namespace acme.atena.application.Service
             return _repositoryBase.GetAll();
         }
 
-        public Task<List<TEntity>> GetAllAsync()
+        public async Task<List<TEntity>> GetAllAsync()
         {
-            return _repositoryBase.GetAllAsync();
+            return await _repositoryBase.GetAllAsync();
         }
 
         public TEntity GetById(Guid id)

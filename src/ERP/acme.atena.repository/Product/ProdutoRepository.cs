@@ -42,5 +42,23 @@ namespace acme.atena.repository.Product
                           select estProd).Sum(t => t.QuantidadeProduto);
             return total;
         }
+
+        public  async Task<Produto> ObterProdutosPeloId(Guid id)
+        {
+            var produto = await (from prd in _db.Produtos
+                                     join tp in _db.TipoProduto on prd.TipoProdutoId equals tp.Id
+                                     where prd.Id == id
+                                     select prd).Include(t => t.TipoProduto).AsNoTracking().FirstOrDefaultAsync();
+            return produto;
+        }
+
+        public async Task<List<Produto>> ObterProdutosJoinTipoProduto()
+        {
+            var produto = await (from prd in _db.Produtos
+                                     join tp in _db.TipoProduto on prd.TipoProdutoId equals tp.Id
+                                     select prd).Include(t => t.TipoProduto).AsNoTracking().ToListAsync();
+            return produto;
+        }
+
     }
 }

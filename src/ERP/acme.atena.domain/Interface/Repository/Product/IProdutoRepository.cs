@@ -11,6 +11,8 @@ namespace acme.atena.domain.Interface.Repository.Product
         long GetTotalProdutoByEstoqueId(Guid estoqueId);
         Produto GetProdutoJoinEstoqueProdutoById(Guid id);
         Task<Produto> GetProdutoJoinEstoqueProdutoByIdAsync(Guid id);
+        Task<Produto> ObterProdutosPeloId(Guid id);
+        Task<List<Produto>> ObterProdutosJoinTipoProduto();
 
     }
 }

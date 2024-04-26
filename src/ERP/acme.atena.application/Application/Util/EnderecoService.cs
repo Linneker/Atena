@@ -25,7 +25,7 @@ namespace acme.atena.application.Service.Util
             if (endereco is null)
             {
                 var client = new RestClient($"https://viacep.com.br/ws/{cep}/json");
-                var request = new RestRequest("", Method.GET);
+                var request = new RestRequest("", Method.Get);
                 var queryResult = client.Execute<EnderecoViaCep>(request).Data;
                 endereco = new Endereco()
                 {

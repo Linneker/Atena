@@ -2,6 +2,7 @@
 using acme.atena.domain.DTO.Enum;
 using acme.atena.domain.DTO.Util;
 using acme.atena.domain.Interface.Repository;
+using acme.atena.domain.Interface.Repository.UnitOfWork;
 using acme.atena.infra.Config;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,10 +18,13 @@ namespace acme.atena.repository
     public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : AbstractEntity
     {
         protected internal readonly Context _db;
+
         public RepositoryBase(Context db)
         {
             _db = db;
         }
+        public IUnitOfWork UnitOfWork => new UnitOfWork.UnitOfWork(_db);
+
 
         public void Add(TEntity entity)
         {
@@ -73,20 +77,20 @@ namespace acme.atena.repository
         }
 
 
-        public void Dispose() => GC.Collect();
+        public void Dispose() => _db.Dispose();
 
 
         public List<TEntity> GetAll() => _db.Set<TEntity>().ToList();
         public IQueryable<TEntity> GetQueryables() => _db.Set<TEntity>().AsNoTracking().AsQueryable();
 
 
-        public Task<List<TEntity>> GetAllAsync() => _db.Set<TEntity>().ToListAsync();
+        public async Task<List<TEntity>> GetAllAsync() => await _db.Set<TEntity>().ToListAsync();
 
         public TEntity GetById(Guid id) => _db.Set<TEntity>().AsNoTracking().Where(t => t.Id == id).FirstOrDefault();
 
 
         public Task<TEntity> GetByIdAsync(Guid id) => _db.Set<TEntity>().AsNoTracking().Where(t => t.Id == id).FirstOrDefaultAsync();
-        
+
         public void Update(TEntity entity)
         {
             try

@@ -53,11 +53,14 @@ namespace acme.atena.api
         public void ConfigureServices(IServiceCollection services)
         {
 
+            var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
 
-            services.AddDbContext<Context>(op => op.UseMySQL(Configuration.GetConnectionString("Atena"))
+
+            services.AddDbContext<Context>(op => op.UseMySql(Configuration.GetConnectionString("Atena"), serverVersion)
             .UseLoggerFactory(loggerFactory)
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors());
+
             //services.AddDbContext<Context>(op => op.UseSqlServer(Configuration.GetConnectionString("Atena_SqlServer"))
             //.LogTo(Console.WriteLine, LogLevel.Information)
             //    .EnableSensitiveDataLogging()

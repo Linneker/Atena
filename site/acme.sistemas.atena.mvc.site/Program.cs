@@ -1,3 +1,4 @@
+using acme.atena.application.Handler.Produtos.Query;
 using acme.atena.config.DI;
 using acme.atena.infra.Config;
 using acme.sistemas.atena.mvc.site.Filtler;
@@ -17,13 +18,18 @@ ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
     builder.AddConsole();
 });
 
-builder.Services.AddDbContext<Context>(op => op.UseMySQL(builder.Configuration.GetConnectionString("Atena"))
-  .UseLoggerFactory(loggerFactory)
-      .EnableSensitiveDataLogging()
-      .EnableDetailedErrors());
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
+
+
+builder.Services.AddDbContext<Context>(op => op.UseMySql(builder.Configuration.GetConnectionString("Atena"), serverVersion)
+.UseLoggerFactory(loggerFactory)
+    .EnableSensitiveDataLogging()
+    .EnableDetailedErrors());
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddTransient<UnitOfWorkFilterAsync>();
+builder.Services.AddScoped<UnitOfWorkFilterAsync>();
+builder.Services.AddScoped<ProtudoQuery>();
 builder.Services.DI();
 
 var app = builder.Build();

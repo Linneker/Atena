@@ -9,5 +9,6 @@ namespace acme.atena.domain.Interface.Repository.Util
 {
     public interface IEnderecoFornecedorRepository: IRepositoryBase<EnderecoFornecedor>
     {
+        Task<EnderecoFornecedor> ObterPeloCepNumero(string cep, string numero);
     }
 }

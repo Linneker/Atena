@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace acme.atena.infra.Config
 {
@@ -25,6 +26,11 @@ namespace acme.atena.infra.Config
 
         public Context(DbContextOptions<Context> options) : base(options)
         {
+        }
+        public async Task<bool> Commit()
+        {
+            bool sucesso = await base.SaveChangesAsync() > 0;
+            return sucesso;
         }
 
         public DbSet<Despesa> Despesas { get; set; }
@@ -110,7 +116,6 @@ namespace acme.atena.infra.Config
                 }
             }
 
-            modelBuilder.HasSequence<long>("CodigoProduto").IncrementsBy(1);
 
         }
     }

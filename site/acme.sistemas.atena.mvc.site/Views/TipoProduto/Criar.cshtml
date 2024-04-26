@@ -1,12 +1,10 @@
-﻿@model acme.atena.application.Handler.TipoProdutos.Command.TipoProdutoCommand
+﻿@model acme.atena.application.Handler.TipoProdutos.Commands.TipoProdutoCommand
 
 @{
     ViewData["Title"] = "Criar";
 }
 
-<h1>Criar</h1>
-
-<h4>TipoProdutoCommand</h4>
+<h2>Novo Tipo Produto</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -23,13 +21,15 @@
                 <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-primary" />
+                <input type="submit" value="Salvar" class="btn btn-sm btn-success" />
+                <a asp-action="Index" class="btn btn-sm btn-primary">Voltar</a>
+
             </div>
         </form>
+        <div>
+        </div>
+
     </div>
 </div>
 
-<div>
-    <a asp-action="Index" class="btn btn-sm btn-primary">Voltar</a>
-</div>
 

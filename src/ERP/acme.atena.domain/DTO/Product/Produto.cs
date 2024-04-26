@@ -36,6 +36,30 @@ namespace acme.atena.domain.DTO.Product
         public virtual ICollection<DevolucaoCompra> DevolucaoCompras { get; set; } = new HashSet<DevolucaoCompra>();
         public virtual ICollection<DevolucaoVenda> DevolucoesVenda { get; set; } = new HashSet<DevolucaoVenda>();
 
-
+        public bool Atualizar(Produto produto)
+        {
+            bool temProdutoAtualizar = false;
+            if (Nome != produto.Nome)
+            {
+                Nome = produto.Nome;
+                temProdutoAtualizar = true;
+            }
+            if(Validade != produto.Validade)
+            {
+                Validade = produto.Validade;
+                temProdutoAtualizar = true;
+            }
+            if(TipoProdutoId != produto.TipoProdutoId)
+            {
+                TipoProdutoId = produto.TipoProdutoId;
+                temProdutoAtualizar = true;
+            }
+            if(Descricao != produto.Descricao)
+            {
+                Descricao = produto.Descricao;
+                temProdutoAtualizar = true;
+            }
+            return temProdutoAtualizar;
+        }
     }
 }

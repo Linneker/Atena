@@ -42,7 +42,7 @@ namespace acme.atena.application.Service.Product
                     {
                         if (produto.EstoqueProdutos.Where(f => f.ProdutoId == t.ProdutoId).FirstOrDefault().QuantidadeProduto >= t.QuantidadeVedida)
                         {
-                            this.AddAsync(venda);
+                            await this.AddAsync(venda);
                         }
                     }
                     else if (produto is not null && produto.EstoqueProdutos.Sum(t => t.QuantidadeProduto) < t.Produto.ComprasProdutos.FirstOrDefault().QuantidadeComprada)

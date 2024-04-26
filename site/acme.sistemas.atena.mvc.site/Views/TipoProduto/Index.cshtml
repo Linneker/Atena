@@ -1,48 +1,46 @@
-﻿@model IEnumerable<acme.atena.application.Handler.TipoProdutos.Command.TipoProdutoCommand>
+﻿@model IEnumerable<acme.atena.application.Handler.TipoProdutos.Commands.TipoProdutoCommand>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<div class="card-body">
 
-    <h1>Tipo Produto</h1>
+<h1>Tipo Produto</h1>
 
-    <p>
-        <a asp-action="Criar" class="btn btn-primary">Cadastrar</a>
-    </p>
-    <table id="example1" class="table table-bordered table-striped">
-        <thead>
+<p>
+    <a asp-action="Criar" class="btn btn-primary">Cadastrar</a>
+</p>
+<table id="example1" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nome)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Descricao)
-                </th>
-                <th>Ações</th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Editar", new {  id=item.Id  },new {@class="btn btn-sm btn-warning"})
+                    @Html.ActionLink("Detalhes", "Detalhes", new {  id=item.Id  },new {@class="btn btn-sm btn-success"})
+                    @Html.ActionLink("Remover", "Remover", new {  id=item.Id  },new {@class="btn btn-sm btn-danger"})
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Descricao)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Editar", "Edit", new {  id=item.Id  },new {@class="btn btn-sm btn-warning"})
-                        @Html.ActionLink("Detalhes", "Details", new {  id=item.Id  },new {@class="btn btn-sm btn-success"})
-                        @Html.ActionLink("Remover", "Delete", new {  id=item.Id  },new {@class="btn btn-sm btn-danger"})
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+        }
+    </tbody>
+</table>
 
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>

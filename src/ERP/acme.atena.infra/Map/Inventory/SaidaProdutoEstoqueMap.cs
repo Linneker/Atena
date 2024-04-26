@@ -23,7 +23,7 @@ namespace acme.atena.infra.Map.Inventory
             builder.Property(t => t.Status).HasDefaultValue(EnumStatus.Ativo);
 
             builder.Property(t => t.Quantidade).IsRequired();
-            builder.Property(t => t.DataSaida).HasDefaultValueSql("NOW()");
+            builder.Property(t => t.DataSaida);
 
             builder.HasOne(t => t.Competencia).WithMany(t => t.SaidaProdutoEstoques).HasForeignKey(t => t.CompetenciaId);
             builder.HasOne(t => t.Produto).WithMany(t => t.SaidaProdutoEstoques).HasForeignKey(t => t.ProdutoId);

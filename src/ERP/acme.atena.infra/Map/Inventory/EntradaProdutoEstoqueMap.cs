@@ -22,7 +22,7 @@ namespace acme.atena.infra.Map.Inventory
             builder.Property(t => t.DataInativacao).IsRequired(false);
             builder.Property(t => t.Status).HasDefaultValue(EnumStatus.Ativo);
 
-            builder.Property(t => t.DataEntrada).HasDefaultValueSql("NOW()");
+            builder.Property(t => t.DataEntrada);
             builder.Property(t => t.EstoqueEstimado);
             builder.Property(t => t.NumeroNotaFiscal).HasMaxLength(150); ;
             builder.Property(t => t.CustoUnitario).HasPrecision(32, 2); ;

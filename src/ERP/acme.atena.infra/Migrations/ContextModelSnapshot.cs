@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using acme.atena.infra.Config;
 
+#nullable disable
+
 namespace acme.atena.infra.Migrations
 {
     [DbContext(typeof(Context))]
@@ -14,27 +16,26 @@ namespace acme.atena.infra.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 64)
-                .HasAnnotation("ProductVersion", "5.0.12");
+                .HasAnnotation("ProductVersion", "6.0.7")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("acme.atena.domain.DTO.Account.Despesa", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("CompetenciaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("CompetenciaId")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Descricao")
                         .HasMaxLength(255)
@@ -42,6 +43,7 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<bool>("DespesaFixa")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(1)")
                         .HasDefaultValue(false);
 
@@ -51,67 +53,80 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
+
                     b.Property<decimal>("Valor")
                         .HasPrecision(24, 4)
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(24,4)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CompetenciaId");
 
-                    b.ToTable("Despesa");
+                    b.ToTable("Despesa", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Account.Divida", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("ClienteId")
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid?>("ClienteId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("CompetenciaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("CompetenciaId")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("DataCompra")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataQueDeviaTerRecebido")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<byte[]>("EmpresaId")
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid?>("EmpresaId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("EnumTipoDivida")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("FornecedorId")
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid?>("FornecedorId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<byte[]>("UsuarioId")
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.Property<decimal>("Valor")
                         .HasPrecision(24, 4)
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(24,4)");
 
                     b.HasKey("Id");
 
@@ -125,77 +140,88 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Divida");
+                    b.ToTable("Divida", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Account.FluxoDeCaixa", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("CompetenciaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("CompetenciaId")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<decimal>("SaldoFinalCaixa")
                         .HasPrecision(24, 4)
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(24,4)");
 
                     b.Property<decimal>("SaldoInicial")
                         .HasPrecision(24, 4)
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(24,4)");
 
                     b.Property<decimal>("SaldoOperacional")
                         .HasPrecision(24, 4)
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(24,4)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CompetenciaId");
 
-                    b.ToTable("FluxoDeCaixa");
+                    b.ToTable("FluxoDeCaixa", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Account.FluxoDeCaixaDespesa", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<byte[]>("DespesaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("DespesaId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("FluxoDeCaixaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("FluxoDeCaixaId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -203,35 +229,40 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("FluxoDeCaixaId");
 
-                    b.ToTable("FluxoDeCaixaDespesa");
+                    b.ToTable("FluxoDeCaixaDespesa", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Account.FluxoDeCaixaReceita", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<byte[]>("FluxoDeCaixaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("FluxoDeCaixaId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("ReceitaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("ReceitaId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -239,26 +270,26 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("ReceitaId");
 
-                    b.ToTable("FluxoDeCaixaReceita");
+                    b.ToTable("FluxoDeCaixaReceita", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Account.FormaPagamento", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("Codigo")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Nome")
                         .HasMaxLength(150)
@@ -266,72 +297,87 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(150)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("FormaPagamento");
+                    b.ToTable("FormaPagamento", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Account.Pagamento", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("ClienteId")
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid?>("ClienteId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("CompetenciaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("CompetenciaId")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DataCredito")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataPagamento")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<byte[]>("EmpresaId")
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid?>("EmpresaId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("EnumTipoPagamento")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("FornecedorId")
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid?>("FornecedorId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("NumeroDaParcela")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(1);
 
-                    b.Property<byte[]>("PagamentoVendaId")
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid?>("PagamentoVendaId")
+                        .HasColumnType("char(36)");
 
                     b.Property<bool>("Parcelado")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(1)")
                         .HasDefaultValue(false);
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<byte[]>("UsuarioId")
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.Property<decimal>("ValorPago")
                         .HasPrecision(24, 4)
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(24,4)");
 
                     b.HasKey("Id");
 
@@ -347,35 +393,40 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Pagamento");
+                    b.ToTable("Pagamento", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Account.PagamentoFormaPagamento", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<byte[]>("FormaPagamentoId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("FormaPagamentoId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("PagamentoId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("PagamentoId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -383,35 +434,35 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("PagamentoId");
 
-                    b.ToTable("PagamentoFormaPagamento");
+                    b.ToTable("PagamentoFormaPagamento", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Account.PagamentoVenda", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("CompetenciaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("CompetenciaId")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("DataCredito")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataPagamento")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("DiaVencimentoParcela")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(1);
 
@@ -422,15 +473,21 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
                     b.Property<int>("StatusPagamento")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("VendaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("VendaId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -438,35 +495,40 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("VendaId");
 
-                    b.ToTable("PagamentoVenda");
+                    b.ToTable("PagamentoVenda", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Account.PagamentoVendaFormaPagamento", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<byte[]>("FormaPagamentoId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("FormaPagamentoId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("PagamentoVendaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("PagamentoVendaId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -474,27 +536,26 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("PagamentoVendaId");
 
-                    b.ToTable("PagamentoVendaFormaPagamento");
+                    b.ToTable("PagamentoVendaFormaPagamento", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Account.Receita", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("CompetenciaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("CompetenciaId")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Descricao")
                         .HasMaxLength(255)
@@ -507,58 +568,224 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<bool>("ReceitaFixa")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(1)")
                         .HasDefaultValue(false);
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
+
                     b.Property<decimal>("Valor")
                         .HasPrecision(24, 4)
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(24,4)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CompetenciaId");
 
-                    b.ToTable("Receita");
+                    b.ToTable("Receita", (string)null);
+                });
+
+            modelBuilder.Entity("acme.atena.domain.DTO.Document.Documento", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Container")
+                        .HasMaxLength(200)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<DateTime?>("DataCriacao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DataInativacao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DataModificacao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Hash")
+                        .HasMaxLength(500)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(500)");
+
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<Guid>("TipoDocumentoId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Token")
+                        .HasMaxLength(200)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TipoDocumentoId");
+
+                    b.ToTable("Documento", (string)null);
+                });
+
+            modelBuilder.Entity("acme.atena.domain.DTO.Document.EntradaProdutoEstoqueDocumento", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("DataCriacao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DataInativacao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DataModificacao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid>("DocumentoId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("EntradaProdutoEstoqueId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DocumentoId");
+
+                    b.HasIndex("EntradaProdutoEstoqueId");
+
+                    b.ToTable("EntradaProdutoEstoqueDocumento", (string)null);
+                });
+
+            modelBuilder.Entity("acme.atena.domain.DTO.Document.TipoDocumento", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("DataCriacao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DataInativacao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DataModificacao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Descricao")
+                        .HasMaxLength(200)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<string>("Nome")
+                        .HasMaxLength(200)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TipoDocumento", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Inventory.EntradaProdutoEstoque", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("CompetenciaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("CompetenciaId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<decimal>("CustoUnitario")
+                        .HasPrecision(32, 2)
+                        .HasColumnType("decimal(32,2)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataEntrada")
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("NOW()");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<byte[]>("EstoqueId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<long>("EstoqueEstimado")
+                        .HasColumnType("bigint");
 
-                    b.Property<byte[]>("ProdutoId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("EstoqueId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("NumeroNotaFiscal")
+                        .HasMaxLength(150)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<int>("PrazoEntradaDiasUteis")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("ProdutoId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<long>("QuantidadeTotal")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
+
+                    b.Property<decimal>("TotalCompras")
+                        .HasPrecision(32, 2)
+                        .HasColumnType("decimal(32,2)");
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -568,27 +795,67 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("ProdutoId");
 
-                    b.ToTable("EntradaProdutoEstoque");
+                    b.ToTable("EntradaProdutoEstoque", (string)null);
+                });
+
+            modelBuilder.Entity("acme.atena.domain.DTO.Inventory.EntradaProdutoEstoqueFornecedor", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("DataCriacao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DataInativacao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DataModificacao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid>("EntradaProdutoEstoqueId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("FornecedorId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EntradaProdutoEstoqueId");
+
+                    b.HasIndex("FornecedorId");
+
+                    b.ToTable("EntradaProdutoEstoqueFornecedor");
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Inventory.Estoque", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<byte[]>("EmpresaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("EmpresaId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("EstoqueMaximo")
                         .HasColumnType("int");
@@ -597,7 +864,9 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("IsPrincipal")
-                        .HasColumnType("tinyint(1)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -606,38 +875,43 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(250)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EmpresaId");
 
-                    b.ToTable("Estoque");
+                    b.ToTable("Estoque", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Inventory.EstoqueProduto", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<byte[]>("EstoqueId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("EstoqueId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("ProdutoId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("ProdutoId")
+                        .HasColumnType("char(36)");
 
                     b.Property<long>("QuantidadeMaxima")
                         .HasColumnType("bigint");
@@ -649,8 +923,15 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -658,46 +939,101 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("ProdutoId");
 
-                    b.ToTable("EstoqueProduto");
+                    b.ToTable("EstoqueProduto", (string)null);
+                });
+
+            modelBuilder.Entity("acme.atena.domain.DTO.Inventory.FluxoCaixaEstoque", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("CompetenciaId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("DataCriacao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DataInativacao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DataModificacao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<decimal>("ValorTotalEntrada")
+                        .HasPrecision(24, 4)
+                        .HasColumnType("decimal(24,4)");
+
+                    b.Property<decimal>("ValorTotalEstoqueFinal")
+                        .HasPrecision(24, 4)
+                        .HasColumnType("decimal(24,4)");
+
+                    b.Property<decimal>("ValorTotalEstoqueInicial")
+                        .HasPrecision(24, 4)
+                        .HasColumnType("decimal(24,4)");
+
+                    b.Property<decimal>("ValorTotalSaida")
+                        .HasPrecision(24, 4)
+                        .HasColumnType("decimal(24,4)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompetenciaId");
+
+                    b.ToTable("FluxoCaixaEstoque", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Inventory.SaidaProdutoEstoque", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("CompetenciaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("CompetenciaId")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataSaida")
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("NOW()");
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<byte[]>("EstoqueId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("EstoqueId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("ProdutoId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("ProdutoId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -707,14 +1043,14 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("ProdutoId");
 
-                    b.ToTable("SaidaProdutoEstoque");
+                    b.ToTable("SaidaProdutoEstoque", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Person.Cliente", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Celular")
                         .HasMaxLength(22)
@@ -727,16 +1063,16 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(15)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataNascimento")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(250)
@@ -759,8 +1095,15 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -770,14 +1113,14 @@ namespace acme.atena.infra.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Cliente");
+                    b.ToTable("Cliente", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Person.Empresa", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Celular")
                         .HasMaxLength(22)
@@ -790,24 +1133,24 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(15)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataNascimento")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(250)
                         .IsUnicode(false)
                         .HasColumnType("varchar(250)");
 
-                    b.Property<byte[]>("EmpresaMatrizId")
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid?>("EmpresaMatrizId")
+                        .HasColumnType("char(36)");
 
                     b.Property<bool>("IsFilial")
                         .HasColumnType("tinyint(1)");
@@ -823,8 +1166,15 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -836,14 +1186,14 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("EmpresaMatrizId");
 
-                    b.ToTable("Empresa");
+                    b.ToTable("Empresa", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Person.Fornecedor", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Celular")
                         .HasMaxLength(22)
@@ -856,16 +1206,16 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(15)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataNascimento")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(250)
@@ -888,8 +1238,15 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(250)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -899,42 +1256,46 @@ namespace acme.atena.infra.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Fornecedor");
+                    b.ToTable("Fornecedor", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Product.Compra", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("CompetenciaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("CompetenciaId")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("DataCompra")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<byte[]>("FornecedorId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("FornecedorId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<byte[]>("UsuarioId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("UsuarioId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.Property<long>("ValorTotal")
                         .HasColumnType("bigint");
@@ -947,52 +1308,56 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Compra");
+                    b.ToTable("Compra", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Product.CompraProduto", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("CompetenciaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("CompetenciaId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("CompraId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("CompraId")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataPagamento")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("IsRecebido")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<byte[]>("ProdutoId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("ProdutoId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("QuantidadeComprada")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
+
                     b.Property<decimal>("Valor")
                         .HasPrecision(24, 4)
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(24,4)");
 
                     b.HasKey("Id");
 
@@ -1002,33 +1367,32 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("ProdutoId");
 
-                    b.ToTable("CompraProduto");
+                    b.ToTable("CompraProduto", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Product.DevolucaoCompra", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("CompetenciaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("CompetenciaId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("CompraProdutoId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("CompraProdutoId")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("IsParcial")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(1)")
                         .HasDefaultValue(false);
 
@@ -1037,13 +1401,19 @@ namespace acme.atena.infra.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(1000)");
 
-                    b.Property<byte[]>("ProdutoId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("ProdutoId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -1053,29 +1423,29 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("ProdutoId");
 
-                    b.ToTable("DevolucaoCompra");
+                    b.ToTable("DevolucaoCompra", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Product.DevolucaoVenda", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("CompetenciaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("CompetenciaId")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("IsParcial")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(1)")
                         .HasDefaultValue(false);
 
@@ -1084,17 +1454,22 @@ namespace acme.atena.infra.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(1000)");
 
-                    b.Property<byte[]>("ProdutoId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("ProdutoId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<byte[]>("VendaProdutoId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("VendaProdutoId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -1104,23 +1479,23 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("VendaProdutoId");
 
-                    b.ToTable("DevolucaoVenda");
+                    b.ToTable("DevolucaoVenda", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Product.Price.TipoValorProduto", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Nome")
                         .HasMaxLength(255)
@@ -1128,44 +1503,56 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("TipoValorProduto");
+                    b.ToTable("TipoValorProduto", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Product.Price.ValorProduto", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<byte[]>("ProdutoId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("ProdutoId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<byte[]>("TipoValorProdutoId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("TipoValorProdutoId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.Property<decimal>("Valor")
                         .HasPrecision(24, 4)
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(24,4)");
 
                     b.HasKey("Id");
 
@@ -1173,26 +1560,26 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("TipoValorProdutoId");
 
-                    b.ToTable("ValorProduto");
+                    b.ToTable("ValorProduto", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Product.Produto", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<long>("Codigo")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Descricao")
                         .HasMaxLength(2000)
@@ -1205,37 +1592,64 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<byte[]>("TipoProdutoId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("TipoProdutoId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("Validade")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Codigo");
+
                     b.HasIndex("TipoProdutoId");
 
-                    b.ToTable("Produto");
+                    b.ToTable("Produto", (string)null);
+                });
+
+            modelBuilder.Entity("acme.atena.domain.DTO.Product.Sequence.CodigoProduto", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DataCriacao")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sequence_Codigo_Produto", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Product.TipoProduto", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Descricao")
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Nome")
                         .HasMaxLength(255)
@@ -1245,6 +1659,12 @@ namespace acme.atena.infra.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
+
                     b.HasKey("Id");
 
                     b.ToTable("TipoProduto");
@@ -1252,47 +1672,52 @@ namespace acme.atena.infra.Migrations
 
             modelBuilder.Entity("acme.atena.domain.DTO.Product.Venda", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("ClienteId")
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid?>("ClienteId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("CompetenciaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("CompetenciaId")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataVenda")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<byte[]>("EmpresaId")
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid?>("EmpresaId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<byte[]>("UsuarioId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("UsuarioId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.Property<decimal?>("ValorPago")
                         .HasPrecision(24, 4)
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(24,4)");
 
                     b.Property<decimal>("ValorTotal")
                         .HasPrecision(24, 4)
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(24,4)");
 
                     b.HasKey("Id");
 
@@ -1304,52 +1729,56 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Venda");
+                    b.ToTable("Venda", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Product.VendaProduto", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("CompetenciaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("CompetenciaId")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataPagamento")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("Enviado")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<byte[]>("ProdutoId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("ProdutoId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("QuantidadeVedida")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
+
                     b.Property<decimal>("Valor")
                         .HasPrecision(24, 4)
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(24,4)");
 
-                    b.Property<byte[]>("VendaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("VendaId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -1359,14 +1788,14 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("VendaId");
 
-                    b.ToTable("VendaProduto");
+                    b.ToTable("VendaProduto", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Seguranca.AutorizacaoApi", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("AccessKey")
                         .HasMaxLength(255)
@@ -1374,37 +1803,44 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("AutorizacaoApi");
+                    b.ToTable("AutorizacaoApi", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Seguranca.Permissao", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("Nivel")
                         .HasColumnType("int");
@@ -1415,19 +1851,26 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(110)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Permissao");
+                    b.ToTable("Permissao", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Seguranca.PermissaoUsuario", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Acesso")
                         .HasMaxLength(255)
@@ -1435,28 +1878,33 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<byte[]>("PermissaoId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("PermissaoId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<byte[]>("TelaId")
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid?>("TelaId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("UsuarioId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("UsuarioId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -1466,14 +1914,14 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("PermissaoUsuario");
+                    b.ToTable("PermissaoUsuario", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Seguranca.Tela", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Class")
                         .HasMaxLength(255)
@@ -1481,13 +1929,13 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Icon")
                         .HasMaxLength(255)
@@ -1495,6 +1943,7 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<bool>("IsPrincipal")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(1)")
                         .HasDefaultValue(false);
 
@@ -1505,13 +1954,14 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<byte[]>("TelaSistemaFilhaId")
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid?>("TelaSistemaFilhaId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte?>("Title")
+                    b.Property<bool?>("Title")
                         .HasMaxLength(255)
                         .HasColumnType("tinyint(255)");
 
@@ -1519,6 +1969,12 @@ namespace acme.atena.infra.Migrations
                         .HasMaxLength(255)
                         .IsUnicode(false)
                         .HasColumnType("varchar(255)");
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Variant")
                         .HasMaxLength(255)
@@ -1529,14 +1985,14 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("TelaSistemaFilhaId");
 
-                    b.ToTable("Tela");
+                    b.ToTable("Tela", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Seguranca.Usuario", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Celular")
                         .HasMaxLength(22)
@@ -1549,16 +2005,16 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(15)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataNascimento")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(250)
@@ -1581,11 +2037,18 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(400)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
                     b.Property<bool>("TermoDeAceite")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -1598,44 +2061,51 @@ namespace acme.atena.infra.Migrations
                     b.HasIndex("Login")
                         .IsUnique();
 
-                    b.ToTable("Usuario");
+                    b.ToTable("Usuario", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Util.Competencia", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("Ano")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("Mes")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Competencia");
+                    b.ToTable("Competencia", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Util.Endereco", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Bairro")
                         .HasMaxLength(255)
@@ -1653,13 +2123,13 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Estado")
                         .HasMaxLength(255)
@@ -1677,23 +2147,29 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Endereco");
+                    b.ToTable("Endereco", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Util.EnderecoCliente", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("ClienteId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("ClienteId")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Complemento")
                         .HasMaxLength(255)
@@ -1701,17 +2177,16 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<byte[]>("EnderecoId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("EnderecoId")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Latitude")
                         .HasMaxLength(255)
@@ -1730,8 +2205,15 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(10)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -1739,14 +2221,14 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("EnderecoId");
 
-                    b.ToTable("EnderecoCliente");
+                    b.ToTable("EnderecoCliente", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Util.EnderecoEmpresa", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Complemento")
                         .HasMaxLength(255)
@@ -1754,21 +2236,19 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<byte[]>("EmpresaId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("EmpresaId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("EnderecoId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("EnderecoId")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Latitude")
                         .HasMaxLength(255)
@@ -1787,8 +2267,15 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(10)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -1796,14 +2283,14 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("EnderecoId");
 
-                    b.ToTable("EnderecoEmpresa");
+                    b.ToTable("EnderecoEmpresa", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Util.EnderecoFornecedor", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Complemento")
                         .HasMaxLength(255)
@@ -1811,21 +2298,19 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<byte[]>("EnderecoId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("EnderecoId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("FornecedorId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("FornecedorId")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Latitude")
                         .HasMaxLength(255)
@@ -1844,8 +2329,15 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(10)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -1853,14 +2345,14 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("FornecedorId");
 
-                    b.ToTable("EnderecoFornecedor");
+                    b.ToTable("EnderecoFornecedor", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Util.EnderecoUsuario", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Complemento")
                         .HasMaxLength(255)
@@ -1868,17 +2360,16 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<byte[]>("EnderecoId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid>("EnderecoId")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Latitude")
                         .HasMaxLength(255)
@@ -1897,12 +2388,18 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(10)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<byte[]>("UsuarioId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("UsuarioId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -1910,23 +2407,23 @@ namespace acme.atena.infra.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("EnderecoUsuario");
+                    b.ToTable("EnderecoUsuario", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Util.Parametro", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Descricao")
                         .HasMaxLength(1000)
@@ -1934,6 +2431,7 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(1000)");
 
                     b.Property<bool>("ExibirTela")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(1)")
                         .HasDefaultValue(true);
 
@@ -1943,8 +2441,15 @@ namespace acme.atena.infra.Migrations
                         .HasColumnType("varchar(250)");
 
                     b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
+
+                    b.Property<Guid?>("UsuarioCriacao")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UsuarioModificacao")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Valor")
                         .HasMaxLength(1500)
@@ -1953,7 +2458,7 @@ namespace acme.atena.infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Parametro");
+                    b.ToTable("Parametro", (string)null);
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Account.Despesa", b =>
@@ -2169,6 +2674,36 @@ namespace acme.atena.infra.Migrations
                     b.Navigation("Competencia");
                 });
 
+            modelBuilder.Entity("acme.atena.domain.DTO.Document.Documento", b =>
+                {
+                    b.HasOne("acme.atena.domain.DTO.Document.TipoDocumento", "TipoDocumento")
+                        .WithMany("Documentos")
+                        .HasForeignKey("TipoDocumentoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("TipoDocumento");
+                });
+
+            modelBuilder.Entity("acme.atena.domain.DTO.Document.EntradaProdutoEstoqueDocumento", b =>
+                {
+                    b.HasOne("acme.atena.domain.DTO.Document.Documento", "Documento")
+                        .WithMany("EntradaProdutoEstoquesDocumentos")
+                        .HasForeignKey("DocumentoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("acme.atena.domain.DTO.Inventory.EntradaProdutoEstoque", "EntradaProdutoEstoque")
+                        .WithMany("EntradaProdutoEstoquesDocumentos")
+                        .HasForeignKey("EntradaProdutoEstoqueId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Documento");
+
+                    b.Navigation("EntradaProdutoEstoque");
+                });
+
             modelBuilder.Entity("acme.atena.domain.DTO.Inventory.EntradaProdutoEstoque", b =>
                 {
                     b.HasOne("acme.atena.domain.DTO.Util.Competencia", "Competencia")
@@ -2196,10 +2731,29 @@ namespace acme.atena.infra.Migrations
                     b.Navigation("Produto");
                 });
 
+            modelBuilder.Entity("acme.atena.domain.DTO.Inventory.EntradaProdutoEstoqueFornecedor", b =>
+                {
+                    b.HasOne("acme.atena.domain.DTO.Inventory.EntradaProdutoEstoque", "EntradaProdutoEstoque")
+                        .WithMany("EntradaProdutoEstoqueFornecedor")
+                        .HasForeignKey("EntradaProdutoEstoqueId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("acme.atena.domain.DTO.Person.Fornecedor", "Fornecedor")
+                        .WithMany("EntradaProdutoEstoqueFornecedor")
+                        .HasForeignKey("FornecedorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("EntradaProdutoEstoque");
+
+                    b.Navigation("Fornecedor");
+                });
+
             modelBuilder.Entity("acme.atena.domain.DTO.Inventory.Estoque", b =>
                 {
                     b.HasOne("acme.atena.domain.DTO.Person.Empresa", "Empresa")
-                        .WithMany("Estoque")
+                        .WithMany("Estoques")
                         .HasForeignKey("EmpresaId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -2224,6 +2778,17 @@ namespace acme.atena.infra.Migrations
                     b.Navigation("Estoque");
 
                     b.Navigation("Produto");
+                });
+
+            modelBuilder.Entity("acme.atena.domain.DTO.Inventory.FluxoCaixaEstoque", b =>
+                {
+                    b.HasOne("acme.atena.domain.DTO.Util.Competencia", "Competencia")
+                        .WithMany("FluxoCaixaEstoques")
+                        .HasForeignKey("CompetenciaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Competencia");
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Inventory.SaidaProdutoEstoque", b =>
@@ -2392,11 +2957,19 @@ namespace acme.atena.infra.Migrations
 
             modelBuilder.Entity("acme.atena.domain.DTO.Product.Produto", b =>
                 {
+                    b.HasOne("acme.atena.domain.DTO.Product.Sequence.CodigoProduto", "CodigoProduto")
+                        .WithMany("Produtos")
+                        .HasForeignKey("Codigo")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("acme.atena.domain.DTO.Product.TipoProduto", "TipoProduto")
                         .WithMany("Produtos")
                         .HasForeignKey("TipoProdutoId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("CodigoProduto");
 
                     b.Navigation("TipoProduto");
                 });
@@ -2599,14 +3172,31 @@ namespace acme.atena.infra.Migrations
 
             modelBuilder.Entity("acme.atena.domain.DTO.Account.PagamentoVenda", b =>
                 {
-                    b.Navigation("Pagamentos");
-
                     b.Navigation("PagamentoVendasFormasPagamentos");
+
+                    b.Navigation("Pagamentos");
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Account.Receita", b =>
                 {
                     b.Navigation("FluxoDeCaixasReceitas");
+                });
+
+            modelBuilder.Entity("acme.atena.domain.DTO.Document.Documento", b =>
+                {
+                    b.Navigation("EntradaProdutoEstoquesDocumentos");
+                });
+
+            modelBuilder.Entity("acme.atena.domain.DTO.Document.TipoDocumento", b =>
+                {
+                    b.Navigation("Documentos");
+                });
+
+            modelBuilder.Entity("acme.atena.domain.DTO.Inventory.EntradaProdutoEstoque", b =>
+                {
+                    b.Navigation("EntradaProdutoEstoqueFornecedor");
+
+                    b.Navigation("EntradaProdutoEstoquesDocumentos");
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Inventory.Estoque", b =>
@@ -2635,7 +3225,7 @@ namespace acme.atena.infra.Migrations
 
                     b.Navigation("EnderecoEmpresas");
 
-                    b.Navigation("Estoque");
+                    b.Navigation("Estoques");
 
                     b.Navigation("Pagamentos");
                 });
@@ -2647,6 +3237,8 @@ namespace acme.atena.infra.Migrations
                     b.Navigation("Dividas");
 
                     b.Navigation("EnderecoFornecedores");
+
+                    b.Navigation("EntradaProdutoEstoqueFornecedor");
 
                     b.Navigation("Pagamentos");
                 });
@@ -2683,6 +3275,11 @@ namespace acme.atena.infra.Migrations
                     b.Navigation("ValorProdutos");
 
                     b.Navigation("VendasProdutos");
+                });
+
+            modelBuilder.Entity("acme.atena.domain.DTO.Product.Sequence.CodigoProduto", b =>
+                {
+                    b.Navigation("Produtos");
                 });
 
             modelBuilder.Entity("acme.atena.domain.DTO.Product.TipoProduto", b =>
@@ -2744,6 +3341,8 @@ namespace acme.atena.infra.Migrations
                     b.Navigation("Dividas");
 
                     b.Navigation("EntradaProdutoEstoques");
+
+                    b.Navigation("FluxoCaixaEstoques");
 
                     b.Navigation("FluxosDeCasas");
 

@@ -23,52 +23,55 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using acme.atena.application.Handler.Enderecos.AutoMapper;
 
 namespace acme.atena.config.DI.Pacotes
 {
     internal static class InjecaoRepository
     {
-        public static void IDRepository(this IServiceCollection services)
+        public static void RepositoryDI(this IServiceCollection services)
         {
             //REPOSITORY
-            services.AddTransient<IRepositoryBase<AbstractEntity>, RepositoryBase<AbstractEntity>>();
-            services.AddTransient<IDespesaRepository, DespesaRepository>();
-            services.AddTransient<IReceitaRepository, ReceitaRepository>();
-            services.AddTransient<IFluxoDeCaixaRepository, FluxoDeCaixaRepository>();
-            services.AddTransient<IDividaRepository, DividaRepository>();
-            services.AddTransient<IPagamentoRepository, PagamentoRepository>();
+            services.AddScoped<IRepositoryBase<AbstractEntity>, RepositoryBase<AbstractEntity>>();
+            services.AddScoped<IDespesaRepository, DespesaRepository>();
+            services.AddScoped<IReceitaRepository, ReceitaRepository>();
+            services.AddScoped<IFluxoDeCaixaRepository, FluxoDeCaixaRepository>();
+            services.AddScoped<IDividaRepository, DividaRepository>();
+            services.AddScoped<IPagamentoRepository, PagamentoRepository>();
 
-            services.AddTransient<IEstoqueRepository, EstoqueRepository>();
-            services.AddTransient<IEstoqueProdutoRepository, EstoqueProdutoRepository>();
-            services.AddTransient<IEntradaProdutoEstoqueRepository, EntradaProdutoEstoqueRepository>();
-            services.AddTransient<ISaidaProdutoEstoqueRepository, SaidaProdutoEstoqueRepository>();
+            services.AddScoped<IEstoqueRepository, EstoqueRepository>();
+            services.AddScoped<IEstoqueProdutoRepository, EstoqueProdutoRepository>();
+            services.AddScoped<IEntradaProdutoEstoqueRepository, EntradaProdutoEstoqueRepository>();
+            services.AddScoped<ISaidaProdutoEstoqueRepository, SaidaProdutoEstoqueRepository>();
 
-            services.AddTransient<ICompraRepository, CompraRepository>();
-            services.AddTransient<ICompraProdutoRepository, CompraProdutoRepository>();
-            services.AddTransient<IProdutoRepository, ProdutoRepository>();
-            services.AddTransient<IVendaRepository, VendaRepository>();
-            services.AddTransient<IVendaProdutoRepository, VendaProdutoRepository>();
-            services.AddTransient<IDevolucaoCompraRepository, DevolucaoCompraRepository>();
-            services.AddTransient<IDevolucaoVendaRepository, DevolucaoVendaRepository>();
-            services.AddTransient<IPagamentoVendaRepository, PagamentoVendaRepository>();
-            services.AddTransient<ITipoProdutoRepository, TipoProdutoRepository>();
-            services.AddTransient<ITipoValorProdutoRepository, TipoValorProdutoRepository>();
-            services.AddTransient<IValorProdutoRepository, ValorProdutoRepository>();
+            services.AddScoped<ICompraRepository, CompraRepository>();
+            services.AddScoped<ICompraProdutoRepository, CompraProdutoRepository>();
+            services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.AddScoped<IVendaRepository, VendaRepository>();
+            services.AddScoped<IVendaProdutoRepository, VendaProdutoRepository>();
+            services.AddScoped<IDevolucaoCompraRepository, DevolucaoCompraRepository>();
+            services.AddScoped<IDevolucaoVendaRepository, DevolucaoVendaRepository>();
+            services.AddScoped<IPagamentoVendaRepository, PagamentoVendaRepository>();
+            services.AddScoped<ITipoProdutoRepository, TipoProdutoRepository>();
+            services.AddScoped<ITipoValorProdutoRepository, TipoValorProdutoRepository>();
+            services.AddScoped<IValorProdutoRepository, ValorProdutoRepository>();
 
-            services.AddTransient<IEmpresaRepository, EmpresaRepository>();
-            services.AddTransient<IClienteRepository, ClienteRepository>();
-            services.AddTransient<IFornecedorRepository, FornecedorRepository>();
+            services.AddScoped<IEmpresaRepository, EmpresaRepository>();
+            services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<IFornecedorRepository, FornecedorRepository>();
 
-            services.AddTransient<ICompetenciaRepository, CompetenciaRepository>();
-            services.AddTransient<IParametroRepository, ParametroRepository>();
-            services.AddTransient<IEnderecoRepository, EnderecoRepository>();
+            services.AddScoped<ICompetenciaRepository, CompetenciaRepository>();
+            services.AddScoped<IParametroRepository, ParametroRepository>();
+            services.AddScoped<IEnderecoRepository, EnderecoRepository>();
 
-            services.AddTransient<IAutorizacaoApiRepository, AutorizacaoApiRepository>();
-            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
-            services.AddTransient<IPermissaoRepository, PermissaoRepository>();
-            services.AddTransient<IPermissaoUsuarioRepository, PermissaoUsuarioRepository>();
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IAutorizacaoApiRepository, AutorizacaoApiRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IPermissaoRepository, PermissaoRepository>();
+            services.AddScoped<IPermissaoUsuarioRepository, PermissaoUsuarioRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+
+            
         }
     }
 }

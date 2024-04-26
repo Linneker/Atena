@@ -10,7 +10,7 @@ namespace acme.atena.domain.DTO.Util
     public class EnderecoFornecedor : EnderecoPessoa
     {
         public Guid FornecedorId { get; set; }
-
+        public bool Matriz { get; set; }
         public virtual Fornecedor Fornecedor { get; set; }
     }
 }

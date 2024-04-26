@@ -26,46 +26,46 @@ namespace acme.atena.config.DI.Pacotes
 {
     internal static class InjecaoService
     {
-        public static void DIService(this IServiceCollection services)
+        public static void ServiceDI(this IServiceCollection services)
         {
             //SERVICE
-            services.AddTransient<IServiceBase<AbstractEntity>, ServiceBase<AbstractEntity>>();
-            services.AddTransient<IDespesaService, DespesaService>();
-            services.AddTransient<IReceitaService, ReceitaService>();
-            services.AddTransient<IFluxoDeCaixaService, FluxoDeCaixaService>();
-            services.AddTransient<IDividaService, DividaService>();
-            services.AddTransient<IPagamentoService, PagamentoService>();
-            services.AddTransient<IPagamentoVendaService, PagamentoVendaService>();
+            services.AddScoped<IServiceBase<AbstractEntity>, ServiceBase<AbstractEntity>>();
+            services.AddScoped<IDespesaService, DespesaService>();
+            services.AddScoped<IReceitaService, ReceitaService>();
+            services.AddScoped<IFluxoDeCaixaService, FluxoDeCaixaService>();
+            services.AddScoped<IDividaService, DividaService>();
+            services.AddScoped<IPagamentoService, PagamentoService>();
+            services.AddScoped<IPagamentoVendaService, PagamentoVendaService>();
 
-            services.AddTransient<IEstoqueService, EstoqueService>();
-            services.AddTransient<IEstoqueProdutoService, EstoqueProdutoService>();
-            services.AddTransient<IEntradaProdutoEstoqueService, EntradaProdutoEstoqueService>();
-            services.AddTransient<ISaidaProdutoEstoqueService, SaidaProdutoEstoqueService>();
-            services.AddTransient<IValorProdutoService, ValorProdutoService>();
+            services.AddScoped<IEstoqueService, EstoqueService>();
+            services.AddScoped<IEstoqueProdutoService, EstoqueProdutoService>();
+            services.AddScoped<IEntradaProdutoEstoqueService, EntradaProdutoEstoqueService>();
+            services.AddScoped<ISaidaProdutoEstoqueService, SaidaProdutoEstoqueService>();
+            services.AddScoped<IValorProdutoService, ValorProdutoService>();
             
 
-            services.AddTransient<ICompraService, CompraService>();
-            services.AddTransient<ICompraProdutoService, CompraProdutoService>();
-            services.AddTransient<IProdutoService, ProdutoService>();
-            services.AddTransient<IVendaService, VendaService>();
-            services.AddTransient<IVendaProdutoService, VendaProdutoService>();
-            services.AddTransient<IDevolucaoCompraService, DevolucaoCompraService>();
-            services.AddTransient<IDevolucaoVendaService, DevolucaoVendaService>();
-            services.AddTransient<ITipoProdutoService, TipoProdutoService>();
-            services.AddTransient<ITipoValorProdutoService, TipoValorProdutoService>();
+            services.AddScoped<ICompraService, CompraService>();
+            services.AddScoped<ICompraProdutoService, CompraProdutoService>();
+            services.AddScoped<IProdutoService, ProdutoService>();
+            services.AddScoped<IVendaService, VendaService>();
+            services.AddScoped<IVendaProdutoService, VendaProdutoService>();
+            services.AddScoped<IDevolucaoCompraService, DevolucaoCompraService>();
+            services.AddScoped<IDevolucaoVendaService, DevolucaoVendaService>();
+            services.AddScoped<ITipoProdutoService, TipoProdutoService>();
+            services.AddScoped<ITipoValorProdutoService, TipoValorProdutoService>();
 
-            services.AddTransient<IEmpresaService, EmpresaService>();
-            services.AddTransient<IClienteService, ClienteService>();
-            services.AddTransient<IFornecedorService, FornecedorService>();
+            services.AddScoped<IEmpresaService, EmpresaService>();
+            services.AddScoped<IClienteService, ClienteService>();
+            services.AddScoped<IFornecedorService, FornecedorService>();
 
-            services.AddTransient<ICompetenciaService, CompetenciaService>();
-            services.AddTransient<IParametroService, ParametroService>();
-            services.AddTransient<IEnderecoService, EnderecoService>();
+            services.AddScoped<ICompetenciaService, CompetenciaService>();
+            services.AddScoped<IParametroService, ParametroService>();
+            services.AddScoped<IEnderecoService, EnderecoService>();
 
-            services.AddTransient<IAutorizacaoApiService, AutorizacaoApiService>();
-            services.AddTransient<IUsuarioService, UsuarioService>();
-            services.AddTransient<IPermissaoService, PermissaoService>();
-            services.AddTransient<IPermissaoUsuarioService, PermissaoUsuarioService>();
+            services.AddScoped<IAutorizacaoApiService, AutorizacaoApiService>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IPermissaoService, PermissaoService>();
+            services.AddScoped<IPermissaoUsuarioService, PermissaoUsuarioService>();
 
         }
     }

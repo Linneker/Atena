@@ -1,16 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="RestSharp" Version="106.15.0" />
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="RestSharp" Version="110.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\acme.atena.domain\acme.atena.domain.csproj" />
+    <ProjectReference Include="..\CORE\acme.atena.core\acme.atena.core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Handler\Cliente\Commands\Query\" />
+    <Folder Include="Handler\Cliente\Validation\" />
+    <Folder Include="Handler\Cliente\Query\" />
+    <Folder Include="Handler\Comum\Commands\Request\" />
+    <Folder Include="Handler\Enderecos\Validation\" />
+    <Folder Include="Handler\Protudos\Event\" />
+    <Folder Include="Handler\Protudos\Query\" />
   </ItemGroup>
 
 </Project>
