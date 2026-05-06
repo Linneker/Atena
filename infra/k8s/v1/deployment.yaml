@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: atena-api
+  namespace: atena
+  labels:
+    app: atena-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: atena-api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: atena-api
+    spec:
+      containers:
+        - name: api
+          image: atena-api:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              name: http
+          envFrom:
+            - configMapRef:
+                name: atena-api-config
+            - secretRef:
+                name: atena-api-secret
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"
+          livenessProbe:
+            httpGet: { path: /health/live, port: 8080 }
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          readinessProbe:
+            httpGet: { path: /health/ready, port: 8080 }
+            initialDelaySeconds: 10
+            periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: atena-nfe-worker
+  namespace: atena
+  labels:
+    app: atena-nfe-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: atena-nfe-worker
+  template:
+    metadata:
+      labels:
+        app: atena-nfe-worker
+    spec:
+      containers:
+        - name: worker
+          image: atena-api:latest
+          args: ["--worker", "nfe-transmissao"]
+          envFrom:
+            - configMapRef:
+                name: atena-api-config
+            - secretRef:
+                name: atena-api-secret
+          resources:
+            requests: { cpu: "100m", memory: "128Mi" }
+            limits: { cpu: "500m", memory: "512Mi" }

@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: atena-api-config
+  namespace: atena
+data:
+  ASPNETCORE_ENVIRONMENT: "Production"
+  ASPNETCORE_URLS: "http://+:8080"
+  Redis__Connection: "redis.atena.svc.cluster.local:6379"
+  RabbitMq__Host: "rabbitmq.atena.svc.cluster.local"
+  RabbitMq__User: "atena"
+  Storage__Provider: "S3"
+  Storage__S3__Endpoint: "http://minio.atena.svc.cluster.local:9000"
+  Storage__S3__Bucket: "atena"
+  Jwt__Issuer: "atena"
+  Jwt__Audience: "atena"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: atena-api-secret
+  namespace: atena
+type: Opaque
+stringData:
+  ConnectionStrings__Default: "server=mysql.atena.svc.cluster.local;port=3306;database=atena;user=atena;password=CHANGE_ME;"
+  RabbitMq__Password: "CHANGE_ME"
+  Storage__S3__AccessKey: "CHANGE_ME"
+  Storage__S3__SecretKey: "CHANGE_ME"
+  Jwt__SecretKey: "CHANGE_ME_USE_LONG_RANDOM_STRING_AT_LEAST_32_CHARS"

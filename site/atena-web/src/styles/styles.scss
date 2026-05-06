@@ -1,0 +1,55 @@
+:root {
+  --tenant-primary: #321fdb;
+  --tenant-secondary: #3c4b64;
+  --tenant-accent: #2eb85c;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background-color: #f8f9fa;
+  color: #2c3e50;
+}
+
+.btn-primary {
+  background-color: var(--tenant-primary) !important;
+  border-color: var(--tenant-primary) !important;
+}
+
+.tenant-logo { max-height: 40px; }
+
+.app-shell {
+  position: relative;
+}
+
+.sidebar {
+  transition: transform 0.2s ease-in-out;
+  position: relative;
+  z-index: 1040;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    transform: translateX(-100%);
+    width: 80% !important;
+    max-width: 280px;
+  }
+  .sidebar.open { transform: translateX(0); }
+
+  .data-table { display: block; overflow-x: auto; }
+  .table-responsive table { min-width: 600px; }
+
+  header h5 { font-size: 1rem; }
+}
+
+@media (max-width: 360px) {
+  .container-fluid, main.p-3 { padding: 0.5rem !important; }
+  .card { border-radius: 0; }
+  .btn { padding: 0.25rem 0.5rem; font-size: 0.85rem; }
+  table { font-size: 0.75rem; }
+}

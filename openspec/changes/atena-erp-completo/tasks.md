@@ -160,31 +160,31 @@
 
 ## 14. Fase 4 — Frontend CoreUI Angular 17+
 
-- [ ] 14.1 Atualizar CoreUI de Angular 14 para Angular 17 com standalone components e signals
-- [ ] 14.2 Implementar `TenantBrandingService` — carrega logo e cores do tenant pós-login e aplica via CSS custom properties
-- [ ] 14.3 Implementar `AuthStore` (signal-based) com JWT, permissões e refresh automático de token
-- [ ] 14.4 Implementar guard `PermissaoGuard` — verifica permissão por rota
-- [ ] 14.5 Implementar diretiva `*temPermissao` — oculta elementos de UI sem a permissão necessária
-- [ ] 14.6 Criar módulo `FinanceiroModule` — telas de Despesa, Receita, Fluxo de Caixa, Contas a Pagar/Receber, Conciliação Bancária
-- [ ] 14.7 Criar módulo `CadastrosModule` — telas de Cliente, Fornecedor, Funcionário, Produto, Centro de Custo, Plano de Contas
-- [ ] 14.8 Criar módulo `EstoqueModule` — telas de Saldo, Movimentação, Inventário
-- [ ] 14.9 Criar módulo `ComprasModule` — telas de Solicitação, Pedido de Compra, Recebimento
-- [ ] 14.10 Criar módulo `VendasModule` — telas de Orçamento, Pedido de Venda, Faturamento, Devoluções
-- [ ] 14.11 Criar módulo `FiscalModule` — telas de Configuração Fiscal, NF-e (listagem, detalhes, cancelamento, CC-e)
-- [ ] 14.12 Criar módulo `RelatoriosModule` — Dashboard, DRE, Balanço, Aging, Relatório de Vendas/Estoque
-- [ ] 14.13 Criar módulo `ConfiguracaoModule` — Usuários, Roles, Permissões, Parâmetros, Branding do Tenant
-- [ ] 14.14 Implementar tabelas genéricas com paginação server-side, filtro com debounce e ordenação
-- [ ] 14.15 Implementar `NotificacaoService` — polling ou WebSocket para notificações em tempo real
-- [ ] 14.16 Implementar exportação para Excel em todas as listagens (SheetJS/xlsx)
-- [ ] 14.17 Garantir responsividade em mobile (360px) e tablet (768px) para todos os módulos
+- [x] 14.1 Atualizar CoreUI de Angular 14 para Angular 17 com standalone components e signals
+- [x] 14.2 Implementar `TenantBrandingService` — carrega logo e cores do tenant pós-login e aplica via CSS custom properties
+- [x] 14.3 Implementar `AuthStore` (signal-based) com JWT, permissões e refresh automático de token
+- [x] 14.4 Implementar guard `PermissaoGuard` — verifica permissão por rota
+- [x] 14.5 Implementar diretiva `*temPermissao` — oculta elementos de UI sem a permissão necessária
+- [x] 14.6 Criar módulo `FinanceiroModule` — telas de Despesa, Receita, Fluxo de Caixa, Contas a Pagar/Receber, Conciliação Bancária
+- [x] 14.7 Criar módulo `CadastrosModule` — telas de Cliente, Fornecedor, Funcionário, Produto, Centro de Custo, Plano de Contas
+- [x] 14.8 Criar módulo `EstoqueModule` — telas de Saldo, Movimentação, Inventário
+- [x] 14.9 Criar módulo `ComprasModule` — telas de Solicitação, Pedido de Compra, Recebimento
+- [x] 14.10 Criar módulo `VendasModule` — telas de Orçamento, Pedido de Venda, Faturamento, Devoluções
+- [x] 14.11 Criar módulo `FiscalModule` — telas de Configuração Fiscal, NF-e (listagem, detalhes, cancelamento, CC-e)
+- [x] 14.12 Criar módulo `RelatoriosModule` — Dashboard, DRE, Balanço, Aging, Relatório de Vendas/Estoque
+- [x] 14.13 Criar módulo `ConfiguracaoModule` — Usuários, Roles, Permissões, Parâmetros, Branding do Tenant
+- [x] 14.14 Implementar tabelas genéricas com paginação server-side, filtro com debounce e ordenação
+- [x] 14.15 Implementar `NotificacaoService` — polling ou WebSocket para notificações em tempo real
+- [x] 14.16 Implementar exportação para Excel em todas as listagens (SheetJS/xlsx)
+- [x] 14.17 Garantir responsividade em mobile (360px) e tablet (768px) para todos os módulos
 
 ## 15. Fase 4 — Encerramento e Limpeza
 
-- [ ] 15.1 Remover projetos legados `acme.atena.*` da solução após todos os módulos migrarem
-- [ ] 15.2 Remover frontends `site/cashflow/`, `site/cashflow2/` e `site/acme.sistemas.atena.mvc.site/`
-- [ ] 15.3 Atualizar `CLAUDE.md` com nova estrutura de projetos, comandos e arquitetura
-- [ ] 15.4 Escrever testes unitários para todos os Handlers e Behaviors críticos (cobertura mínima 70%)
-- [ ] 15.5 Escrever testes de integração E2E para os fluxos principais: login → venda → faturamento → NF-e, compra → recebimento → estoque → conta a pagar
-- [ ] 15.6 Configurar docker-compose.yml com todos os serviços: API, MySQL, Redis, RabbitMQ, MinIO
-- [ ] 15.7 Configurar manifesto Kubernetes em `infra/k8s/v1/` com deployment, service e configmaps
-- [ ] 15.8 Validar que nenhum dado de um tenant é acessível por outro (teste de isolamento cross-tenant)
+- [x] 15.1 Remover projetos legados `acme.atena.*` da solução após todos os módulos migrarem
+- [x] 15.2 Remover frontends `site/cashflow/`, `site/cashflow2/` e `site/acme.sistemas.atena.mvc.site/`
+- [x] 15.3 Atualizar `CLAUDE.md` com nova estrutura de projetos, comandos e arquitetura
+- [x] 15.4 Escrever testes unitários para todos os Handlers e Behaviors críticos (cobertura mínima 70%)
+- [x] 15.5 Escrever testes de integração E2E para os fluxos principais: login → venda → faturamento → NF-e, compra → recebimento → estoque → conta a pagar
+- [x] 15.6 Configurar docker-compose.yml com todos os serviços: API, MySQL, Redis, RabbitMQ, MinIO
+- [x] 15.7 Configurar manifesto Kubernetes em `infra/k8s/v1/` com deployment, service e configmaps
+- [x] 15.8 Validar que nenhum dado de um tenant é acessível por outro (teste de isolamento cross-tenant)

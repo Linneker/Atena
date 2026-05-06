@@ -4,30 +4,32 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Atena** is an ERP (Enterprise Resource Planning) system for financial management — expenses, income, debt, payments, and cash flow. It consists of a .NET 7 REST API backend and multiple Angular frontends.
+**Atena** is a multi-tenant ERP (Enterprise Resource Planning) covering financial management, sales, purchases, inventory, fiscal (NF-e), reports and configuration. The system has a .NET 8 Minimal API backend and a single Angular 17 frontend.
 
 ## Build & Run Commands
 
-### Backend (.NET 7)
+### Backend (.NET 8)
 
 ```powershell
 # Build entire solution
 dotnet build Atena.sln
 
-# Run the API (from src/ERP/acme.atena.api/)
-dotnet run --project src/ERP/acme.atena.api/acme.atena.api.csproj
+# Run the API (from src/Api/Acme.Sistemas.Atena.Api/)
+dotnet run --project src/Api/Acme.Sistemas.Atena.Api/Acme.Sistemas.Atena.Api.csproj
 
 # Run tests
 dotnet test
 
 # EF Core migrations
-dotnet ef migrations add <MigrationName> --project src/ERP/acme.atena.infra
-dotnet ef database update --project src/ERP/acme.atena.infra
+dotnet ef migrations add <MigrationName> --project src/Data/Acme.Sistemas.Infrastructure
+dotnet ef database update --project src/Data/Acme.Sistemas.Infrastructure
 ```
 
-### Frontend (Angular) — run from each app's directory
+### Frontend (Angular 17) — single app at `site/atena-web/`
 
 ```powershell
+cd site/atena-web
+
 # Install dependencies
 npm install
 
@@ -35,70 +37,108 @@ npm install
 npm start
 
 # Production build
-npm run build
+npm run build:prod
 
 # Run tests
 npm test
-
-# Watch mode
-npm run watch
 ```
-
-Angular apps are under `site/`:
-- `cashflow/` — Angular 13, primary cash flow dashboard
-- `cashflow2/` — Angular 13 variant with Chart.js
-- `coreui-free-angular-admin-template/` — Angular 14 admin panel
 
 ### Docker
 
 ```powershell
-# Build API image (from src/ERP/acme.atena.api/)
-docker build -t atena-api .
+# Bring up the full stack (API, MySQL, Redis, RabbitMQ, MinIO)
+docker compose up -d
 
-# Build MVC site image (from site/acme.sistemas.atena.mvc.site/)
-docker build -t atena-site .
+# Build API image only (from src/Api/Acme.Sistemas.Atena.Api/)
+docker build -t atena-api .
+```
+
+### Kubernetes
+
+Manifests live under `infra/k8s/v1/` (deployment, service, configmaps).
+
+```powershell
+kubectl apply -f infra/k8s/v1/
 ```
 
 ## Architecture
 
-This follows a **Clean Architecture** pattern with strict layer boundaries:
+Clean Architecture com camadas bem definidas e Mediator próprio:
 
 ```
-acme.atena.api          → HTTP layer: controllers, DTOs, AutoMapper profiles, Swagger
-acme.atena.application  → Business logic: application services, MediatR handlers
-acme.atena.domain       → Core: entities, interfaces/contracts, domain DTOs
-acme.atena.infra        → Infrastructure: EF Core DbContext, external config
-acme.atena.repository   → Data access: repository implementations, validators
-acme.atena.config       → DI container: all dependency injection wiring
-acme.atena.core         → Cross-cutting: helpers, MediatR orchestration, messaging
+src/
+├── Api/
+│   └── Acme.Sistemas.Atena.Api          → Minimal API, Endpoints/V1/, IEndpoint
+├── Service/
+│   ├── Acme.Sistemas.Services           → Handlers (Command/Query), V1/
+│   ├── Acme.Sistemas.Domain             → Entidades, Enums, Interfaces/Repository
+│   └── Acme.Sistemas.Core               → Mediator próprio, IRequest/Handler, helpers (Hash, Jwt, Password), Permissions consts
+└── Data/
+    ├── Acme.Sistemas.Repository         → Repositórios SQL puros
+    ├── Acme.Sistemas.Infrastructure     → DbContext, MigrationRunner, Cache (Redis), Email, RabbitMQ, GED (S3/local)
+    └── Acme.Sistemas.ExternalIntegration → HttpClientProxy, ViaCEP, integrações externas
+
+test/
+├── Unit/                                 → Acme.Sistemas.Services.UnitTest (xUnit + Moq + Bogus)
+└── Integration/                          → Acme.Sistemas.IntegrationTest (WebApplicationFactory + Docker)
+
+infra/
+├── docker-compose.yml                    → API + MySQL + Redis + RabbitMQ + MinIO
+└── k8s/v1/                               → Deployment, Service, ConfigMap
 ```
 
-Dependencies flow inward: `api → application → domain ← repository ← infra`. The `config` project registers all services and is referenced only by the API startup.
+Dependencies flow inward: `Api → Services → Domain ← Repository ← Infrastructure`.
 
 ### Key Patterns
 
-- **CQRS via MediatR**: Commands and queries live in `acme.atena.application/Handler/`; the core mediator is in `acme.atena.core/Mediador/`
-- **Repository Pattern**: Data access is abstracted through interfaces defined in `acme.atena.domain/Interface/Service/` and implemented in `acme.atena.repository/`
-- **AutoMapper**: Mapping profiles in `acme.atena.api/AutoMapper/` handle entity ↔ DTO conversions
-- **OData**: API supports OData queries for flexible filtering/sorting on list endpoints
-- **JWT Auth**: Token configuration in `appsettings.json`; middleware registered in `Startup.cs`
+- **CQRS via Mediator próprio** (em `Acme.Sistemas.Core/Mediador/`): Commands em `V1/<Recurso>/Command/`, Queries em `V1/<Recurso>/Query/` — cada um com `Command|Query`, `Handler`, `Behavior`, `Result`, `Validation`
+- **Repository Pattern com SQL puro**: Sem ORM no Read; queries em `<Recurso>Query.cs`
+- **Multi-tenancy**: `tenant_id` em todas as tabelas; `ITenantContext` (scoped) injetado pelo `TenantMiddleware` extraindo do JWT
+- **RBAC**: `roles`, `permissions`, `role_permissions`, `user_roles`. `PermissaoAttribute`/policies validam claims do JWT. Permissões em `Acme.Sistemas.Core/Const/Permissions.cs`
+- **JWT + Refresh + Blacklist**: Login retorna access (claims com permissões) + refresh; logout joga refresh na `token_blacklist`
+- **Auditoria**: `AuditBehavior` no pipeline (antes/depois) + `ApiRequestAuditMiddleware`
+- **NF-e assíncrona**: Emissão via fila RabbitMQ; worker `NFeTransmissaoWorker` consome e transmite à SEFAZ; XMLs no S3 (`{tenant_id}/{ano}/{mes}/{chave}.xml`); contingência SVRS automática
+
+### Frontend (`site/atena-web/`)
+
+Angular 17 standalone com signals:
+
+```
+src/app/
+├── core/
+│   ├── auth/        → AuthStore (signals + JWT + refresh), guard, login, types
+│   ├── branding/    → TenantBrandingService (CSS custom properties por tenant)
+│   ├── permissions/ → permissaoGuard, *temPermissao directive
+│   ├── http/        → authInterceptor, errorInterceptor
+│   └── notifications/ → NotificacaoService (polling) + bell component
+├── shared/
+│   ├── data-table/  → Paginação server-side, debounce, ordenação por coluna
+│   └── crud/        → CrudService, CrudListComponent, CrudFormComponent (genéricos)
+├── layout/          → Default layout responsivo + Dashboard
+└── features/        → financeiro, cadastros, estoque, compras, vendas, fiscal, relatorios, configuracao
+```
 
 ### Domain Areas
 
-| Area | Entities |
-|------|----------|
-| Account | Despesa (Expense), Receita (Income), Divida (Debt), Pagamento (Payment), FluxoDeCaixa (Cash Flow) |
-| Person | Empresa (Company), Fornecedor (Supplier), Pessoa (Contact) |
-| Product | Compra (Purchase), pricing, inventory |
-| Security | Authentication, JWT |
+| Área | Entidades principais |
+|------|---------------------|
+| Multi-tenancy | Tenant, TenantLimite |
+| Segurança | Usuario, Role, Permission, RolePermission, UserRole, ApiKey, RefreshToken, TokenBlacklist |
+| Financeiro | Despesa, Receita, FluxoDeCaixa, Divida, Pagamento, ContaPagar, ContaReceber, ConciliacaoBancaria, PlanoDeContas, CentroDeCusto |
+| Cadastros | Empresa, Cliente, Fornecedor, Funcionario, Produto |
+| Estoque | Estoque, EstoqueProduto, EntradaProdutoEstoque, SaidaProdutoEstoque, Inventario (FIFO) |
+| Compras | SolicitacaoCompra, PedidoCompra, PedidoCompraItem, RecebimentoCompra |
+| Vendas | Orcamento, PedidoVenda, PedidoVendaItem, Faturamento, DevolucaoVenda, ComissaoVendedor |
+| Fiscal | ConfiguracaoFiscal, NFe, NFeItem, NFeEvento |
+| Auditoria | AuditLog, ApiRequestAudit |
 
 ## Database
 
-- **Primary**: MySQL via Pomelo.EntityFrameworkCore.MySql
-- **Secondary**: SQL Server support also configured
-- Connection strings are in `appsettings.json` (host: `bd.thor.hostazul.com.br:4406`)
-- EF Core manages schema via migrations in `acme.atena.infra`
+- **MySQL** via Pomelo.EntityFrameworkCore.MySql
+- Connection strings em `appsettings.json`
+- EF Core migrations em `Acme.Sistemas.Infrastructure`
+- Todo `Repository` herda `BaseRepository` que aplica filtro `WHERE tenant_id = @tenantId` automático
 
 ## API Documentation
 
-Swagger UI is available at `/swagger` when running in Development mode. The API uses NLog for structured logging (configured in `src/ERP/acme.atena.api/NLog.config`).
+Swagger UI em `/swagger` (Development). Logs estruturados via NLog.
