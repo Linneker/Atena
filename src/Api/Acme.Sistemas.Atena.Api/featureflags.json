@@ -1,0 +1,7 @@
+{
+  "flags": {
+    "nfe.contingencia.svrs": false,
+    "estoque.permitir.negativo": false,
+    "auditoria.detalhada": true
+  }
+}

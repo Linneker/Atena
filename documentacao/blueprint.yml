@@ -1,0 +1,856 @@
+blueprint:
+  metadata:
+    nome: "Estrutura Padrão de Projetos Acme Sistemas"
+    tipo: "blueprint-arquitetural"
+    versao: "1.0.0"
+    descricao: >
+      Modelo padrão de estrutura para projetos de desenvolvimento da plataforma Acme.
+      Define organização de pastas, responsabilidades por projeto, convenções internas,
+      padrões arquiteturais e organização dos testes.
+
+  diretrizes_gerais:
+    manter_pastas_virtuais: true
+    manter_pastas_fisicas: true
+    prefixo_padrao: "Acme.Sistemas"
+    observacoes:
+      - "Tanto pastas virtuais quanto pastas físicas devem ser mantidas."
+      - "A estrutura deve ser organizada por camadas e responsabilidades."
+      - "As funcionalidades do projeto Services devem ser organizadas por versão."
+
+  estrutura_diretorios:
+    PastaProjeto:
+      tipo: "pasta"
+      filhos:
+        infra:
+          tipo: "pasta"
+          descricao: "Artefatos de infraestrutura local e kubernetes."
+          filhos:
+            compose:
+              tipo: "pasta"
+              filhos:
+                docker-compose.yml:
+                  tipo: "arquivo"
+                  descricao: "Arquivo de orquestração local."
+            k8s:
+              tipo: "pasta"
+              filhos:
+                v1:
+                  tipo: "pasta"
+                  filhos:
+                    deployment.yaml:
+                      tipo: "arquivo"
+                      descricao: "Manifesto de deployment da aplicação."
+                kind-config.yaml:
+                  tipo: "arquivo"
+                  descricao: "Configuração de cluster local kind."
+
+        src:
+          tipo: "pasta"
+          descricao: "Código-fonte principal da solução."
+          filhos:
+            Api:
+              tipo: "pasta"
+              filhos:
+                Acme.Sistemas.NomeProjeto.Api:
+                  tipo: "projeto"
+                  subtipo: "web.api"
+                  descricao: "Projeto de entrada HTTP da aplicação."
+
+            Service:
+              tipo: "pasta"
+              filhos:
+                Acme.Sistemas.Services:
+                  tipo: "projeto"
+                  subtipo: "biblioteca_de_classe"
+                  descricao: "Projeto com regras de negócio e orquestração."
+                Acme.Sistemas.Core:
+                  tipo: "projeto"
+                  subtipo: "biblioteca_de_classe"
+                  descricao: "Projeto com contratos, utilitários e CQRS/Mediator."
+                Acme.Sistemas.Domain:
+                  tipo: "projeto"
+                  subtipo: "biblioteca_de_classe"
+                  descricao: "Projeto com entidades, enums, interfaces e constantes de domínio."
+
+            Data:
+              tipo: "pasta"
+              filhos:
+                Acme.Sistemas.ExternalIntegration:
+                  tipo: "projeto"
+                  subtipo: "biblioteca_de_classe"
+                  descricao: "Projeto de integrações externas."
+                Acme.Sistemas.Infrastructure:
+                  tipo: "projeto"
+                  subtipo: "biblioteca_de_classe"
+                  descricao: "Projeto de infraestrutura técnica."
+                Acme.Sistemas.Repository:
+                  tipo: "projeto"
+                  subtipo: "biblioteca_de_classe"
+                  descricao: "Projeto de acesso a dados e repositórios."
+
+        test:
+          tipo: "pasta"
+          descricao: "Projetos de teste."
+          filhos:
+            Integration:
+              tipo: "pasta"
+              filhos:
+                Acme.Sistemas.IntegrationTest:
+                  tipo: "projeto"
+                  subtipo: "teste_integracao"
+                  descricao: "Projeto de testes de integração."
+            Unit:
+              tipo: "pasta"
+              filhos:
+                Acme.Sistemas.Services.UnitTest:
+                  tipo: "projeto"
+                  subtipo: "teste_unitario"
+                  descricao: "Projeto de testes unitários."
+
+  projetos:
+    Acme.Sistemas.NomeProjeto.Api:
+      descricao: >
+        Camada de entrada da aplicação. Responsável por expor os endpoints HTTP da API.
+        Utiliza Minimal API com arquivos separados por endpoint.
+      estrutura:
+        Endpoints:
+          tipo: "pasta"
+          descricao: "Contém todos os Minimal API endpoints organizados por versão e nome do endpoint."
+          filhos:
+            V_N:
+              tipo: "pasta"
+              descricao: "Versão do endpoint, por exemplo V1, V2."
+              filhos:
+                NomeEndpoint:
+                  tipo: "pasta"
+                  descricao: "Conjunto de arquivos de um endpoint específico."
+                  arquivos:
+                    NomeArquivo.cs:
+                      tipo: "arquivo"
+                      descricao: >
+                        Implementação do endpoint usando a interface IEndpoint.
+                        Define rota, método HTTP e handler.
+                    NomeArquivoRequest.cs:
+                      tipo: "arquivo"
+                      obrigatorio: false
+                      descricao: >
+                        Contrato de entrada da requisição.
+                        Opcional em endpoints GET sem parâmetros complexos.
+                    NomeArquivoResponse.cs:
+                      tipo: "arquivo"
+                      descricao: "Contrato de saída retornado ao consumidor."
+                    NomeArquivoMap.cs:
+                      tipo: "arquivo"
+                      descricao: "Converte Request para Command/Query e Result para Response."
+
+        Middlewares:
+          tipo: "pasta"
+          descricao: "Middlewares customizados da aplicação."
+        Hosted:
+          tipo: "pasta"
+          descricao: "Workers e serviços hospedados, como IHostedService."
+        Config:
+          tipo: "pasta"
+          descricao: "Configurações globais como segurança, erros e OpenAPI."
+
+      arquivos_raiz:
+        cache.db:
+          tipo: "arquivo"
+          descricao: "Banco local LiteDB usado para cache local, como alternativa a Redis."
+        featureflags.json:
+          tipo: "arquivo"
+          descricao: "Arquivo de feature flags acessado via API para ativação em runtime."
+        Dockerfile:
+          tipo: "arquivo"
+          descricao: "Configuração da imagem Docker do projeto."
+        Program.cs:
+          tipo: "arquivo"
+          descricao: "Ponto de entrada e configuração da aplicação."
+
+    Acme.Sistemas.Services:
+      descricao: >
+        Camada de aplicação. Contém toda a lógica de negócio organizada
+        no padrão CQRS por funcionalidade.
+      organizacao:
+        versionamento: "V{N}"
+        descricao_versionamento: >
+          A pasta V{N} representa a versão da funcionalidade, como V1, V2, V3.
+          Cada versão pode coexistir sem quebrar contratos anteriores.
+      estrutura:
+        V_N:
+          tipo: "pasta"
+          filhos:
+            NomeDaFuncionalidade:
+              tipo: "pasta"
+              descricao: "Agrupa uma funcionalidade específica do sistema."
+              filhos:
+                Command:
+                  tipo: "pasta"
+                  descricao: "Operações de escrita ou ações que alteram estado."
+                  filhos:
+                    AcaoEspecifica:
+                      tipo: "pasta"
+                      arquivos:
+                        NomeCommand.cs:
+                          tipo: "arquivo"
+                          descricao: "Record com as propriedades necessárias para executar a ação."
+                        NomeCommandHandler.cs:
+                          tipo: "arquivo"
+                          descricao: "Lógica principal com orquestração de services e repositories."
+                        NomeCommandBehavior.cs:
+                          tipo: "arquivo"
+                          descricao: >
+                            Comportamento do pipeline com logs, validações complementares
+                            e enriquecimento de dados.
+                        NomeCommandResult.cs:
+                          tipo: "arquivo"
+                          descricao: "Contrato de retorno da operação."
+                        NomeCommandValidation.cs:
+                          tipo: "arquivo"
+                          descricao: "Validações dos dados do Command."
+
+                Query:
+                  tipo: "pasta"
+                  descricao: "Operações de leitura sem efeito colateral."
+                  filhos:
+                    AcaoEspecifica:
+                      tipo: "pasta"
+                      arquivos:
+                        NomeQuery.cs:
+                          tipo: "arquivo"
+                          descricao: "Record com as propriedades necessárias para consulta."
+                        NomeQueryHandler.cs:
+                          tipo: "arquivo"
+                          descricao: "Lógica principal que chama repositories e monta o resultado."
+                        NomeQueryBehavior.cs:
+                          tipo: "arquivo"
+                          descricao: >
+                            Comportamento do pipeline com logs, cache
+                            e enriquecimento de dados.
+                        NomeQueryResult.cs:
+                          tipo: "arquivo"
+                          descricao: "Contrato de retorno da consulta."
+                        NomeQueryValidation.cs:
+                          tipo: "arquivo"
+                          descricao: "Validações dos dados da Query."
+
+                Event:
+                  tipo: "pasta"
+                  descricao: "Eventos internos disparados de forma assíncrona."
+                  observacoes:
+                    - "Events não possuem retorno."
+                  filhos:
+                    AcaoEspecifica:
+                      tipo: "pasta"
+                      arquivos:
+                        NomeNotification.cs:
+                          tipo: "arquivo"
+                          descricao: "Record com as propriedades do evento."
+                        NomeNotificationHandler.cs:
+                          tipo: "arquivo"
+                          descricao: "Handler que reage ao evento disparado."
+                        NomeNotificationBehavior.cs:
+                          tipo: "arquivo"
+                          descricao: "Comportamento do pipeline do evento."
+                        NomeNotificationValidation.cs:
+                          tipo: "arquivo"
+                          descricao: "Validações dos dados da Notification."
+
+                Services:
+                  tipo: "pasta"
+                  descricao: "Serviços concretos e interfaces da funcionalidade."
+                  arquivos:
+                    NomeService.cs:
+                      tipo: "arquivo"
+                      descricao: "Implementação concreta da lógica de negócio."
+                    INomeService.cs:
+                      tipo: "arquivo"
+                      descricao: "Interface que define o contrato do serviço."
+
+      arquivos_raiz:
+        ServicesServiceCollecation.cs:
+          tipo: "arquivo"
+          descricao: "Registra todas as injeções de dependência do projeto Services."
+
+    Acme.Sistemas.Core:
+      descricao: >
+        Projeto de infraestrutura transversal. Fornece contratos, utilitários e o mecanismo
+        de CQRS/Mediator utilizados por toda a solução.
+      estrutura:
+        Const:
+          tipo: "pasta"
+          arquivos:
+            KeyCache.cs:
+              tipo: "arquivo"
+              descricao: >
+                Constantes de chaves de cache utilizadas em toda a aplicação.
+        Erros:
+          tipo: "pasta"
+          arquivos:
+            MessageErros.cs:
+              tipo: "arquivo"
+              descricao: "Mensagens de erro padronizadas."
+        Helper:
+          tipo: "pasta"
+          arquivos:
+            DynamicConverter.cs:
+              tipo: "arquivo"
+              descricao: >
+                Utilitário de conversão universal de tipos com uso de TypeConverter e cache.
+            LogEnrichmentHelper.cs:
+              tipo: "arquivo"
+              descricao: >
+                Utilitário para enriquecimento de logs com tenant, usuário e correlação.
+        Mediators:
+          tipo: "pasta"
+          descricao: "Implementação própria do padrão Mediator/CQRS."
+          filhos:
+            Handler:
+              tipo: "pasta"
+              arquivos:
+                IRequest.cs:
+                  tipo: "arquivo"
+                  descricao: "Marcador para comandos e queries do CQRS."
+                IRequestHandler.cs:
+                  tipo: "arquivo"
+                  descricao: "Contrato do handler de um request."
+            Notification:
+              tipo: "pasta"
+              arquivos:
+                INotification.cs:
+                  tipo: "arquivo"
+                  descricao: "Marcador para eventos de domínio sem retorno."
+                INotificationHandler.cs:
+                  tipo: "arquivo"
+                  descricao: "Contrato do handler de uma notification."
+          arquivos_raiz:
+            IMediator.cs:
+              tipo: "arquivo"
+              descricao: "Contrato central do mediator."
+            IPipelineBehavior.cs:
+              tipo: "arquivo"
+              descricao: "Middleware do pipeline de execução de requests."
+            Mediator.cs:
+              tipo: "arquivo"
+              descricao: >
+                Implementação do mediator com descoberta de handlers e behaviors via DI.
+
+        Response:
+          tipo: "pasta"
+          filhos:
+            Erros:
+              tipo: "pasta"
+              arquivos:
+                Error.cs:
+                  tipo: "arquivo"
+                  descricao: "Representa um erro com código e mensagem."
+          arquivos_raiz:
+            ResponseDefault.cs:
+              tipo: "arquivo"
+              descricao: >
+                Wrapper padrão de resposta HTTP com status, mensagem, conteúdo e erros.
+
+        Security:
+          tipo: "pasta"
+          arquivos:
+            CryptographyAsync.cs:
+              tipo: "arquivo"
+              descricao: "Criptografia assimétrica RSA com padding OAEP+SHA512."
+            Hash.cs:
+              tipo: "arquivo"
+              descricao: "Funções de hash SHA256, SHA512 e comparação segura."
+            JwtOptions.cs:
+              tipo: "arquivo"
+              descricao: "Parâmetros JWT como issuer, audience, key e TTLs."
+            PasswordHelper.cs:
+              tipo: "arquivo"
+              descricao: "Validação de senhas fortes."
+
+        Settings:
+          tipo: "pasta"
+          arquivos:
+            CacheMetrics.cs:
+              tipo: "arquivo"
+              descricao: "Métricas de performance do cache."
+            FeatureFlagSettings.cs:
+              tipo: "arquivo"
+              descricao: "Configuração das feature flags."
+            MemoryUsageStats.cs:
+              tipo: "arquivo"
+              descricao: "Dados de monitoramento de uso de memória."
+
+      arquivos_raiz:
+        DepencieInjection.cs:
+          tipo: "arquivo"
+          descricao: >
+            Registra mediator, handlers, behaviors e notifications no container de DI.
+
+    Acme.Sistemas.Domain:
+      descricao: >
+        Camada de domínio. Contém entidades, enumerações, interfaces de repositório
+        e constantes de negócio. Não possui dependências de infraestrutura.
+      estrutura:
+        Constants:
+          tipo: "pasta"
+          arquivos:
+
+        Entities:
+          tipo: "pasta"
+          descricao: "Entidades do domínio agrupadas por módulo."
+          filhos:
+            Archives:
+              tipo: "pasta"
+              arquivos:
+                FilesEntity.cs:
+                  tipo: "arquivo"
+                  descricao: "Entidade base de arquivo."
+
+            Cache:
+              tipo: "pasta"
+            Configurations:
+              tipo: "pasta"
+
+            Emails:
+              tipo: "pasta"
+              arquivos:
+                EmailDispatchLogEntity.cs:
+                  tipo: "arquivo"
+                  descricao: "Log de envios de e-mail."
+                EmailProviderConfigEntity.cs:
+                  tipo: "arquivo"
+                  descricao: "Configuração de provedor de e-mail por tenant."
+                PasswordResetTokenEntity.cs:
+                  tipo: "arquivo"
+                  descricao: "Token temporário de recuperação de senha."
+
+            Notifications:
+              tipo: "pasta"
+            Organizations:
+              tipo: "pasta"
+
+            Permissions:
+              tipo: "pasta"
+              arquivos:
+                RoleEntity.cs:
+                  tipo: "arquivo"
+                  descricao: "Papel ou perfil de acesso."
+                PermissionEntity.cs:
+                  tipo: "arquivo"
+                  descricao: "Permissão individual de recurso."
+                RolePermissionEntity.cs:
+                  tipo: "arquivo"
+                  descricao: "Associação entre papel e permissão."
+                ApiKeyEntity.cs:
+                  tipo: "arquivo"
+                  descricao: "Chave de API para autenticação de integrações."
+                RefreshTokenEntity.cs:
+                  tipo: "arquivo"
+                  descricao: "Token de renovação de sessão."
+                TokenBlacklistEntity.cs:
+                  tipo: "arquivo"
+                  descricao: "Lista de tokens invalidados."
+
+            Tenants:
+              tipo: "pasta"
+              arquivos:
+                TenantBrandingEntity.cs:
+                  tipo: "arquivo"
+                  descricao: "Configuração visual por tenant."
+
+            Users:
+              tipo: "pasta"
+
+            Others:
+              tipo: "pasta"
+              arquivos:
+                AuditLogEntity.cs:
+                  tipo: "arquivo"
+                  descricao: "Log de auditoria funcional."
+                ApiRequestAuditEntity.cs:
+                  tipo: "arquivo"
+                  descricao: "Log de auditoria de requisições HTTP."
+
+          arquivos_raiz:
+            BaseEntity.cs:
+              tipo: "arquivo"
+              descricao: "Classe base com campos comuns das entidades."
+            ObjectCreateDelete.cs:
+              tipo: "arquivo"
+              descricao: "Metadados de ciclo de vida de criação e remoção."
+
+        Enums:
+          tipo: "pasta"
+          descricao: "Enumerações do domínio."
+        Interfaces:
+          tipo: "pasta"
+          filhos:
+            Repository:
+              tipo: "pasta"
+              descricao: >
+                Contratos de repositório. As implementações ficam em Acme.Sistemas.Repository.
+
+    Acme.Sistemas.Infrastructure:
+      descricao: >
+        Camada de infraestrutura. Gerencia comunicação com banco de dados, cache,
+        storage, mensageria, e-mail e feature flags.
+      estrutura:
+        Databases:
+          tipo: "pasta"
+          filhos:
+            Configuration:
+              tipo: "pasta"
+              arquivos:
+                CrudConfiguration.cs:
+                  tipo: "arquivo"
+                DatabaseMetrics.cs:
+                  tipo: "arquivo"
+                DataConfiguration.cs:
+                  tipo: "arquivo"
+                RetryOptions.cs:
+                  tipo: "arquivo"
+                RetryPolicy.cs:
+                  tipo: "arquivo"
+                SqlExecutor.cs:
+                  tipo: "arquivo"
+                TransactionManager.cs:
+                  tipo: "arquivo"
+            Helper:
+              tipo: "pasta"
+              arquivos:
+                EntityMapper.cs:
+                  tipo: "arquivo"
+                TransientErrorDetector.cs:
+                  tipo: "arquivo"
+            Migrations:
+              tipo: "pasta"
+              filhos:
+                Configuration:
+                  tipo: "pasta"
+                  arquivos:
+                    AlterTableBuilder.cs:
+                      tipo: "arquivo"
+                    FluentMigrationBuilder.cs:
+                      tipo: "arquivo"
+                    IMigration.cs:
+                      tipo: "arquivo"
+                    MigrationRunner.cs:
+                      tipo: "arquivo"
+                    MigrationTable.cs:
+                      tipo: "arquivo"
+                    SequenceBuilder.cs:
+                      tipo: "arquivo"
+                    TableBuilder.cs:
+                      tipo: "arquivo"
+                Consts:
+                  tipo: "pasta"
+                  arquivos:
+                    ConstDatabase.cs:
+                      tipo: "arquivo"
+
+        Cache:
+          tipo: "pasta"
+          arquivos:
+            CacheStore.cs:
+              tipo: "arquivo"
+
+        Ged:
+          tipo: "pasta"
+          arquivos:
+            GedAwsS3StorageProvider.cs:
+              tipo: "arquivo"
+            GedAzureBlobStorageProvider.cs:
+              tipo: "arquivo"
+            GedLocalStorageProvider.cs:
+              tipo: "arquivo"
+            GedDocumentContentProcessor.cs:
+              tipo: "arquivo"
+            GedDocumentStorageProviderResolver.cs:
+              tipo: "arquivo"
+            GedStorageSupport.cs:
+              tipo: "arquivo"
+
+        Messaging:
+          tipo: "pasta"
+          filhos:
+            Email:
+              tipo: "pasta"
+              arquivos:
+                EmailQueueService.cs:
+                  tipo: "arquivo"
+            RabbitMq:
+              tipo: "pasta"
+              arquivos:
+                RabbitMqBus.cs:
+                  tipo: "arquivo"
+                RabbitMqDynamicConfigurator.cs:
+                  tipo: "arquivo"
+                RabbitMqOptions.cs:
+                  tipo: "arquivo"
+                RateLimiterConfig.cs:
+                  tipo: "arquivo"
+
+        AppConfiguration:
+          tipo: "pasta"
+          arquivos:
+            FeatureFlagService.cs:
+              tipo: "arquivo"
+
+      arquivos_raiz:
+        InfrastructureServiceCollectionExtensions.cs:
+          tipo: "arquivo"
+          descricao: "Registro das dependências da infraestrutura."
+
+    Acme.Sistemas.ExternalIntegration:
+      descricao: >
+        Camada de integração com APIs e serviços externos. Implementa um sistema
+        de proxy HTTP baseado em reflexão para evitar boilerplate.
+      estrutura:
+        Clients:
+          tipo: "pasta"
+          filhos:
+            ViaCep:
+              tipo: "pasta"
+              arquivos:
+                IViaCepExternalClient.cs:
+                  tipo: "arquivo"
+                  descricao: >
+                    Interface para consulta de endereços pelo CEP na API ViaCEP.
+        Helper:
+          tipo: "pasta"
+          arquivos:
+            ApiResponse.cs:
+              tipo: "arquivo"
+              descricao: "Wrapper genérico para respostas externas."
+            IApiResponse.cs:
+              tipo: "arquivo"
+              descricao: "Interface base para respostas de APIs externas."
+            IExternalApiClient.cs:
+              tipo: "arquivo"
+              descricao: "Interface marcadora para clientes externos."
+
+        Methods:
+          tipo: "pasta"
+          arquivos:
+            HeaderAttribute.cs:
+              tipo: "arquivo"
+              descricao: "Injeta um cabeçalho HTTP customizado."
+            HttpDeleteAttribute.cs:
+              tipo: "arquivo"
+              descricao: "Marca um método como HTTP DELETE."
+            HttpGetAttribute.cs:
+              tipo: "arquivo"
+              descricao: "Marca um método como HTTP GET."
+            HttpPostAttribute.cs:
+              tipo: "arquivo"
+              descricao: "Marca um método como HTTP POST."
+            HttpPutAttribute.cs:
+              tipo: "arquivo"
+              descricao: "Marca um método como HTTP PUT."
+
+        Proxys:
+          tipo: "pasta"
+          arquivos:
+            HttpClientProxy.cs:
+              tipo: "arquivo"
+              descricao: >
+                Implementação dinâmica de proxy HTTP baseada em reflexão.
+            HttpClientProxyFactory.cs:
+              tipo: "arquivo"
+              descricao: >
+                Fábrica que cria instâncias do proxy integradas ao IHttpClientFactory.
+
+      arquivos_raiz:
+        ExternalIntegrationDI.cs:
+          tipo: "arquivo"
+          descricao: "Registra clientes externos e proxy no container de DI."
+
+    Acme.Sistemas.Repository:
+      descricao: >
+        Camada de acesso a dados. Implementa interfaces de repositório
+        usando SQL puro via IDataConfiguration.
+      estrutura:
+        Helper:
+          tipo: "pasta"
+          arquivos:
+            ConvertExtentions.cs:
+              tipo: "arquivo"
+              descricao: >
+                Métodos auxiliares de conversão para resultados de queries.
+        Repositories:
+          tipo: "pasta"
+          filhos:
+            V_N:
+              tipo: "pasta"
+              filhos:
+                Entidade:
+                  tipo: "pasta"
+                  arquivos:
+                    EntidadeRepository.cs:
+                      tipo: "arquivo"
+                      descricao: >
+                        Implementação concreta do repositório via IDataConfiguration.
+                  filhos:
+                    Query:
+                      tipo: "pasta"
+                      arquivos:
+                        EntidadeQuery.cs:
+                          tipo: "arquivo"
+                          descricao: "Centraliza queries SQL da entidade."
+
+      exemplos_repositorios:
+        - "AddressRepository"
+        - "UserRepository"
+        - "RoleRepository"
+        - "RolePermissionRepository"
+        - "SectorRepository"
+        - "TenantRepository"
+        - "SolicitationRepository"
+        - "ProtocolWorkflowRepository"
+        - "ProtocolEventRepository"
+        - "ProtocolIntegrationOutboxRepository"
+        - "GedDocumentRepository"
+        - "CatalogRepository"
+        - "NotificationRepository"
+        - "RefreshTokenRepository"
+        - "TokenBlacklistRepository"
+        - "AuditLogRepository"
+        - "ApiRequestAuditRepository"
+        - "ApiKeyRepository"
+        - "EmailRepository"
+        - "RuleEngineRepository"
+        - "NavigationRepository"
+        - "FileRepository"
+
+      arquivos_raiz:
+        RepositoryServiceCollectionExtensions.cs:
+          tipo: "arquivo"
+          descricao: "Registra todos os repositórios no container de DI."
+
+    Acme.Sistemas.NomeProjeto.Web:
+      descricao: >
+        Camada de interface com o usuário. Projeto frontend da solução,
+        responsável por consumir a API e apresentar funcionalidades ao usuário final.
+      estrutura:
+        arquivos_raiz:
+          Program.cs:
+            tipo: "arquivo"
+            descricao: "Ponto de entrada e configuração da aplicação frontend."
+          WeatherApiClient.cs:
+            tipo: "arquivo"
+            descricao: "Exemplo de cliente HTTP para consumo de API."
+
+    Acme.Sistemas.IntegrationTest:
+      descricao: >
+        Projeto de testes de integração. Sobe a aplicação completa com infraestrutura real
+        e executa cenários end-to-end.
+      estrutura:
+        Config:
+          tipo: "pasta"
+          arquivos:
+            IntegrationTestBase.cs:
+              tipo: "arquivo"
+              descricao: "Classe base para testes de integração."
+            IntegrationWebApplicationFactory.cs:
+              tipo: "arquivo"
+              descricao: >
+                Fábrica que sobe a aplicação em ambiente de teste e configura dependências.
+            DockerEnvironment.cs:
+              tipo: "arquivo"
+              descricao: "Gerencia o ciclo de vida dos containers Docker."
+            TestOcrService.cs:
+              tipo: "arquivo"
+              descricao: "Stub do serviço OCR para testes."
+        Fixture:
+          tipo: "pasta"
+          filhos:
+            Roles:
+              tipo: "pasta"
+            Tenants:
+              tipo: "pasta"
+            Users:
+              tipo: "pasta"
+        Test:
+          tipo: "pasta"
+          filhos:
+            Tenants:
+              tipo: "pasta"
+            Navigation:
+              tipo: "pasta"
+            Roles:
+              tipo: "pasta"
+
+    Acme.Sistemas.Services.UnitTest:
+      descricao: >
+        Projeto de testes unitários. Testa handlers, behaviors, services
+        e regras de negócio de forma isolada usando mocks.
+      estrutura:
+        Fixture:
+          tipo: "pasta"
+          padrao_arquivo: "{Nome}Fixture.cs"
+          descricao: >
+            Cada fixture configura mocks, stubs e dados de entrada para testes.
+        Test:
+          tipo: "pasta"
+          padrao_arquivo: "{Nome}Tests.cs"
+          descricao: "Arquivos de teste unitário por handler, service ou behavior."
+
+      bibliotecas_utilizadas:
+        - "xUnit"
+        - "Moq"
+        - "Bogus"
+        - "AutoMock"
+
+      areas_cobertas:
+        - "Usuários"
+        - "Solicitações"
+        - "Protocolos"
+        - "BPMN"
+        - "GED"
+        - "Colaboradores"
+        - "Setores"
+        - "Papéis"
+        - "Catálogo"
+        - "Endereços"
+        - "Navegação"
+        - "Motor de Regras"
+        - "Recuperação de senha"
+        - "Notificações"
+        - "Modelos de protocolo"
+
+  padroes_arquiteturais:
+    - nome: "CQRS + Mediator"
+      aplicacao: "Acme.Sistemas.Core e Acme.Sistemas.Services"
+    - nome: "Pipeline Behavior"
+      aplicacao: "IPipelineBehavior no Core e arquivos *Behavior.cs"
+    - nome: "Repository Pattern"
+      aplicacao: "Interfaces no Domain e implementações no Repository"
+    - nome: "Outbox Pattern"
+      aplicacao: "ProtocolIntegrationOutboxEntity e worker de dispatch"
+    - nome: "Domain-Driven Design"
+      aplicacao: "Entidades e agregados no Domain"
+    - nome: "BPMN Workflow Engine"
+      aplicacao: "Services, Domain e Repository"
+    - nome: "Multi-tenancy"
+      aplicacao: "Isolamento por tenant em entidades e repositórios"
+    - nome: "Proxy HTTP por Reflexão"
+      aplicacao: "HttpClientProxy em ExternalIntegration"
+    - nome: "Migration Versionada"
+      aplicacao: "MigrationRunner, IMigration e tabela __Migrations"
+    - nome: "Feature Flags"
+      aplicacao: "featureflags.json e FeatureFlagService"
+    - nome: "Auditoria Funcional"
+      aplicacao: "AuditLogEntity e middleware de auditoria"
+
+  regras_validacao:
+    - "Toda solução deve conter as pastas infra, src e test."
+    - "Toda solução deve manter pastas virtuais e físicas."
+    - "O projeto Services deve ser organizado por versão V{N}."
+    - "Cada funcionalidade do Services pode conter Command, Query, Event e Services."
+    - "Commands devem possuir Command, Handler, Behavior, Result e Validation."
+    - "Queries devem possuir Query, Handler, Behavior, Result e Validation."
+    - "Events devem possuir Notification, Handler, Behavior e Validation."
+    - "Events não possuem retorno."
+    - "O projeto Repository deve implementar interfaces definidas no Domain."
+    - "O projeto Core deve concentrar contratos compartilhados e infraestrutura transversal."
+    - "O projeto Api deve expor endpoints organizados por versão."
+    - "O projeto Infrastructure deve centralizar integrações técnicas com banco, cache, mensageria e storage."
