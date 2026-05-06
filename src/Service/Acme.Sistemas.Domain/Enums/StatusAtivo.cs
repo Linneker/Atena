@@ -4,5 +4,6 @@ public enum StatusAtivo
 {
     Inativo = 0,
     Ativo = 1,
-    Suspenso = 2
+    Suspenso = 2,
+    PendenteConfirmacao = 3
 }

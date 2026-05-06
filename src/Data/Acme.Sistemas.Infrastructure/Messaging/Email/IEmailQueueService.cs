@@ -1,15 +1,6 @@
-namespace Acme.Sistemas.Infrastructure.Messaging.Email;
-
-public interface IEmailQueueService
-{
-    Task EnqueueAsync(EmailMessage message, CancellationToken cancellationToken = default);
-}
-
-public sealed record EmailMessage(
-    string To,
-    string Subject,
-    string Body,
-    bool IsHtml = true,
-    IReadOnlyList<EmailAttachment>? Attachments = null);
-
-public sealed record EmailAttachment(string FileName, byte[] Content, string ContentType);
+// Re-export of the interface defined in Acme.Sistemas.Core.Messaging.
+// The interface lives in Core so the Services project (which doesn't
+// reference Infrastructure) can depend on it.
+global using IEmailQueueService = Acme.Sistemas.Core.Messaging.IEmailQueueService;
+global using EmailMessage = Acme.Sistemas.Core.Messaging.EmailMessage;
+global using EmailAttachment = Acme.Sistemas.Core.Messaging.EmailAttachment;

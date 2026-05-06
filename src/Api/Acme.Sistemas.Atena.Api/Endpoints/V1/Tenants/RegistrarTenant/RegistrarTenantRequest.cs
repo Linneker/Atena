@@ -6,4 +6,7 @@ public sealed record RegistrarTenantRequest(
     string Plano,
     string? FusoHorario,
     string? CorPrimaria,
-    string? LogoUrl);
+    string? LogoUrl,
+    string AdminNomeCompleto,
+    string AdminEmail,
+    string AdminSenha);

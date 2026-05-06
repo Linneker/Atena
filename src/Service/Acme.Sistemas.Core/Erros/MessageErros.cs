@@ -12,6 +12,8 @@ public static class MessageErros
     public const string CpfInvalido = "CPF inválido.";
     public const string CredenciaisInvalidas = "Usuário ou senha incorretos.";
     public const string ContaBloqueada = "Conta temporariamente bloqueada por excesso de tentativas.";
+    public const string EmailNaoConfirmado = "E-mail ainda não confirmado. Verifique sua caixa de entrada.";
+    public const string TokenConfirmacaoInvalido = "Token de confirmação inválido ou expirado.";
     public const string TokenExpirado = "Token expirado.";
     public const string TokenInvalido = "Token inválido.";
     public const string LimitePlanoAtingido = "Limite do plano atingido. Faça upgrade do plano.";

@@ -13,6 +13,9 @@ public sealed class Usuario
     public int FailedLoginAttempts { get; set; }
     public DateTime? LockedUntil { get; set; }
     public DateTime? LastLoginAt { get; set; }
+    public DateTime? EmailConfirmedAt { get; set; }
+    public string? EmailConfirmationTokenHash { get; set; }
+    public DateTime? EmailConfirmationExpiresAt { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public Guid? CreatedBy { get; set; }
     public DateTime? UpdatedAt { get; set; }
@@ -21,4 +24,5 @@ public sealed class Usuario
     public Guid? DeletedBy { get; set; }
 
     public bool IsLocked => LockedUntil.HasValue && LockedUntil.Value > DateTime.UtcNow;
+    public bool IsEmailConfirmed => EmailConfirmedAt.HasValue;
 }

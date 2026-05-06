@@ -16,17 +16,20 @@ public sealed class LoginCommandHandler
     private static readonly TimeSpan LockoutDuration = TimeSpan.FromMinutes(15);
 
     private readonly IUsuarioRepository _users;
+    private readonly ITenantRepository _tenants;
     private readonly IRolePermissionRepository _rolePermissions;
     private readonly IRefreshTokenRepository _refreshTokens;
     private readonly IJwtTokenService _jwt;
 
     public LoginCommandHandler(
         IUsuarioRepository users,
+        ITenantRepository tenants,
         IRolePermissionRepository rolePermissions,
         IRefreshTokenRepository refreshTokens,
         IJwtTokenService jwt)
     {
         _users = users;
+        _tenants = tenants;
         _rolePermissions = rolePermissions;
         _refreshTokens = refreshTokens;
         _jwt = jwt;
@@ -36,8 +39,28 @@ public sealed class LoginCommandHandler
         LoginCommand request,
         CancellationToken cancellationToken)
     {
-        var user = await _users.GetByEmailAcrossTenantsAsync(request.Email, cancellationToken);
-        if (user is null || user.Status != StatusAtivo.Ativo)
+        var cnpjDigits = new string(request.Cnpj.Where(char.IsDigit).ToArray());
+        var tenant = await _tenants.GetByCnpjAsync(cnpjDigits, cancellationToken);
+        if (tenant is null || tenant.Status != StatusAtivo.Ativo)
+        {
+            return ResponseDefault<LoginCommandResult>.BadRequest(
+                Error.Unauthorized(MessageErros.CredenciaisInvalidas));
+        }
+
+        var user = await _users.GetByEmailAsync(tenant.Id, request.Email, cancellationToken);
+        if (user is null)
+        {
+            return ResponseDefault<LoginCommandResult>.BadRequest(
+                Error.Unauthorized(MessageErros.CredenciaisInvalidas));
+        }
+
+        if (user.Status == StatusAtivo.PendenteConfirmacao || !user.IsEmailConfirmed)
+        {
+            return ResponseDefault<LoginCommandResult>.BadRequest(
+                Error.Unauthorized(MessageErros.EmailNaoConfirmado));
+        }
+
+        if (user.Status != StatusAtivo.Ativo)
         {
             return ResponseDefault<LoginCommandResult>.BadRequest(
                 Error.Unauthorized(MessageErros.CredenciaisInvalidas));

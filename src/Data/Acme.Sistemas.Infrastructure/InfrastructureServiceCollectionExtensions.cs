@@ -17,6 +17,7 @@ public static class InfrastructureServiceCollectionExtensions
     {
         services.Configure<RetryOptions>(configuration.GetSection(RetryOptions.SectionName));
         services.Configure<RabbitMqOptions>(configuration.GetSection(RabbitMqOptions.SectionName));
+        services.Configure<SmtpOptions>(configuration.GetSection(SmtpOptions.SectionName));
         services.Configure<FeatureFlagSettings>(configuration.GetSection(FeatureFlagSettings.SectionName));
 
         services.AddSingleton<RetryPolicy>();
@@ -26,6 +27,8 @@ public static class InfrastructureServiceCollectionExtensions
         services.AddSingleton<ICacheStore, CacheStore>();
         services.AddSingleton<IRabbitMqBus, RabbitMqBus>();
         services.AddScoped<IEmailQueueService, EmailQueueService>();
+        services.AddScoped<ISmtpEmailSender, MailKitSmtpEmailSender>();
+        services.AddHostedService<EmailDispatcherHostedService>();
 
         services.AddSingleton<IGedStorageProvider>(sp =>
             new GedLocalStorageProvider(Path.Combine(AppContext.BaseDirectory, "ged-local")));

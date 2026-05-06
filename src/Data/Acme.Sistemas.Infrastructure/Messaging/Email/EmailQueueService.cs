@@ -4,9 +4,6 @@ namespace Acme.Sistemas.Infrastructure.Messaging.Email;
 
 public sealed class EmailQueueService : IEmailQueueService
 {
-    private const string Exchange = "atena.email";
-    private const string RoutingKey = "email.send";
-
     private readonly IRabbitMqBus _bus;
 
     public EmailQueueService(IRabbitMqBus bus)
@@ -15,5 +12,5 @@ public sealed class EmailQueueService : IEmailQueueService
     }
 
     public Task EnqueueAsync(EmailMessage message, CancellationToken cancellationToken = default)
-        => _bus.PublishAsync(Exchange, RoutingKey, message, cancellationToken);
+        => _bus.PublishAsync(EmailQueueNames.Exchange, EmailQueueNames.RoutingKey, message, cancellationToken);
 }

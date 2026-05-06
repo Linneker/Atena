@@ -9,4 +9,7 @@ public sealed record CriarTenantCommand(
     string Plano,
     string? FusoHorario,
     string? CorPrimaria,
-    string? LogoUrl) : IRequest<ResponseDefault<CriarTenantCommandResult>>;
+    string? LogoUrl,
+    string AdminNomeCompleto,
+    string AdminEmail,
+    string AdminSenha) : IRequest<ResponseDefault<CriarTenantCommandResult>>;

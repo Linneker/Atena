@@ -12,6 +12,9 @@ public sealed class CriarTenantCommandValidation : AbstractValidator<CriarTenant
             .WithMessage("Plano inválido.");
         RuleFor(x => x.CorPrimaria).MaximumLength(20);
         RuleFor(x => x.LogoUrl).MaximumLength(500);
+        RuleFor(x => x.AdminNomeCompleto).NotEmpty().MaximumLength(255);
+        RuleFor(x => x.AdminEmail).NotEmpty().EmailAddress().MaximumLength(255);
+        RuleFor(x => x.AdminSenha).NotEmpty().MinimumLength(8).MaximumLength(100);
     }
 
     private static bool BeValidCnpj(string cnpj)

@@ -3,7 +3,7 @@ using Acme.Sistemas.Services.V1.Autenticacao.Command.Login;
 
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Auth;
 
-public sealed record LoginRequest(string Email, string Senha);
+public sealed record LoginRequest(string Cnpj, string Email, string Senha);
 
 public sealed class LoginEndpoint : IEndpoint
 {
@@ -17,7 +17,7 @@ public sealed class LoginEndpoint : IEndpoint
         {
             var userAgent = httpContext.Request.Headers.UserAgent.ToString();
             var ip = httpContext.Connection.RemoteIpAddress?.ToString();
-            var command = new LoginCommand(request.Email, request.Senha, userAgent, ip);
+            var command = new LoginCommand(request.Cnpj, request.Email, request.Senha, userAgent, ip);
 
             var response = await mediator.Send(command, cancellationToken);
             return response.IsSuccess
@@ -25,6 +25,7 @@ public sealed class LoginEndpoint : IEndpoint
                 : Results.Json(response, statusCode: response.Status);
         })
         .AllowAnonymous()
+        .RequireRateLimiting("auth-login")
         .WithTags("Auth")
         .WithName("Login")
         .Produces<LoginCommandResult>()

@@ -17,6 +17,7 @@ public sealed class RegistrarTenantEndpoint : IEndpoint
                 : Results.Json(response, statusCode: response.Status);
         })
         .AllowAnonymous()
+        .RequireRateLimiting("tenant-registration")
         .WithTags("Tenants")
         .WithName("RegistrarTenant")
         .Produces<RegistrarTenantResponse>(StatusCodes.Status201Created)

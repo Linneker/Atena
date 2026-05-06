@@ -6,8 +6,10 @@ public static class RegistrarTenantMap
 {
     public static CriarTenantCommand ToCommand(this RegistrarTenantRequest request) =>
         new(request.RazaoSocial, request.Cnpj, request.Plano,
-            request.FusoHorario, request.CorPrimaria, request.LogoUrl);
+            request.FusoHorario, request.CorPrimaria, request.LogoUrl,
+            request.AdminNomeCompleto, request.AdminEmail, request.AdminSenha);
 
     public static RegistrarTenantResponse ToResponse(this CriarTenantCommandResult result) =>
-        new(result.Id, result.RazaoSocial, result.Cnpj, result.Plano);
+        new(result.Id, result.RazaoSocial, result.Cnpj, result.Plano,
+            result.AdminUserId, result.AdminEmail);
 }

@@ -9,6 +9,8 @@ namespace Acme.Sistemas.Infrastructure.Messaging.RabbitMq;
 
 public sealed class RabbitMqBus : IRabbitMqBus, IDisposable
 {
+    private const string RetryHeader = "x-acme-retry-count";
+
     private readonly RabbitMqOptions _options;
     private readonly ILogger<RabbitMqBus> _logger;
     private readonly Lazy<IConnection> _connection;
@@ -79,6 +81,107 @@ public sealed class RabbitMqBus : IRabbitMqBus, IDisposable
 
         channel.BasicConsume(queue, autoAck: false, consumer);
         return Task.CompletedTask;
+    }
+
+    public Task SubscribeBoundAsync<T>(
+        SubscribeBinding binding,
+        Func<T, CancellationToken, Task> handler,
+        CancellationToken cancellationToken = default)
+    {
+        var channel = _connection.Value.CreateModel();
+
+        // Dead-letter topology: messages exceeding MaxRetries go here.
+        channel.ExchangeDeclare(binding.DeadLetterExchange, ExchangeType.Topic, durable: true, autoDelete: false);
+        channel.QueueDeclare(binding.DeadLetterQueue, durable: true, exclusive: false, autoDelete: false);
+        channel.QueueBind(binding.DeadLetterQueue, binding.DeadLetterExchange, binding.DeadLetterRoutingKey);
+
+        // Main topology.
+        channel.ExchangeDeclare(binding.Exchange, ExchangeType.Topic, durable: true, autoDelete: false);
+        channel.QueueDeclare(binding.Queue, durable: true, exclusive: false, autoDelete: false);
+        channel.QueueBind(binding.Queue, binding.Exchange, binding.RoutingKey);
+
+        channel.BasicQos(prefetchSize: 0, prefetchCount: binding.PrefetchCount, global: false);
+
+        var consumer = new AsyncEventingBasicConsumer(channel);
+        consumer.Received += async (_, ea) =>
+        {
+            var retryCount = ReadRetryCount(ea.BasicProperties);
+
+            try
+            {
+                var json = Encoding.UTF8.GetString(ea.Body.ToArray());
+                var payload = JsonSerializer.Deserialize<T>(json);
+                if (payload is null)
+                {
+                    _logger.LogWarning("Mensagem inválida descartada da fila {Queue} (payload null).", binding.Queue);
+                    PublishToDlq(channel, binding, ea, retryCount, "PAYLOAD_NULL");
+                    channel.BasicAck(ea.DeliveryTag, false);
+                    return;
+                }
+
+                await handler(payload, cancellationToken);
+                channel.BasicAck(ea.DeliveryTag, false);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex,
+                    "Erro processando mensagem da fila {Queue} (tentativa {Retry}/{Max}).",
+                    binding.Queue, retryCount + 1, binding.MaxRetries);
+
+                if (retryCount + 1 >= binding.MaxRetries)
+                {
+                    PublishToDlq(channel, binding, ea, retryCount + 1, ex.GetType().Name);
+                    channel.BasicAck(ea.DeliveryTag, false);
+                }
+                else
+                {
+                    Republish(channel, binding, ea, retryCount + 1);
+                    channel.BasicAck(ea.DeliveryTag, false);
+                }
+            }
+        };
+
+        channel.BasicConsume(binding.Queue, autoAck: false, consumer);
+        return Task.CompletedTask;
+    }
+
+    private static int ReadRetryCount(IBasicProperties? props)
+    {
+        if (props?.Headers is null || !props.Headers.TryGetValue(RetryHeader, out var raw)) return 0;
+        return raw switch
+        {
+            int i => i,
+            long l => (int)l,
+            byte[] bytes when int.TryParse(Encoding.UTF8.GetString(bytes), out var n) => n,
+            _ => 0
+        };
+    }
+
+    private static void Republish(IModel channel, SubscribeBinding binding, BasicDeliverEventArgs ea, int retryCount)
+    {
+        var props = channel.CreateBasicProperties();
+        props.Persistent = true;
+        props.ContentType = ea.BasicProperties?.ContentType ?? "application/json";
+        props.MessageId = ea.BasicProperties?.MessageId ?? Guid.NewGuid().ToString();
+        props.Headers = new Dictionary<string, object> { [RetryHeader] = retryCount };
+
+        channel.BasicPublish(binding.Exchange, binding.RoutingKey, props, ea.Body);
+    }
+
+    private static void PublishToDlq(IModel channel, SubscribeBinding binding, BasicDeliverEventArgs ea, int retryCount, string reason)
+    {
+        var props = channel.CreateBasicProperties();
+        props.Persistent = true;
+        props.ContentType = ea.BasicProperties?.ContentType ?? "application/json";
+        props.MessageId = ea.BasicProperties?.MessageId ?? Guid.NewGuid().ToString();
+        props.Headers = new Dictionary<string, object>
+        {
+            [RetryHeader] = retryCount,
+            ["x-acme-failure-reason"] = reason,
+            ["x-acme-original-queue"] = binding.Queue
+        };
+
+        channel.BasicPublish(binding.DeadLetterExchange, binding.DeadLetterRoutingKey, props, ea.Body);
     }
 
     public void Dispose()
