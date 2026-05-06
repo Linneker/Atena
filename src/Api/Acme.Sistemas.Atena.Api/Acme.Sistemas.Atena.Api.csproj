@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Acme.Sistemas.Atena.Api</RootNamespace>
+    <AssemblyName>Acme.Sistemas.Atena.Api</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Service\Acme.Sistemas.Core\Acme.Sistemas.Core.csproj" />
+    <ProjectReference Include="..\..\Service\Acme.Sistemas.Domain\Acme.Sistemas.Domain.csproj" />
+    <ProjectReference Include="..\..\Service\Acme.Sistemas.Services\Acme.Sistemas.Services.csproj" />
+    <ProjectReference Include="..\..\Data\Acme.Sistemas.Repository\Acme.Sistemas.Repository.csproj" />
+    <ProjectReference Include="..\..\Data\Acme.Sistemas.Infrastructure\Acme.Sistemas.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Data\Acme.Sistemas.ExternalIntegration\Acme.Sistemas.ExternalIntegration.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="featureflags.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

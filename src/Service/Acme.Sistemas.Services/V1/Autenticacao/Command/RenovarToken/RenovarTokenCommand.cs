@@ -1,0 +1,15 @@
+using Acme.Sistemas.Core.Mediators.Handler;
+using Acme.Sistemas.Core.Response;
+
+namespace Acme.Sistemas.Services.V1.Autenticacao.Command.RenovarToken;
+
+public sealed record RenovarTokenCommand(
+    string RefreshToken,
+    string? UserAgent,
+    string? IpAddress) : IRequest<ResponseDefault<RenovarTokenCommandResult>>;
+
+public sealed record RenovarTokenCommandResult(
+    string AccessToken,
+    string RefreshToken,
+    DateTime AccessExpiresAt,
+    DateTime RefreshExpiresAt);
