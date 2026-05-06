@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Acme.Sistemas.Core\Acme.Sistemas.Core.csproj" />
     <ProjectReference Include="..\Acme.Sistemas.Domain\Acme.Sistemas.Domain.csproj" />
+    <ProjectReference Include="..\..\Data\Acme.Sistemas.ExternalIntegration\Acme.Sistemas.ExternalIntegration.csproj" />
   </ItemGroup>
 
 </Project>

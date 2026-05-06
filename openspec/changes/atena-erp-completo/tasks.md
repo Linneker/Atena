@@ -39,27 +39,27 @@
 
 ## 4. Fase 1 — Migração: Módulo Financeiro (Despesa e Receita)
 
-- [ ] 4.1 Migrar entidades `Despesa` e `Receita` para `Acme.Sistemas.Domain/Entities/Financeiro/`
-- [ ] 4.2 Criar `V1/Despesa/Command/CriarDespesa` (Command, Handler, Behavior, Result, Validation)
-- [ ] 4.3 Criar `V1/Despesa/Command/AlterarDespesa` (Command, Handler, Behavior, Result, Validation)
-- [ ] 4.4 Criar `V1/Despesa/Command/ExcluirDespesa` (Command, Handler, Behavior, Result, Validation)
-- [ ] 4.5 Criar `V1/Despesa/Command/BaixarDespesa` — registra pagamento e atualiza FluxoDeCaixa
-- [ ] 4.6 Criar `V1/Despesa/Query/ListarDespesas` (Query, Handler, Behavior, Result — com filtros de competência, status, categoria)
-- [ ] 4.7 Criar `V1/Despesa/Query/ObterDespesa` (por ID)
-- [ ] 4.8 Criar `DespesaRepository` com queries SQL puras e `DespesaQuery.cs`
-- [ ] 4.9 Criar endpoints Minimal API em `Endpoints/V1/Despesa/` mapeando para Commands/Queries
-- [ ] 4.10 Repetir itens 4.2–4.9 para `Receita`
-- [ ] 4.11 Implementar `V1/FluxoDeCaixa/Query/ObterFluxo` — consolida receitas e despesas do período
-- [ ] 4.12 Implementar `V1/FluxoDeCaixa/Command/FecharPeriodo` — fecha competência como imutável
+- [x] 4.1 Migrar entidades `Despesa` e `Receita` para `Acme.Sistemas.Domain/Entities/Financeiro/`
+- [x] 4.2 Criar `V1/Despesa/Command/CriarDespesa` (Command, Handler, Behavior, Result, Validation)
+- [x] 4.3 Criar `V1/Despesa/Command/AlterarDespesa` (Command, Handler, Behavior, Result, Validation)
+- [x] 4.4 Criar `V1/Despesa/Command/ExcluirDespesa` (Command, Handler, Behavior, Result, Validation)
+- [x] 4.5 Criar `V1/Despesa/Command/BaixarDespesa` — registra pagamento e atualiza FluxoDeCaixa
+- [x] 4.6 Criar `V1/Despesa/Query/ListarDespesas` (Query, Handler, Behavior, Result — com filtros de competência, status, categoria)
+- [x] 4.7 Criar `V1/Despesa/Query/ObterDespesa` (por ID)
+- [x] 4.8 Criar `DespesaRepository` com queries SQL puras e `DespesaQuery.cs`
+- [x] 4.9 Criar endpoints Minimal API em `Endpoints/V1/Despesa/` mapeando para Commands/Queries
+- [x] 4.10 Repetir itens 4.2–4.9 para `Receita`
+- [x] 4.11 Implementar `V1/FluxoDeCaixa/Query/ObterFluxo` — consolida receitas e despesas do período
+- [x] 4.12 Implementar `V1/FluxoDeCaixa/Command/FecharPeriodo` — fecha competência como imutável
 
 ## 5. Fase 1 — Migração: Usuário e Empresa
 
-- [ ] 5.1 Migrar entidades `Usuario`, `Empresa`, `Endereco` para o Domain
-- [ ] 5.2 Criar `V1/Usuario/Command/CriarUsuario`, `AlterarUsuario`, `ExcluirUsuario` com validações
-- [ ] 5.3 Criar `V1/Usuario/Query/ListarUsuarios`, `ObterUsuario`
-- [ ] 5.4 Criar `UsuarioRepository` com SQL puro
-- [ ] 5.5 Criar `V1/Empresa/Command/CriarEmpresa`, `AlterarEmpresa` com validação de CNPJ e busca de endereço via CEP
-- [ ] 5.6 Criar endpoints Minimal API para Usuário e Empresa
+- [x] 5.1 Migrar entidades `Usuario`, `Empresa`, `Endereco` para o Domain
+- [x] 5.2 Criar `V1/Usuario/Command/CriarUsuario`, `AlterarUsuario`, `ExcluirUsuario` com validações
+- [x] 5.3 Criar `V1/Usuario/Query/ListarUsuarios`, `ObterUsuario`
+- [x] 5.4 Criar `UsuarioRepository` com SQL puro
+- [x] 5.5 Criar `V1/Empresa/Command/CriarEmpresa`, `AlterarEmpresa` com validação de CNPJ e busca de endereço via CEP
+- [x] 5.6 Criar endpoints Minimal API para Usuário e Empresa
 
 ## 6. Fase 2 — Módulo Financeiro Completo
 
