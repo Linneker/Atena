@@ -39,6 +39,13 @@ public sealed record ResponseDefault<T>
         Errors = new[] { Error.NotFound(message) }
     };
 
+    public static ResponseDefault<T> Forbidden(string message) => new()
+    {
+        Status = 403,
+        Message = message,
+        Errors = new[] { Error.Forbidden(message) }
+    };
+
     public static ResponseDefault<T> Conflict(string message) => new()
     {
         Status = 409,

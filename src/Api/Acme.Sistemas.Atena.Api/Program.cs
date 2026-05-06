@@ -34,7 +34,9 @@ builder.Services.AddAcmeExternalIntegration();
 builder.Services.AddEndpoints(typeof(Program).Assembly);
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<ITenantContext, HttpTenantContextAccessor>();
+builder.Services.AddScoped<HttpTenantContextAccessor>();
+builder.Services.AddScoped<ITenantContext>(sp => sp.GetRequiredService<HttpTenantContextAccessor>());
+builder.Services.AddScoped<IMutableTenantContext>(sp => sp.GetRequiredService<HttpTenantContextAccessor>());
 builder.Services.AddSingleton<IAuthorizationHandler, PermissaoAuthorizationHandler>();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -131,6 +133,7 @@ app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseTenantContext();
+app.UseApiRequestAudit();
 
 app.MapEndpoints();
 

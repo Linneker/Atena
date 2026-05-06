@@ -3,9 +3,16 @@ using Acme.Sistemas.Domain.Interfaces.Repository;
 
 namespace Acme.Sistemas.Atena.Api.Config.Security;
 
-public sealed class HttpTenantContextAccessor : ITenantContext
+/// <summary>
+/// Tenant context que combina HttpContext (uso normal por requisição)
+/// com override manual (uso por workers/background services).
+/// </summary>
+public sealed class HttpTenantContextAccessor : IMutableTenantContext
 {
     private readonly IHttpContextAccessor _accessor;
+    private Guid? _overrideTenantId;
+    private Guid? _overrideUserId;
+    private IReadOnlySet<string>? _overridePermissions;
     private readonly Lazy<ContextSnapshot> _snapshot;
 
     public HttpTenantContextAccessor(IHttpContextAccessor accessor)
@@ -14,10 +21,21 @@ public sealed class HttpTenantContextAccessor : ITenantContext
         _snapshot = new Lazy<ContextSnapshot>(BuildSnapshot);
     }
 
-    public Guid TenantId => _snapshot.Value.TenantId;
-    public Guid? UserId => _snapshot.Value.UserId;
-    public bool IsAuthenticated => _snapshot.Value.IsAuthenticated;
-    public IReadOnlySet<string> Permissions => _snapshot.Value.Permissions;
+    public Guid TenantId => _overrideTenantId ?? _snapshot.Value.TenantId;
+    public Guid? UserId => _overrideUserId ?? _snapshot.Value.UserId;
+    public bool IsAuthenticated => _overrideTenantId.HasValue || _snapshot.Value.IsAuthenticated;
+    public IReadOnlySet<string> Permissions => _overridePermissions ?? _snapshot.Value.Permissions;
+
+    /// <summary>
+    /// Define o tenant manualmente — usado por background workers que não têm HttpContext.
+    /// Deve ser chamado uma única vez por scope.
+    /// </summary>
+    public void Override(Guid tenantId, Guid? userId = null, IReadOnlySet<string>? permissions = null)
+    {
+        _overrideTenantId = tenantId;
+        _overrideUserId = userId;
+        _overridePermissions = permissions;
+    }
 
     private ContextSnapshot BuildSnapshot()
     {

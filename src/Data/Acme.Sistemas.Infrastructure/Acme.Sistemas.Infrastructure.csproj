@@ -16,6 +16,8 @@
     <PackageReference Include="AWSSDK.S3" Version="3.7.305" />
     <PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />
     <PackageReference Include="MailKit" Version="4.16.0" />
+    <PackageReference Include="QuestPDF" Version="2024.7.3" />
+    <PackageReference Include="ClosedXML" Version="0.102.3" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.1" />
@@ -28,6 +30,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Service\Acme.Sistemas.Core\Acme.Sistemas.Core.csproj" />
     <ProjectReference Include="..\..\Service\Acme.Sistemas.Domain\Acme.Sistemas.Domain.csproj" />
+    <ProjectReference Include="..\..\Service\Acme.Sistemas.Services\Acme.Sistemas.Services.csproj" />
     <ProjectReference Include="..\Acme.Sistemas.Repository\Acme.Sistemas.Repository.csproj" />
   </ItemGroup>
 

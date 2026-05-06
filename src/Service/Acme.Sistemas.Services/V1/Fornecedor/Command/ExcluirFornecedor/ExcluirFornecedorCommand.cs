@@ -1,0 +1,6 @@
+using Acme.Sistemas.Core.Mediators.Handler;
+using Acme.Sistemas.Core.Response;
+
+namespace Acme.Sistemas.Services.V1.Fornecedor.Command.ExcluirFornecedor;
+
+public sealed record ExcluirFornecedorCommand(Guid Id) : IRequest<ResponseDefault>;

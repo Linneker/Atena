@@ -63,100 +63,100 @@
 
 ## 6. Fase 2 — Módulo Financeiro Completo
 
-- [ ] 6.1 Criar entidades `Divida`, `Pagamento`, `ContaPagar`, `ContaReceber`, `ConciliacaoBancaria` no Domain
-- [ ] 6.2 Implementar `V1/Divida` — CRUD completo com Command/Query/Handler/Behavior
-- [ ] 6.3 Implementar `V1/ContaPagar` — criar, baixar (total/parcial), alerta de vencimento
-- [ ] 6.4 Implementar `V1/ContaReceber` — criar, receber, controle de inadimplência
-- [ ] 6.5 Implementar `V1/ConciliacaoBancaria/Command/ImportarExtrato` — processamento de OFX/CSV
-- [ ] 6.6 Implementar algoritmo de conciliação automática por valor e data
-- [ ] 6.7 Implementar `V1/PlanoDeContas` — CRUD hierárquico com validação de pai/filho
-- [ ] 6.8 Implementar `V1/CentroDeCusto` — CRUD com vínculo a despesas/receitas
-- [ ] 6.9 Implementar `V1/Relatorios/Financeiro/DRE` — geração baseada no plano de contas
-- [ ] 6.10 Implementar `V1/Relatorios/Financeiro/Balanco` — balanço patrimonial gerencial
-- [ ] 6.11 Implementar geração de PDF de relatórios (DRE, Balanço) com branding do tenant
+- [x] 6.1 Criar entidades `Divida`, `Pagamento`, `ContaPagar`, `ContaReceber`, `ConciliacaoBancaria` no Domain
+- [x] 6.2 Implementar `V1/Divida` — CRUD completo com Command/Query/Handler/Behavior
+- [x] 6.3 Implementar `V1/ContaPagar` — criar, baixar (total/parcial), alerta de vencimento
+- [x] 6.4 Implementar `V1/ContaReceber` — criar, receber, controle de inadimplência
+- [x] 6.5 Implementar `V1/ConciliacaoBancaria/Command/ImportarExtrato` — processamento de OFX/CSV
+- [x] 6.6 Implementar algoritmo de conciliação automática por valor e data
+- [x] 6.7 Implementar `V1/PlanoDeContas` — CRUD hierárquico com validação de pai/filho
+- [x] 6.8 Implementar `V1/CentroDeCusto` — CRUD com vínculo a despesas/receitas
+- [x] 6.9 Implementar `V1/Relatorios/Financeiro/DRE` — geração baseada no plano de contas
+- [x] 6.10 Implementar `V1/Relatorios/Financeiro/Balanco` — balanço patrimonial gerencial
+- [x] 6.11 Implementar geração de PDF de relatórios (DRE, Balanço) com branding do tenant
 
 ## 7. Fase 2 — Módulo de Cadastros Completo
 
-- [ ] 7.1 Criar entidades `Cliente`, `Fornecedor`, `Funcionario`, `PlanoDeContas`, `CentroDeCusto` no Domain
-- [ ] 7.2 Implementar `V1/Cliente` — CRUD com validação CPF/CNPJ, busca CEP, controle inadimplência
-- [ ] 7.3 Implementar `V1/Fornecedor` — CRUD com vínculo de produtos e condições de pagamento padrão
-- [ ] 7.4 Implementar `V1/Funcionario` — CRUD básico com cargo, departamento e centro de custo
-- [ ] 7.5 Implementar `V1/Produto` — CRUD com código de barras, unidade de medida, tabela de preços multi-nível
-- [ ] 7.6 Implementar `V1/TipoProduto` e `V1/TipoValorProduto` (tipos de preço)
+- [x] 7.1 Criar entidades `Cliente`, `Fornecedor`, `Funcionario`, `PlanoDeContas`, `CentroDeCusto` no Domain
+- [x] 7.2 Implementar `V1/Cliente` — CRUD com validação CPF/CNPJ, busca CEP, controle inadimplência
+- [x] 7.3 Implementar `V1/Fornecedor` — CRUD com vínculo de produtos e condições de pagamento padrão
+- [x] 7.4 Implementar `V1/Funcionario` — CRUD básico com cargo, departamento e centro de custo
+- [x] 7.5 Implementar `V1/Produto` — CRUD com código de barras, unidade de medida, tabela de preços multi-nível
+- [x] 7.6 Implementar `V1/TipoProduto` e `V1/TipoValorProduto` (tipos de preço)
 
 ## 8. Fase 2 — Módulo de Estoque
 
-- [ ] 8.1 Criar entidades `Estoque`, `EstoqueProduto`, `EntradaProdutoEstoque`, `SaidaProdutoEstoque`, `Inventario` no Domain
-- [ ] 8.2 Criar repositórios SQL para todas as entidades de estoque
-- [ ] 8.3 Implementar `V1/Estoque/Query/ConsultarSaldo` — saldo disponível, reservado e total por produto
-- [ ] 8.4 Implementar `V1/Estoque/Command/RegistrarEntrada` — entrada manual com motivo
-- [ ] 8.5 Implementar `V1/Estoque/Command/RegistrarSaida` — saída manual com bloqueio de saldo negativo (configurável)
-- [ ] 8.6 Implementar custeio FIFO — calcular CMV na saída com base nos lotes mais antigos
-- [ ] 8.7 Implementar `V1/Inventario/Command/AbrirInventario` — bloqueia movimentações dos produtos
-- [ ] 8.8 Implementar `V1/Inventario/Command/FecharInventario` — gera ajustes automáticos das diferenças
-- [ ] 8.9 Implementar `V1/Estoque/Query/RelatorioMovimentacao` — extrato de movimentação por produto e período
-- [ ] 8.10 Implementar alerta de estoque mínimo — `Event/AlertaEstoqueMinimo` disparado quando saldo < mínimo
-- [ ] 8.11 Criar endpoints Minimal API V1 para todos os recursos de estoque
+- [x] 8.1 Criar entidades `Estoque`, `EstoqueProduto`, `EntradaProdutoEstoque`, `SaidaProdutoEstoque`, `Inventario` no Domain
+- [x] 8.2 Criar repositórios SQL para todas as entidades de estoque
+- [x] 8.3 Implementar `V1/Estoque/Query/ConsultarSaldo` — saldo disponível, reservado e total por produto
+- [x] 8.4 Implementar `V1/Estoque/Command/RegistrarEntrada` — entrada manual com motivo
+- [x] 8.5 Implementar `V1/Estoque/Command/RegistrarSaida` — saída manual com bloqueio de saldo negativo (configurável)
+- [x] 8.6 Implementar custeio FIFO — calcular CMV na saída com base nos lotes mais antigos
+- [x] 8.7 Implementar `V1/Inventario/Command/AbrirInventario` — bloqueia movimentações dos produtos
+- [x] 8.8 Implementar `V1/Inventario/Command/FecharInventario` — gera ajustes automáticos das diferenças
+- [x] 8.9 Implementar `V1/Estoque/Query/RelatorioMovimentacao` — extrato de movimentação por produto e período
+- [x] 8.10 Implementar alerta de estoque mínimo — `Event/AlertaEstoqueMinimo` disparado quando saldo < mínimo
+- [x] 8.11 Criar endpoints Minimal API V1 para todos os recursos de estoque
 
 ## 9. Fase 2 — Módulo de Compras
 
-- [ ] 9.1 Criar entidades `SolicitacaoCompra`, `PedidoCompra`, `PedidoCompraItem`, `RecebimentoCompra` no Domain
-- [ ] 9.2 Implementar `V1/SolicitacaoCompra` — CRUD com fluxo de aprovação (status: rascunho → aguardando aprovação → aprovada/rejeitada)
-- [ ] 9.3 Implementar `V1/SolicitacaoCompra/Command/Aprovar` e `Rejeitar` com alçada por valor
-- [ ] 9.4 Implementar `V1/PedidoCompra/Command/Criar` — a partir de solicitação aprovada ou direto
-- [ ] 9.5 Implementar `V1/PedidoCompra/Command/EnviarFornecedor` — gera PDF e envia por e-mail
-- [ ] 9.6 Implementar `V1/RecebimentoCompra/Command/Registrar` — total, parcial ou com divergência; gera entrada de estoque e conta a pagar
-- [ ] 9.7 Implementar `V1/RecebimentoCompra/Command/VincularNFe` — valida chave de acesso na SEFAZ
-- [ ] 9.8 Implementar notificações de aprovação pendente (`Event/NotificarAprovacaoPendente`)
-- [ ] 9.9 Criar endpoints Minimal API V1 para Compras
+- [x] 9.1 Criar entidades `SolicitacaoCompra`, `PedidoCompra`, `PedidoCompraItem`, `RecebimentoCompra` no Domain
+- [x] 9.2 Implementar `V1/SolicitacaoCompra` — CRUD com fluxo de aprovação (status: rascunho → aguardando aprovação → aprovada/rejeitada)
+- [x] 9.3 Implementar `V1/SolicitacaoCompra/Command/Aprovar` e `Rejeitar` com alçada por valor
+- [x] 9.4 Implementar `V1/PedidoCompra/Command/Criar` — a partir de solicitação aprovada ou direto
+- [x] 9.5 Implementar `V1/PedidoCompra/Command/EnviarFornecedor` — gera PDF e envia por e-mail
+- [x] 9.6 Implementar `V1/RecebimentoCompra/Command/Registrar` — total, parcial ou com divergência; gera entrada de estoque e conta a pagar
+- [x] 9.7 Implementar `V1/RecebimentoCompra/Command/VincularNFe` — valida chave de acesso na SEFAZ
+- [x] 9.8 Implementar notificações de aprovação pendente (`Event/NotificarAprovacaoPendente`)
+- [x] 9.9 Criar endpoints Minimal API V1 para Compras
 
 ## 10. Fase 2 — Módulo de Vendas
 
-- [ ] 10.1 Criar entidades `Orcamento`, `PedidoVenda`, `PedidoVendaItem`, `Faturamento`, `DevolucaoVenda`, `ComissaoVendedor` no Domain
-- [ ] 10.2 Implementar `V1/Orcamento` — CRUD com validade e conversão para pedido
-- [ ] 10.3 Implementar `V1/PedidoVenda/Command/Criar` — verificação de estoque, reserva e desconto por alçada
-- [ ] 10.4 Implementar `V1/PedidoVenda/Command/Confirmar` — reserva estoque definitivamente
-- [ ] 10.5 Implementar `V1/Faturamento/Command/Faturar` — total ou parcial; baixa estoque, gera conta a receber e dispara emissão NF-e
-- [ ] 10.6 Implementar `V1/DevolucaoVenda/Command/Registrar` — total ou parcial; retorna estoque, estorna conta a receber e dispara NF-e de devolução
-- [ ] 10.7 Implementar cálculo de comissão de vendedor no evento de faturamento
-- [ ] 10.8 Implementar `V1/Relatorios/Vendas` — por vendedor, cliente, produto e período
-- [ ] 10.9 Criar endpoints Minimal API V1 para Vendas
+- [x] 10.1 Criar entidades `Orcamento`, `PedidoVenda`, `PedidoVendaItem`, `Faturamento`, `DevolucaoVenda`, `ComissaoVendedor` no Domain
+- [x] 10.2 Implementar `V1/Orcamento` — CRUD com validade e conversão para pedido
+- [x] 10.3 Implementar `V1/PedidoVenda/Command/Criar` — verificação de estoque, reserva e desconto por alçada
+- [x] 10.4 Implementar `V1/PedidoVenda/Command/Confirmar` — reserva estoque definitivamente
+- [x] 10.5 Implementar `V1/Faturamento/Command/Faturar` — total ou parcial; baixa estoque, gera conta a receber e dispara emissão NF-e
+- [x] 10.6 Implementar `V1/DevolucaoVenda/Command/Registrar` — total ou parcial; retorna estoque, estorna conta a receber e dispara NF-e de devolução
+- [x] 10.7 Implementar cálculo de comissão de vendedor no evento de faturamento
+- [x] 10.8 Implementar `V1/Relatorios/Vendas` — por vendedor, cliente, produto e período
+- [x] 10.9 Criar endpoints Minimal API V1 para Vendas
 
 ## 11. Fase 3 — Fiscal NF-e
 
-- [ ] 11.1 Criar entidades `ConfiguracaoFiscal`, `NFe`, `NFeItem`, `NFeEvento` no Domain
-- [ ] 11.2 Implementar `V1/ConfiguracaoFiscal/Command/ImportarCertificado` — upload e armazenamento criptografado do PFX A1
-- [ ] 11.3 Implementar `V1/ConfiguracaoFiscal/Command/AlterarAmbiente` — troca homologação/produção
-- [ ] 11.4 Integrar biblioteca de geração/assinatura de XML NF-e (NFeio ou nfe-net)
-- [ ] 11.5 Implementar `V1/NFe/Command/EmitirNFe` — monta XML, assina, transmite via RabbitMQ (assíncrono)
-- [ ] 11.6 Implementar worker `NFeTransmissaoWorker` — consome fila RabbitMQ, transmite à SEFAZ, atualiza status e armazena XML no S3
-- [ ] 11.7 Implementar modo de contingência SVRS — ativado automaticamente em falha do webservice principal
-- [ ] 11.8 Implementar geração de DANFE em PDF após autorização
-- [ ] 11.9 Implementar envio automático de DANFE por e-mail ao cliente (via EmailQueueService)
-- [ ] 11.10 Implementar `V1/NFe/Command/CancelarNFe` — valida prazo 24h, transmite evento de cancelamento, reverte estoque e conta a receber
-- [ ] 11.11 Implementar `V1/NFe/Command/EmitirCCe` — carta de correção eletrônica
-- [ ] 11.12 Implementar armazenamento de XMLs no S3 com path `{tenant_id}/{ano}/{mes}/{chave}.xml`
-- [ ] 11.13 Implementar alerta de certificado a vencer (30 dias antes)
-- [ ] 11.14 Implementar controle de limite de NF-e por plano de tenant
+- [x] 11.1 Criar entidades `ConfiguracaoFiscal`, `NFe`, `NFeItem`, `NFeEvento` no Domain
+- [x] 11.2 Implementar `V1/ConfiguracaoFiscal/Command/ImportarCertificado` — upload e armazenamento criptografado do PFX A1
+- [x] 11.3 Implementar `V1/ConfiguracaoFiscal/Command/AlterarAmbiente` — troca homologação/produção
+- [x] 11.4 Integrar biblioteca de geração/assinatura de XML NF-e (NFeio ou nfe-net)
+- [x] 11.5 Implementar `V1/NFe/Command/EmitirNFe` — monta XML, assina, transmite via RabbitMQ (assíncrono)
+- [x] 11.6 Implementar worker `NFeTransmissaoWorker` — consome fila RabbitMQ, transmite à SEFAZ, atualiza status e armazena XML no S3
+- [x] 11.7 Implementar modo de contingência SVRS — ativado automaticamente em falha do webservice principal
+- [x] 11.8 Implementar geração de DANFE em PDF após autorização
+- [x] 11.9 Implementar envio automático de DANFE por e-mail ao cliente (via EmailQueueService)
+- [x] 11.10 Implementar `V1/NFe/Command/CancelarNFe` — valida prazo 24h, transmite evento de cancelamento, reverte estoque e conta a receber
+- [x] 11.11 Implementar `V1/NFe/Command/EmitirCCe` — carta de correção eletrônica
+- [x] 11.12 Implementar armazenamento de XMLs no S3 com path `{tenant_id}/{ano}/{mes}/{chave}.xml`
+- [x] 11.13 Implementar alerta de certificado a vencer (30 dias antes)
+- [x] 11.14 Implementar controle de limite de NF-e por plano de tenant
 
 ## 12. Fase 3 — Dashboard e Relatórios
 
-- [ ] 12.1 Implementar `V1/Dashboard/Query/ObterKpis` — receita, despesa, resultado, vendas abertas, vencimentos, estoque crítico
-- [ ] 12.2 Implementar `V1/Dashboard/Query/EvolucaoFinanceira` — receitas vs despesas últimos 12 meses
-- [ ] 12.3 Implementar `V1/Relatorios/ContasPagar/Aging` — por faixas de vencimento
-- [ ] 12.4 Implementar `V1/Relatorios/ContasReceber/Aging` — por faixas de vencimento
-- [ ] 12.5 Implementar `V1/Relatorios/Estoque/Posicao` — saldo e valor por produto
-- [ ] 12.6 Implementar exportação de relatórios para Excel (NPOI ou EPPlus) e PDF (DinkToPdf ou QuestPDF)
+- [x] 12.1 Implementar `V1/Dashboard/Query/ObterKpis` — receita, despesa, resultado, vendas abertas, vencimentos, estoque crítico
+- [x] 12.2 Implementar `V1/Dashboard/Query/EvolucaoFinanceira` — receitas vs despesas últimos 12 meses
+- [x] 12.3 Implementar `V1/Relatorios/ContasPagar/Aging` — por faixas de vencimento
+- [x] 12.4 Implementar `V1/Relatorios/ContasReceber/Aging` — por faixas de vencimento
+- [x] 12.5 Implementar `V1/Relatorios/Estoque/Posicao` — saldo e valor por produto
+- [x] 12.6 Implementar exportação de relatórios para Excel (NPOI ou EPPlus) e PDF (DinkToPdf ou QuestPDF)
 
 ## 13. Fase 3 — Auditoria
 
-- [ ] 13.1 Criar tabelas `audit_logs` e `api_request_audit` no banco
-- [ ] 13.2 Implementar `AuditLogEntity` e `ApiRequestAuditEntity` no Domain
-- [ ] 13.3 Implementar `AuditBehavior` no pipeline do Mediator — captura dados antes/depois em Commands de escrita
-- [ ] 13.4 Implementar middleware `ApiRequestAuditMiddleware` — registra toda requisição de forma assíncrona
-- [ ] 13.5 Implementar `V1/Auditoria/Query/ListarLogs` — com filtros por usuário, entidade, operação e período (apenas admins)
-- [ ] 13.6 Implementar `V1/Auditoria/Query/HistoricoRegistro` — histórico de alterações de um registro específico por ID
-- [ ] 13.7 Implementar exportação de logs de auditoria em JSON com hash de integridade SHA-256
+- [x] 13.1 Criar tabelas `audit_logs` e `api_request_audit` no banco
+- [x] 13.2 Implementar `AuditLogEntity` e `ApiRequestAuditEntity` no Domain
+- [x] 13.3 Implementar `AuditBehavior` no pipeline do Mediator — captura dados antes/depois em Commands de escrita
+- [x] 13.4 Implementar middleware `ApiRequestAuditMiddleware` — registra toda requisição de forma assíncrona
+- [x] 13.5 Implementar `V1/Auditoria/Query/ListarLogs` — com filtros por usuário, entidade, operação e período (apenas admins)
+- [x] 13.6 Implementar `V1/Auditoria/Query/HistoricoRegistro` — histórico de alterações de um registro específico por ID
+- [x] 13.7 Implementar exportação de logs de auditoria em JSON com hash de integridade SHA-256
 
 ## 14. Fase 4 — Frontend CoreUI Angular 17+
 
