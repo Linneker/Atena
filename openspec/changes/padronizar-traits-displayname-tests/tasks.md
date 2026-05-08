@@ -54,8 +54,8 @@
 - [x] 3.4.5 Build + test verde + commit `test(infra): retrofit Trait+DisplayName`
 
 ### 3.5 — Repository (1 arquivo)
-- [ ] 3.5.1 `BaseRepositoryTenantFilterTests.cs` — `Acao=TenantFilter`
-- [ ] 3.5.2 Build + test verde + commit `test(repository): retrofit Trait+DisplayName`
+- [x] 3.5.1 `BaseRepositoryTenantFilterTests.cs` — `Acao=TenantFilter`
+- [x] 3.5.2 Build + test verde + commit `test(repository): retrofit Trait+DisplayName`
 
 ### 3.6 — Api / Integration + Http (6 arquivos)
 - [ ] 3.6.1 `HttpTenantContextAccessorTests.cs` — `Acao=TenantContext`

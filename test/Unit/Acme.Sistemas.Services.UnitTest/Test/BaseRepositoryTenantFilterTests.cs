@@ -22,7 +22,9 @@ public class BaseRepositoryTenantFilterTests
         public override Task UpdateAsync(TestEntity e, CancellationToken c = default) => Task.CompletedTask;
     }
 
-    [Fact]
+    [Trait("Solucao", "Repository")]
+    [Trait("Acao", "TenantFilter")]
+    [Fact(DisplayName = "Dado um BaseRepository, quando GetByIdAsync, então a SQL recebe parâmetros @tenantId e @id do contexto")]
     public async Task GetByIdAsync_DeveAplicarFiltroDeTenantId()
     {
         var tenantId = Guid.NewGuid();
@@ -50,7 +52,9 @@ public class BaseRepositoryTenantFilterTests
         capturedParams["@id"].Should().Be(registroId);
     }
 
-    [Fact]
+    [Trait("Solucao", "Repository")]
+    [Trait("Acao", "TenantFilter")]
+    [Fact(DisplayName = "Dado um BaseRepository, quando ListAsync com skip e take, então a SQL contém WHERE tenant_id = @tenantId AND deleted_at IS NULL e parâmetros de paginação")]
     public async Task ListAsync_DeveAplicarFiltroDeTenantIdEPaginacao()
     {
         var tenantId = Guid.NewGuid();
