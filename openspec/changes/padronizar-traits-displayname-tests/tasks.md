@@ -42,9 +42,9 @@
 - [x] 3.2.4 Build + test verde + commit `test(services): retrofit Trait+DisplayName em handlers`
 
 ### 3.3 — Core / Helpers (2 arquivos)
-- [ ] 3.3.1 `JwtTokenServiceTests.cs` — `Solucao=Core, Acao=JwtTokenService`
-- [ ] 3.3.2 `PasswordHelperTests.cs` — `Solucao=Core, Acao=PasswordHelper`
-- [ ] 3.3.3 Build + test verde + commit `test(core): retrofit Trait+DisplayName em helpers`
+- [x] 3.3.1 `JwtTokenServiceTests.cs` — `Solucao=Core, Acao=JwtTokenService`
+- [x] 3.3.2 `PasswordHelperTests.cs` — `Solucao=Core, Acao=PasswordHelper`
+- [x] 3.3.3 Build + test verde + commit `test(core): retrofit Trait+DisplayName em helpers`
 
 ### 3.4 — Infrastructure (4 arquivos)
 - [ ] 3.4.1 `CacheCleanupWorkerTests.cs` — `Acao=CacheCleanupWorker`

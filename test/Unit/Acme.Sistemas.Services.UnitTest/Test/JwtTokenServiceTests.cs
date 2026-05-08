@@ -17,7 +17,9 @@ public class JwtTokenServiceTests
             RefreshTokenDays = 7
         }));
 
-    [Fact]
+    [Trait("Solucao", "Core")]
+    [Trait("Acao", "JwtTokenService")]
+    [Fact(DisplayName = "Dado tenant, user e permissões, quando Issue, então gera access + refresh tokens com expirações futuras coerentes")]
     public void Issue_DeveGerarTokensValidos()
     {
         var sut = CreateService();
@@ -32,7 +34,9 @@ public class JwtTokenServiceTests
         pair.RefreshExpiresAt.Should().BeAfter(pair.AccessExpiresAt);
     }
 
-    [Fact]
+    [Trait("Solucao", "Core")]
+    [Trait("Acao", "JwtTokenService")]
+    [Fact(DisplayName = "Dado token recém-emitido, quando TryValidate, então valida com sucesso e devolve jti, tenantId e userId")]
     public void TryValidate_DeveValidarTokenRecemEmitido()
     {
         var sut = CreateService();
@@ -48,7 +52,9 @@ public class JwtTokenServiceTests
         u.Should().Be(userId);
     }
 
-    [Fact]
+    [Trait("Solucao", "Core")]
+    [Trait("Acao", "JwtTokenService")]
+    [Fact(DisplayName = "Dado token com assinatura adulterada, quando TryValidate, então rejeita")]
     public void TryValidate_DeveRejeitarTokenAdulterado()
     {
         var sut = CreateService();
@@ -60,7 +66,9 @@ public class JwtTokenServiceTests
         ok.Should().BeFalse();
     }
 
-    [Fact]
+    [Trait("Solucao", "Core")]
+    [Trait("Acao", "JwtTokenService")]
+    [Fact(DisplayName = "Dado mesmo refresh token, quando HashRefreshToken duas vezes, então retorna SHA-512 determinístico de 128 chars")]
     public void HashRefreshToken_DeveSerDeterministicoESha512()
     {
         var token = "some-random-refresh-token-value";

@@ -6,7 +6,9 @@ namespace Acme.Sistemas.Services.UnitTest.Test;
 
 public class PasswordHelperTests
 {
-    [Fact]
+    [Trait("Solucao", "Core")]
+    [Trait("Acao", "PasswordHelper")]
+    [Fact(DisplayName = "Dado uma senha hashada, quando Verify com a mesma senha, então retorna true")]
     public void Hash_e_Verify_DevemReconhecerSenhaCorreta()
     {
         var password = "Atena@2026!";
@@ -15,7 +17,9 @@ public class PasswordHelperTests
         PasswordHelper.Verify(password, stored).Should().BeTrue();
     }
 
-    [Fact]
+    [Trait("Solucao", "Core")]
+    [Trait("Acao", "PasswordHelper")]
+    [Fact(DisplayName = "Dado uma senha hashada, quando Verify com senha diferente, então retorna false")]
     public void Verify_DeveRejeitarSenhaIncorreta()
     {
         var stored = PasswordHelper.Hash("CorretaSenha@1");
@@ -23,7 +27,9 @@ public class PasswordHelperTests
         PasswordHelper.Verify("OutraSenha@1", stored).Should().BeFalse();
     }
 
-    [Theory]
+    [Trait("Solucao", "Core")]
+    [Trait("Acao", "PasswordHelper")]
+    [Theory(DisplayName = "Dado uma senha, quando IsStrong, então valida regras de minúscula, maiúscula, dígito, especial e tamanho")]
     [InlineData("Atena@2026", true)]
     [InlineData("atena2026", false)]
     [InlineData("ATENA2026", false)]
