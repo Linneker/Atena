@@ -19,7 +19,9 @@ public class BaixarDespesaCommandHandlerTests
         _tenant.SetupGet(t => t.UserId).Returns(Guid.NewGuid());
     }
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "BaixarDespesa")]
+    [Fact(DisplayName = "Dado despesa pendente, quando baixar, então altera para Pago e persiste valor, data e forma de pagamento")]
     public async Task Baixar_DespesaPendente_AlteraStatusEPersistePagamento()
     {
         var id = Guid.NewGuid();
@@ -51,7 +53,9 @@ public class BaixarDespesaCommandHandlerTests
         capturada.FormaPagamento.Should().Be(FormaPagamento.Pix);
     }
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "BaixarDespesa")]
+    [Fact(DisplayName = "Dado despesa já paga, quando baixar de novo, então retorna 409 Conflict")]
     public async Task Baixar_DespesaJaPaga_RetornaConflict()
     {
         var id = Guid.NewGuid();
@@ -66,7 +70,9 @@ public class BaixarDespesaCommandHandlerTests
         result.Status.Should().Be(409);
     }
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "BaixarDespesa")]
+    [Fact(DisplayName = "Dado despesa inexistente, quando baixar, então retorna 404 Not Found")]
     public async Task Baixar_DespesaInexistente_RetornaNotFound()
     {
         _despesas.Setup(r => r.GetByIdAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))

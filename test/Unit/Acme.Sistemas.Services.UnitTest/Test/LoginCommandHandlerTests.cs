@@ -49,7 +49,9 @@ public class LoginCommandHandlerTests
         return (sut, users, tenants, rps, refresh, tenant);
     }
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "Login")]
+    [Fact(DisplayName = "Dado credenciais corretas, quando login, então retorna access token, refresh token e permissões")]
     public async Task Login_ComCredenciaisCorretas_RetornaTokens()
     {
         var (sut, users, _, rps, _, tenant) = Build();
@@ -77,7 +79,9 @@ public class LoginCommandHandlerTests
         result.Content.Permissions.Should().Contain("tenant:ler");
     }
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "Login")]
+    [Fact(DisplayName = "Dado 4 tentativas falhas anteriores, quando login falha pela 5ª vez, então bloqueia a conta por mais de 10 minutos")]
     public async Task Login_AposCincoTentativas_BloqueiaConta()
     {
         var (sut, users, _, _, _, tenant) = Build();
@@ -107,7 +111,9 @@ public class LoginCommandHandlerTests
         capturedLock!.Value.Should().BeAfter(DateTime.UtcNow.AddMinutes(10));
     }
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "Login")]
+    [Fact(DisplayName = "Dado conta bloqueada (LockedUntil futuro), quando login com senha correta, então recusa imediatamente sem validar credencial")]
     public async Task Login_ContaBloqueada_RecusaImediatamente()
     {
         var (sut, users, _, _, _, tenant) = Build();
@@ -131,7 +137,9 @@ public class LoginCommandHandlerTests
         result.Status.Should().Be(400);
     }
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "Login")]
+    [Fact(DisplayName = "Dado usuário com e-mail não confirmado, quando login, então retorna mensagem específica de e-mail pendente")]
     public async Task Login_EmailNaoConfirmado_RetornaErroEspecifico()
     {
         var (sut, users, _, _, _, tenant) = Build();

@@ -36,10 +36,10 @@
 - [x] 3.1.6 Build + test verde + commit `test(services): retrofit Trait+DisplayName em behaviors`
 
 ### 3.2 — Services / Handlers (3 arquivos)
-- [ ] 3.2.1 `LoginCommandHandlerTests.cs` — `Acao=Login`
-- [ ] 3.2.2 `CriarClienteCommandHandlerTests.cs` — `Acao=CriarCliente`
-- [ ] 3.2.3 `BaixarDespesaCommandHandlerTests.cs` — `Acao=BaixarDespesa`
-- [ ] 3.2.4 Build + test verde + commit `test(services): retrofit Trait+DisplayName em handlers`
+- [x] 3.2.1 `LoginCommandHandlerTests.cs` — `Acao=Login`
+- [x] 3.2.2 `CriarClienteCommandHandlerTests.cs` — `Acao=CriarCliente`
+- [x] 3.2.3 `BaixarDespesaCommandHandlerTests.cs` — `Acao=BaixarDespesa`
+- [x] 3.2.4 Build + test verde + commit `test(services): retrofit Trait+DisplayName em handlers`
 
 ### 3.3 — Core / Helpers (2 arquivos)
 - [ ] 3.3.1 `JwtTokenServiceTests.cs` — `Solucao=Core, Acao=JwtTokenService`

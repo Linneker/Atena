@@ -22,7 +22,9 @@ public class CriarClienteCommandHandlerTests
         _tenant.SetupGet(t => t.UserId).Returns(Guid.NewGuid());
     }
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "CriarCliente")]
+    [Fact(DisplayName = "Dado documento já existente, quando criar cliente, então retorna 409 Conflict e não persiste")]
     public async Task Criar_DocumentoExistente_RetornaConflict()
     {
         _repo.Setup(r => r.GetByDocumentoAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
@@ -38,7 +40,9 @@ public class CriarClienteCommandHandlerTests
         _repo.Verify(r => r.AddAsync(It.IsAny<Cliente>(), It.IsAny<CancellationToken>()), Times.Never);
     }
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "CriarCliente")]
+    [Fact(DisplayName = "Dado documento inédito, quando criar cliente, então persiste com TenantId e CreatedBy do contexto")]
     public async Task Criar_NovoCliente_PersisteComTenantContext()
     {
         _repo.Setup(r => r.GetByDocumentoAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
