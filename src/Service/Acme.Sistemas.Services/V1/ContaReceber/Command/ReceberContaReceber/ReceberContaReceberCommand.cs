@@ -10,5 +10,3 @@ public sealed record ReceberContaReceberCommand(
     DateTime DataRecebimento,
     string? Observacao) : IRequest<ResponseDefault<ReceberContaReceberCommandResult>>;
 
-public sealed record ReceberContaReceberCommandResult(
-    Guid Id, StatusConta Status, decimal ValorRecebido, decimal Saldo);

@@ -13,10 +13,3 @@ public sealed record ListarContasReceberQuery(
     int Skip = 0,
     int Take = 50) : IRequest<ResponseDefault<ListarContasReceberQueryResult>>;
 
-public sealed record ListarContasReceberQueryItem(
-    Guid Id, string Descricao, Guid? ClienteId,
-    decimal ValorOriginal, decimal ValorRecebido, decimal Saldo,
-    DateTime DataVencimento, StatusConta Status, int DiasAtraso);
-
-public sealed record ListarContasReceberQueryResult(
-    IReadOnlyList<ListarContasReceberQueryItem> Items, long Total, int Skip, int Take);

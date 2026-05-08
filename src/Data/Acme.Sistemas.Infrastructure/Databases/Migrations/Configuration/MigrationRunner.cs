@@ -1,5 +1,5 @@
 using System.Reflection;
-using Acme.Sistemas.Repository.Configuration;
+using Acme.Sistemas.Infrastructure.Databases.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace Acme.Sistemas.Infrastructure.Databases.Migrations.Configuration;

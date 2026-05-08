@@ -1,6 +1,5 @@
-using Acme.Sistemas.Services.V1.Relatorios.Financeiro.Balanco;
-using Acme.Sistemas.Services.V1.Relatorios.Financeiro.DRE;
-using Acme.Sistemas.Services.V1.Relatorios.Pdf;
+using Acme.Sistemas.Domain.Interfaces.Reports;
+using Acme.Sistemas.Domain.Reports;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;

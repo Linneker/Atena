@@ -3,7 +3,7 @@ using Acme.Sistemas.Core.Response;
 using Acme.Sistemas.Domain.Entities.Fiscal;
 using Acme.Sistemas.Domain.Enums;
 using Acme.Sistemas.Domain.Interfaces.Repository;
-using Acme.Sistemas.Services.V1.Fiscal.Services;
+using Acme.Sistemas.Domain.Interfaces.Fiscal;
 
 namespace Acme.Sistemas.Services.V1.Fiscal.Command.CancelarNFe;
 

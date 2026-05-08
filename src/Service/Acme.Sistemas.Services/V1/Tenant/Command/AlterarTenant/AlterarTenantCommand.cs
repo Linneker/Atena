@@ -12,4 +12,3 @@ public sealed record AlterarTenantCommand(
     string? CorPrimaria,
     string FusoHorario) : IRequest<ResponseDefault<AlterarTenantCommandResult>>;
 
-public sealed record AlterarTenantCommandResult(Guid Id);

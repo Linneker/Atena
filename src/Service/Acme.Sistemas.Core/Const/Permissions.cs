@@ -49,6 +49,7 @@ public static class Permissions
         public const string Dashboard = "dashboard";
         public const string Auditoria = "auditoria";
         public const string ApiKey = "api-key";
+        public const string FeatureFlags = "feature-flags";
     }
 
     public static string Of(string recurso, string acao) => $"{recurso}:{acao}";

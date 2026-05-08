@@ -15,4 +15,3 @@ public sealed record CriarReceitaCommand(
     Guid? ClienteId,
     Guid? OrigemVendaId) : IRequest<ResponseDefault<CriarReceitaCommandResult>>;
 
-public sealed record CriarReceitaCommandResult(Guid Id, string Nome, decimal Valor, DateTime DataPrevistaRecebimento);

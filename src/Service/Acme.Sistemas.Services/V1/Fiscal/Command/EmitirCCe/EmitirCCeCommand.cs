@@ -8,7 +8,3 @@ public sealed record EmitirCCeCommand(
     string Correcao,
     int Sequencia = 1) : IRequest<ResponseDefault<EmitirCCeCommandResult>>;
 
-public sealed record EmitirCCeCommandResult(
-    Guid NFeId,
-    int Sequencia,
-    string? Protocolo);

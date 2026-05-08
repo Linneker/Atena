@@ -14,4 +14,3 @@ public sealed record CriarFuncionarioCommand(
     DateTime? DataAdmissao,
     Guid? UsuarioId) : IRequest<ResponseDefault<CriarFuncionarioCommandResult>>;
 
-public sealed record CriarFuncionarioCommandResult(Guid Id, string NomeCompleto, string Cpf);

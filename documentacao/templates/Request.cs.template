@@ -1,0 +1,9 @@
+namespace Acme.Sistemas.Atena.Api.Endpoints.V1.{{Recurso}}.{{Acao}}{{Recurso}};
+
+/// <summary>
+/// DTO de entrada do {{Acao}}{{Recurso}}Endpoint.
+/// Mapeado para o Command/Query correspondente em <see cref="{{Acao}}{{Recurso}}Map"/>.
+/// </summary>
+public sealed record {{Acao}}{{Recurso}}Request(
+    // TODO: campos do payload de entrada
+);

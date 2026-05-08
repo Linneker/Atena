@@ -1,0 +1,12 @@
+using Acme.Sistemas.Services.V1.{{Funcionalidade}}.{{CommandOrQuery}}.{{Acao}};
+
+namespace Acme.Sistemas.Atena.Api.Endpoints.V1.{{Recurso}}.{{Acao}}{{Recurso}};
+
+public static class {{Acao}}{{Recurso}}Map
+{
+    public static {{Acao}}{{Recurso}}Command ToCommand(this {{Acao}}{{Recurso}}Request request) =>
+        new(/* request.Field1, request.Field2, ... */);
+
+    public static {{Acao}}{{Recurso}}Response ToResponse(this {{Acao}}{{Recurso}}CommandResult result) =>
+        new(/* result.Field1, result.Field2, ... */);
+}

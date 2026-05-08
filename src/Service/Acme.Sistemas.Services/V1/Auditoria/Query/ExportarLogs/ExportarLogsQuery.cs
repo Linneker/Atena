@@ -10,8 +10,3 @@ public sealed record ExportarLogsQuery(
     OperacaoAuditoria? Operacao = null,
     DateTime? Inicio = null,
     DateTime? Fim = null) : IRequest<ResponseDefault<ExportarLogsQueryResult>>;
-
-public sealed record ExportarLogsQueryResult(
-    int TotalRegistros,
-    string HashSha256,
-    string ConteudoJson);

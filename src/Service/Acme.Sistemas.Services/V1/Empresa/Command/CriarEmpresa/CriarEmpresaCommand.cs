@@ -12,15 +12,3 @@ public sealed record EnderecoDto(
     string? Cidade,
     string? Uf);
 
-public sealed record CriarEmpresaCommand(
-    string RazaoSocial,
-    string? NomeFantasia,
-    string Cnpj,
-    string? InscricaoEstadual,
-    string? InscricaoMunicipal,
-    string? Email,
-    string? Telefone,
-    EnderecoDto? Endereco,
-    bool BuscarEnderecoPorCep = false) : IRequest<ResponseDefault<CriarEmpresaCommandResult>>;
-
-public sealed record CriarEmpresaCommandResult(Guid Id, string RazaoSocial, string Cnpj);

@@ -6,8 +6,3 @@ namespace Acme.Sistemas.Services.V1.Divida.Query.ObterDivida;
 
 public sealed record ObterDividaQuery(Guid Id) : IRequest<ResponseDefault<ObterDividaQueryResult>>;
 
-public sealed record ObterDividaQueryResult(
-    Guid Id, string Credor, string? Descricao,
-    decimal ValorOriginal, decimal ValorPago, decimal Saldo,
-    decimal? TaxaJurosMensal, DateTime DataInicio, DateTime? DataFim,
-    int NumeroParcelas, StatusConta Status, DateTime CreatedAt);

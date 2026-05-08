@@ -1,6 +1,6 @@
 using Acme.Sistemas.Core.Mediators;
+using Acme.Sistemas.Core.Mediators.Behaviors;
 using Acme.Sistemas.Core.Mediators.Handler;
-using Acme.Sistemas.Services.Behaviors;
 using FluentAssertions;
 using FluentValidation;
 using Xunit;

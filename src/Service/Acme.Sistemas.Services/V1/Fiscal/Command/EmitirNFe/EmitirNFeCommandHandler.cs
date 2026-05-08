@@ -3,6 +3,7 @@ using Acme.Sistemas.Core.Response;
 using Acme.Sistemas.Core.Settings;
 using Acme.Sistemas.Domain.Entities.Fiscal;
 using Acme.Sistemas.Domain.Interfaces.Repository;
+using Acme.Sistemas.Domain.Interfaces.Fiscal;
 using Acme.Sistemas.Services.V1.Fiscal.Services;
 using Microsoft.Extensions.Options;
 using NFeEntity = Acme.Sistemas.Domain.Entities.Fiscal.NFe;

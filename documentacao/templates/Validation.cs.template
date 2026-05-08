@@ -1,0 +1,12 @@
+using FluentValidation;
+
+namespace Acme.Sistemas.Services.V1.{{Funcionalidade}}.{{CommandOrQuery}}.{{Acao}};
+
+public sealed class {{Acao}}{{CommandOrQuery}}Validation : AbstractValidator<{{Acao}}{{CommandOrQuery}}>
+{
+    public {{Acao}}{{CommandOrQuery}}Validation()
+    {
+        // TODO: regras
+        // RuleFor(x => x.Id).NotEmpty();
+    }
+}

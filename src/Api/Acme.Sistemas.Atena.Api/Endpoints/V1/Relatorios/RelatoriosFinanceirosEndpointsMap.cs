@@ -1,0 +1,4 @@
+namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Relatorios;
+
+// Marker — mappings inline em RelatoriosFinanceirosEndpoints.MapEndpoint (parâmetros de rota/query → Command/Query).
+// Quando o split por verbo for executado, cada pasta {Verbo}/ ganha seu próprio Map.cs.

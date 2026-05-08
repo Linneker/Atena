@@ -10,9 +10,3 @@ public sealed record ListarFornecedoresQuery(
     int Skip = 0,
     int Take = 50) : IRequest<ResponseDefault<ListarFornecedoresQueryResult>>;
 
-public sealed record ListarFornecedoresQueryItem(
-    Guid Id, TipoPessoa Tipo, string Nome, string? NomeFantasia,
-    string Documento, string? Email, string? Telefone,
-    string? CondicaoPagamentoPadrao, StatusAtivo Status);
-
-public sealed record ListarFornecedoresQueryResult(IReadOnlyList<ListarFornecedoresQueryItem> Items, long Total);

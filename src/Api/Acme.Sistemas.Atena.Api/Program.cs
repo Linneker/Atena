@@ -23,6 +23,11 @@ JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Feature flags: arquivo dedicado, hot-reload nativo via IConfiguration + IOptionsMonitor.
+builder.Configuration.AddJsonFile("featureflags.json", optional: true, reloadOnChange: true);
+
+builder.Services.Configure<FeatureFlagSettings>(builder.Configuration.GetSection(FeatureFlagSettings.SectionName));
+
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(JwtOptions.SectionName));
 builder.Services.Configure<PublicAppOptions>(builder.Configuration.GetSection(PublicAppOptions.SectionName));
 
@@ -70,6 +75,10 @@ builder.Services.AddAuthorization(options =>
 });
 
 builder.Services.AddHostedService<PermissionsSeedHostedService>();
+builder.Services.AddHostedService<Acme.Sistemas.Atena.Api.Hosted.NFeTransmissaoWorker>();
+builder.Services.AddHostedService<Acme.Sistemas.Atena.Api.Hosted.CertificadoVencimentoVarreduraWorker>();
+builder.Services.AddHostedService<Acme.Sistemas.Atena.Api.Hosted.EmailDispatcherHostedService>();
+builder.Services.AddHostedService<Acme.Sistemas.Atena.Api.Hosted.CacheCleanupWorker>();
 
 builder.Services.AddCors(options =>
 {

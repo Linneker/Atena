@@ -1,0 +1,46 @@
+using Acme.Sistemas.Core.Mediators;
+using Acme.Sistemas.Core.Mediators.Handler;
+using Acme.Sistemas.Core.Response;
+using Acme.Sistemas.Domain.Interfaces.Cache;
+using Microsoft.Extensions.Logging;
+
+namespace Acme.Sistemas.Services.V1.{{Funcionalidade}}.{{CommandOrQuery}}.{{Acao}};
+
+/// <summary>
+/// Behavior específico do {{Acao}}{{CommandOrQuery}}.
+///
+/// Convenção do blueprint: regra-específica adicional ao pipeline transversal
+/// (Validation → CacheLookup → Audit → Log → este Behavior → Handler).
+///
+/// Em queries: tipicamente vazio (o CacheLookup transversal já trata).
+/// Em commands de mutação: invalida chaves de cache afetadas (ex.: lista da entidade,
+/// objetos relacionados) DEPOIS do handler bem-sucedido.
+/// </summary>
+public sealed class {{Acao}}{{CommandOrQuery}}Behavior
+    : IPipelineBehavior<{{Acao}}{{CommandOrQuery}}, ResponseDefault<{{Acao}}{{CommandOrQuery}}Result>>
+{
+    private readonly ICacheStore _cache;
+    private readonly ILogger<{{Acao}}{{CommandOrQuery}}Behavior> _logger;
+
+    public {{Acao}}{{CommandOrQuery}}Behavior(
+        ICacheStore cache,
+        ILogger<{{Acao}}{{CommandOrQuery}}Behavior> logger)
+    {
+        _cache = cache;
+        _logger = logger;
+    }
+
+    public async Task<ResponseDefault<{{Acao}}{{CommandOrQuery}}Result>> Handle(
+        {{Acao}}{{CommandOrQuery}} request,
+        RequestHandlerDelegate<ResponseDefault<{{Acao}}{{CommandOrQuery}}Result>> next,
+        CancellationToken cancellationToken)
+    {
+        var response = await next();
+        if (!response.IsSuccess) return response;
+
+        // TODO: invalidar chaves de cache relacionadas, se aplicável.
+        // Ex.: await _cache.RemoveAsync($"{{recurso}}:{request.Id}", cancellationToken);
+
+        return response;
+    }
+}

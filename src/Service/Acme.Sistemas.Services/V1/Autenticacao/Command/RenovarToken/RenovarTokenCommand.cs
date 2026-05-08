@@ -8,8 +8,3 @@ public sealed record RenovarTokenCommand(
     string? UserAgent,
     string? IpAddress) : IRequest<ResponseDefault<RenovarTokenCommandResult>>;
 
-public sealed record RenovarTokenCommandResult(
-    string AccessToken,
-    string RefreshToken,
-    DateTime AccessExpiresAt,
-    DateTime RefreshExpiresAt);

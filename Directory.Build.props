@@ -1,0 +1,12 @@
+<Project>
+  <PropertyGroup>
+    <!--
+      Desabilita NU1900 (auditoria de vulnerabilidades) globalmente.
+      Motivo: o feed privado Motz-default fica inacessível em ambientes
+      offline ou fora da VPN, gerando warnings que poluem o build.
+      A auditoria continua disponível rodando manualmente:
+        dotnet list package vulnerable (com hífens duplos como flag)
+    -->
+    <NuGetAudit>false</NuGetAudit>
+  </PropertyGroup>
+</Project>

@@ -10,12 +10,3 @@ public sealed record LoginCommand(
     string? UserAgent,
     string? IpAddress) : IRequest<ResponseDefault<LoginCommandResult>>;
 
-public sealed record LoginCommandResult(
-    string AccessToken,
-    string RefreshToken,
-    DateTime AccessExpiresAt,
-    DateTime RefreshExpiresAt,
-    Guid UserId,
-    Guid TenantId,
-    string NomeCompleto,
-    IReadOnlyList<string> Permissions);

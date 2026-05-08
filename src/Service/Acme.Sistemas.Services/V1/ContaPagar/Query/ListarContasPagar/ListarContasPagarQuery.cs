@@ -13,11 +13,3 @@ public sealed record ListarContasPagarQuery(
     int Skip = 0,
     int Take = 50) : IRequest<ResponseDefault<ListarContasPagarQueryResult>>;
 
-public sealed record ListarContasPagarQueryItem(
-    Guid Id, string Descricao, Guid? FornecedorId,
-    decimal ValorOriginal, decimal ValorPago, decimal Saldo,
-    DateTime DataVencimento, StatusConta Status,
-    bool Vencida, int DiasParaVencer);
-
-public sealed record ListarContasPagarQueryResult(
-    IReadOnlyList<ListarContasPagarQueryItem> Items, long Total, int Skip, int Take);

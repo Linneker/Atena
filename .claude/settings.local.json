@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(openspec list *)",
+      "Bash(dotnet build *)",
+      "Bash(dotnet test *)",
+      "Bash(openspec validate *)",
+      "Bash(docker version *)",
+      "Bash(openspec --help)",
+      "Bash(openspec change *)",
+      "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(f\\\\\"  {c['name']}: {c['completedTasks']}/{c['totalTasks']} \\({c['status']}\\)\\\\\"\\) for c in d['changes']]\")",
+      "Bash(openspec archive *)"
+    ]
+  }
+}

@@ -11,8 +11,3 @@ public sealed record ReceberReceitaCommand(
     FormaPagamento FormaPagamento,
     string? Observacao) : IRequest<ResponseDefault<ReceberReceitaCommandResult>>;
 
-public sealed record ReceberReceitaCommandResult(
-    Guid Id,
-    StatusPagamento StatusRecebimento,
-    decimal ValorRecebido,
-    DateTime DataRecebimento);

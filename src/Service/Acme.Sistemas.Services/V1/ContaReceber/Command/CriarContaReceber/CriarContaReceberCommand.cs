@@ -11,4 +11,3 @@ public sealed record CriarContaReceberCommand(
     decimal ValorOriginal,
     DateTime DataVencimento) : IRequest<ResponseDefault<CriarContaReceberCommandResult>>;
 
-public sealed record CriarContaReceberCommandResult(Guid Id, string Descricao, decimal ValorOriginal, DateTime DataVencimento);

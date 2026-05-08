@@ -19,4 +19,3 @@ public sealed record AlterarFornecedorCommand(
     StatusAtivo Status,
     EnderecoDto? Endereco) : IRequest<ResponseDefault<AlterarFornecedorCommandResult>>;
 
-public sealed record AlterarFornecedorCommandResult(Guid Id);

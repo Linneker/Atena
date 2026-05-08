@@ -7,8 +7,3 @@ public sealed record CancelarNFeCommand(
     Guid NFeId,
     string Justificativa) : IRequest<ResponseDefault<CancelarNFeCommandResult>>;
 
-public sealed record CancelarNFeCommandResult(
-    Guid NFeId,
-    string? ProtocoloCancelamento,
-    bool EstoqueRevertido,
-    bool ContaReceberCancelada);

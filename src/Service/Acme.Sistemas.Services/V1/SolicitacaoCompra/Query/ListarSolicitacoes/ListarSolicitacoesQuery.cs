@@ -9,8 +9,3 @@ public sealed record ListarSolicitacoesQuery(
     int Skip = 0,
     int Take = 50) : IRequest<ResponseDefault<ListarSolicitacoesQueryResult>>;
 
-public sealed record ListarSolicitacoesQueryItem(
-    Guid Id, string Numero, Guid? SolicitanteId,
-    decimal ValorTotal, DateTime DataSolicitacao, StatusSolicitacaoCompra Status);
-
-public sealed record ListarSolicitacoesQueryResult(IReadOnlyList<ListarSolicitacoesQueryItem> Items, long Total);

@@ -11,4 +11,3 @@ public sealed record CriarPlanoDeContasCommand(
     Guid? PaiId,
     bool AceitaLancamento) : IRequest<ResponseDefault<CriarPlanoDeContasCommandResult>>;
 
-public sealed record CriarPlanoDeContasCommandResult(Guid Id, string Codigo, string Nome, int Nivel);

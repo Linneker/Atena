@@ -1,7 +1,19 @@
 {
-  "flags": {
-    "nfe.contingencia.svrs": false,
-    "estoque.permitir.negativo": false,
-    "auditoria.detalhada": true
+  "FeatureFlags": {
+    "Cache": {
+      "Provider": "LiteDb",
+      "HotTtlMinutes": 15,
+      "ColdTtlMinutes": 15,
+      "LiteDbPath": "cache.db",
+      "RedisConnection": null
+    },
+    "NFe": {
+      "AmbienteHomologacao": true,
+      "ContingenciaSvrsAuto": true
+    },
+    "Audit": {
+      "Enabled": true,
+      "Verbose": false
+    }
   }
 }

@@ -1,3 +1,4 @@
+using Acme.Sistemas.Domain.Interfaces.Messaging;
 using Acme.Sistemas.Infrastructure.Messaging.RabbitMq;
 
 namespace Acme.Sistemas.Infrastructure.Messaging.Email;

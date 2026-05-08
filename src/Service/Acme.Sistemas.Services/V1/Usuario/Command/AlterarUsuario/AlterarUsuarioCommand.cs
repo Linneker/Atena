@@ -10,4 +10,3 @@ public sealed record AlterarUsuarioCommand(
     string Email,
     StatusAtivo Status) : IRequest<ResponseDefault<AlterarUsuarioCommandResult>>;
 
-public sealed record AlterarUsuarioCommandResult(Guid Id);

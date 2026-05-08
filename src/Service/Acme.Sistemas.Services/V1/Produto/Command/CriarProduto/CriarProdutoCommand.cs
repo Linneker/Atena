@@ -14,4 +14,3 @@ public sealed record CriarProdutoCommand(
     decimal? CustoMedio,
     decimal? EstoqueMinimo) : IRequest<ResponseDefault<CriarProdutoCommandResult>>;
 
-public sealed record CriarProdutoCommandResult(Guid Id, string Codigo, string Nome);

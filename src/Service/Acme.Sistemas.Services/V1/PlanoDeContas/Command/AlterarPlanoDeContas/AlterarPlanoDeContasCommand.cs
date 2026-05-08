@@ -9,4 +9,3 @@ public sealed record AlterarPlanoDeContasCommand(
     bool AceitaLancamento,
     bool Ativo) : IRequest<ResponseDefault<AlterarPlanoDeContasCommandResult>>;
 
-public sealed record AlterarPlanoDeContasCommandResult(Guid Id);

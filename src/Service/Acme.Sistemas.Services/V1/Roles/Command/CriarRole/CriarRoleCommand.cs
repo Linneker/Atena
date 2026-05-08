@@ -8,4 +8,3 @@ public sealed record CriarRoleCommand(
     string? Descricao,
     IReadOnlyList<string>? PermissoesCodigos) : IRequest<ResponseDefault<CriarRoleCommandResult>>;
 
-public sealed record CriarRoleCommandResult(Guid Id, string Nome);

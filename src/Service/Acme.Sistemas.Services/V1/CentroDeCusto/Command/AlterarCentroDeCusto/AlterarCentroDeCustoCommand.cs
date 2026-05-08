@@ -10,4 +10,3 @@ public sealed record AlterarCentroDeCustoCommand(
     Guid? ResponsavelId,
     bool Ativo) : IRequest<ResponseDefault<AlterarCentroDeCustoCommandResult>>;
 
-public sealed record AlterarCentroDeCustoCommandResult(Guid Id);

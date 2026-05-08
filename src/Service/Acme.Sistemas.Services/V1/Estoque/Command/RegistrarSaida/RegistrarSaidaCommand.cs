@@ -15,5 +15,3 @@ public sealed record RegistrarSaidaCommand(
     string? DocumentoReferencia,
     DateTime? DataMovimento) : IRequest<ResponseDefault<RegistrarSaidaCommandResult>>;
 
-public sealed record RegistrarSaidaCommandResult(
-    Guid MovimentoId, decimal NovoSaldoTotal, decimal NovoSaldoDisponivel);

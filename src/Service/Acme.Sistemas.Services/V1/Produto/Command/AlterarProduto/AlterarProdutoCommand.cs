@@ -16,4 +16,3 @@ public sealed record AlterarProdutoCommand(
     decimal? EstoqueMinimo,
     StatusAtivo Status) : IRequest<ResponseDefault<AlterarProdutoCommandResult>>;
 
-public sealed record AlterarProdutoCommandResult(Guid Id);

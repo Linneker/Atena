@@ -1,8 +1,9 @@
 using Acme.Sistemas.Core.Mediators;
 using Acme.Sistemas.Domain.Interfaces.Repository;
+using Acme.Sistemas.Domain.Interfaces.Reports;
+using Acme.Sistemas.Domain.Reports;
 using Acme.Sistemas.Services.V1.Relatorios.Financeiro.Balanco;
 using Acme.Sistemas.Services.V1.Relatorios.Financeiro.DRE;
-using Acme.Sistemas.Services.V1.Relatorios.Pdf;
 
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Relatorios;
 

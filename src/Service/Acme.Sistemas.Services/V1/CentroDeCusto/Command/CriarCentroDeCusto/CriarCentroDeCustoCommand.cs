@@ -9,4 +9,3 @@ public sealed record CriarCentroDeCustoCommand(
     string? Descricao,
     Guid? ResponsavelId) : IRequest<ResponseDefault<CriarCentroDeCustoCommandResult>>;
 
-public sealed record CriarCentroDeCustoCommandResult(Guid Id, string Codigo, string Nome);

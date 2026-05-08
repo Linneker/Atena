@@ -13,4 +13,3 @@ public sealed record AlterarDividaCommand(
     DateTime? DataFim,
     int NumeroParcelas) : IRequest<ResponseDefault<AlterarDividaCommandResult>>;
 
-public sealed record AlterarDividaCommandResult(Guid Id);

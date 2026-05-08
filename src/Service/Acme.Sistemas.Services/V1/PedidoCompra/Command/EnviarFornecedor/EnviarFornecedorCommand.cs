@@ -7,5 +7,3 @@ public sealed record EnviarFornecedorCommand(
     Guid PedidoId,
     string? EmailDestinoOverride = null) : IRequest<ResponseDefault<EnviarFornecedorCommandResult>>;
 
-public sealed record EnviarFornecedorCommandResult(
-    Guid PedidoId, string EmailDestino, DateTime EnviadoEm);

@@ -1,0 +1,118 @@
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Vendas\VendasEndpoints.cs:        orc.MapPost("/", async (CriarOrcamentoCommand cmd, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Vendas\VendasEndpoints.cs:        orc.MapGet("/", async (StatusOrcamento? status, Guid? clienteId, int? skip, int? take, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Vendas\VendasEndpoints.cs:        ped.MapPost("/", async (CriarPedidoVendaCommand cmd, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Vendas\VendasEndpoints.cs:        ped.MapPost("/{id:guid}/confirmar", async (Guid id, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Vendas\VendasEndpoints.cs:        fat.MapPost("/", async (FaturarPedidoCommand cmd, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Vendas\VendasEndpoints.cs:        dev.MapPost("/", async (RegistrarDevolucaoCommand cmd, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Vendas\VendasEndpoints.cs:        rel.MapGet("/", async (DateTime inicio, DateTime fim, AgrupamentoVendas agrupamento,
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Usuarios\ObterUsuarioEndpoint.cs:        app.MapGet("/api/v1/usuarios/{id:guid}", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Usuarios\ListarUsuariosEndpoint.cs:        app.MapGet("/api/v1/usuarios", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Usuarios\ExcluirUsuarioEndpoint.cs:        app.MapDelete("/api/v1/usuarios/{id:guid}", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Usuarios\CriarUsuarioEndpoint.cs:        app.MapPost("/api/v1/usuarios", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Usuarios\AlterarUsuarioEndpoint.cs:        app.MapPut("/api/v1/usuarios/{id:guid}", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\TiposProduto\TiposProdutoEndpoints.cs:        tipos.MapPost("/", async (CriarTipoProdutoCommand cmd, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\TiposProduto\TiposProdutoEndpoints.cs:        tipos.MapGet("/", async (IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\TiposProduto\TiposProdutoEndpoints.cs:        valores.MapPost("/", async (CriarTipoValorProdutoCommand cmd, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\TiposProduto\TiposProdutoEndpoints.cs:        valores.MapGet("/", async (IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Funcionarios\FuncionariosEndpoints.cs:        group.MapPost("/", async (CriarFuncionarioCommand cmd, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Funcionarios\FuncionariosEndpoints.cs:        group.MapPut("/{id:guid}", async (Guid id, AlterarFuncionarioRequest req, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Funcionarios\FuncionariosEndpoints.cs:        group.MapDelete("/{id:guid}", async (Guid id, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Funcionarios\FuncionariosEndpoints.cs:        group.MapGet("/", async (int? skip, int? take, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Tenants\RegistrarTenant\RegistrarTenantEndpoint.cs:        app.MapPost("/api/v1/tenants/registrar", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Fornecedores\FornecedoresEndpoints.cs:        group.MapPost("/", async (CriarFornecedorCommand cmd, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Fornecedores\FornecedoresEndpoints.cs:        group.MapPut("/{id:guid}", async (Guid id, AlterarFornecedorRequest req, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Fornecedores\FornecedoresEndpoints.cs:        group.MapDelete("/{id:guid}", async (Guid id, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Fornecedores\FornecedoresEndpoints.cs:        group.MapGet("/", async (string? termo, int? skip, int? take, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Fornecedores\FornecedoresEndpoints.cs:        group.MapGet("/{id:guid}", async (Guid id, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Receita\AlterarReceitaEndpoint.cs:        app.MapPut("/api/v1/receitas/{id:guid}", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Tenants\ObterTenant\ObterTenantEndpoint.cs:        app.MapGet("/api/v1/tenants/{id:guid}", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Receita\ReceberReceitaEndpoint.cs:        app.MapPost("/api/v1/receitas/{id:guid}/receber", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Produtos\ProdutosEndpoints.cs:        group.MapPost("/", async (CriarProdutoCommand cmd, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Produtos\ProdutosEndpoints.cs:        group.MapPut("/{id:guid}", async (Guid id, AlterarProdutoRequest req, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Produtos\ProdutosEndpoints.cs:        group.MapDelete("/{id:guid}", async (Guid id, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Produtos\ProdutosEndpoints.cs:        group.MapPost("/{id:guid}/precos", async (Guid id, DefinirPrecoRequest req, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Produtos\ProdutosEndpoints.cs:        group.MapGet("/", async (string? termo, int? skip, int? take, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Produtos\ProdutosEndpoints.cs:        group.MapGet("/{id:guid}", async (Guid id, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Clientes\ClientesEndpoints.cs:        group.MapPost("/", async (CriarClienteCommand cmd, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Clientes\ClientesEndpoints.cs:        group.MapPut("/{id:guid}", async (Guid id, AlterarClienteRequest req, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Clientes\ClientesEndpoints.cs:        group.MapDelete("/{id:guid}", async (Guid id, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Clientes\ClientesEndpoints.cs:        group.MapPost("/{id:guid}/inadimplencia", async (Guid id, AtualizarInadimplenciaRequest req, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Clientes\ClientesEndpoints.cs:        group.MapGet("/", async (string? termo, bool? inadimplente, int? skip, int? take, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Clientes\ClientesEndpoints.cs:        group.MapGet("/{id:guid}", async (Guid id, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Auditoria\AuditoriaEndpoints.cs:        group.MapGet("/logs", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Auditoria\AuditoriaEndpoints.cs:        group.MapGet("/historico/{entidade}/{id:guid}", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Auditoria\AuditoriaEndpoints.cs:        group.MapGet("/exportar", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Auditoria\AuditoriaEndpoints.cs:        group.MapGet("/exportar/hash", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Receita\ObterReceitaEndpoint.cs:        app.MapGet("/api/v1/receitas/{id:guid}", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\PlanoDeContas\PlanoDeContasEndpoints.cs:        group.MapPost("/", async (CriarPlanoDeContasCommand cmd, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\PlanoDeContas\PlanoDeContasEndpoints.cs:        group.MapPut("/{id:guid}", async (Guid id, AlterarPlanoDeContasRequest req, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\PlanoDeContas\PlanoDeContasEndpoints.cs:        group.MapDelete("/{id:guid}", async (Guid id, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\PlanoDeContas\PlanoDeContasEndpoints.cs:        group.MapGet("/", async (IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Receita\ExcluirReceitaEndpoint.cs:        app.MapDelete("/api/v1/receitas/{id:guid}", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\CentrosDeCusto\CentrosDeCustoEndpoints.cs:        group.MapPost("/", async (CriarCentroDeCustoCommand cmd, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\CentrosDeCusto\CentrosDeCustoEndpoints.cs:        group.MapPut("/{id:guid}", async (Guid id, AlterarCentroDeCustoRequest req, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\CentrosDeCusto\CentrosDeCustoEndpoints.cs:        group.MapDelete("/{id:guid}", async (Guid id, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\CentrosDeCusto\CentrosDeCustoEndpoints.cs:        group.MapGet("/", async (int? skip, int? take, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Estoque\EstoqueEndpoints.cs:        group.MapGet("/produtos/{produtoId:guid}/saldo", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Estoque\EstoqueEndpoints.cs:        group.MapPost("/entradas", async (RegistrarEntradaRequest req, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Estoque\EstoqueEndpoints.cs:        group.MapPost("/saidas", async (RegistrarSaidaRequest req, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Estoque\EstoqueEndpoints.cs:        group.MapGet("/produtos/{produtoId:guid}/movimentacao", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Estoque\EstoqueEndpoints.cs:        inv.MapPost("/", async (AbrirInventarioRequest req, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Estoque\EstoqueEndpoints.cs:        inv.MapPost("/{id:guid}/fechar", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Receita\ListarReceitasEndpoint.cs:        app.MapGet("/api/v1/receitas", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Tenants\ListarTenants\ListarTenantsEndpoint.cs:        app.MapGet("/api/v1/tenants", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Compras\ComprasEndpoints.cs:        sols.MapPost("/", async (CriarSolicitacaoCommand cmd, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Compras\ComprasEndpoints.cs:        sols.MapGet("/", async (StatusSolicitacaoCompra? status, int? skip, int? take, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Compras\ComprasEndpoints.cs:        sols.MapGet("/{id:guid}", async (Guid id, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Compras\ComprasEndpoints.cs:        sols.MapPost("/{id:guid}/enviar-aprovacao", async (Guid id, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Compras\ComprasEndpoints.cs:        sols.MapPost("/{id:guid}/aprovar", async (Guid id, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Compras\ComprasEndpoints.cs:        sols.MapPost("/{id:guid}/rejeitar", async (Guid id, RejeitarSolicitacaoRequest req, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Compras\ComprasEndpoints.cs:        peds.MapPost("/", async (CriarPedidoCompraCommand cmd, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Compras\ComprasEndpoints.cs:        peds.MapPost("/{id:guid}/enviar-fornecedor", async (Guid id, EnviarFornecedorRequest req, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Compras\ComprasEndpoints.cs:        rec.MapPost("/", async (RegistrarRecebimentoCommand cmd, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Compras\ComprasEndpoints.cs:        rec.MapPost("/{id:guid}/vincular-nfe", async (Guid id, VincularNFeRequest req, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Receita\CriarReceitaEndpoint.cs:        app.MapPost("/api/v1/receitas", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\ConciliacaoBancaria\ImportarExtratoEndpoint.cs:        app.MapPost("/api/v1/conciliacao-bancaria/importar", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Roles\RolesEndpoints.cs:        group.MapPost("/", async (CriarRoleRequest req, IMediator mediator, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Roles\RolesEndpoints.cs:        group.MapGet("/", async (int? skip, int? take, IMediator mediator, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Roles\RolesEndpoints.cs:        group.MapPost("/{id:guid}/permissoes", async (Guid id, AtribuirPermissaoRequest req, IMediator mediator, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Roles\RolesEndpoints.cs:        group.MapPost("/{id:guid}/usuarios", async (Guid id, AtribuirRoleUsuarioRequest req, IMediator mediator, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Roles\RolesEndpoints.cs:        app.MapGet("/api/v1/permissoes", async (IMediator mediator, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\FluxoDeCaixa\ObterFluxoEndpoint.cs:        app.MapGet("/api/v1/fluxo-de-caixa", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Dashboard\DashboardEndpoints.cs:        dash.MapGet("/kpis", async (DateTime? inicio, DateTime? fim, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Dashboard\DashboardEndpoints.cs:        dash.MapGet("/evolucao-financeira", async (int? meses, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Dashboard\DashboardEndpoints.cs:        rel.MapGet("/contas-pagar/aging", async (IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Dashboard\DashboardEndpoints.cs:        rel.MapGet("/contas-receber/aging", async (IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Dashboard\DashboardEndpoints.cs:        rel.MapGet("/estoque/posicao", async (Guid? estoqueId, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\ContasPagar\ContasPagarEndpoints.cs:        group.MapPost("/", async (CriarContaPagarCommand cmd, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\ContasPagar\ContasPagarEndpoints.cs:        group.MapPost("/{id:guid}/baixar", async (Guid id, BaixarContaPagarRequest req, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\ContasPagar\ContasPagarEndpoints.cs:        group.MapGet("/", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\ContasPagar\ContasPagarEndpoints.cs:        group.MapGet("/{id:guid}", async (Guid id, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Auth\RenovarTokenEndpoint.cs:        app.MapPost("/api/v1/auth/refresh", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Empresas\CriarEmpresaEndpoint.cs:        app.MapPost("/api/v1/empresas", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Despesa\CriarDespesaEndpoint.cs:        app.MapPost("/api/v1/despesas", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Tenants\ExcluirTenant\ExcluirTenantEndpoint.cs:        app.MapDelete("/api/v1/tenants/{id:guid}", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Despesa\ExcluirDespesaEndpoint.cs:        app.MapDelete("/api/v1/despesas/{id:guid}", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Despesa\ObterDespesaEndpoint.cs:        app.MapGet("/api/v1/despesas/{id:guid}", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Relatorios\RelatoriosFinanceirosEndpoints.cs:        group.MapGet("/dre", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Relatorios\RelatoriosFinanceirosEndpoints.cs:        group.MapGet("/dre.pdf", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Relatorios\RelatoriosFinanceirosEndpoints.cs:        group.MapGet("/balanco", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Relatorios\RelatoriosFinanceirosEndpoints.cs:        group.MapGet("/balanco.pdf", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Auth\LoginEndpoint.cs:        app.MapPost("/api/v1/auth/login", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Tenants\AlterarTenant\AlterarTenantEndpoint.cs:        app.MapPut("/api/v1/tenants/{id:guid}", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\FluxoDeCaixa\FecharPeriodoEndpoint.cs:        app.MapPost("/api/v1/fluxo-de-caixa/fechar-periodo", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Auth\LogoutEndpoint.cs:        app.MapPost("/api/v1/auth/logout", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Despesa\AlterarDespesaEndpoint.cs:        app.MapPut("/api/v1/despesas/{id:guid}", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Despesa\BaixarDespesaEndpoint.cs:        app.MapPost("/api/v1/despesas/{id:guid}/baixar", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\ContasReceber\ContasReceberEndpoints.cs:        group.MapPost("/", async (CriarContaReceberCommand cmd, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\ContasReceber\ContasReceberEndpoints.cs:        group.MapPost("/{id:guid}/receber", async (Guid id, ReceberContaReceberRequest req, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\ContasReceber\ContasReceberEndpoints.cs:        group.MapGet("/", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\ContasReceber\ContasReceberEndpoints.cs:        group.MapGet("/{id:guid}", async (Guid id, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Empresas\AlterarEmpresaEndpoint.cs:        app.MapPut("/api/v1/empresas/{id:guid}", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Despesa\ListarDespesasEndpoint.cs:        app.MapGet("/api/v1/despesas", async (
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Dividas\DividasEndpoints.cs:        group.MapPost("/", async (CriarDividaCommand cmd, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Dividas\DividasEndpoints.cs:        group.MapPut("/{id:guid}", async (Guid id, AlterarDividaRequest req, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Dividas\DividasEndpoints.cs:        group.MapDelete("/{id:guid}", async (Guid id, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Dividas\DividasEndpoints.cs:        group.MapGet("/", async (StatusConta? status, int? skip, int? take, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Dividas\DividasEndpoints.cs:        group.MapGet("/{id:guid}", async (Guid id, IMediator m, CancellationToken ct) =>
+H:\ACME\PROJETOS\Sistemas\Atena\src\Api\Acme.Sistemas.Atena.Api\Endpoints\V1\Auth\ConfirmarEmailEndpoint.cs:        app.MapPost("/api/v1/auth/confirmar-email", async (

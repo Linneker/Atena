@@ -15,4 +15,3 @@ public sealed record AlterarDespesaCommand(
     Guid? CentroDeCustoId,
     Guid? FornecedorId) : IRequest<ResponseDefault<AlterarDespesaCommandResult>>;
 
-public sealed record AlterarDespesaCommandResult(Guid Id);

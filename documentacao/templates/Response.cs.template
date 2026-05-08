@@ -1,0 +1,9 @@
+namespace Acme.Sistemas.Atena.Api.Endpoints.V1.{{Recurso}}.{{Acao}}{{Recurso}};
+
+/// <summary>
+/// DTO de saída do {{Acao}}{{Recurso}}Endpoint. Tipicamente espelha o Result do Command/Query
+/// adaptado às necessidades da camada HTTP (omissão de campos sensíveis, renames, etc.).
+/// </summary>
+public sealed record {{Acao}}{{Recurso}}Response(
+    // TODO: campos do payload de saída
+);

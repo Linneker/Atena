@@ -1,5 +1,5 @@
 using System.Data;
-using Acme.Sistemas.Repository.Configuration;
+using Acme.Sistemas.Infrastructure.Databases.Configuration;
 
 namespace Acme.Sistemas.Infrastructure.Databases.Configuration;
 

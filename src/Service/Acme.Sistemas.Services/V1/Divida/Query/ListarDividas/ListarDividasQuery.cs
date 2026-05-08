@@ -9,8 +9,3 @@ public sealed record ListarDividasQuery(
     int Skip = 0,
     int Take = 50) : IRequest<ResponseDefault<ListarDividasQueryResult>>;
 
-public sealed record ListarDividasQueryItem(
-    Guid Id, string Credor, decimal ValorOriginal, decimal ValorPago,
-    decimal Saldo, DateTime DataInicio, DateTime? DataFim, int NumeroParcelas, StatusConta Status);
-
-public sealed record ListarDividasQueryResult(IReadOnlyList<ListarDividasQueryItem> Items, long Total);

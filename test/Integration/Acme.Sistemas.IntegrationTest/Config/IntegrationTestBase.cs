@@ -17,8 +17,15 @@ public abstract class IntegrationTestBase : IClassFixture<DockerEnvironment>, IA
 
     public virtual Task InitializeAsync()
     {
-        Factory.ConnectionString = Docker.MySqlConnectionString;
-        Client = Factory.CreateClient();
+        if (Docker.IsAvailable)
+        {
+            Factory.ConnectionString = Docker.MySqlConnectionString;
+            Client = Factory.CreateClient();
+        }
+        else
+        {
+            Client = new HttpClient();
+        }
         return Task.CompletedTask;
     }
 

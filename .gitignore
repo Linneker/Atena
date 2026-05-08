@@ -425,3 +425,9 @@ acme.cashflow.infra/obj.*
 acme.cashflow.repository/obj.*
 
 /site/cashflow/node_modules
+# Cache local LiteDB (Acme.Sistemas.Atena.Api)
+cache.db
+*.cache.db
+
+# Feature flags override de desenvolvimento
+featureflags.local.json

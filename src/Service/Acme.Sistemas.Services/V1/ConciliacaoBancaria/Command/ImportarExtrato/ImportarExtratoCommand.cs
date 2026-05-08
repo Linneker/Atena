@@ -10,7 +10,3 @@ public sealed record ImportarExtratoCommand(
     string Formato,
     byte[] Conteudo) : IRequest<ResponseDefault<ImportarExtratoCommandResult>>;
 
-public sealed record ImportarExtratoCommandResult(
-    Guid ConciliacaoId,
-    int TotalLancamentos,
-    int TotalConciliados);

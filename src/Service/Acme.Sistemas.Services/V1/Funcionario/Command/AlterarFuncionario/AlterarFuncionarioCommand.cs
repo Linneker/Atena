@@ -17,4 +17,3 @@ public sealed record AlterarFuncionarioCommand(
     Guid? UsuarioId,
     StatusAtivo Status) : IRequest<ResponseDefault<AlterarFuncionarioCommandResult>>;
 
-public sealed record AlterarFuncionarioCommandResult(Guid Id);

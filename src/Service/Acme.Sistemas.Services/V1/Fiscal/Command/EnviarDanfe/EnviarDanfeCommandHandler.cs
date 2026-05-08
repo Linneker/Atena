@@ -1,9 +1,9 @@
 using Acme.Sistemas.Core.Mediators.Handler;
-using Acme.Sistemas.Core.Messaging;
+using Acme.Sistemas.Domain.Interfaces.Messaging;
 using Acme.Sistemas.Core.Response;
 using Acme.Sistemas.Domain.Entities.Fiscal;
 using Acme.Sistemas.Domain.Interfaces.Repository;
-using Acme.Sistemas.Services.V1.Relatorios.Pdf;
+using Acme.Sistemas.Domain.Interfaces.Reports;
 
 namespace Acme.Sistemas.Services.V1.Fiscal.Command.EnviarDanfe;
 

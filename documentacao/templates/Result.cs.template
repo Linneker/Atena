@@ -1,0 +1,11 @@
+namespace Acme.Sistemas.Services.V1.{{Funcionalidade}}.{{CommandOrQuery}}.{{Acao}};
+
+/// <summary>
+/// Result do {{Acao}}{{CommandOrQuery}}.
+///
+/// Convenção: record imutável + (opcional) métodos factory `Sucesso()` / `Erro()`.
+/// O wrapping HTTP fica em <see cref="Acme.Sistemas.Core.Response.ResponseDefault{T}"/>.
+/// </summary>
+public sealed record {{Acao}}{{CommandOrQuery}}Result(
+    // TODO: campos do resultado (ex.: Guid Id, string Codigo, ...)
+);

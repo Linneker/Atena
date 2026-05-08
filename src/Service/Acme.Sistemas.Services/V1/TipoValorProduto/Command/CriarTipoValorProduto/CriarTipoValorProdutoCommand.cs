@@ -6,4 +6,3 @@ namespace Acme.Sistemas.Services.V1.TipoValorProduto.Command.CriarTipoValorProdu
 public sealed record CriarTipoValorProdutoCommand(string Nome, string? Descricao)
     : IRequest<ResponseDefault<CriarTipoValorProdutoCommandResult>>;
 
-public sealed record CriarTipoValorProdutoCommandResult(Guid Id, string Nome);

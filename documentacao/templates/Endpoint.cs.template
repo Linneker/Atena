@@ -1,0 +1,27 @@
+using Acme.Sistemas.Atena.Api.Config.Security;
+using Acme.Sistemas.Core.Const;
+using Acme.Sistemas.Core.Mediators;
+using Acme.Sistemas.Services.V1.{{Funcionalidade}}.{{CommandOrQuery}}.{{Acao}};
+
+namespace Acme.Sistemas.Atena.Api.Endpoints.V1.{{Recurso}}.{{Acao}}{{Recurso}};
+
+public sealed class {{Acao}}{{Recurso}}Endpoint : IEndpoint
+{
+    public void MapEndpoint(IEndpointRouteBuilder app)
+    {
+        app.Map{{Verbo}}("/api/v1/{{rota}}", async (
+            // {{Acao}}{{Recurso}}Request request,    // opcional para POST/PUT
+            IMediator mediator,
+            CancellationToken cancellationToken) =>
+        {
+            var response = await mediator.Send(/* request.ToCommand() */, cancellationToken);
+            return response.IsSuccess
+                ? Results.Ok(response.Content /* .ToResponse() */)
+                : Results.Json(response, statusCode: response.Status);
+        })
+        .RequirePermissao(Permissions.Of(Permissions.Recursos.{{Recurso}}, Permissions.Acoes.{{Acao}}))
+        .WithTags("{{Recurso}}")
+        .WithName("{{Acao}}{{Recurso}}")
+        .Produces<{{Acao}}{{Recurso}}Response>();
+    }
+}

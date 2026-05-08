@@ -12,4 +12,3 @@ public sealed record CriarContaPagarCommand(
     DateTime DataVencimento,
     string? Observacao) : IRequest<ResponseDefault<CriarContaPagarCommandResult>>;
 
-public sealed record CriarContaPagarCommandResult(Guid Id, string Descricao, decimal ValorOriginal, DateTime DataVencimento);

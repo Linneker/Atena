@@ -16,4 +16,3 @@ public sealed record AlterarReceitaCommand(
     Guid? ClienteId,
     Guid? OrigemVendaId) : IRequest<ResponseDefault<AlterarReceitaCommandResult>>;
 
-public sealed record AlterarReceitaCommandResult(Guid Id);

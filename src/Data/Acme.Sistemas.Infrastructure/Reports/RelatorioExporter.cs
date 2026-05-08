@@ -1,4 +1,4 @@
-using Acme.Sistemas.Services.V1.Relatorios.Export;
+using Acme.Sistemas.Domain.Interfaces.Reports;
 using ClosedXML.Excel;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;

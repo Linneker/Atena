@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using System.Text;
+using Acme.Sistemas.Domain.Interfaces.Fiscal;
 
 namespace Acme.Sistemas.Services.V1.Fiscal.Services;
 

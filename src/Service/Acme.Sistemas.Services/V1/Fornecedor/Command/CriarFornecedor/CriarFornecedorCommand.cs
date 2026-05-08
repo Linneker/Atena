@@ -16,4 +16,3 @@ public sealed record CriarFornecedorCommand(
     string? CondicaoPagamentoPadrao,
     EnderecoDto? Endereco) : IRequest<ResponseDefault<CriarFornecedorCommandResult>>;
 
-public sealed record CriarFornecedorCommandResult(Guid Id, string Nome, string Documento);

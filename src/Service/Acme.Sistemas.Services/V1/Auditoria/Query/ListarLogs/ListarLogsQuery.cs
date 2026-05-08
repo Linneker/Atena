@@ -12,10 +12,3 @@ public sealed record ListarLogsQuery(
     DateTime? Fim = null,
     int Skip = 0,
     int Take = 50) : IRequest<ResponseDefault<ListarLogsQueryResult>>;
-
-public sealed record ListarLogsQueryItem(
-    Guid Id, Guid? UserId, string Entidade, Guid? EntidadeId,
-    OperacaoAuditoria Operacao, string CommandTipo,
-    DateTime OcorridoEm);
-
-public sealed record ListarLogsQueryResult(IReadOnlyList<ListarLogsQueryItem> Items, long Total);

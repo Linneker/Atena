@@ -7,5 +7,3 @@ public sealed record AbrirInventarioCommand(
     Guid EstoqueId,
     string? Observacao) : IRequest<ResponseDefault<AbrirInventarioCommandResult>>;
 
-public sealed record AbrirInventarioCommandResult(
-    Guid Id, Guid EstoqueId, int TotalProdutos, DateTime DataAbertura);

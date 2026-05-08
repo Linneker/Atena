@@ -6,4 +6,3 @@ namespace Acme.Sistemas.Services.V1.Autenticacao.Command.ConfirmarEmail;
 public sealed record ConfirmarEmailCommand(string Token)
     : IRequest<ResponseDefault<ConfirmarEmailCommandResult>>;
 
-public sealed record ConfirmarEmailCommandResult(Guid UserId, string Email, DateTime ConfirmadoEm);

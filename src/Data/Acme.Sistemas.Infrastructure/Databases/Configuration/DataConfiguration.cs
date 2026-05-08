@@ -1,5 +1,5 @@
 using System.Data;
-using Acme.Sistemas.Repository.Configuration;
+using Acme.Sistemas.Infrastructure.Databases.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MySqlConnector;

@@ -16,4 +16,3 @@ public sealed record CriarClienteCommand(
     EnderecoDto? Endereco,
     bool BuscarEnderecoPorCep = false) : IRequest<ResponseDefault<CriarClienteCommandResult>>;
 
-public sealed record CriarClienteCommandResult(Guid Id, string Nome, string Documento);

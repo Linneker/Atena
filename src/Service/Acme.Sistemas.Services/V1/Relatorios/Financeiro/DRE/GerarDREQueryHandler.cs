@@ -2,6 +2,7 @@ using Acme.Sistemas.Core.Mediators.Handler;
 using Acme.Sistemas.Core.Response;
 using Acme.Sistemas.Domain.Enums;
 using Acme.Sistemas.Domain.Interfaces.Repository;
+using Acme.Sistemas.Domain.Reports;
 using PlanoEntity = Acme.Sistemas.Domain.Entities.Financeiro.PlanoDeContas;
 
 namespace Acme.Sistemas.Services.V1.Relatorios.Financeiro.DRE;

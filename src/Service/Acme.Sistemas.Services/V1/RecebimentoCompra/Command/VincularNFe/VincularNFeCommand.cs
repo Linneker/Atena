@@ -8,8 +8,3 @@ public sealed record VincularNFeCommand(
     string NumeroNotaFiscal,
     string ChaveAcesso) : IRequest<ResponseDefault<VincularNFeCommandResult>>;
 
-public sealed record VincularNFeCommandResult(
-    Guid RecebimentoId,
-    string ChaveAcesso,
-    bool ChaveAcessoValida,
-    bool ConsultaSefazExecutada);

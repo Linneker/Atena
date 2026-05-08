@@ -18,4 +18,3 @@ public sealed record AlterarClienteCommand(
     StatusAtivo Status,
     EnderecoDto? Endereco) : IRequest<ResponseDefault<AlterarClienteCommandResult>>;
 
-public sealed record AlterarClienteCommandResult(Guid Id);

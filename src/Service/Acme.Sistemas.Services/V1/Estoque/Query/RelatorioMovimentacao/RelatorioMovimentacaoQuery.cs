@@ -11,22 +11,3 @@ public sealed record RelatorioMovimentacaoQuery(
     int Skip = 0,
     int Take = 200) : IRequest<ResponseDefault<RelatorioMovimentacaoResult>>;
 
-public sealed record MovimentoLinha(
-    DateTime Data,
-    string Tipo,
-    Guid EstoqueId,
-    decimal Quantidade,
-    decimal? CustoUnitario,
-    decimal? CmvUnitario,
-    OrigemMovimento Origem,
-    string? Motivo,
-    string? DocumentoReferencia);
-
-public sealed record RelatorioMovimentacaoResult(
-    Guid ProdutoId,
-    DateTime? Inicio,
-    DateTime? Fim,
-    decimal TotalEntradas,
-    decimal TotalSaidas,
-    decimal Saldo,
-    IReadOnlyList<MovimentoLinha> Movimentos);

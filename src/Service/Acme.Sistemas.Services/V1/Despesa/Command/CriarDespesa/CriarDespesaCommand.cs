@@ -14,4 +14,3 @@ public sealed record CriarDespesaCommand(
     Guid? CentroDeCustoId,
     Guid? FornecedorId) : IRequest<ResponseDefault<CriarDespesaCommandResult>>;
 
-public sealed record CriarDespesaCommandResult(Guid Id, string Nome, decimal Valor, DateTime DataVencimento);

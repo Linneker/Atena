@@ -8,4 +8,3 @@ public sealed record AtualizarInadimplenciaCommand(
     bool Inadimplente,
     bool BloquearVendas) : IRequest<ResponseDefault<AtualizarInadimplenciaCommandResult>>;
 
-public sealed record AtualizarInadimplenciaCommandResult(Guid Id, bool Inadimplente, bool BloqueadoVendas);

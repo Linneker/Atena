@@ -1,5 +1,5 @@
 using Acme.Sistemas.Infrastructure.Messaging.RabbitMq;
-using Acme.Sistemas.Services.V1.Fiscal.Services;
+using Acme.Sistemas.Domain.Interfaces.Fiscal;
 
 namespace Acme.Sistemas.Infrastructure.Messaging.Email;
 

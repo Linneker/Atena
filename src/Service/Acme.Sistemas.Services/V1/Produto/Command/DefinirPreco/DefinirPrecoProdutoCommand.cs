@@ -9,4 +9,3 @@ public sealed record DefinirPrecoProdutoCommand(
     decimal Valor,
     DateTime? VigenciaInicio = null) : IRequest<ResponseDefault<DefinirPrecoProdutoCommandResult>>;
 
-public sealed record DefinirPrecoProdutoCommandResult(Guid PrecoId, decimal Valor, DateTime VigenciaInicio);

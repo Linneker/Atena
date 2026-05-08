@@ -7,7 +7,3 @@ public sealed record ImportarCertificadoCommand(
     byte[] PfxConteudo,
     string Senha) : IRequest<ResponseDefault<ImportarCertificadoCommandResult>>;
 
-public sealed record ImportarCertificadoCommandResult(
-    string Subject,
-    DateTime ValidoAte,
-    int DiasParaVencer);

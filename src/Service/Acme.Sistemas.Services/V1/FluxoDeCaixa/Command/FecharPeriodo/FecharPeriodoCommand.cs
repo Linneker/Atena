@@ -8,11 +8,3 @@ public sealed record FecharPeriodoCommand(
     int Mes,
     string? Observacao) : IRequest<ResponseDefault<FecharPeriodoCommandResult>>;
 
-public sealed record FecharPeriodoCommandResult(
-    Guid Id,
-    int Ano,
-    int Mes,
-    decimal TotalReceitas,
-    decimal TotalDespesas,
-    decimal Resultado,
-    DateTime FechadoEm);

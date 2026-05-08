@@ -10,20 +10,3 @@ public sealed record RecebimentoItemDto(
     decimal? PrecoUnitario,
     string? Observacao);
 
-public sealed record RegistrarRecebimentoCommand(
-    Guid PedidoCompraId,
-    Guid EstoqueId,
-    DateTime? DataRecebimento,
-    string? NumeroNotaFiscal,
-    string? ChaveAcessoNFe,
-    string? Observacao,
-    DateTime VencimentoContaPagar,
-    Guid? PlanoDeContasId,
-    IReadOnlyList<RecebimentoItemDto> Itens) : IRequest<ResponseDefault<RegistrarRecebimentoCommandResult>>;
-
-public sealed record RegistrarRecebimentoCommandResult(
-    Guid RecebimentoId,
-    TipoRecebimento Tipo,
-    Guid? ContaPagarId,
-    decimal ValorTotalRecebido,
-    int EntradasGeradas);

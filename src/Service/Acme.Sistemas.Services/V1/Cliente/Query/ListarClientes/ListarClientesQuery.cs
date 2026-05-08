@@ -11,9 +11,3 @@ public sealed record ListarClientesQuery(
     int Skip = 0,
     int Take = 50) : IRequest<ResponseDefault<ListarClientesQueryResult>>;
 
-public sealed record ListarClientesQueryItem(
-    Guid Id, TipoPessoa Tipo, string Nome, string? NomeFantasia,
-    string Documento, string? Email, string? Telefone,
-    StatusAtivo Status, bool Inadimplente, bool BloqueadoVendas);
-
-public sealed record ListarClientesQueryResult(IReadOnlyList<ListarClientesQueryItem> Items, long Total);

@@ -34,7 +34,7 @@ public class CriarClienteCommandHandlerTests
                 null, null, null, null), default);
 
         result.IsSuccess.Should().BeFalse();
-        result.StatusCode.Should().Be(409);
+        result.Status.Should().Be(409);
         _repo.Verify(r => r.AddAsync(It.IsAny<Cliente>(), It.IsAny<CancellationToken>()), Times.Never);
     }
 

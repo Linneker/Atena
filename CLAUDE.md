@@ -46,19 +46,29 @@ npm test
 ### Docker
 
 ```powershell
-# Bring up the full stack (API, MySQL, Redis, RabbitMQ, MinIO)
-docker compose up -d
+# Sobe a stack completa (API, MySQL, Redis, RabbitMQ, MinIO).
+# Compose vive em infra/compose/ — paths relativos consideram raiz do repo.
+docker compose -f infra/compose/docker-compose.yml up -d
 
-# Build API image only (from src/Api/Acme.Sistemas.Atena.Api/)
-docker build -t atena-api .
+# Build da imagem da API (Dockerfile em src/Api/.../Dockerfile, build context na raiz)
+docker build -t atena-api -f src/Api/Acme.Sistemas.Atena.Api/Dockerfile .
 ```
 
 ### Kubernetes
 
-Manifests live under `infra/k8s/v1/` (deployment, service, configmaps).
+Manifests em `infra/k8s/v1/` (namespace, configmap, deployment, service).
+Cluster local com `kind` configurado em `infra/k8s/kind-config.yaml`
+(3 control-plane + 3 worker, port-mapping 30000→5000).
 
 ```powershell
+# Cria cluster kind local
+kind create cluster --name atena --config infra/k8s/kind-config.yaml
+
+# Aplica manifests
 kubectl apply -f infra/k8s/v1/
+
+# Ou use o script automatizado (build + load + apply + wait)
+pwsh infra/k8s/v1/deploy-kind.ps1
 ```
 
 ## Architecture
@@ -89,9 +99,44 @@ infra/
 
 Dependencies flow inward: `Api → Services → Domain ← Repository ← Infrastructure`.
 
+### Blueprint Acme
+
+A organização técnica segue o blueprint comum dos projetos Acme. Documentos canônicos:
+
+- `documentacao/blueprint.yml` (norma técnica)
+- `documentacao/ESTRUTURA_PADRAO_PROJETOS_ACME.md` (guia)
+- `documentacao/templates/` — templates de Behavior, Result, Validation, Endpoint, Request, Response, Map
+
+**Justificativa "Domain por módulo ERP":** o blueprint é norma de organização (CQRS, layout, infra, cache); o modelo de domínio é específico do projeto. Atena mantém Domain organizado por área ERP (Financeiro, Estoque, Compras, etc.) — isto é decisão deliberada, **não** divergência do blueprint.
+
+#### Como criar um novo Endpoint no padrão
+
+```
+Api/Endpoints/V1/{Recurso}/{Verbo}{Recurso}/
+├── {Verbo}{Recurso}Endpoint.cs    ← classe IEndpoint que registra a rota
+├── {Verbo}{Recurso}Request.cs     ← DTO de entrada (opcional para GETs simples)
+├── {Verbo}{Recurso}Response.cs    ← DTO de saída
+└── {Verbo}{Recurso}Map.cs         ← extensions Request → Command, Result → Response
+```
+
+Implementa `IEndpoint`, descoberto via reflexão por `EndpointRegistrationExtensions`. Use `RequirePermissao(Permissions.Of(Recursos.X, Acoes.Y))`.
+
+#### Como criar um novo Command com Behavior+Result
+
+```
+Service/Acme.Sistemas.Services/V1/{Funcionalidade}/Command/{Acao}/
+├── {Acao}Command.cs               ← record + IRequest<ResponseDefault<{Acao}CommandResult>>
+├── {Acao}CommandHandler.cs        ← IRequestHandler<…>; lógica de negócio
+├── {Acao}CommandBehavior.cs       ← IPipelineBehavior<…>; cache invalidation, regra extra
+├── {Acao}CommandResult.cs         ← record imutável (payload de saída)
+└── {Acao}CommandValidation.cs     ← AbstractValidator<…> com FluentValidation
+```
+
+O pipeline transversal aplica em ordem: **Validation → CacheLookup → Audit → Log → Behavior específico → Handler**. Os 4 transversais vivem em `Acme.Sistemas.Core/Mediators/Behaviors/`. Convenções validadas em CI por `ConvencoesBlueprintTests`.
+
 ### Key Patterns
 
-- **CQRS via Mediator próprio** (em `Acme.Sistemas.Core/Mediador/`): Commands em `V1/<Recurso>/Command/`, Queries em `V1/<Recurso>/Query/` — cada um com `Command|Query`, `Handler`, `Behavior`, `Result`, `Validation`
+- **CQRS via Mediator próprio** (em `Acme.Sistemas.Core/Mediators/`): Commands em `V1/<Recurso>/Command/`, Queries em `V1/<Recurso>/Query/` — cada um com `Command|Query`, `Handler`, `Behavior`, `Result`, `Validation`
 - **Repository Pattern com SQL puro**: Sem ORM no Read; queries em `<Recurso>Query.cs`
 - **Multi-tenancy**: `tenant_id` em todas as tabelas; `ITenantContext` (scoped) injetado pelo `TenantMiddleware` extraindo do JWT
 - **RBAC**: `roles`, `permissions`, `role_permissions`, `user_roles`. `PermissaoAttribute`/policies validam claims do JWT. Permissões em `Acme.Sistemas.Core/Const/Permissions.cs`

@@ -11,14 +11,3 @@ public sealed record NFeItemDto(
     string? Cfop,
     string? Ncm);
 
-public sealed record EmitirNFeCommand(
-    Guid? FaturamentoId,
-    Guid ClienteId,
-    IReadOnlyList<NFeItemDto> Itens) : IRequest<ResponseDefault<EmitirNFeCommandResult>>;
-
-public sealed record EmitirNFeCommandResult(
-    Guid NFeId,
-    int Numero,
-    int Serie,
-    string ChaveAcesso,
-    bool EnfileiradaParaTransmissao);

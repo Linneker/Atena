@@ -11,5 +11,3 @@ public sealed record BaixarContaPagarCommand(
     FormaPagamento FormaPagamento,
     string? Observacao) : IRequest<ResponseDefault<BaixarContaPagarCommandResult>>;
 
-public sealed record BaixarContaPagarCommandResult(
-    Guid Id, StatusConta Status, decimal ValorPago, decimal Saldo);

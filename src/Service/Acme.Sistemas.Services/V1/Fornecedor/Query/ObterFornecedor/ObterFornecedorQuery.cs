@@ -7,9 +7,3 @@ namespace Acme.Sistemas.Services.V1.Fornecedor.Query.ObterFornecedor;
 
 public sealed record ObterFornecedorQuery(Guid Id) : IRequest<ResponseDefault<ObterFornecedorQueryResult>>;
 
-public sealed record ObterFornecedorQueryResult(
-    Guid Id, TipoPessoa Tipo, string Nome, string? NomeFantasia,
-    string Documento, string? InscricaoEstadual,
-    string? Email, string? Telefone,
-    string? CondicaoPagamentoPadrao, StatusAtivo Status,
-    Endereco Endereco, DateTime CreatedAt);

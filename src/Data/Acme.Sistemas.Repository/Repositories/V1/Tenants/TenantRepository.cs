@@ -2,7 +2,7 @@ using System.Data;
 using Acme.Sistemas.Domain.Entities.Tenants;
 using Acme.Sistemas.Domain.Enums;
 using Acme.Sistemas.Domain.Interfaces.Repository;
-using Acme.Sistemas.Repository.Configuration;
+using Acme.Sistemas.Infrastructure.Databases.Configuration;
 using Acme.Sistemas.Repository.Helper;
 
 namespace Acme.Sistemas.Repository.Repositories.V1.Tenants;

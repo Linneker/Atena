@@ -8,4 +8,3 @@ public sealed record CriarUsuarioCommand(
     string Email,
     string Senha) : IRequest<ResponseDefault<CriarUsuarioCommandResult>>;
 
-public sealed record CriarUsuarioCommandResult(Guid Id, string NomeCompleto, string Email);

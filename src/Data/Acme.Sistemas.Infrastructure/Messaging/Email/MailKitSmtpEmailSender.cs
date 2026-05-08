@@ -1,3 +1,4 @@
+using Acme.Sistemas.Domain.Interfaces.Messaging;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Logging;

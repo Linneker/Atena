@@ -11,8 +11,3 @@ public sealed record BaixarDespesaCommand(
     FormaPagamento FormaPagamento,
     string? Observacao) : IRequest<ResponseDefault<BaixarDespesaCommandResult>>;
 
-public sealed record BaixarDespesaCommandResult(
-    Guid Id,
-    StatusPagamento StatusPagamento,
-    decimal ValorPago,
-    DateTime DataPagamento);

@@ -27,11 +27,17 @@ spec:
           ports:
             - containerPort: 8080
               name: http
+          env:
+            - name: FeatureFlags__Cache__LiteDbPath
+              value: "/tmp/cache.db"
           envFrom:
             - configMapRef:
                 name: atena-api-config
             - secretRef:
                 name: atena-api-secret
+          volumeMounts:
+            - name: cache-tmp
+              mountPath: /tmp
           resources:
             requests:
               cpu: "250m"
@@ -47,6 +53,9 @@ spec:
             httpGet: { path: /health/ready, port: 8080 }
             initialDelaySeconds: 10
             periodSeconds: 10
+      volumes:
+        - name: cache-tmp
+          emptyDir: {}
 ---
 apiVersion: apps/v1
 kind: Deployment

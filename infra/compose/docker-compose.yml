@@ -1,0 +1,109 @@
+services:
+  api:
+    build:
+      context: ../..
+      dockerfile: src/Api/Acme.Sistemas.Atena.Api/Dockerfile
+    image: atena-api:latest
+    container_name: atena-api
+    ports:
+      - "5000:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__Default: server=mysql;port=3306;database=atena;user=atena;password=atena123;
+      Redis__Connection: redis:6379
+      RabbitMq__Host: rabbitmq
+      RabbitMq__User: atena
+      RabbitMq__Password: atena123
+      Storage__Provider: S3
+      Storage__S3__Endpoint: http://minio:9000
+      Storage__S3__AccessKey: atena
+      Storage__S3__SecretKey: atena12345
+      Storage__S3__Bucket: atena
+      Jwt__SecretKey: change-me-in-production-use-a-very-long-secret-key
+      Jwt__Issuer: atena
+      Jwt__Audience: atena
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      rabbitmq:
+        condition: service_healthy
+      minio:
+        condition: service_started
+    networks: [atena]
+
+  mysql:
+    image: mysql:8.0
+    container_name: atena-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: atena
+      MYSQL_USER: atena
+      MYSQL_PASSWORD: atena123
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pat root123"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks: [atena]
+
+  redis:
+    image: redis:7-alpine
+    container_name: atena-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks: [atena]
+
+  rabbitmq:
+    image: rabbitmq:3.12-management-alpine
+    container_name: atena-rabbitmq
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: atena
+      RABBITMQ_DEFAULT_PASS: atena123
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+    networks: [atena]
+
+  minio:
+    image: minio/minio:latest
+    container_name: atena-minio
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: atena
+      MINIO_ROOT_PASSWORD: atena12345
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio-data:/data
+    networks: [atena]
+
+volumes:
+  mysql-data:
+  redis-data:
+  rabbitmq-data:
+  minio-data:
+
+networks:
+  atena:
+    driver: bridge

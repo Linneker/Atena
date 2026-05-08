@@ -1,4 +1,4 @@
-using Acme.Sistemas.Services.V1.Relatorios.Pdf;
+using Acme.Sistemas.Domain.Interfaces.Reports;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;

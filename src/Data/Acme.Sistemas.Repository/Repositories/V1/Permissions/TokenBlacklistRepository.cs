@@ -1,6 +1,6 @@
 using Acme.Sistemas.Domain.Entities.Permissions;
 using Acme.Sistemas.Domain.Interfaces.Repository;
-using Acme.Sistemas.Repository.Configuration;
+using Acme.Sistemas.Infrastructure.Databases.Configuration;
 
 namespace Acme.Sistemas.Repository.Repositories.V1.Permissions;
 

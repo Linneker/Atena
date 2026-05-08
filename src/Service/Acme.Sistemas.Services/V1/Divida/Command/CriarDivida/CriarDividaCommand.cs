@@ -12,4 +12,3 @@ public sealed record CriarDividaCommand(
     DateTime? DataFim,
     int NumeroParcelas) : IRequest<ResponseDefault<CriarDividaCommandResult>>;
 
-public sealed record CriarDividaCommandResult(Guid Id, string Credor, decimal ValorOriginal);

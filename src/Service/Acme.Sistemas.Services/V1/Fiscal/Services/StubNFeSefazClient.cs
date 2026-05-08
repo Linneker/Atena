@@ -1,4 +1,5 @@
 using Acme.Sistemas.Domain.Entities.Fiscal;
+using Acme.Sistemas.Domain.Interfaces.Fiscal;
 using Microsoft.Extensions.Logging;
 
 namespace Acme.Sistemas.Services.V1.Fiscal.Services;

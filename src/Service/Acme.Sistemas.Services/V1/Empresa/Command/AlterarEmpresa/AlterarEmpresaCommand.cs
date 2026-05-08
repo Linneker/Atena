@@ -18,4 +18,3 @@ public sealed record AlterarEmpresaCommand(
     EnderecoDto? Endereco,
     bool BuscarEnderecoPorCep = false) : IRequest<ResponseDefault<AlterarEmpresaCommandResult>>;
 
-public sealed record AlterarEmpresaCommandResult(Guid Id);

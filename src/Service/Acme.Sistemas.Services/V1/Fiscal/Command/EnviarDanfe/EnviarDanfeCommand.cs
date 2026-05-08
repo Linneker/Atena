@@ -7,4 +7,3 @@ public sealed record EnviarDanfeCommand(
     Guid NFeId,
     string? EmailDestinoOverride = null) : IRequest<ResponseDefault<EnviarDanfeCommandResult>>;
 
-public sealed record EnviarDanfeCommandResult(Guid NFeId, string EmailDestino);
