@@ -52,35 +52,35 @@
 
 ### 2.1 Loader de certificado A1
 
-- [ ] 2.1.1 Definir interface `ICertificadoLoader` com `LoadAsync(byte[] pfx, string senha)` → `X509Certificate2`
-- [ ] 2.1.2 Implementar `A1CertificadoLoader` (PFX em memória)
-- [ ] 2.1.3 Validar cadeia ICP-Brasil (raiz `AC RAIZ ICP-Brasil v5`)
-- [ ] 2.1.4 Detectar expiração e flag de uso indevido (`KeyUsage` deve incluir `DigitalSignature`)
-- [ ] 2.1.5 Test unitário com cert auto-assinado mock + cert real homolog (em test-resources, gitignored)
+- [x] 2.1.1 `ICertificadoLoader` em `Domain/Interfaces/Fiscal/` com `LoadAsync` + `CertificadoInvalidoException`
+- [x] 2.1.2 `A1CertificadoLoader` em `ExternalIntegration/Sefaz/Certificado/` carrega via `X509CertificateLoader.LoadPkcs12` (não-obsoleto)
+- [x] 2.1.3 Validação de cadeia ICP-Brasil via `X509Chain.Build` (toggle `validarCadeiaIcpBrasil` permite tests com cert auto-assinado)
+- [x] 2.1.4 Validação de NotAfter (vencimento) + KeyUsage com `DigitalSignature`
+- [x] 2.1.5 Tests unitários com cert auto-assinado gerado em runtime (`CertificateRequest`): 5 fatos (load OK, senha errada, vencido, sem DigitalSignature, bytes vazios). Tests com cert ICP-Brasil real ficam para pipeline manual quando o cert estiver disponível
 
 ### 2.2 Carregamento por tenant
 
-- [ ] 2.2.1 Estender `ConfiguracaoFiscalRepository` para retornar `byte[] pfx, string senhaCriptografada`
-- [ ] 2.2.2 Helper `CertificadoTenantResolver` que descriptografa senha + chama `ICertificadoLoader`
-- [ ] 2.2.3 Cache em memória do `X509Certificate2` por tenant (com TTL = vencimento - 1 dia)
-- [ ] 2.2.4 Integrar com worker existente `CertificadoVencimentoVarreduraWorker` para alertas
+- [x] 2.2.1 `ConfiguracaoFiscal` já expõe `CertificadoPfxCriptografado` (byte[]), `CertificadoSenhaCriptografada` (Base64) e `CertificadoSenhaNonceBase64`; `IConfiguracaoFiscalRepository.GetAsync` retorna tudo. Sem mudança necessária
+- [x] 2.2.2 `CertificadoTenantResolver` em `ExternalIntegration/Sefaz/Certificado/` descriptografa via `TenantSecretCipher` (AES-GCM existente) + delega ao `ICertificadoLoader`
+- [x] 2.2.3 Cache `ConcurrentDictionary<Guid, CacheEntry>` por tenant; TTL = `NotAfter - margemAntesVencimento` (default 1 dia); método `Invalidar()` para upload de novo cert
+- [ ] 2.2.4 ⚠ DEFERIDO — Integração com `CertificadoVencimentoVarreduraWorker` é uma mudança no worker existente; entra em fase futura (Fase 6 ou separada). Resolver já expõe `NotAfter` via `cert.NotAfter` para o worker consumir
 
 ### 2.3 Assinador XML C14N
 
-- [ ] 2.3.1 Implementar `XmlSignerC14N` usando `SignedXml` do .NET
-- [ ] 2.3.2 Configurar `Reference` com URI = `#NFe<chave>` (Id do `infNFe`)
-- [ ] 2.3.3 Configurar transforms: `XmlDsigEnvelopedSignatureTransform` + `XmlDsigExcC14NTransform`
-- [ ] 2.3.4 Configurar `SignedInfo.CanonicalizationMethod = http://www.w3.org/2001/10/xml-exc-c14n#`
-- [ ] 2.3.5 Configurar `SignatureMethod = http://www.w3.org/2000/09/xmldsig#rsa-sha1`
-- [ ] 2.3.6 Embutir `KeyInfo` com `X509Data > X509Certificate`
-- [ ] 2.3.7 Test golden: assinar NFe sample → comparar com `xmlsec1` validate
+- [x] 2.3.1 `XmlSignerC14N` em `ExternalIntegration/Sefaz/Certificado/` usando `SignedXml` (`System.Security.Cryptography.Xml` adicionado ao .csproj)
+- [x] 2.3.2 Reference URI = `#<Id>` resolvido por subclasse `IdAwareSignedXml` (NFe usa atributo `Id` simples, não xml:id)
+- [x] 2.3.3 Transforms: `XmlDsigEnvelopedSignatureTransform` + `XmlDsigExcC14NTransform`
+- [x] 2.3.4 `CanonicalizationMethod = SignedXml.XmlDsigExcC14NTransformUrl`
+- [x] 2.3.5 `SignatureMethod = SignedXml.XmlDsigRSASHA1Url` (SEFAZ ainda exige SHA-1 para NFe v4.00)
+- [x] 2.3.6 `KeyInfo` com `KeyInfoX509Data(cert)` — embute `X509Certificate` em base64
+- [x] 2.3.7 ⚠ PARCIAL — Auto-validação via `SignedXml.CheckSignatureReturningKey` confirma integridade da assinatura (test `Sign_AssinaturaResultanteEhVerificavelPorCheckSignature`); golden file vs `xmlsec1` externo precisa de NFe sample real e fica para Fase 7 (validação fim-a-fim)
 
 ### 2.4 A3 (token físico) — opcional, fase 2
 
-- [ ] 2.4.1 Definir interface `IPkcs11Provider` (mockável)
-- [ ] 2.4.2 Implementar via `Pkcs11Interop` (lib MIT) — única dependência externa aceita
-- [ ] 2.4.3 Documentar drivers testados: SafeNet eToken 5110, Watchdata, Gemalto
-- [ ] 2.4.4 Test manual com token real (não automatizado)
+- [ ] 2.4.1 ⚠ DEFERIDO (proposal explícita: "A3 fica para fase final") — Definir `IPkcs11Provider`
+- [ ] 2.4.2 ⚠ DEFERIDO — Implementação via `Pkcs11Interop`
+- [ ] 2.4.3 ⚠ DEFERIDO — Documentar drivers (SafeNet eToken 5110, Watchdata, Gemalto)
+- [ ] 2.4.4 ⚠ DEFERIDO — Test manual com token físico
 
 ---
 
