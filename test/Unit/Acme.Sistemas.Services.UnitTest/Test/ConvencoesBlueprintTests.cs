@@ -1,5 +1,3 @@
-using System.Reflection;
-using Acme.Sistemas.Atena.Api.Endpoints;
 using Acme.Sistemas.Core.Mediators.Handler;
 using Acme.Sistemas.Core.Mediators.Notification;
 using FluentAssertions;
@@ -8,15 +6,17 @@ using Xunit;
 namespace Acme.Sistemas.Services.UnitTest.Test;
 
 /// <summary>
-/// Convenções do blueprint Acme:
+/// Convenções do blueprint Acme (lado Services):
 ///
 /// • Para cada `*Command` em <c>Acme.Sistemas.Services.V1</c>: exigir Handler/Behavior/Result/Validation
 ///   no mesmo namespace (mesma pasta).
 /// • Idem para `*Query` e `*Notification` (Notification não tem Result).
-/// • Para cada `IEndpoint` em <c>Acme.Sistemas.Atena.Api</c>: exigir `{Nome}Response` e `{Nome}Map`
-///   na mesma pasta. `Request` é opcional para GETs simples (heurística aplicada via existência de tipo).
 ///
 /// O teste lê o **disco** (paths físicos) porque a convenção é de organização de arquivos, não só de tipos.
+///
+/// O analyzer de endpoints (Endpoint+Request+Response+Map) vive em
+/// <c>EndpointConventionTests</c> no projeto de integração — itera <c>EndpointDataSource</c> em runtime
+/// para cobrir também rotas registradas fora do contrato <c>IEndpoint</c>.
 /// </summary>
 public class ConvencoesBlueprintTests
 {
@@ -135,39 +135,4 @@ public class ConvencoesBlueprintTests
         faltando.Should().BeEmpty(string.Join("\n", faltando));
     }
 
-    [Fact]
-    public void TodoEndpoint_TemResponseEMap()
-    {
-        var asm = typeof(IEndpoint).Assembly;
-        var endpoints = asm.GetTypes()
-            .Where(t => !t.IsAbstract && !t.IsInterface && typeof(IEndpoint).IsAssignableFrom(t))
-            .ToList();
-
-        var apiSrc = Path.Combine(SrcRoot, "Api", "Acme.Sistemas.Atena.Api");
-        var faltando = new List<string>();
-        foreach (var t in endpoints)
-        {
-            // Localiza o arquivo .cs do endpoint pelo nome do tipo (assume convenção {Nome}.cs).
-            var matches = Directory.GetFiles(apiSrc, $"{t.Name}.cs", SearchOption.AllDirectories);
-            if (matches.Length == 0)
-            {
-                faltando.Add($"{t.FullName}: arquivo {t.Name}.cs não encontrado");
-                continue;
-            }
-            var folder = Path.GetDirectoryName(matches[0])!;
-            var baseName = t.Name.EndsWith("Endpoint", StringComparison.Ordinal)
-                ? t.Name[..^"Endpoint".Length]
-                : t.Name.EndsWith("Endpoints", StringComparison.Ordinal)
-                    ? t.Name // monolíticos ficam com sufixo
-                    : t.Name;
-
-            foreach (var sibling in new[] { "Response", "Map" })
-            {
-                var expected = Path.Combine(folder, $"{baseName}{sibling}.cs");
-                if (!File.Exists(expected))
-                    faltando.Add($"{t.FullName}: faltando {baseName}{sibling}.cs em {folder}");
-            }
-        }
-        faltando.Should().BeEmpty(string.Join("\n", faltando));
-    }
 }

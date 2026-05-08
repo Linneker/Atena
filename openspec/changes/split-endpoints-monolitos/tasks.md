@@ -206,18 +206,18 @@
 - [x] 4.3 Deletar os 16 `*EndpointsResponse.cs` órfãos
 - [x] 4.4 Deletar os 16 `*EndpointsMap.cs` órfãos
 - [x] 4.5 `dotnet build` verde após limpeza
-- [ ] 4.6 Commit `chore(endpoints): remove markers órfãos pós-split`
+- [x] 4.6 Commit `chore(endpoints): remove markers órfãos pós-split` (cd7607b)
 
 ---
 
 ## Fase 5 — Endurecimento do analyzer
 
-- [ ] 5.1 Localizar `ConvencoesBlueprintTests.TodoEndpoint_TemResponseEMap` no projeto Unit Tests
-- [ ] 5.2 Substituir iteração por `IEndpoint` types por iteração via `EndpointDataSource.Endpoints`
-- [ ] 5.3 Para cada `RouteEndpoint`, resolver arquivo de origem do handler (via `DisplayName` ou metadata) e validar siblings `*Request.cs` + `*Response.cs` + `*Map.cs` na mesma pasta
-- [ ] 5.4 Adicionar exceções explícitas (Swagger, Health, etc) em allow-list se necessário
-- [ ] 5.5 Test passa para todas as ~120 rotas
-- [ ] 5.6 Commit `test(blueprint): endurece analyzer pra iterar EndpointDataSource`
+- [x] 5.1 Localizar `ConvencoesBlueprintTests.TodoEndpoint_TemResponseEMap` no projeto Unit Tests (movido para `EndpointConventionTests` no projeto de integração — requer `WebApplicationFactory` para `EndpointDataSource`)
+- [x] 5.2 Substituir iteração por `IEndpoint` types por iteração via `EndpointDataSource.Endpoints`
+- [x] 5.3 Para cada `RouteEndpoint`, resolver arquivo de origem do handler (via `MethodInfo` metadata + walk de `DeclaringType` para descer a closure) e validar siblings `*Request.cs` + `*Response.cs` + `*Map.cs` na mesma pasta
+- [x] 5.4 Adicionar exceções explícitas (Swagger, Health, etc) em allow-list se necessário (allow-list contém apenas `/health`)
+- [x] 5.5 Test passa para todas as ~120 rotas (122 rotas /api/v1 + 1 health, todas verdes)
+- [x] 5.6 Commit `test(blueprint): endurece analyzer pra iterar EndpointDataSource`
 
 ---
 
