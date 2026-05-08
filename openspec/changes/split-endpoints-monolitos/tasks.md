@@ -33,7 +33,7 @@
 - [x] 2.1.2 Criar 4 pastas + 12 arquivos
 - [x] 2.1.3 Remover monólito
 - [x] 2.1.4 Build + RouteSnapshot verde
-- [ ] 2.1.5 Commit dedicado
+- [x] 2.1.5 Commit dedicado (superseded: split entrou no histórico via commit bulk `71b7969 corrigindo fase 2 e 3`; intenção de preservar a separação no histórico ficou prejudicada, mas conteúdo está aplicado e validado pelo RouteSnapshot)
 - [x] 2.1.6 **Code review humano** dos 12 arquivos — calibrar padrão antes de seguir (concluído: padrão Request/Response/Map confirmado + trailing slash normalizado)
 
 ### 2.2 — ContasPagarEndpoints (4 rotas)
@@ -87,29 +87,29 @@
 - [x] 2.11.3 Remover monólito + build/test verde + commit
 
 ### 2.12 — ClientesEndpoints (6 rotas)
-- [ ] 2.12.1 Mapear rotas
-- [ ] 2.12.2 Gerar pastas + arquivos
-- [ ] 2.12.3 Remover monólito + build/test verde + commit
+- [x] 2.12.1 Mapear rotas
+- [x] 2.12.2 Gerar pastas + arquivos
+- [x] 2.12.3 Remover monólito + build/test verde + commit
 
 ### 2.13 — EstoqueEndpoints (6 rotas, 2 áreas: Estoque + Inventario)
-- [ ] 2.13.1 Mapear rotas; atenção a regras de saldo real-time (não mexer em handler)
-- [ ] 2.13.2 Gerar pastas (`Estoque/...`, `Inventario/...`)
-- [ ] 2.13.3 Remover monólito + build/test verde + commit
+- [x] 2.13.1 Mapear rotas; atenção a regras de saldo real-time (não mexer em handler)
+- [x] 2.13.2 Gerar pastas (`Estoque/...`, `Inventario/...`)
+- [x] 2.13.3 Remover monólito + build/test verde + commit
 
 ### 2.14 — ProdutosEndpoints (6 rotas)
-- [ ] 2.14.1 Mapear rotas
-- [ ] 2.14.2 Gerar pastas + arquivos
-- [ ] 2.14.3 Remover monólito + build/test verde + commit
+- [x] 2.14.1 Mapear rotas
+- [x] 2.14.2 Gerar pastas + arquivos
+- [x] 2.14.3 Remover monólito + build/test verde + commit
 
 ### 2.15 — VendasEndpoints (7 rotas, 4 áreas: Orcamento + PedidoVenda + Faturamento + DevolucaoVenda)
-- [ ] 2.15.1 Mapear rotas e separar por entidade
-- [ ] 2.15.2 Gerar pastas (`Vendas/Orcamento/...`, `Vendas/PedidoVenda/...`, `Vendas/Faturamento/...`, `Vendas/DevolucaoVenda/...`)
-- [ ] 2.15.3 Remover monólito + build/test verde + commit
+- [x] 2.15.1 Mapear rotas e separar por entidade
+- [x] 2.15.2 Gerar pastas (`Vendas/Orcamento/...`, `Vendas/PedidoVenda/...`, `Vendas/Faturamento/...`, `Vendas/DevolucaoVenda/...`, `Relatorios/Vendas/...`)
+- [x] 2.15.3 Remover monólito + build/test verde + commit
 
 ### 2.16 — ComprasEndpoints (10 rotas, 3 áreas: Solicitacao + PedidoCompra + Recebimento) — último, maior
-- [ ] 2.16.1 Mapear rotas e separar por entidade
-- [ ] 2.16.2 Gerar pastas (`Compras/SolicitacaoCompra/...`, `Compras/PedidoCompra/...`, `Compras/RecebimentoCompra/...`)
-- [ ] 2.16.3 Remover monólito + build/test verde + commit
+- [x] 2.16.1 Mapear rotas e separar por entidade
+- [x] 2.16.2 Gerar pastas (`Compras/SolicitacaoCompra/...`, `Compras/PedidoCompra/...`, `Compras/RecebimentoCompra/...`)
+- [x] 2.16.3 Remover monólito + build/test verde + commit
 
 ---
 
@@ -130,82 +130,82 @@
 > 7. Build + RouteSnapshot verde + commit por módulo
 
 ### 3.1 — Auditoria (3 endpoints: ListarLogs, ExportarLogs, HistoricoRegistro)
-- [ ] 3.1.1 Retrofit ListarLogs (Endpoint+Request+Response+Map)
-- [ ] 3.1.2 Retrofit ExportarLogs (Endpoint+Request+Response+Map)
-- [ ] 3.1.3 Retrofit HistoricoRegistro (Endpoint+Request+Response+Map)
-- [ ] 3.1.4 Build + RouteSnapshot verde + commit
+- [x] 3.1.1 Retrofit ListarLogs (Endpoint+Request+Response+Map)
+- [x] 3.1.2 Retrofit ExportarLogs (Endpoint+Request+Response+Map)
+- [x] 3.1.3 Retrofit HistoricoRegistro (Endpoint+Request+Response+Map)
+- [x] 3.1.4 Build + RouteSnapshot verde + commit
 
 ### 3.2 — Auth (4 endpoints: Login, Logout, ConfirmarEmail, RenovarToken)
-- [ ] 3.2.1 Retrofit Login
-- [ ] 3.2.2 Retrofit Logout
-- [ ] 3.2.3 Retrofit ConfirmarEmail
-- [ ] 3.2.4 Retrofit RenovarToken
-- [ ] 3.2.5 Build + RouteSnapshot verde + commit
+- [x] 3.2.1 Retrofit Login
+- [x] 3.2.2 Retrofit Logout
+- [x] 3.2.3 Retrofit ConfirmarEmail
+- [x] 3.2.4 Retrofit RenovarToken
+- [x] 3.2.5 Build + RouteSnapshot verde + commit
 
 ### 3.3 — ConciliacaoBancaria (1 endpoint: ImportarExtrato)
-- [ ] 3.3.1 Retrofit ImportarExtrato (atenção: provável upload multipart)
-- [ ] 3.3.2 Build + RouteSnapshot verde + commit
+- [x] 3.3.1 Retrofit ImportarExtrato (atenção: provável upload multipart)
+- [x] 3.3.2 Build + RouteSnapshot verde + commit
 
 ### 3.4 — Despesa (6 endpoints: Criar, Alterar, Excluir, Listar, Obter, Baixar)
-- [ ] 3.4.1 Retrofit CriarDespesa
-- [ ] 3.4.2 Retrofit AlterarDespesa
-- [ ] 3.4.3 Retrofit ExcluirDespesa
-- [ ] 3.4.4 Retrofit ListarDespesas
-- [ ] 3.4.5 Retrofit ObterDespesa
-- [ ] 3.4.6 Retrofit BaixarDespesa
-- [ ] 3.4.7 Build + RouteSnapshot verde + commit
+- [x] 3.4.1 Retrofit CriarDespesa
+- [x] 3.4.2 Retrofit AlterarDespesa
+- [x] 3.4.3 Retrofit ExcluirDespesa
+- [x] 3.4.4 Retrofit ListarDespesas
+- [x] 3.4.5 Retrofit ObterDespesa
+- [x] 3.4.6 Retrofit BaixarDespesa
+- [x] 3.4.7 Build + RouteSnapshot verde + commit
 
 ### 3.5 — Empresas (2 endpoints: Criar, Alterar)
-- [ ] 3.5.1 Retrofit CriarEmpresa
-- [ ] 3.5.2 Retrofit AlterarEmpresa
-- [ ] 3.5.3 Build + RouteSnapshot verde + commit
+- [x] 3.5.1 Retrofit CriarEmpresa
+- [x] 3.5.2 Retrofit AlterarEmpresa
+- [x] 3.5.3 Build + RouteSnapshot verde + commit
 
 ### 3.6 — FeatureFlags (4 endpoints: Listar, Obter, Alterar, Recarregar)
-- [ ] 3.6.1 Retrofit ListarFeatureFlags
-- [ ] 3.6.2 Retrofit ObterFeatureFlag
-- [ ] 3.6.3 Retrofit AlterarFeatureFlag
-- [ ] 3.6.4 Retrofit RecarregarFeatureFlags
-- [ ] 3.6.5 Build + RouteSnapshot verde + commit
+- [x] 3.6.1 Retrofit ListarFeatureFlags
+- [x] 3.6.2 Retrofit ObterFeatureFlag
+- [x] 3.6.3 Retrofit AlterarFeatureFlag
+- [x] 3.6.4 Retrofit RecarregarFeatureFlags
+- [x] 3.6.5 Build + RouteSnapshot verde + commit
 
 ### 3.7 — FluxoDeCaixa (2 endpoints: Obter, FecharPeriodo)
-- [ ] 3.7.1 Retrofit ObterFluxo
-- [ ] 3.7.2 Retrofit FecharPeriodo
-- [ ] 3.7.3 Build + RouteSnapshot verde + commit
+- [x] 3.7.1 Retrofit ObterFluxo
+- [x] 3.7.2 Retrofit FecharPeriodo
+- [x] 3.7.3 Build + RouteSnapshot verde + commit
 
 ### 3.8 — Receita (6 endpoints: Criar, Alterar, Excluir, Listar, Obter, Receber)
-- [ ] 3.8.1 Retrofit CriarReceita
-- [ ] 3.8.2 Retrofit AlterarReceita
-- [ ] 3.8.3 Retrofit ExcluirReceita
-- [ ] 3.8.4 Retrofit ListarReceitas
-- [ ] 3.8.5 Retrofit ObterReceita
-- [ ] 3.8.6 Retrofit ReceberReceita
-- [ ] 3.8.7 Build + RouteSnapshot verde + commit
+- [x] 3.8.1 Retrofit CriarReceita
+- [x] 3.8.2 Retrofit AlterarReceita
+- [x] 3.8.3 Retrofit ExcluirReceita
+- [x] 3.8.4 Retrofit ListarReceitas
+- [x] 3.8.5 Retrofit ObterReceita
+- [x] 3.8.6 Retrofit ReceberReceita
+- [x] 3.8.7 Build + RouteSnapshot verde + commit
 
 ### 3.9 — Tenants (5 endpoints: Registrar, Listar, Obter, Alterar, Excluir)
-- [ ] 3.9.1 Retrofit RegistrarTenant
-- [ ] 3.9.2 Retrofit ListarTenants
-- [ ] 3.9.3 Retrofit ObterTenant
-- [ ] 3.9.4 Retrofit AlterarTenant
-- [ ] 3.9.5 Retrofit ExcluirTenant
-- [ ] 3.9.6 Build + RouteSnapshot verde + commit
+- [x] 3.9.1 Retrofit RegistrarTenant
+- [x] 3.9.2 Retrofit ListarTenants
+- [x] 3.9.3 Retrofit ObterTenant
+- [x] 3.9.4 Retrofit AlterarTenant
+- [x] 3.9.5 Retrofit ExcluirTenant
+- [x] 3.9.6 Build + RouteSnapshot verde + commit
 
 ### 3.10 — Usuarios (5 endpoints: Criar, Listar, Obter, Alterar, Excluir)
-- [ ] 3.10.1 Retrofit CriarUsuario
-- [ ] 3.10.2 Retrofit ListarUsuarios
-- [ ] 3.10.3 Retrofit ObterUsuario
-- [ ] 3.10.4 Retrofit AlterarUsuario
-- [ ] 3.10.5 Retrofit ExcluirUsuario
-- [ ] 3.10.6 Build + RouteSnapshot verde + commit
+- [x] 3.10.1 Retrofit CriarUsuario
+- [x] 3.10.2 Retrofit ListarUsuarios
+- [x] 3.10.3 Retrofit ObterUsuario
+- [x] 3.10.4 Retrofit AlterarUsuario
+- [x] 3.10.5 Retrofit ExcluirUsuario
+- [x] 3.10.6 Build + RouteSnapshot verde + commit
 
 ---
 
 ## Fase 4 — Limpeza de markers órfãos
 
-- [ ] 4.1 Listar todos `*EndpointsResponse.cs` em `Endpoints/V1/` (markers gerados pela Phase 7 do `aderencia-blueprint-acme`)
-- [ ] 4.2 Listar todos `*EndpointsMap.cs` análogos
-- [ ] 4.3 Deletar os 16 `*EndpointsResponse.cs` órfãos
-- [ ] 4.4 Deletar os 16 `*EndpointsMap.cs` órfãos
-- [ ] 4.5 `dotnet build` verde após limpeza
+- [x] 4.1 Listar todos `*EndpointsResponse.cs` em `Endpoints/V1/` (markers gerados pela Phase 7 do `aderencia-blueprint-acme`)
+- [x] 4.2 Listar todos `*EndpointsMap.cs` análogos
+- [x] 4.3 Deletar os 16 `*EndpointsResponse.cs` órfãos
+- [x] 4.4 Deletar os 16 `*EndpointsMap.cs` órfãos
+- [x] 4.5 `dotnet build` verde após limpeza
 - [ ] 4.6 Commit `chore(endpoints): remove markers órfãos pós-split`
 
 ---
