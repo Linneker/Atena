@@ -8,16 +8,18 @@ using Xunit;
 namespace Acme.Sistemas.IntegrationTest.Test;
 
 /// <summary>
-/// Oracle de rotas — guarda das mudanças durante o split-endpoints-monolitos.
-/// Enumera <see cref="EndpointDataSource"/> em runtime e compara com baseline JSON.
-/// Qualquer typo de path/verb/name no split quebra esse teste.
+/// Oracle de rotas — guarda permanente contra regressão de routing.
+/// Enumera <see cref="EndpointDataSource"/> em runtime e compara com baseline JSON
+/// em `test/Integration/Acme.Sistemas.IntegrationTest/Baseline/routes-runtime.json`.
+/// Qualquer alteração de path/verb/name (intencional ou não) quebra esse teste —
+/// para mudanças intencionais, regenerar o baseline deletando o arquivo e re-rodando.
 /// </summary>
 public class RouteSnapshotTests : IntegrationTestBase
 {
     private static readonly string BaselinePath = Path.GetFullPath(Path.Combine(
         AppContext.BaseDirectory,
-        "..", "..", "..", "..", "..", "..",
-        "openspec", "changes", "split-endpoints-monolitos", "baseline", "routes-runtime.json"));
+        "..", "..", "..",
+        "Baseline", "routes-runtime.json"));
 
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
