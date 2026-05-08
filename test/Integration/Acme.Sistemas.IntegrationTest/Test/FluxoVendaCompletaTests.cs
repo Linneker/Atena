@@ -15,7 +15,11 @@ public class FluxoVendaCompletaTests : IntegrationTestBase
 {
     public FluxoVendaCompletaTests(DockerEnvironment docker) : base(docker) { }
 
-    [Fact(Skip = "Requer seed completo do tenant + cliente + produto + cert. fiscal homologação")]
+    [Trait("Solucao", "Api")]
+    [Trait("Acao", "FluxoVenda")]
+    [Fact(
+        Skip = "Requer seed completo do tenant + cliente + produto + cert. fiscal homologação",
+        DisplayName = "Dado seed completo, quando login + pedido de venda + faturamento + emissão de NF-e, então fluxo completa com sucesso")]
     public async Task Fluxo_Login_PedidoVenda_Faturamento_NFe_DeveCompletar()
     {
         var token = await LoginAsync("admin@tenant1.test", "Admin@123");
@@ -42,7 +46,11 @@ public class FluxoVendaCompletaTests : IntegrationTestBase
         nfeStatus.IsSuccessStatusCode.Should().BeTrue();
     }
 
-    [Fact(Skip = "Requer seed completo + fornecedor + produto")]
+    [Trait("Solucao", "Api")]
+    [Trait("Acao", "FluxoVenda")]
+    [Fact(
+        Skip = "Requer seed completo + fornecedor + produto",
+        DisplayName = "Dado seed completo, quando solicitação + pedido + recebimento de compra, então atualiza saldo de estoque do produto")]
     public async Task Fluxo_Compra_Recebimento_Estoque_ContaPagar_DeveCompletar()
     {
         var token = await LoginAsync("admin@tenant1.test", "Admin@123");

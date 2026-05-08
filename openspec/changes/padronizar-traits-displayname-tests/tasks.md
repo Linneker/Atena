@@ -58,13 +58,13 @@
 - [x] 3.5.2 Build + test verde + commit `test(repository): retrofit Trait+DisplayName`
 
 ### 3.6 — Api / Integration + Http (6 arquivos)
-- [ ] 3.6.1 `HttpTenantContextAccessorTests.cs` — `Acao=TenantContext`
-- [ ] 3.6.2 `HealthCheckTests.cs` — `Acao=HealthCheck`
-- [ ] 3.6.3 `FluxoVendaCompletaTests.cs` — `Acao=FluxoVenda`
-- [ ] 3.6.4 `IsolamentoCrossTenantTests.cs` — `Acao=IsolamentoCrossTenant`
-- [ ] 3.6.5 `RouteSnapshotTests.cs` — `Acao=RouteSnapshot`
-- [ ] 3.6.6 `EndpointConventionTests.cs` — `Acao=Convencoes`
-- [ ] 3.6.7 Build + test verde + commit `test(api): retrofit Trait+DisplayName`
+- [x] 3.6.1 `HttpTenantContextAccessorTests.cs` — `Acao=TenantContext`
+- [x] 3.6.2 `HealthCheckTests.cs` — `Acao=HealthCheck`
+- [x] 3.6.3 `FluxoVendaCompletaTests.cs` — `Acao=FluxoVenda`
+- [x] 3.6.4 `IsolamentoCrossTenantTests.cs` — `Acao=IsolamentoCrossTenant`
+- [x] 3.6.5 `RouteSnapshotTests.cs` — `Acao=RouteSnapshot`
+- [x] 3.6.6 `EndpointConventionTests.cs` — `Acao=Convencoes`
+- [x] 3.6.7 Build + test verde + commit `test(api): retrofit Trait+DisplayName`
 
 ### 3.7 — Test / meta (1 arquivo)
 - [ ] 3.7.1 `ConvencoesBlueprintTests.cs` — `Solucao=Test, Acao=Convencoes` em todos os 4+ fatos (inclui o analyzer ainda Skipped)

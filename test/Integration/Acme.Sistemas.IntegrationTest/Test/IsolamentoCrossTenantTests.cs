@@ -15,7 +15,11 @@ public class IsolamentoCrossTenantTests : IntegrationTestBase
 {
     public IsolamentoCrossTenantTests(DockerEnvironment docker) : base(docker) { }
 
-    [Fact(Skip = "Requer seed de dois tenants distintos no ambiente de teste")]
+    [Trait("Solucao", "Api")]
+    [Trait("Acao", "IsolamentoCrossTenant")]
+    [Fact(
+        Skip = "Requer seed de dois tenants distintos no ambiente de teste",
+        DisplayName = "Dado cliente criado pelo Tenant A, quando Tenant B tenta ler/alterar/excluir, então recebe 404 ou 403")]
     public async Task TenantB_NaoAcessaCliente_CriadoPorTenantA()
     {
         var tokenA = await LoginAsync("admin@tenant-a.test", "Admin@123");
@@ -46,7 +50,11 @@ public class IsolamentoCrossTenantTests : IntegrationTestBase
         listagem.IsSuccessStatusCode.Should().BeTrue();
     }
 
-    [Fact(Skip = "Requer seed de dois tenants e produtos em cada um")]
+    [Trait("Solucao", "Api")]
+    [Trait("Acao", "IsolamentoCrossTenant")]
+    [Fact(
+        Skip = "Requer seed de dois tenants e produtos em cada um",
+        DisplayName = "Dado produtos do Tenant A, quando Tenant B lista produtos, então a página não contém o produto criado por A")]
     public async Task Listagem_TenantB_NaoRetornaProdutos_DeTenantA()
     {
         var tokenA = await LoginAsync("admin@tenant-a.test", "Admin@123");

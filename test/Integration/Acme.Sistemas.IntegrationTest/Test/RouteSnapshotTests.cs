@@ -26,7 +26,9 @@ public class RouteSnapshotTests : IntegrationTestBase
 
     public RouteSnapshotTests(DockerEnvironment docker) : base(docker) { }
 
-    [SkippableFact]
+    [Trait("Solucao", "Api")]
+    [Trait("Acao", "RouteSnapshot")]
+    [SkippableFact(DisplayName = "Dado a aplicação de pé, quando enumera EndpointDataSource, então o snapshot bate com o baseline (path, verbo, name)")]
     public void RotasEnumeradas_BatemComBaseline()
     {
         Skip.IfNot(Docker.IsAvailable, $"Docker indisponível: {Docker.UnavailableReason}");

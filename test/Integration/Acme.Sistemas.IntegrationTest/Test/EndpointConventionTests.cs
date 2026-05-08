@@ -23,7 +23,9 @@ public class EndpointConventionTests : IntegrationTestBase
 
     public EndpointConventionTests(DockerEnvironment docker) : base(docker) { }
 
-    [SkippableFact]
+    [Trait("Solucao", "Api")]
+    [Trait("Acao", "Convencoes")]
+    [SkippableFact(DisplayName = "Dado as rotas registradas em runtime, quando enumera EndpointDataSource, então cada rota /api/v1 reside em pasta com Endpoint+Request+Response+Map")]
     public void TodaRota_TemEndpointRequestResponseMap()
     {
         Skip.IfNot(Docker.IsAvailable, $"Docker indisponível: {Docker.UnavailableReason}");

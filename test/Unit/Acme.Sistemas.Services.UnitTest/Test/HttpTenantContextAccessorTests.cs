@@ -9,7 +9,9 @@ namespace Acme.Sistemas.Services.UnitTest.Test;
 
 public class HttpTenantContextAccessorTests
 {
-    [Fact]
+    [Trait("Solucao", "Api")]
+    [Trait("Acao", "TenantContext")]
+    [Fact(DisplayName = "Dado JWT com claims de tenant, user e permissões, quando acessor consultado, então expõe IsAuthenticated, TenantId, UserId e lista de Permissions")]
     public void DeveExtrairTenantIdEPermissoesDoJwt()
     {
         var tenantId = Guid.NewGuid();
@@ -34,7 +36,9 @@ public class HttpTenantContextAccessorTests
         sut.Permissions.Should().BeEquivalentTo(new[] { "vendas:criar", "vendas:ler" });
     }
 
-    [Fact]
+    [Trait("Solucao", "Api")]
+    [Trait("Acao", "TenantContext")]
+    [Fact(DisplayName = "Dado HttpContext sem autenticação, quando acessor consultado, então IsAuthenticated=false, TenantId=Empty e Permissions vazia")]
     public void SemAutenticacaoRetornaContextoVazio()
     {
         var http = new DefaultHttpContext();
@@ -49,7 +53,9 @@ public class HttpTenantContextAccessorTests
         sut.Permissions.Should().BeEmpty();
     }
 
-    [Fact]
+    [Trait("Solucao", "Api")]
+    [Trait("Acao", "TenantContext")]
+    [Fact(DisplayName = "Dado claim de tenant com valor não-Guid, quando TenantId consultado, então retorna Guid.Empty sem lançar")]
     public void TenantClaimInvalidoResultaEmGuidEmpty()
     {
         var identity = new ClaimsIdentity(new[]

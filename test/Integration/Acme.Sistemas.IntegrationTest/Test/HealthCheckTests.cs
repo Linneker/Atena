@@ -9,7 +9,9 @@ public class HealthCheckTests : IntegrationTestBase
 {
     public HealthCheckTests(DockerEnvironment docker) : base(docker) { }
 
-    [SkippableFact]
+    [Trait("Solucao", "Api")]
+    [Trait("Acao", "HealthCheck")]
+    [SkippableFact(DisplayName = "Dado a aplicação de pé, quando GET /health, então retorna 200 OK")]
     public async Task Health_DeveRetornarOk()
     {
         Skip.IfNot(Docker.IsAvailable,
