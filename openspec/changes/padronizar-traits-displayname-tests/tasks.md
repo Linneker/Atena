@@ -74,9 +74,9 @@
 
 ## Fase 4 — Validação final
 
-- [ ] 4.1 Remover `Skip` do analyzer `TodoTeste_TemDisplayNameESolucaoEAcao`
-- [ ] 4.2 `dotnet test` (unit) verde — analyzer agora ativo
-- [ ] 4.3 Validar filtro: `dotnet test --filter "Trait=Solucao=Services"` retorna apenas testes da camada
-- [ ] 4.4 Validar filtro: `dotnet test --filter "Trait=Acao=CriarCliente"` retorna apenas testes da unidade
-- [ ] 4.5 `openspec validate padronizar-traits-displayname-tests --strict` verde
-- [ ] 4.6 Commit `test(blueprint): ativa analyzer de Trait+DisplayName após retrofit`
+- [x] 4.1 Remover `Skip` do analyzer `TodoTeste_TemDisplayNameESolucaoEAcao`
+- [x] 4.2 `dotnet test` (unit) verde — analyzer agora ativo (61/61 verdes, incluindo o analyzer)
+- [x] 4.3 Validar filtro: `dotnet test --filter "Solucao=Services"` retorna 23 testes da camada
+- [x] 4.4 Validar filtro: `dotnet test --filter "Acao=CriarCliente"` retorna 2 testes da unidade
+- [x] 4.5 `openspec validate padronizar-traits-displayname-tests --strict` verde
+- [x] 4.6 Commit `test(blueprint): ativa analyzer de Trait+DisplayName após retrofit`

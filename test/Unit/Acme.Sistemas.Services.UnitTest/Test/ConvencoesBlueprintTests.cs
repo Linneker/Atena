@@ -149,9 +149,7 @@ public class ConvencoesBlueprintTests
 
     [Trait("Solucao", "Test")]
     [Trait("Acao", "Convencoes")]
-    [Fact(
-        Skip = "ativa após retrofit completo (Fase 4 do change padronizar-traits-displayname-tests)",
-        DisplayName = "Dado um método [Fact]/[Theory] em UnitTest ou IntegrationTest, então tem DisplayName + Trait(Solucao) + Trait(Acao) válidos")]
+    [Fact(DisplayName = "Dado um método [Fact]/[Theory] em UnitTest ou IntegrationTest, então tem DisplayName + Trait(Solucao) + Trait(Acao) válidos")]
     public void TodoTeste_TemDisplayNameESolucaoEAcao()
     {
         var assemblies = new[]
