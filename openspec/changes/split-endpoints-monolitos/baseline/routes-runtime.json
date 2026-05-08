@@ -84,18 +84,18 @@
     "DisplayName": "HTTP: PUT /api/v1/centros-de-custo/{id:guid}"
   },
   {
-    "Pattern": "/api/v1/clientes/",
+    "Pattern": "/api/v1/clientes",
     "Verbs": [
       "GET"
     ],
-    "DisplayName": "HTTP: GET /api/v1/clientes/"
+    "DisplayName": "HTTP: GET /api/v1/clientes"
   },
   {
-    "Pattern": "/api/v1/clientes/",
+    "Pattern": "/api/v1/clientes",
     "Verbs": [
       "POST"
     ],
-    "DisplayName": "HTTP: POST /api/v1/clientes/"
+    "DisplayName": "HTTP: POST /api/v1/clientes"
   },
   {
     "Pattern": "/api/v1/clientes/{id:guid}",
@@ -245,11 +245,11 @@
     "DisplayName": "HTTP: POST /api/v1/despesas/{id:guid}/baixar"
   },
   {
-    "Pattern": "/api/v1/devolucoes-venda/",
+    "Pattern": "/api/v1/devolucoes-venda",
     "Verbs": [
       "POST"
     ],
-    "DisplayName": "HTTP: POST /api/v1/devolucoes-venda/"
+    "DisplayName": "HTTP: POST /api/v1/devolucoes-venda"
   },
   {
     "Pattern": "/api/v1/dividas",
@@ -329,11 +329,11 @@
     "DisplayName": "HTTP: POST /api/v1/estoque/saidas"
   },
   {
-    "Pattern": "/api/v1/faturamentos/",
+    "Pattern": "/api/v1/faturamentos",
     "Verbs": [
       "POST"
     ],
-    "DisplayName": "HTTP: POST /api/v1/faturamentos/"
+    "DisplayName": "HTTP: POST /api/v1/faturamentos"
   },
   {
     "Pattern": "/api/v1/feature-flags",
@@ -441,11 +441,11 @@
     "DisplayName": "HTTP: PUT /api/v1/funcionarios/{id:guid}"
   },
   {
-    "Pattern": "/api/v1/inventarios/",
+    "Pattern": "/api/v1/inventarios",
     "Verbs": [
       "POST"
     ],
-    "DisplayName": "HTTP: POST /api/v1/inventarios/"
+    "DisplayName": "HTTP: POST /api/v1/inventarios"
   },
   {
     "Pattern": "/api/v1/inventarios/{id:guid}/fechar",
@@ -455,25 +455,25 @@
     "DisplayName": "HTTP: POST /api/v1/inventarios/{id:guid}/fechar"
   },
   {
-    "Pattern": "/api/v1/orcamentos/",
+    "Pattern": "/api/v1/orcamentos",
     "Verbs": [
       "GET"
     ],
-    "DisplayName": "HTTP: GET /api/v1/orcamentos/"
+    "DisplayName": "HTTP: GET /api/v1/orcamentos"
   },
   {
-    "Pattern": "/api/v1/orcamentos/",
+    "Pattern": "/api/v1/orcamentos",
     "Verbs": [
       "POST"
     ],
-    "DisplayName": "HTTP: POST /api/v1/orcamentos/"
+    "DisplayName": "HTTP: POST /api/v1/orcamentos"
   },
   {
-    "Pattern": "/api/v1/pedidos-compra/",
+    "Pattern": "/api/v1/pedidos-compra",
     "Verbs": [
       "POST"
     ],
-    "DisplayName": "HTTP: POST /api/v1/pedidos-compra/"
+    "DisplayName": "HTTP: POST /api/v1/pedidos-compra"
   },
   {
     "Pattern": "/api/v1/pedidos-compra/{id:guid}/enviar-fornecedor",
@@ -483,11 +483,11 @@
     "DisplayName": "HTTP: POST /api/v1/pedidos-compra/{id:guid}/enviar-fornecedor"
   },
   {
-    "Pattern": "/api/v1/pedidos-venda/",
+    "Pattern": "/api/v1/pedidos-venda",
     "Verbs": [
       "POST"
     ],
-    "DisplayName": "HTTP: POST /api/v1/pedidos-venda/"
+    "DisplayName": "HTTP: POST /api/v1/pedidos-venda"
   },
   {
     "Pattern": "/api/v1/pedidos-venda/{id:guid}/confirmar",
@@ -532,18 +532,18 @@
     "DisplayName": "HTTP: PUT /api/v1/plano-de-contas/{id:guid}"
   },
   {
-    "Pattern": "/api/v1/produtos/",
+    "Pattern": "/api/v1/produtos",
     "Verbs": [
       "GET"
     ],
-    "DisplayName": "HTTP: GET /api/v1/produtos/"
+    "DisplayName": "HTTP: GET /api/v1/produtos"
   },
   {
-    "Pattern": "/api/v1/produtos/",
+    "Pattern": "/api/v1/produtos",
     "Verbs": [
       "POST"
     ],
-    "DisplayName": "HTTP: POST /api/v1/produtos/"
+    "DisplayName": "HTTP: POST /api/v1/produtos"
   },
   {
     "Pattern": "/api/v1/produtos/{id:guid}",
@@ -574,11 +574,11 @@
     "DisplayName": "HTTP: POST /api/v1/produtos/{id:guid}/precos"
   },
   {
-    "Pattern": "/api/v1/recebimentos-compra/",
+    "Pattern": "/api/v1/recebimentos-compra",
     "Verbs": [
       "POST"
     ],
-    "DisplayName": "HTTP: POST /api/v1/recebimentos-compra/"
+    "DisplayName": "HTTP: POST /api/v1/recebimentos-compra"
   },
   {
     "Pattern": "/api/v1/recebimentos-compra/{id:guid}/vincular-nfe",
@@ -679,11 +679,11 @@
     "DisplayName": "HTTP: GET /api/v1/relatorios/financeiro/dre.pdf"
   },
   {
-    "Pattern": "/api/v1/relatorios/vendas/",
+    "Pattern": "/api/v1/relatorios/vendas",
     "Verbs": [
       "GET"
     ],
-    "DisplayName": "HTTP: GET /api/v1/relatorios/vendas/"
+    "DisplayName": "HTTP: GET /api/v1/relatorios/vendas"
   },
   {
     "Pattern": "/api/v1/roles",
@@ -714,18 +714,18 @@
     "DisplayName": "HTTP: POST /api/v1/roles/{id:guid}/usuarios"
   },
   {
-    "Pattern": "/api/v1/solicitacoes-compra/",
+    "Pattern": "/api/v1/solicitacoes-compra",
     "Verbs": [
       "GET"
     ],
-    "DisplayName": "HTTP: GET /api/v1/solicitacoes-compra/"
+    "DisplayName": "HTTP: GET /api/v1/solicitacoes-compra"
   },
   {
-    "Pattern": "/api/v1/solicitacoes-compra/",
+    "Pattern": "/api/v1/solicitacoes-compra",
     "Verbs": [
       "POST"
     ],
-    "DisplayName": "HTTP: POST /api/v1/solicitacoes-compra/"
+    "DisplayName": "HTTP: POST /api/v1/solicitacoes-compra"
   },
   {
     "Pattern": "/api/v1/solicitacoes-compra/{id:guid}",
