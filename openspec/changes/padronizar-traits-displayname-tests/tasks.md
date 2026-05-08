@@ -15,11 +15,11 @@
 
 ## Fase 2 — Analyzer (escrito mas inativo até Fase 4)
 
-- [ ] 2.1 Adicionar método `TodoTeste_TemDisplayNameESolucaoEAcao` em `ConvencoesBlueprintTests`
-- [ ] 2.2 Implementar reflexão sobre assembly Unit + Integration para coletar `[Fact]`/`[Theory]` (incluindo `Skip`)
-- [ ] 2.3 Validar DisplayName não-vazio, Trait("Solucao") na allow-list, Trait("Acao") não-vazio
-- [ ] 2.4 Marcar como `[Fact(Skip = "ativa após retrofit completo — Fase 4")]` com Trait+DisplayName próprios
-- [ ] 2.5 Build verde + commit `test(blueprint): adiciona analyzer de Trait+DisplayName (skip até Fase 4)`
+- [x] 2.1 Adicionar método `TodoTeste_TemDisplayNameESolucaoEAcao` em `ConvencoesBlueprintTests`
+- [x] 2.2 Implementar reflexão sobre assembly Unit + Integration para coletar `[Fact]`/`[Theory]` (incluindo `Skip`); ProjectReference Unit→Integration adicionada para acesso direto ao assembly
+- [x] 2.3 Validar DisplayName não-vazio, Trait("Solucao") na allow-list, Trait("Acao") não-vazio (lendo via `CustomAttributeData` — `TraitAttribute` não expõe Name/Value como properties)
+- [x] 2.4 Marcar como `[Fact(Skip = "ativa após retrofit completo — Fase 4")]` com Trait+DisplayName próprios
+- [x] 2.5 Build verde + commit `test(blueprint): adiciona analyzer de Trait+DisplayName (skip até Fase 4)`
 
 ---
 

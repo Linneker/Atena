@@ -1,3 +1,4 @@
+using System.Reflection;
 using Acme.Sistemas.Core.Mediators.Handler;
 using Acme.Sistemas.Core.Mediators.Notification;
 using FluentAssertions;
@@ -135,4 +136,68 @@ public class ConvencoesBlueprintTests
         faltando.Should().BeEmpty(string.Join("\n", faltando));
     }
 
+    private static readonly HashSet<string> CamadasValidas = new(StringComparer.Ordinal)
+    {
+        "Api", "Services", "Core", "Domain", "Repository", "Infrastructure", "ExternalIntegration", "Test",
+    };
+
+    [Trait("Solucao", "Test")]
+    [Trait("Acao", "Convencoes")]
+    [Fact(
+        Skip = "ativa após retrofit completo (Fase 4 do change padronizar-traits-displayname-tests)",
+        DisplayName = "Dado um método [Fact]/[Theory] em UnitTest ou IntegrationTest, então tem DisplayName + Trait(Solucao) + Trait(Acao) válidos")]
+    public void TodoTeste_TemDisplayNameESolucaoEAcao()
+    {
+        var assemblies = new[]
+        {
+            typeof(ConvencoesBlueprintTests).Assembly,
+            typeof(Acme.Sistemas.IntegrationTest.Config.IntegrationTestBase).Assembly,
+        };
+
+        var faltando = new List<string>();
+        foreach (var asm in assemblies)
+        {
+            foreach (var type in asm.GetTypes().Where(t => t.IsClass && t.IsPublic))
+            {
+                foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+                {
+                    var fact = method.GetCustomAttribute<FactAttribute>(inherit: true);
+                    if (fact is null) continue;
+
+                    var loc = $"{type.FullName}.{method.Name}";
+
+                    if (string.IsNullOrWhiteSpace(fact.DisplayName))
+                        faltando.Add($"{loc}: faltando DisplayName em [Fact]/[Theory]");
+
+                    var traits = ReadTraits(method);
+
+                    if (!traits.TryGetValue("Solucao", out var solucao))
+                        faltando.Add($"{loc}: faltando [Trait(\"Solucao\", <camada>)]");
+                    else if (!CamadasValidas.Contains(solucao))
+                        faltando.Add($"{loc}: Trait(\"Solucao\", \"{solucao}\") fora da allow-list ({string.Join(", ", CamadasValidas)})");
+
+                    if (!traits.TryGetValue("Acao", out var acao) || string.IsNullOrWhiteSpace(acao))
+                        faltando.Add($"{loc}: faltando [Trait(\"Acao\", <unidade>)]");
+                }
+            }
+        }
+
+        faltando.Should().BeEmpty(string.Join("\n", faltando));
+    }
+
+    private static Dictionary<string, string> ReadTraits(MethodInfo method)
+    {
+        // xUnit.TraitAttribute não expõe Name/Value como properties; lê via CustomAttributeData.
+        var traits = new Dictionary<string, string>(StringComparer.Ordinal);
+        foreach (var data in method.GetCustomAttributesData())
+        {
+            if (data.AttributeType.Name != nameof(TraitAttribute)) continue;
+            if (data.ConstructorArguments.Count < 2) continue;
+            var key = data.ConstructorArguments[0].Value as string;
+            var value = data.ConstructorArguments[1].Value as string;
+            if (key is null) continue;
+            traits[key] = value ?? string.Empty;
+        }
+        return traits;
+    }
 }

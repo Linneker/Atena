@@ -32,6 +32,7 @@
     <ProjectReference Include="..\..\..\src\Service\Acme.Sistemas.Domain\Acme.Sistemas.Domain.csproj" />
     <ProjectReference Include="..\..\..\src\Service\Acme.Sistemas.Services\Acme.Sistemas.Services.csproj" />
     <ProjectReference Include="..\..\..\src\Data\Acme.Sistemas.Infrastructure\Acme.Sistemas.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Integration\Acme.Sistemas.IntegrationTest\Acme.Sistemas.IntegrationTest.csproj" />
   </ItemGroup>
 
 </Project>
