@@ -27,7 +27,9 @@ public class HybridCacheStoreTests : IDisposable
         if (File.Exists(_file)) try { File.Delete(_file); } catch { }
     }
 
-    [Fact]
+    [Trait("Solucao", "Infrastructure")]
+    [Trait("Acao", "HybridCacheStore")]
+    [Fact(DisplayName = "Dado SetAsync, quando grava entrada, então persiste em memory (hot) e cold (LiteDb) simultaneamente")]
     public async Task Set_GravaEmAmbasCamadas()
     {
         await _sut.SetAsync("k", "v", TimeSpan.FromMinutes(5));
@@ -36,7 +38,9 @@ public class HybridCacheStoreTests : IDisposable
         (await _cold.GetAsync<string>("k")).Should().Be("v");
     }
 
-    [Fact]
+    [Trait("Solucao", "Infrastructure")]
+    [Trait("Acao", "HybridCacheStore")]
+    [Fact(DisplayName = "Dado hit em memory, quando GetAsync, então retorna do hot e não consulta o cold")]
     public async Task Get_HitMemory_NaoConsultaCold()
     {
         _memory.Set("k", "hot");
@@ -46,7 +50,9 @@ public class HybridCacheStoreTests : IDisposable
         (await _cold.GetAsync<string>("k")).Should().BeNull();
     }
 
-    [Fact]
+    [Trait("Solucao", "Infrastructure")]
+    [Trait("Acao", "HybridCacheStore")]
+    [Fact(DisplayName = "Dado miss em memory e hit em cold, quando GetAsync, então retorna do cold e repopula a memory")]
     public async Task Get_MissMemory_HitCold_RepopulaMemory()
     {
         await _cold.SetAsync("k", "cold-only", TimeSpan.FromMinutes(5));
@@ -56,14 +62,18 @@ public class HybridCacheStoreTests : IDisposable
         hot.Should().Be("cold-only");
     }
 
-    [Fact]
+    [Trait("Solucao", "Infrastructure")]
+    [Trait("Acao", "HybridCacheStore")]
+    [Fact(DisplayName = "Dado miss em memory e cold, quando GetAsync, então retorna null")]
     public async Task Get_MissAmbas_RetornaNull()
     {
         var v = await _sut.GetAsync<string>("k");
         v.Should().BeNull();
     }
 
-    [Fact]
+    [Trait("Solucao", "Infrastructure")]
+    [Trait("Acao", "HybridCacheStore")]
+    [Fact(DisplayName = "Dado entrada em ambas camadas, quando RemoveAsync, então remove de memory e cold")]
     public async Task Remove_RemoveDeAmbas()
     {
         await _sut.SetAsync("k", "v", TimeSpan.FromMinutes(5));
@@ -72,7 +82,9 @@ public class HybridCacheStoreTests : IDisposable
         (await _cold.GetAsync<string>("k")).Should().BeNull();
     }
 
-    [Fact]
+    [Trait("Solucao", "Infrastructure")]
+    [Trait("Acao", "HybridCacheStore")]
+    [Fact(DisplayName = "Dado entrada com TTL expirado no cold, quando GetAsync, então retorna null")]
     public async Task TtlExpirado_NoCold_RetornaNull()
     {
         await _cold.SetAsync("k", "v", TimeSpan.FromMilliseconds(1));
@@ -80,7 +92,9 @@ public class HybridCacheStoreTests : IDisposable
         (await _sut.GetAsync<string>("k")).Should().BeNull();
     }
 
-    [Fact]
+    [Trait("Solucao", "Infrastructure")]
+    [Trait("Acao", "HybridCacheStore")]
+    [Fact(DisplayName = "Dado 10 threads concorrentes escrevendo, quando todas terminam, então cold contém todas as entradas sem corrupção")]
     public async Task ConcorrenciaIntraProcesso_10Threads_NaoCorrompe()
     {
         const int threadCount = 10;

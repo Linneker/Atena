@@ -23,7 +23,9 @@ public class CacheCleanupWorkerTests : IDisposable
         if (File.Exists(_file)) try { File.Delete(_file); } catch { }
     }
 
-    [Fact]
+    [Trait("Solucao", "Infrastructure")]
+    [Trait("Acao", "CacheCleanupWorker")]
+    [Fact(DisplayName = "Dado entradas com TTLs distintos, quando Tick executa, então remove apenas as expiradas e preserva as vigentes")]
     public async Task Tick_RemoveSomenteExpiradas()
     {
         await _cold.SetAsync("vivo", "v", TimeSpan.FromMinutes(5));

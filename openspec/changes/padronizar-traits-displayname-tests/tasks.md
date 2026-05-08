@@ -47,11 +47,11 @@
 - [x] 3.3.3 Build + test verde + commit `test(core): retrofit Trait+DisplayName em helpers`
 
 ### 3.4 — Infrastructure (4 arquivos)
-- [ ] 3.4.1 `CacheCleanupWorkerTests.cs` — `Acao=CacheCleanupWorker`
-- [ ] 3.4.2 `CacheProviderRouterTests.cs` — `Acao=CacheProviderRouter`
-- [ ] 3.4.3 `FeatureFlagServiceTests.cs` — `Acao=FeatureFlagService`
-- [ ] 3.4.4 `HybridCacheStoreTests.cs` — `Acao=HybridCacheStore`
-- [ ] 3.4.5 Build + test verde + commit `test(infra): retrofit Trait+DisplayName`
+- [x] 3.4.1 `CacheCleanupWorkerTests.cs` — `Acao=CacheCleanupWorker`
+- [x] 3.4.2 `CacheProviderRouterTests.cs` — `Acao=CacheProviderRouter`
+- [x] 3.4.3 `FeatureFlagServiceTests.cs` — `Acao=FeatureFlagService`
+- [x] 3.4.4 `HybridCacheStoreTests.cs` — `Acao=HybridCacheStore`
+- [x] 3.4.5 Build + test verde + commit `test(infra): retrofit Trait+DisplayName`
 
 ### 3.5 — Repository (1 arquivo)
 - [ ] 3.5.1 `BaseRepositoryTenantFilterTests.cs` — `Acao=TenantFilter`

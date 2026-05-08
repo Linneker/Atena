@@ -41,7 +41,9 @@ public class CacheProviderRouterTests : IDisposable
         public void Update(T value) => CurrentValue = value;
     }
 
-    [Fact]
+    [Trait("Solucao", "Infrastructure")]
+    [Trait("Acao", "CacheProviderRouter")]
+    [Fact(DisplayName = "Dado feature flag Provider=LiteDb, quando router escreve e lê, então usa o HybridCacheStore (memory+cold)")]
     public async Task ProviderLiteDb_UsaHybrid()
     {
         var monitor = new StaticMonitor<FeatureFlagSettings>(new FeatureFlagSettings
@@ -56,7 +58,9 @@ public class CacheProviderRouterTests : IDisposable
         (await _cold.GetAsync<string>("k")).Should().Be("v");
     }
 
-    [Fact]
+    [Trait("Solucao", "Infrastructure")]
+    [Trait("Acao", "CacheProviderRouter")]
+    [Fact(DisplayName = "Dado Provider=Redis sem Redis injetado, quando router executa, então faz fallback para HybridCacheStore")]
     public async Task ProviderRedis_SemRedisRegistrado_CaiNoHybrid()
     {
         var monitor = new StaticMonitor<FeatureFlagSettings>(new FeatureFlagSettings
@@ -70,7 +74,9 @@ public class CacheProviderRouterTests : IDisposable
         (await router.GetAsync<string>("k")).Should().Be("v");
     }
 
-    [Fact]
+    [Trait("Solucao", "Infrastructure")]
+    [Trait("Acao", "CacheProviderRouter")]
+    [Fact(DisplayName = "Dado hot-swap em runtime para Provider=Redis com Redis falho, quando router executa, então cai no Hybrid sem perder operações")]
     public async Task HotSwap_AlteraProviderEmRuntime_RedisFalhando_CaiNoHybrid()
     {
         var monitor = new StaticMonitor<FeatureFlagSettings>(new FeatureFlagSettings

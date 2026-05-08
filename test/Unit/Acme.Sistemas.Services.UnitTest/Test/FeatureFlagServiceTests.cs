@@ -38,7 +38,9 @@ public class FeatureFlagServiceTests : IDisposable
         return new FeatureFlagService(config, NullLogger<FeatureFlagService>.Instance, _file);
     }
 
-    [Fact]
+    [Trait("Solucao", "Infrastructure")]
+    [Trait("Acao", "FeatureFlagService")]
+    [Fact(DisplayName = "Dado configuração com flags aninhadas, quando ListAll, então retorna apenas as folhas com chave path-style")]
     public void ListAll_RetornaApenasFolhas()
     {
         var sut = BuildSut();
@@ -50,14 +52,18 @@ public class FeatureFlagServiceTests : IDisposable
         });
     }
 
-    [Fact]
+    [Trait("Solucao", "Infrastructure")]
+    [Trait("Acao", "FeatureFlagService")]
+    [Fact(DisplayName = "Dado uma flag inexistente, quando Get, então retorna null")]
     public void Get_FlagInexistente_RetornaNull()
     {
         var sut = BuildSut();
         sut.Get("NaoExiste:X").Should().BeNull();
     }
 
-    [Fact]
+    [Trait("Solucao", "Infrastructure")]
+    [Trait("Acao", "FeatureFlagService")]
+    [Fact(DisplayName = "Dado flags com diferentes tipos no JSON, quando Get, então retorna item com Type inferido (String, Boolean, Integer)")]
     public void Get_FlagExistente_RetornaItemComTipoInferido()
     {
         var sut = BuildSut();
@@ -74,7 +80,9 @@ public class FeatureFlagServiceTests : IDisposable
         ttl.Type.Should().Be(FeatureFlagType.Integer);
     }
 
-    [Fact]
+    [Trait("Solucao", "Infrastructure")]
+    [Trait("Acao", "FeatureFlagService")]
+    [Fact(DisplayName = "Dado SetAsync com tipo compatível, quando persiste, então grava no arquivo e a próxima leitura reflete o novo valor")]
     public async Task SetAsync_TipoCompativel_PersisteEArquivoEAtualizaConfiguracao()
     {
         var sut = BuildSut();
@@ -88,7 +96,9 @@ public class FeatureFlagServiceTests : IDisposable
         sut.Get("Cache:Provider")!.Value.Should().Be("Redis");
     }
 
-    [Fact]
+    [Trait("Solucao", "Infrastructure")]
+    [Trait("Acao", "FeatureFlagService")]
+    [Fact(DisplayName = "Dado SetAsync com tipo incompatível ao da flag, quando chamado, então lança ArgumentException e não modifica o arquivo")]
     public async Task SetAsync_TipoIncompativel_LancaArgumentException_NaoMudaArquivo()
     {
         var sut = BuildSut();
@@ -102,7 +112,9 @@ public class FeatureFlagServiceTests : IDisposable
         depois.Should().Be(antes);
     }
 
-    [Fact]
+    [Trait("Solucao", "Infrastructure")]
+    [Trait("Acao", "FeatureFlagService")]
+    [Fact(DisplayName = "Dado SetAsync para flag inexistente, quando chamado, então lança ArgumentException")]
     public async Task SetAsync_FlagInexistente_LancaArgumentException()
     {
         var sut = BuildSut();
@@ -111,7 +123,9 @@ public class FeatureFlagServiceTests : IDisposable
         await act.Should().ThrowAsync<ArgumentException>();
     }
 
-    [Fact]
+    [Trait("Solucao", "Infrastructure")]
+    [Trait("Acao", "FeatureFlagService")]
+    [Fact(DisplayName = "Dado arquivo de flags ficar malformado em runtime, quando ReloadAsync, então lança mas serviço continua respondendo")]
     public async Task ArquivoMalformado_NaoDerruba_AntigosValoresPermanecem()
     {
         var sut = BuildSut();
