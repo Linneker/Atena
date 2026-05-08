@@ -88,27 +88,27 @@
 
 ### 3.1 Catálogo de URLs SEFAZ
 
-- [ ] 3.1.1 Criar `Sefaz/Urls/sefaz-urls.json` com 27 UFs × 2 ambientes × 6 serviços (~324 entradas)
-- [ ] 3.1.2 Modelar `SefazUrlCatalog` que carrega o JSON embutido + permite override por config
-- [ ] 3.1.3 Métodos: `GetAutorizacao(uf, amb)`, `GetEvento(uf, amb)`, `GetStatus(uf, amb)`, etc.
-- [ ] 3.1.4 Incluir SVRS-RS e SVRS-AN (autorizadora nacional) como entradas especiais
-- [ ] 3.1.5 Test: lookup das 5 UFs prioritárias retorna URLs corretas conhecidas
+- [x] 3.1.1 ⚠ PARCIAL — `sefaz-urls.json` cobre 5 UFs prioritárias (SP, RJ, MG, RS, PR) + SVRS + SVAN × 2 ambientes × 6 serviços = 84 entradas. Restantes 22 UFs listadas em `_demais_ufs_pendentes` para adição conforme demanda (proposal explícita: foco nas 5 prioritárias)
+- [x] 3.1.2 `SefazUrlCatalog` carrega via `EmbeddedResource`, parseia com `JsonDocument`, expõe `DefinirOverride` para tests/ambientes privados
+- [x] 3.1.3 Helpers `GetAutorizacao/GetRetAutorizacao/GetConsultaProtocolo/GetStatusServico/GetRecepcaoEvento/GetInutilizacao(uf, amb)`
+- [x] 3.1.4 SVRS e SVAN como UFs especiais no catálogo
+- [x] 3.1.5 Tests `SefazUrlCatalogTests` (11 fatos): 5 UFs prioritárias + SVRS/SVAN com hosts conhecidos, UF inexistente, override, homolog vs producao distintos
 
 ### 3.2 HttpClient com mTLS
 
-- [ ] 3.2.1 Configurar `HttpClientHandler.ClientCertificates.Add(cert)` por requisição (cert do tenant)
-- [ ] 3.2.2 Configurar TLS 1.2+ (não aceitar TLS 1.0/1.1, SEFAZ rejeita)
-- [ ] 3.2.3 Timeout configurável (default 30s)
-- [ ] 3.2.4 Retry policy via Polly: 2 retries com backoff exponencial em erro de rede (não em 4xx fiscal)
-- [ ] 3.2.5 Logging estruturado (NLog) com requestId, tenant, UF, serviço, latência
+- [x] 3.2.1 `SocketsHttpHandler.SslOptions.ClientCertificates` injeta cert do tenant + `LocalCertificateSelectionCallback` força seleção
+- [x] 3.2.2 `EnabledSslProtocols = TLS 1.2 | TLS 1.3` (SEFAZ rejeita TLS 1.0/1.1)
+- [x] 3.2.3 `Timeout` parametrizável no construtor (default 30s)
+- [x] 3.2.4 Polly v8 `ResiliencePipeline<HttpResponseMessage>` com 2 retries, backoff exponencial 500ms; condições: HttpRequestException, TaskCanceledException, 5xx (não retenta 4xx fiscal)
+- [x] 3.2.5 Logging via `ILogger<SefazSoapClient>`: nível Information para sucesso (servico/uf/ambiente/status/latencia), Warning para falha (com exceção)
 
 ### 3.3 Envelope SOAP
 
-- [ ] 3.3.1 Implementar `SoapEnvelopeBuilder` que monta envelope SOAP 1.2 com `<nfeDadosMsg>` no body
-- [ ] 3.3.2 Adicionar header `Content-Type: application/soap+xml; charset=utf-8; action="..."`
-- [ ] 3.3.3 Adicionar SOAP Action por serviço (e.g., `nfeAutorizacaoLote`)
-- [ ] 3.3.4 Parser de resposta: extrair `<nfeResultMsg>` do envelope SOAP
-- [ ] 3.3.5 Test golden: envelope montado byte-igual a exemplo real homolog
+- [x] 3.3.1 `SoapEnvelopeBuilder.Build(payload, wsdlNs)` monta envelope SOAP 1.2 com `<nfeDadosMsg xmlns="...">` no body
+- [x] 3.3.2 `SefazSoapClient` configura `Content-Type: application/soap+xml; charset=utf-8; action="..."` via `MediaTypeHeaderValue` + `NameValueHeaderValue`
+- [x] 3.3.3 `SoapAction.For(servico)` retorna `(WsdlNamespace, Action)` por serviço (`nfeAutorizacaoLote`, `nfeRetAutorizacaoLote`, etc.)
+- [x] 3.3.4 `SoapEnvelopeBuilder.ExtractResultMsg(soap)` retorna conteúdo de `nfeResultMsg`; em SOAP Fault, retorna o XML do Fault para diagnóstico
+- [ ] 3.3.5 ⚠ PARCIAL — Tests validam estrutura/well-formedness do envelope + parse de respostas com nfeResultMsg e Fault. Golden file vs exemplo SEFAZ real precisa de captura homolog real (Fase 7)
 
 ---
 
