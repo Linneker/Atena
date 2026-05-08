@@ -116,49 +116,49 @@
 
 ### 4.1 NFeAutorizacao4 (síncrono)
 
-- [ ] 4.1.1 Implementar `NFeAutorizacaoService.AutorizarSyncAsync(NFe, ambiente, uf)`
-- [ ] 4.1.2 Validar XML local (XSD) antes de transmitir; se inválido, retornar `cStat=999` local
-- [ ] 4.1.3 Assinar NFe; montar lote `enviNFe` com `idLote=1, indSinc=1`
-- [ ] 4.1.4 Transmitir + parsear `retEnviNFe` → `protNFe.infProt`
-- [ ] 4.1.5 Mapear `cStat` para enum `SefazResultadoCodigo` (100, 102, 110, 204, 539, ...)
-- [ ] 4.1.6 Test integração contra homolog SP (mockado em CI; real em pipeline manual)
+- [x] 4.1.1 `NFeAutorizacaoService.AutorizarSyncAsync` em `ExternalIntegration/Sefaz/Servicos/`
+- [x] 4.1.2 Validação XSD opt-in (`XsdValidator.TemSchemasCarregados`) → cStat=999 local em caso de invalidade
+- [x] 4.1.3 Lote `enviNFe` com idLote=1, indSinc=1 (síncrono) ou indSinc=0 (assíncrono)
+- [x] 4.1.4 `ParseRetorno` extrai `protNFe.infProt` ou `infRec` para retorno unificado `AutorizacaoResultado`
+- [x] 4.1.5 `SefazResultadoCodigo` em `Domain/Entities/Fiscal/Xml/Servicos/` com helpers `IsAutorizado` / `IsParalisacao`
+- [ ] 4.1.6 ⚠ DEFERIDO — Test contra homolog SP precisa de cert real + tenant; entra em Fase 7. Cobertura atual: parser de retorno (3 fatos: sync sucesso, async recibo, erro 225)
 
 ### 4.2 NFeRetAutorizacao4 (assíncrono)
 
-- [ ] 4.2.1 `AutorizarAsyncAsync` com `indSinc=0` retorna `nRec` (recibo)
-- [ ] 4.2.2 `ConsultarRecibo(nRec)` polling até `cStat=104` (Lote processado)
-- [ ] 4.2.3 Test simulando latência > 1s
+- [x] 4.2.1 `NFeAutorizacaoService.AutorizarAsyncAsync` retorna `nRec` em `AutorizacaoResultado.NRecibo`
+- [x] 4.2.2 `NFeRetAutorizacaoService.ConsultarReciboAsync` faz polling exponencial (2s → 30s, max 6 tentativas) até cStat ≠ 105
+- [ ] 4.2.3 ⚠ DEFERIDO — Test de latência simulada precisa de mock de `SefazSoapClient`; cobertura atual via parser RetConsReciNFe (Fase 7)
 
 ### 4.3 NFeConsultaProtocolo4
 
-- [ ] 4.3.1 `ConsultarChaveAsync(chave, ambiente, uf)` → status atual da NFe
-- [ ] 4.3.2 Útil para reconciliação de NFes "perdidas" (autorizada na SEFAZ mas sem retorno do lote)
-- [ ] 4.3.3 Test contra chave conhecida em homolog
+- [x] 4.3.1 `NFeConsultaProtocoloService.ConsultarChaveAsync(chave, ambiente, uf, cert)` valida 44 dígitos e parseia `retConsSitNFe.protNFe`
+- [x] 4.3.2 Caso de uso documentado no XML doc — reconciliação de NFes perdidas
+- [ ] 4.3.3 ⚠ DEFERIDO — Test contra chave real homolog (Fase 7)
 
 ### 4.4 NFeStatusServico4
 
-- [ ] 4.4.1 `ConsultarStatusServicoAsync(ambiente, uf)` → `cStat` (107=operando, 108=paralisada momentaneamente, 109=paralisação programada)
-- [ ] 4.4.2 Cache de 5 min para evitar flood
-- [ ] 4.4.3 Usado pela `ContingenciaPolicy` (ver Fase 5)
+- [x] 4.4.1 `NFeStatusServicoService.ConsultarStatusServicoAsync` retorna `StatusServicoResultado` com flags `Operando`/`Paralisado`
+- [x] 4.4.2 Cache `ConcurrentDictionary<key, (resultado, expira)>` com TTL 5min; `ignorarCache=true` força refresh
+- [ ] 4.4.3 Integração com `ContingenciaPolicy` será implementada na Fase 5
 
 ### 4.5 NFeRecepcaoEvento4 — Cancelamento
 
-- [ ] 4.5.1 Modelar `evCancNFe` com nProt, xJust (15-255 chars), tpEvento=110111
-- [ ] 4.5.2 Assinar evento separadamente (Reference URI = #ID...)
-- [ ] 4.5.3 Transmitir + parsear retorno; sucesso = `cStat=135 (Evento registrado)`
-- [ ] 4.5.4 Test contra homolog: cancelar NFe autorizada anteriormente
+- [x] 4.5.1 `Evento` + `InfEvento` + `DetEvento` em `Domain/Entities/Fiscal/Xml/Servicos/Evento.cs` com `nProt`, `xJust`, `tpEvento=110111`; validação 15-255 chars no `CancelarAsync`
+- [x] 4.5.2 `XmlSignerC14N.Sign` reusado com Id formato `ID<tpEvento><chNFe><nSeqEvento>` (Reference URI = `#ID...`)
+- [x] 4.5.3 `EnviarEventoAsync` parseia `retEnvEvento.retEvento[0].infEvento` e usa `IsAutorizado` (135/136 = sucesso)
+- [ ] 4.5.4 ⚠ DEFERIDO — Test contra homolog real (Fase 7); cobertura unit em `MontarEvento` (Id correto + cOrgao por UF)
 
 ### 4.6 NFeRecepcaoEvento4 — CC-e
 
-- [ ] 4.6.1 Modelar `evCCe` com xCorrecao (15-1000 chars), tpEvento=110110
-- [ ] 4.6.2 Assinar + transmitir + parsear
-- [ ] 4.6.3 Geração do PDF da CC-e (extensão do `QuestPdfDanfeRenderer`)
+- [x] 4.6.1 `EmitirCCeAsync` valida xCorrecao 15-1000 chars; tpEvento=110110; xCondUso preenchida com texto legal padrão
+- [x] 4.6.2 Mesmo pipeline de assinar/transmitir/parsear de cancelamento (compartilhado em `EnviarEventoAsync`)
+- [ ] 4.6.3 ⚠ DEFERIDO — PDF da CC-e (`QuestPdfDanfeRenderer`) é trabalho de UI/Reporting, fora do escopo do cliente SEFAZ
 
 ### 4.7 NFeInutilizacao4
 
-- [ ] 4.7.1 Modelar `inutNFe` (CNPJ, mod, serie, nNFIni, nNFFin, xJust)
-- [ ] 4.7.2 Assinar + transmitir + parsear
-- [ ] 4.7.3 Útil para descartar numeração não-utilizada antes do encerramento mensal
+- [x] 4.7.1 `InutNFe` + `InfInut` em `Domain/Entities/Fiscal/Xml/Servicos/Inutilizacao.cs`; `NFeInutilizacaoService.InutilizarAsync` valida xJust 15-255, nNFFin ≥ nNFIni, CNPJ 14 dígitos; Id formato `ID<cUF><ano><CNPJ><mod><serie><nNFIni><nNFFin>`
+- [x] 4.7.2 Mesmo pipeline de assinar via `XmlSignerC14N.Sign` + transmitir + parsear `retInutNFe.infInut` (cStat=102 = homologado)
+- [x] 4.7.3 Caso de uso documentado em XML doc; teste cobre deserialização do retorno com protocolo
 
 ---
 
