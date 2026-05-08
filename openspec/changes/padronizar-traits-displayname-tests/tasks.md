@@ -67,8 +67,8 @@
 - [x] 3.6.7 Build + test verde + commit `test(api): retrofit Trait+DisplayName`
 
 ### 3.7 — Test / meta (1 arquivo)
-- [ ] 3.7.1 `ConvencoesBlueprintTests.cs` — `Solucao=Test, Acao=Convencoes` em todos os 4+ fatos (inclui o analyzer ainda Skipped)
-- [ ] 3.7.2 Build + test verde + commit `test(meta): retrofit Trait+DisplayName em ConvencoesBlueprintTests`
+- [x] 3.7.1 `ConvencoesBlueprintTests.cs` — `Solucao=Test, Acao=Convencoes` em todos os 4 fatos (inclui o analyzer ainda Skipped)
+- [x] 3.7.2 Build + test verde + commit `test(meta): retrofit Trait+DisplayName em ConvencoesBlueprintTests`
 
 ---
 

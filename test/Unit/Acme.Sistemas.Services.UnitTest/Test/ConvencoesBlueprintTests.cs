@@ -60,7 +60,9 @@ public class ConvencoesBlueprintTests
         return path;
     }
 
-    [Fact]
+    [Trait("Solucao", "Test")]
+    [Trait("Acao", "Convencoes")]
+    [Fact(DisplayName = "Dado todos os Commands em Services.V1, então cada um tem Handler+Behavior+Result+Validation na mesma pasta")]
     public void TodoCommand_TemHandlerBehaviorResultValidation()
     {
         var faltando = new List<string>();
@@ -79,7 +81,9 @@ public class ConvencoesBlueprintTests
         faltando.Should().BeEmpty(string.Join("\n", faltando));
     }
 
-    [Fact]
+    [Trait("Solucao", "Test")]
+    [Trait("Acao", "Convencoes")]
+    [Fact(DisplayName = "Dado todas as Queries em Services.V1, então cada uma tem Handler+Behavior+Result+Validation na mesma pasta")]
     public void TodaQuery_TemHandlerBehaviorResultValidation()
     {
         var faltando = new List<string>();
@@ -98,7 +102,9 @@ public class ConvencoesBlueprintTests
         faltando.Should().BeEmpty(string.Join("\n", faltando));
     }
 
-    [Fact]
+    [Trait("Solucao", "Test")]
+    [Trait("Acao", "Convencoes")]
+    [Fact(DisplayName = "Dado todas as Notifications em Services.V1, então cada uma tem ao menos um Handler + Behavior + Validation na mesma pasta")]
     public void TodaNotification_TemHandlerBehaviorValidation()
     {
         var asm = typeof(Acme.Sistemas.Services.ServicesServiceCollection).Assembly;
