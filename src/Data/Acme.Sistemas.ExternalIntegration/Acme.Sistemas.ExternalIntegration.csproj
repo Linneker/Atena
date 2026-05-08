@@ -16,6 +16,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Service\Acme.Sistemas.Core\Acme.Sistemas.Core.csproj" />
+    <ProjectReference Include="..\..\Service\Acme.Sistemas.Domain\Acme.Sistemas.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Sefaz\Schemas\v4.00\*.xsd" />
   </ItemGroup>
 
 </Project>
