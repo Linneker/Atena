@@ -854,3 +854,35 @@ blueprint:
     - "O projeto Core deve concentrar contratos compartilhados e infraestrutura transversal."
     - "O projeto Api deve expor endpoints organizados por versão."
     - "O projeto Infrastructure deve centralizar integrações técnicas com banco, cache, mensageria e storage."
+
+  convencoes_testes:
+    descricao: >
+      Padrão obrigatório de attributes para todo método [Fact]/[Theory]
+      (incluindo casos com Skip) nos projetos UnitTest e IntegrationTest.
+    attributes_obrigatorios:
+      - nome: 'Trait("Solucao", <Camada>)'
+        descricao: >
+          Camada arquitetural do código sob teste. Vocabulário fechado:
+          Api, Services, Core, Domain, Repository, Infrastructure,
+          ExternalIntegration, Test (este último para meta-tests de
+          convenções).
+      - nome: 'Trait("Acao", <Unidade>)'
+        descricao: >
+          Nome curto da unidade-em-teste em PascalCase. Para Command/Query
+          é o nome da ação (CriarDespesa, Login, ListarLogs); para
+          behavior/service/helper é o nome da classe (AuditBehavior,
+          JwtTokenService, PasswordHelper); para meta-tests usar
+          'Convencoes'.
+      - nome: 'Fact(DisplayName = "...")'
+        descricao: >
+          Frase Given-When-Then em PT-BR descrevendo o cenário. Ex.:
+          "Dado credenciais inválidas, quando login, então retorna 401".
+          Aceita variações ("Quando ...", "Deve ...") quando o contexto
+          é trivial.
+    enforcement: >
+      Validado por TodoTeste_TemDisplayNameESolucaoEAcao em
+      ConvencoesBlueprintTests. Build/CI reprova qualquer método fora
+      do padrão.
+    filtros_uteis:
+      - 'dotnet test --filter "Trait=Solucao=Services"'
+      - 'dotnet test --filter "Trait=Acao=CriarDespesa"'

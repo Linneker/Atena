@@ -924,3 +924,67 @@ Cada arquivo de teste corresponde a um handler, behavior ou service. Utiliza `xU
 | **Migration Versionada** | `MigrationRunner` + `IMigration` + tabela `__Migrations` |
 | **Feature Flags** | `featureflags.json` + `FeatureFlagService` com hot-reload |
 | **Auditoria Funcional** | `AuditLogEntity` + middleware de auditoria de requests |
+
+---
+
+## Convenções de Testes
+
+Todo método `[Fact]` ou `[Theory]` (incluindo `[Fact(Skip = "...")]`) nos projetos `Acme.Sistemas.Services.UnitTest` e `Acme.Sistemas.IntegrationTest` deve declarar três attributes:
+
+```csharp
+[Trait("Solucao", "Services")]
+[Trait("Acao", "CriarDespesa")]
+[Fact(DisplayName = "Dado dados válidos, quando criar despesa, então persiste e retorna 201")]
+public async Task CriarDespesa_DadosValidos_Retorna201()
+{
+    // ...
+}
+```
+
+### `Trait("Solucao", X)` — vocabulário fechado
+
+| Valor | Quando usar |
+|---|---|
+| `Api` | Endpoints, integração HTTP, middlewares, host |
+| `Services` | Handlers de Command/Query/Notification, behaviors do pipeline |
+| `Core` | Helpers e utilitários puros (`Acme.Sistemas.Core`) — Jwt, Hash, Password |
+| `Domain` | Entidades, value objects, regras de invariante |
+| `Repository` | Repositórios SQL, filtro de tenant |
+| `Infrastructure` | Cache, mensageria, email, GED, hosted services |
+| `ExternalIntegration` | `HttpClientProxy`, ViaCEP, integrações externas |
+| `Test` | Meta-tests (convenções, layout, blueprint) |
+
+### `Trait("Acao", Y)` — nome curto da unidade-em-teste
+
+| Tipo | Exemplo |
+|---|---|
+| Command | `CriarDespesa`, `Login`, `BaixarDespesa` |
+| Query | `ListarLogs`, `ObterFluxo`, `GerarBalanco` |
+| Behavior | `AuditBehavior`, `CacheLookupBehavior`, `LogBehavior`, `ValidationBehavior` |
+| Service / Helper | `JwtTokenService`, `PasswordHelper`, `FeatureFlagService`, `HybridCacheStore` |
+| Worker / Hosted | `CacheCleanupWorker` |
+| Repository / Filtro | `TenantFilter` |
+| Aspecto de Api | `HealthCheck`, `RouteSnapshot`, `IsolamentoCrossTenant`, `TenantContext`, `FluxoVenda` |
+| Meta / convenções | `Convencoes` |
+
+### `DisplayName` — Given-When-Then em PT-BR
+
+Forma canônica: `"Dado <contexto>, quando <ato>, então <resultado>"`.
+
+Variações aceitas:
+- Omitir "Dado <contexto>" se o contexto é trivial: `"Quando login com senha errada, então retorna 401"`.
+- Usar "Deve <comportamento>" como prefixo se o cenário é estado-livre: `"Deve gerar hash diferente para mesma senha em chamadas distintas"`.
+
+### Filtros úteis no `dotnet test`
+
+```powershell
+# Roda apenas a camada Services
+dotnet test --filter "Trait=Solucao=Services"
+
+# Roda todos os testes da unidade CriarDespesa (handler + endpoint)
+dotnet test --filter "Trait=Acao=CriarDespesa"
+```
+
+### Enforcement
+
+O método `TodoTeste_TemDisplayNameESolucaoEAcao` em `ConvencoesBlueprintTests` (projeto Unit) reprova qualquer regressão. Falta de DisplayName, `Trait("Solucao")` fora da allow-list ou `Trait("Acao")` vazio quebra o build.

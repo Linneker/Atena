@@ -187,3 +187,21 @@ src/app/
 ## API Documentation
 
 Swagger UI em `/swagger` (Development). Logs estruturados via NLog.
+
+## Convenções de Testes
+
+Todo método `[Fact]`/`[Theory]` (incluindo `[Fact(Skip = "...")]`) nos projetos `Acme.Sistemas.Services.UnitTest` e `Acme.Sistemas.IntegrationTest` declara três attributes:
+
+```csharp
+[Trait("Solucao", "Services")]                           // camada arquitetural — vocab fechado
+[Trait("Acao", "CriarDespesa")]                          // unidade-em-teste — Command/Query/Helper
+[Fact(DisplayName = "Dado X, quando Y, então Z")]        // frase Given-When-Then em PT-BR
+```
+
+**Solucao** ∈ `Api`, `Services`, `Core`, `Domain`, `Repository`, `Infrastructure`, `ExternalIntegration`, `Test`.
+
+**Acao**: nome do Command/Query (`Login`, `CriarDespesa`), nome da classe (`AuditBehavior`, `JwtTokenService`), ou `Convencoes` para meta-tests.
+
+Filtros úteis: `dotnet test --filter "Trait=Solucao=Services"` ou `dotnet test --filter "Trait=Acao=CriarDespesa"`.
+
+Enforcement: `ConvencoesBlueprintTests.TodoTeste_TemDisplayNameESolucaoEAcao` reprova qualquer regressão. Detalhes em `documentacao/ESTRUTURA_PADRAO_PROJETOS_ACME.md`.
