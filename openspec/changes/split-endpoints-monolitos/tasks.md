@@ -232,9 +232,9 @@
 
 ## Fase 7 — Validação final
 
-- [ ] 7.1 `dotnet build Atena.sln` verde sem warnings novos
-- [ ] 7.2 `dotnet test` (unit) verde — incluindo analyzer endurecido
-- [ ] 7.3 `dotnet test` (integration HealthCheck + RouteSnapshot) verde
-- [ ] 7.4 Validar: 0 arquivos `*Endpoints.cs` em `Endpoints/V1/`
-- [ ] 7.5 Validar: ~120 arquivos `*Endpoint.cs` em pastas filhas (mindepth 2)
-- [ ] 7.6 `openspec validate split-endpoints-monolitos --strict` verde
+- [x] 7.1 `dotnet build Atena.sln` verde — 0 erros, 2 warnings pré-existentes (X509Certificate2 em ImportarCertificadoCommandHandler e MySqlBuilder em DockerEnvironment); nenhum warning novo introduzido pelo split
+- [x] 7.2 `dotnet test` (unit) verde — 61/61 testes, incluindo `TodoTeste_TemDisplayNameESolucaoEAcao` (analyzer endurecido de Trait+DisplayName) e os 3 fatos de `ConvencoesBlueprintTests`
+- [x] 7.3 `dotnet test` (integration) verde — 3/3 (HealthCheck, RouteSnapshot, EndpointConvention)
+- [x] 7.4 0 arquivos `*Endpoints.cs` (plural) em `Endpoints/V1/` confirmado via `find`
+- [x] 7.5 121 arquivos `*Endpoint.cs` em pastas filhas (mindepth 2) — alinhado com expectativa de ~120 rotas
+- [x] 7.6 `openspec validate split-endpoints-monolitos --strict` verde
