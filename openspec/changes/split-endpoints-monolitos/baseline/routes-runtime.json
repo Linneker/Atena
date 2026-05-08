@@ -1,0 +1,863 @@
+[
+  {
+    "Pattern": "/api/v1/auditoria/exportar",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/auditoria/exportar"
+  },
+  {
+    "Pattern": "/api/v1/auditoria/exportar/hash",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/auditoria/exportar/hash"
+  },
+  {
+    "Pattern": "/api/v1/auditoria/historico/{entidade}/{id:guid}",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/auditoria/historico/{entidade}/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/auditoria/logs",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/auditoria/logs"
+  },
+  {
+    "Pattern": "/api/v1/auth/confirmar-email",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/auth/confirmar-email"
+  },
+  {
+    "Pattern": "/api/v1/auth/login",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/auth/login"
+  },
+  {
+    "Pattern": "/api/v1/auth/logout",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/auth/logout"
+  },
+  {
+    "Pattern": "/api/v1/auth/refresh",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/auth/refresh"
+  },
+  {
+    "Pattern": "/api/v1/centros-de-custo",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/centros-de-custo"
+  },
+  {
+    "Pattern": "/api/v1/centros-de-custo",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/centros-de-custo"
+  },
+  {
+    "Pattern": "/api/v1/centros-de-custo/{id:guid}",
+    "Verbs": [
+      "DELETE"
+    ],
+    "DisplayName": "HTTP: DELETE /api/v1/centros-de-custo/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/centros-de-custo/{id:guid}",
+    "Verbs": [
+      "PUT"
+    ],
+    "DisplayName": "HTTP: PUT /api/v1/centros-de-custo/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/clientes/",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/clientes/"
+  },
+  {
+    "Pattern": "/api/v1/clientes/",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/clientes/"
+  },
+  {
+    "Pattern": "/api/v1/clientes/{id:guid}",
+    "Verbs": [
+      "DELETE"
+    ],
+    "DisplayName": "HTTP: DELETE /api/v1/clientes/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/clientes/{id:guid}",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/clientes/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/clientes/{id:guid}",
+    "Verbs": [
+      "PUT"
+    ],
+    "DisplayName": "HTTP: PUT /api/v1/clientes/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/clientes/{id:guid}/inadimplencia",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/clientes/{id:guid}/inadimplencia"
+  },
+  {
+    "Pattern": "/api/v1/conciliacao-bancaria/importar",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/conciliacao-bancaria/importar"
+  },
+  {
+    "Pattern": "/api/v1/contas-pagar",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/contas-pagar"
+  },
+  {
+    "Pattern": "/api/v1/contas-pagar",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/contas-pagar"
+  },
+  {
+    "Pattern": "/api/v1/contas-pagar/{id:guid}",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/contas-pagar/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/contas-pagar/{id:guid}/baixar",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/contas-pagar/{id:guid}/baixar"
+  },
+  {
+    "Pattern": "/api/v1/contas-receber",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/contas-receber"
+  },
+  {
+    "Pattern": "/api/v1/contas-receber",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/contas-receber"
+  },
+  {
+    "Pattern": "/api/v1/contas-receber/{id:guid}",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/contas-receber/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/contas-receber/{id:guid}/receber",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/contas-receber/{id:guid}/receber"
+  },
+  {
+    "Pattern": "/api/v1/dashboard/evolucao-financeira",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/dashboard/evolucao-financeira"
+  },
+  {
+    "Pattern": "/api/v1/dashboard/kpis",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/dashboard/kpis"
+  },
+  {
+    "Pattern": "/api/v1/despesas",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/despesas"
+  },
+  {
+    "Pattern": "/api/v1/despesas",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/despesas"
+  },
+  {
+    "Pattern": "/api/v1/despesas/{id:guid}",
+    "Verbs": [
+      "DELETE"
+    ],
+    "DisplayName": "HTTP: DELETE /api/v1/despesas/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/despesas/{id:guid}",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/despesas/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/despesas/{id:guid}",
+    "Verbs": [
+      "PUT"
+    ],
+    "DisplayName": "HTTP: PUT /api/v1/despesas/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/despesas/{id:guid}/baixar",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/despesas/{id:guid}/baixar"
+  },
+  {
+    "Pattern": "/api/v1/devolucoes-venda/",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/devolucoes-venda/"
+  },
+  {
+    "Pattern": "/api/v1/dividas",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/dividas"
+  },
+  {
+    "Pattern": "/api/v1/dividas",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/dividas"
+  },
+  {
+    "Pattern": "/api/v1/dividas/{id:guid}",
+    "Verbs": [
+      "DELETE"
+    ],
+    "DisplayName": "HTTP: DELETE /api/v1/dividas/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/dividas/{id:guid}",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/dividas/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/dividas/{id:guid}",
+    "Verbs": [
+      "PUT"
+    ],
+    "DisplayName": "HTTP: PUT /api/v1/dividas/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/empresas",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/empresas"
+  },
+  {
+    "Pattern": "/api/v1/empresas/{id:guid}",
+    "Verbs": [
+      "PUT"
+    ],
+    "DisplayName": "HTTP: PUT /api/v1/empresas/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/estoque/entradas",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/estoque/entradas"
+  },
+  {
+    "Pattern": "/api/v1/estoque/produtos/{produtoId:guid}/movimentacao",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/estoque/produtos/{produtoId:guid}/movimentacao"
+  },
+  {
+    "Pattern": "/api/v1/estoque/produtos/{produtoId:guid}/saldo",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/estoque/produtos/{produtoId:guid}/saldo"
+  },
+  {
+    "Pattern": "/api/v1/estoque/saidas",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/estoque/saidas"
+  },
+  {
+    "Pattern": "/api/v1/faturamentos/",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/faturamentos/"
+  },
+  {
+    "Pattern": "/api/v1/feature-flags",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/feature-flags"
+  },
+  {
+    "Pattern": "/api/v1/feature-flags/recarregar",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/feature-flags/recarregar"
+  },
+  {
+    "Pattern": "/api/v1/feature-flags/{key}",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/feature-flags/{key}"
+  },
+  {
+    "Pattern": "/api/v1/feature-flags/{key}",
+    "Verbs": [
+      "PUT"
+    ],
+    "DisplayName": "HTTP: PUT /api/v1/feature-flags/{key}"
+  },
+  {
+    "Pattern": "/api/v1/fluxo-de-caixa",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/fluxo-de-caixa"
+  },
+  {
+    "Pattern": "/api/v1/fluxo-de-caixa/fechar-periodo",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/fluxo-de-caixa/fechar-periodo"
+  },
+  {
+    "Pattern": "/api/v1/fornecedores",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/fornecedores"
+  },
+  {
+    "Pattern": "/api/v1/fornecedores",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/fornecedores"
+  },
+  {
+    "Pattern": "/api/v1/fornecedores/{id:guid}",
+    "Verbs": [
+      "DELETE"
+    ],
+    "DisplayName": "HTTP: DELETE /api/v1/fornecedores/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/fornecedores/{id:guid}",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/fornecedores/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/fornecedores/{id:guid}",
+    "Verbs": [
+      "PUT"
+    ],
+    "DisplayName": "HTTP: PUT /api/v1/fornecedores/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/funcionarios",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/funcionarios"
+  },
+  {
+    "Pattern": "/api/v1/funcionarios",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/funcionarios"
+  },
+  {
+    "Pattern": "/api/v1/funcionarios/{id:guid}",
+    "Verbs": [
+      "DELETE"
+    ],
+    "DisplayName": "HTTP: DELETE /api/v1/funcionarios/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/funcionarios/{id:guid}",
+    "Verbs": [
+      "PUT"
+    ],
+    "DisplayName": "HTTP: PUT /api/v1/funcionarios/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/inventarios/",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/inventarios/"
+  },
+  {
+    "Pattern": "/api/v1/inventarios/{id:guid}/fechar",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/inventarios/{id:guid}/fechar"
+  },
+  {
+    "Pattern": "/api/v1/orcamentos/",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/orcamentos/"
+  },
+  {
+    "Pattern": "/api/v1/orcamentos/",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/orcamentos/"
+  },
+  {
+    "Pattern": "/api/v1/pedidos-compra/",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/pedidos-compra/"
+  },
+  {
+    "Pattern": "/api/v1/pedidos-compra/{id:guid}/enviar-fornecedor",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/pedidos-compra/{id:guid}/enviar-fornecedor"
+  },
+  {
+    "Pattern": "/api/v1/pedidos-venda/",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/pedidos-venda/"
+  },
+  {
+    "Pattern": "/api/v1/pedidos-venda/{id:guid}/confirmar",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/pedidos-venda/{id:guid}/confirmar"
+  },
+  {
+    "Pattern": "/api/v1/permissoes",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/permissoes"
+  },
+  {
+    "Pattern": "/api/v1/plano-de-contas",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/plano-de-contas"
+  },
+  {
+    "Pattern": "/api/v1/plano-de-contas",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/plano-de-contas"
+  },
+  {
+    "Pattern": "/api/v1/plano-de-contas/{id:guid}",
+    "Verbs": [
+      "DELETE"
+    ],
+    "DisplayName": "HTTP: DELETE /api/v1/plano-de-contas/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/plano-de-contas/{id:guid}",
+    "Verbs": [
+      "PUT"
+    ],
+    "DisplayName": "HTTP: PUT /api/v1/plano-de-contas/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/produtos/",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/produtos/"
+  },
+  {
+    "Pattern": "/api/v1/produtos/",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/produtos/"
+  },
+  {
+    "Pattern": "/api/v1/produtos/{id:guid}",
+    "Verbs": [
+      "DELETE"
+    ],
+    "DisplayName": "HTTP: DELETE /api/v1/produtos/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/produtos/{id:guid}",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/produtos/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/produtos/{id:guid}",
+    "Verbs": [
+      "PUT"
+    ],
+    "DisplayName": "HTTP: PUT /api/v1/produtos/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/produtos/{id:guid}/precos",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/produtos/{id:guid}/precos"
+  },
+  {
+    "Pattern": "/api/v1/recebimentos-compra/",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/recebimentos-compra/"
+  },
+  {
+    "Pattern": "/api/v1/recebimentos-compra/{id:guid}/vincular-nfe",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/recebimentos-compra/{id:guid}/vincular-nfe"
+  },
+  {
+    "Pattern": "/api/v1/receitas",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/receitas"
+  },
+  {
+    "Pattern": "/api/v1/receitas",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/receitas"
+  },
+  {
+    "Pattern": "/api/v1/receitas/{id:guid}",
+    "Verbs": [
+      "DELETE"
+    ],
+    "DisplayName": "HTTP: DELETE /api/v1/receitas/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/receitas/{id:guid}",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/receitas/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/receitas/{id:guid}",
+    "Verbs": [
+      "PUT"
+    ],
+    "DisplayName": "HTTP: PUT /api/v1/receitas/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/receitas/{id:guid}/receber",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/receitas/{id:guid}/receber"
+  },
+  {
+    "Pattern": "/api/v1/relatorios/contas-pagar/aging",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/relatorios/contas-pagar/aging"
+  },
+  {
+    "Pattern": "/api/v1/relatorios/contas-receber/aging",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/relatorios/contas-receber/aging"
+  },
+  {
+    "Pattern": "/api/v1/relatorios/estoque/posicao",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/relatorios/estoque/posicao"
+  },
+  {
+    "Pattern": "/api/v1/relatorios/financeiro/balanco",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/relatorios/financeiro/balanco"
+  },
+  {
+    "Pattern": "/api/v1/relatorios/financeiro/balanco.pdf",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/relatorios/financeiro/balanco.pdf"
+  },
+  {
+    "Pattern": "/api/v1/relatorios/financeiro/dre",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/relatorios/financeiro/dre"
+  },
+  {
+    "Pattern": "/api/v1/relatorios/financeiro/dre.pdf",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/relatorios/financeiro/dre.pdf"
+  },
+  {
+    "Pattern": "/api/v1/relatorios/vendas/",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/relatorios/vendas/"
+  },
+  {
+    "Pattern": "/api/v1/roles",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/roles"
+  },
+  {
+    "Pattern": "/api/v1/roles",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/roles"
+  },
+  {
+    "Pattern": "/api/v1/roles/{id:guid}/permissoes",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/roles/{id:guid}/permissoes"
+  },
+  {
+    "Pattern": "/api/v1/roles/{id:guid}/usuarios",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/roles/{id:guid}/usuarios"
+  },
+  {
+    "Pattern": "/api/v1/solicitacoes-compra/",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/solicitacoes-compra/"
+  },
+  {
+    "Pattern": "/api/v1/solicitacoes-compra/",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/solicitacoes-compra/"
+  },
+  {
+    "Pattern": "/api/v1/solicitacoes-compra/{id:guid}",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/solicitacoes-compra/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/solicitacoes-compra/{id:guid}/aprovar",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/solicitacoes-compra/{id:guid}/aprovar"
+  },
+  {
+    "Pattern": "/api/v1/solicitacoes-compra/{id:guid}/enviar-aprovacao",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/solicitacoes-compra/{id:guid}/enviar-aprovacao"
+  },
+  {
+    "Pattern": "/api/v1/solicitacoes-compra/{id:guid}/rejeitar",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/solicitacoes-compra/{id:guid}/rejeitar"
+  },
+  {
+    "Pattern": "/api/v1/tenants",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/tenants"
+  },
+  {
+    "Pattern": "/api/v1/tenants/registrar",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/tenants/registrar"
+  },
+  {
+    "Pattern": "/api/v1/tenants/{id:guid}",
+    "Verbs": [
+      "DELETE"
+    ],
+    "DisplayName": "HTTP: DELETE /api/v1/tenants/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/tenants/{id:guid}",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/tenants/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/tenants/{id:guid}",
+    "Verbs": [
+      "PUT"
+    ],
+    "DisplayName": "HTTP: PUT /api/v1/tenants/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/tipos-produto",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/tipos-produto"
+  },
+  {
+    "Pattern": "/api/v1/tipos-produto",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/tipos-produto"
+  },
+  {
+    "Pattern": "/api/v1/tipos-valor-produto",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/tipos-valor-produto"
+  },
+  {
+    "Pattern": "/api/v1/tipos-valor-produto",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/tipos-valor-produto"
+  },
+  {
+    "Pattern": "/api/v1/usuarios",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/usuarios"
+  },
+  {
+    "Pattern": "/api/v1/usuarios",
+    "Verbs": [
+      "POST"
+    ],
+    "DisplayName": "HTTP: POST /api/v1/usuarios"
+  },
+  {
+    "Pattern": "/api/v1/usuarios/{id:guid}",
+    "Verbs": [
+      "DELETE"
+    ],
+    "DisplayName": "HTTP: DELETE /api/v1/usuarios/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/usuarios/{id:guid}",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /api/v1/usuarios/{id:guid}"
+  },
+  {
+    "Pattern": "/api/v1/usuarios/{id:guid}",
+    "Verbs": [
+      "PUT"
+    ],
+    "DisplayName": "HTTP: PUT /api/v1/usuarios/{id:guid}"
+  },
+  {
+    "Pattern": "/health",
+    "Verbs": [
+      "GET"
+    ],
+    "DisplayName": "HTTP: GET /health"
+  }
+]

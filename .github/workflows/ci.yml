@@ -25,3 +25,8 @@ jobs:
 
       - name: Unit tests (inclui ConvencoesBlueprintTests)
         run: dotnet test test/Unit/Acme.Sistemas.Services.UnitTest/Acme.Sistemas.Services.UnitTest.csproj --configuration Release --no-build --logger "console;verbosity=normal"
+
+      - name: Integration tests (HealthCheck + RouteSnapshot — requer Docker)
+        run: dotnet test test/Integration/Acme.Sistemas.IntegrationTest/Acme.Sistemas.IntegrationTest.csproj --configuration Release --no-build --logger "console;verbosity=normal"
+        env:
+          DOCKER_HOST: unix:///var/run/docker.sock
