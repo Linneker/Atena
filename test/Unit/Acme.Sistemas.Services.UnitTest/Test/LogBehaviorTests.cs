@@ -10,7 +10,9 @@ public class LogBehaviorTests
 {
     public sealed record SampleRequest(string Nome) : IRequest<string>;
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "LogBehavior")]
+    [Fact(DisplayName = "Dado um request, quando o LogBehavior executa, então delega ao próximo e devolve a resposta")]
     public async Task Handle_DelegaParaProximoEDevolveResposta()
     {
         var sut = new LogBehavior<SampleRequest, string>(NullLogger<LogBehavior<SampleRequest, string>>.Instance);
@@ -18,7 +20,9 @@ public class LogBehaviorTests
         resultado.Should().Be("ok");
     }
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "LogBehavior")]
+    [Fact(DisplayName = "Dado o próximo lançar exceção, quando o LogBehavior executa, então propaga a exceção sem engolir")]
     public async Task Handle_PropagaExcecaoDoProximo()
     {
         var sut = new LogBehavior<SampleRequest, string>(NullLogger<LogBehavior<SampleRequest, string>>.Instance);

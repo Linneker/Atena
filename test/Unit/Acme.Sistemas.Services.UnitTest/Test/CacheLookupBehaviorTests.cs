@@ -18,7 +18,9 @@ public class CacheLookupBehaviorTests
 
     public sealed record NaoCacheableQuery(string Id) : IRequest<string>;
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "CacheLookupBehavior")]
+    [Fact(DisplayName = "Dado um request não-ICacheable, quando o behavior executa, então ignora cache e chama o próximo")]
     public async Task RequestNaoCacheable_NaoConsultaCache_ChamaProximo()
     {
         var cache = new InMemoryCacheStore();
@@ -36,7 +38,9 @@ public class CacheLookupBehaviorTests
         chamouProximo.Should().BeTrue();
     }
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "CacheLookupBehavior")]
+    [Fact(DisplayName = "Dado cache miss em request ICacheable, quando o behavior executa, então chama o próximo e grava o resultado no cache")]
     public async Task Miss_ChamaProximo_GravaCache()
     {
         var cache = new InMemoryCacheStore();
@@ -49,7 +53,9 @@ public class CacheLookupBehaviorTests
         (await cache.GetAsync<string>("q:1")).Should().Be("valor");
     }
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "CacheLookupBehavior")]
+    [Fact(DisplayName = "Dado cache hit em request ICacheable, quando o behavior executa, então retorna valor cacheado e não chama o próximo")]
     public async Task Hit_RetornaValorCacheado_NaoChamaProximo()
     {
         var cache = new InMemoryCacheStore();
@@ -68,7 +74,9 @@ public class CacheLookupBehaviorTests
         chamouProximo.Should().BeFalse();
     }
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "CacheLookupBehavior")]
+    [Fact(DisplayName = "Dado cache com TTL expirado, quando o behavior executa, então não retorna valor antigo e chama o próximo")]
     public async Task TtlExpirado_NaoRetornaValor_ChamaProximo()
     {
         var cache = new InMemoryCacheStore();

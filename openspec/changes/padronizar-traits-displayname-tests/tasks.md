@@ -28,12 +28,12 @@
 > Por commit: 1 camada (Solucao). Mantém histórico legível e bisect rápido.
 
 ### 3.1 — Services / Behaviors (5 arquivos)
-- [ ] 3.1.1 `AuditBehaviorTests.cs` — `Acao=AuditBehavior`
-- [ ] 3.1.2 `CacheLookupBehaviorTests.cs` — `Acao=CacheLookupBehavior`
-- [ ] 3.1.3 `LogBehaviorTests.cs` — `Acao=LogBehavior`
-- [ ] 3.1.4 `ValidationBehaviorTests.cs` — `Acao=ValidationBehavior`
-- [ ] 3.1.5 `PipelineBehaviorOrderingTests.cs` — `Acao=PipelineBehavior`
-- [ ] 3.1.6 Build + test verde + commit `test(services): retrofit Trait+DisplayName em behaviors`
+- [x] 3.1.1 `AuditBehaviorTests.cs` — `Acao=AuditBehavior`
+- [x] 3.1.2 `CacheLookupBehaviorTests.cs` — `Acao=CacheLookupBehavior`
+- [x] 3.1.3 `LogBehaviorTests.cs` — `Acao=LogBehavior`
+- [x] 3.1.4 `ValidationBehaviorTests.cs` — `Acao=ValidationBehavior`
+- [x] 3.1.5 `PipelineBehaviorOrderingTests.cs` — `Acao=PipelineBehavior`
+- [x] 3.1.6 Build + test verde + commit `test(services): retrofit Trait+DisplayName em behaviors`
 
 ### 3.2 — Services / Handlers (3 arquivos)
 - [ ] 3.2.1 `LoginCommandHandlerTests.cs` — `Acao=Login`

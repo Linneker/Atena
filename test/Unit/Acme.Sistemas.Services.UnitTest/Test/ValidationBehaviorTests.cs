@@ -16,7 +16,9 @@ public class ValidationBehaviorTests
         public SampleValidator() { RuleFor(x => x.Nome).NotEmpty().MinimumLength(3); }
     }
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "ValidationBehavior")]
+    [Fact(DisplayName = "Dado nenhum validador registrado, quando o ValidationBehavior executa, então chama o próximo sem bloqueio")]
     public async Task SemValidadores_ChamaProximoSemBloqueio()
     {
         var sut = new ValidationBehavior<SampleRequest, string>(Array.Empty<IValidator<SampleRequest>>());
@@ -24,7 +26,9 @@ public class ValidationBehaviorTests
         resultado.Should().Be("ok");
     }
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "ValidationBehavior")]
+    [Fact(DisplayName = "Dado request inválido, quando o ValidationBehavior executa, então lança ValidationException")]
     public async Task RequestInvalido_LancaValidationException()
     {
         var sut = new ValidationBehavior<SampleRequest, string>(new[] { new SampleValidator() });
@@ -32,7 +36,9 @@ public class ValidationBehaviorTests
         await act.Should().ThrowAsync<ValidationException>();
     }
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "ValidationBehavior")]
+    [Fact(DisplayName = "Dado request válido, quando o ValidationBehavior executa, então chama o próximo")]
     public async Task RequestValido_ChamaProximo()
     {
         var sut = new ValidationBehavior<SampleRequest, string>(new[] { new SampleValidator() });

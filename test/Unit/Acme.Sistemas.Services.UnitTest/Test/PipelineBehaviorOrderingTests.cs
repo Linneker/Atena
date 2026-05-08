@@ -49,7 +49,9 @@ public class PipelineBehaviorOrderingTests
         }
     }
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "PipelineBehavior")]
+    [Fact(DisplayName = "Dado um Command que passa pelo Mediator, quando enviado, então executa Validation → CacheLookup → Audit → Log → Handler na ordem")]
     public async Task Pipeline_ExecutaTransversaisNaOrdemValidation_CacheLookup_Audit_Log_Handler()
     {
         Trace.Clear();
@@ -79,7 +81,9 @@ public class PipelineBehaviorOrderingTests
         Trace.Should().Contain("Handler");
     }
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "PipelineBehavior")]
+    [Fact(DisplayName = "Dado um Command inválido, quando enviado pelo Mediator, então lança ValidationException antes de chegar ao Handler")]
     public async Task Pipeline_RequestInvalido_LancaValidationExceptionAntesDoHandler()
     {
         Trace.Clear();

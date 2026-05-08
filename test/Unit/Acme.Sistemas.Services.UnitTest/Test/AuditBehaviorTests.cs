@@ -20,7 +20,9 @@ public class AuditBehaviorTests
 
     public sealed record ListarFooQuery(string Filtro) : IRequest<string>;
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "AuditBehavior")]
+    [Fact(DisplayName = "Dado um request não-IAuditable, quando o behavior executa, então não persiste AuditLog")]
     public async Task NaoAuditable_NaoPersisteLog()
     {
         var audit = new Mock<IAuditLogRepository>();
@@ -34,7 +36,9 @@ public class AuditBehaviorTests
         audit.Verify(a => a.AddAsync(It.IsAny<AuditLog>(), It.IsAny<CancellationToken>()), Times.Never);
     }
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "AuditBehavior")]
+    [Fact(DisplayName = "Dado um Command IAuditable, quando o behavior executa, então persiste AuditLog com Recurso, Operação e EntidadeId")]
     public async Task Auditable_PersisteLogComRecursoAcaoEId()
     {
         var audit = new Mock<IAuditLogRepository>();
@@ -60,7 +64,9 @@ public class AuditBehaviorTests
         capturado.EntidadeId.Should().Be(id);
     }
 
-    [Fact]
+    [Trait("Solucao", "Services")]
+    [Trait("Acao", "AuditBehavior")]
+    [Fact(DisplayName = "Dado falha ao persistir AuditLog, quando o behavior executa, então não quebra o fluxo do handler")]
     public async Task FalhaAoPersistirNaoQuebraFluxo()
     {
         var audit = new Mock<IAuditLogRepository>();
