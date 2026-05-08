@@ -50,8 +50,8 @@ Acme.Sistemas.NomeProjeto.Api/
 ├── Endpoints/
 │   └── V{N}/
 │       └── {NomeEndpoint}/
-│           ├── {NomeArquivo}.cs
-│           ├── {NomeArquivo}Request.cs          (opcional — pode não existir em GETs simples)
+│           ├── {NomeArquivo}Endpoint.cs
+│           ├── {NomeArquivo}Request.cs
 │           ├── {NomeArquivo}Response.cs
 │           └── {NomeArquivo}Map.cs
 ├── Middlewares/
@@ -75,12 +75,16 @@ Acme.Sistemas.NomeProjeto.Api/
 
 #### Arquivos por Endpoint
 
+Cada rota HTTP reside em sua própria pasta com **4 arquivos obrigatórios** (uma rota = uma pasta = quatro arquivos). Não existem aglomerados `*Endpoints.cs` (plural) registrando múltiplas rotas.
+
 | Arquivo | Descrição |
 |---|---|
-| `{Nome}.cs` | Implementação do endpoint usando a interface `IEndpoint`. Define a rota, método HTTP e handler |
-| `{Nome}Request.cs` | Contrato de entrada da requisição. Opcional em endpoints GET sem parâmetros complexos |
+| `{Nome}Endpoint.cs` | Implementação do endpoint usando a interface `IEndpoint`. Define a rota, método HTTP e handler |
+| `{Nome}Request.cs` | Contrato de entrada da requisição. Mesmo em GETs simples, manter o arquivo (pode ser record vazio ou conter parâmetros de rota/query) |
 | `{Nome}Response.cs` | Contrato de saída. Define as propriedades retornadas ao consumidor da API |
-| `{Nome}Map.cs` | Converte `Request → Command/Query` e `CommandResult/QueryResult → Response` |
+| `{Nome}Map.cs` | Converte `Request → Command/Query` e `CommandResult/QueryResult → Response` via extensions |
+
+Conformidade validada em CI por `EndpointConventionTests` (projeto Integration), que itera `EndpointDataSource.Endpoints` em runtime e exige siblings em cada pasta. Allow-list cobre apenas `/health`.
 
 #### Arquivos Raiz
 

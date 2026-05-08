@@ -223,10 +223,10 @@
 
 ## Fase 6 — Documentação
 
-- [ ] 6.1 Atualizar `CLAUDE.md` confirmando que 100% dos endpoints seguem padrão 4-arquivos (Endpoint+Request+Response+Map)
-- [ ] 6.2 Remover qualquer nota de "dívida técnica de monoliths" no `CLAUDE.md`
-- [ ] 6.3 Atualizar `documentacao/ESTRUTURA_PADRAO_PROJETOS_ACME.md` confirmando padrão Request/Response/Map
-- [ ] 6.4 Commit `docs: confirma 100% aderência blueprint pós-split`
+- [x] 6.1 Atualizar `CLAUDE.md` confirmando que 100% dos endpoints seguem padrão 4-arquivos (Endpoint+Request+Response+Map); removido "(opcional para GETs simples)" e adicionado bloco de aderência apontando para `EndpointConventionTests`
+- [x] 6.2 Remover qualquer nota de "dívida técnica de monoliths" no `CLAUDE.md` (já não existia — purgado em commits anteriores; verificado via grep)
+- [x] 6.3 Atualizar `documentacao/ESTRUTURA_PADRAO_PROJETOS_ACME.md` confirmando padrão Request/Response/Map; removido "opcional em GETs", reescrita a tabela de arquivos com `{Nome}Endpoint.cs` (sufixo) e bloco confirmando enforcement via test de integração
+- [x] 6.4 Commit `docs: confirma 100% aderência blueprint pós-split`
 
 ---
 

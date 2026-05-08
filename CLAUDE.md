@@ -114,12 +114,14 @@ A organização técnica segue o blueprint comum dos projetos Acme. Documentos c
 ```
 Api/Endpoints/V1/{Recurso}/{Verbo}{Recurso}/
 ├── {Verbo}{Recurso}Endpoint.cs    ← classe IEndpoint que registra a rota
-├── {Verbo}{Recurso}Request.cs     ← DTO de entrada (opcional para GETs simples)
+├── {Verbo}{Recurso}Request.cs     ← DTO de entrada
 ├── {Verbo}{Recurso}Response.cs    ← DTO de saída
 └── {Verbo}{Recurso}Map.cs         ← extensions Request → Command, Result → Response
 ```
 
 Implementa `IEndpoint`, descoberto via reflexão por `EndpointRegistrationExtensions`. Use `RequirePermissao(Permissions.Of(Recursos.X, Acoes.Y))`.
+
+**100% de aderência:** todas as ~120 rotas /api/v1 seguem este padrão (uma rota por pasta, 4 arquivos). Validado em runtime por `EndpointConventionTests` (projeto Integration), que itera `EndpointDataSource.Endpoints` e exige siblings em cada pasta. Allow-list cobre apenas `/health`. Não existem mais arquivos `*Endpoints.cs` (plural) em `Endpoints/V1/`.
 
 #### Como criar um novo Command com Behavior+Result
 
