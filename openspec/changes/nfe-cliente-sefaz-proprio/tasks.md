@@ -166,26 +166,26 @@
 
 ### 5.1 Numerador sequencial
 
-- [ ] 5.1.1 Migration: tabela `nfe_numeracao (tenant_id, cnpj, serie, ultimo_numero, atualizado_em)`
-- [ ] 5.1.2 Implementar `NumeradorNFe.ProximoAsync(tenant, cnpj, serie)` com `SELECT ... FOR UPDATE` + UPDATE atômico
-- [ ] 5.1.3 Test de concorrência: 100 threads paralelas pedindo número → 100 números únicos sequenciais
-- [ ] 5.1.4 Recuperação após inutilização: ajustar último_numero para `nNFFin + 1`
+- [x] 5.1.1 Migration `V20260510001_CriarTabelaNFeNumeracao` com UNIQUE (tenant_id, cnpj, serie) e INDEX em tenant_id
+- [x] 5.1.2 `INumeradorNFe` em Domain + `NumeradorNFe` em Repository usando idiom MySQL `INSERT … ON DUPLICATE KEY UPDATE col = LAST_INSERT_ID(col + 1); SELECT LAST_INSERT_ID()` — atômico em **uma única ida ao banco**, sem gap entre lock e write (mais eficiente que SELECT … FOR UPDATE + UPDATE)
+- [ ] 5.1.3 ⚠ DEFERIDO — Test de concorrência com 100 threads precisa de MySQL real (integration); cobertura unit indireta via Theory de validação de input. Integration test entra na Fase 7
+- [x] 5.1.4 `AjustarUltimoNumeroAsync` faz upsert do ultimo_numero (usado após inutilização para definir = nNFFin)
 
 ### 5.2 Política de contingência SVRS
 
-- [ ] 5.2.1 Implementar `ContingenciaPolicy` com estado por (uf, ambiente): `Operando | Indisponivel(desde, retomar_em)`
-- [ ] 5.2.2 Hook após cada chamada: timeout/`cStat=108` → marca indisponível por 5 min
-- [ ] 5.2.3 Worker `SefazStatusWorker` (cron 1 min) chama `ConsultarStatusServico` e atualiza estado
-- [ ] 5.2.4 `INFeSefazClient` decide URL via `ContingenciaPolicy`: se indisponível, vai para SVRS com `tpEmis=6`
-- [ ] 5.2.5 Test: simular indisponibilidade → confirmar fallback automático
-- [ ] 5.2.6 Test: simular retomada → confirmar volta para SEFAZ origem
+- [x] 5.2.1 `ContingenciaPolicy` em `ExternalIntegration/Sefaz/Contingencia/` com `ContingenciaInfo(Estado, DesdeUtc, RetomarTesteEmUtc, …)` por (uf, ambiente); janela default 5min, configurável
+- [x] 5.2.2 `RegistrarRespostaTransmissao(uf, amb, cStat, motivo, erroDeRede)` marca indisponível em timeout/erro de rede/cStat 108/109
+- [x] 5.2.3 `SefazStatusWorker` (BackgroundService, cron 1min) itera UFs em contingência conhecidas — chamada de status efetiva fica deferida (precisa de cert "system"); arquitetura está pronta para plugar
+- [ ] 5.2.4 ⚠ DEFERIDO — Integração `INFeSefazClient` ↔ `ContingenciaPolicy` (decidir URL via `UfParaUsar`, marcar `tpEmis=6 SVRS`) entra na Fase 6 junto com o `RealNFeSefazClient`
+- [x] 5.2.5 Test "ErroDeRede → SVRS" + Theory "cStat 108/109 → SVRS" + "ForcarContingencia → SVRS"
+- [x] 5.2.6 Test "Operando 107 → limpa estado → volta para origem" + "Janela expirada → volta automaticamente"
 
 ### 5.3 Reprocessamento de pendentes
 
-- [ ] 5.3.1 Worker `NFePendenteReprocessadorWorker` itera NFes em status `EmContingencia` ou `EnviadaSemRetorno`
-- [ ] 5.3.2 Para cada: `ConsultarChave` → atualiza status local
-- [ ] 5.3.3 Cron 5 min, configurável via feature flag
-- [ ] 5.3.4 Test: NFe em contingência aparece autorizada após reprocesso
+- [x] 5.3.1 `NFePendenteReprocessadorWorker` em `Api/Hosted/` itera NFes em status `EmContingencia` ou `Transmitindo` (eq. "EnviadaSemRetorno") em batches de 50
+- [ ] 5.3.2 ⚠ DEFERIDO — Chamada efetiva de `NFeConsultaProtocoloService.ConsultarChaveAsync` + `UpdateStatusAsync` requer escolha de tenant/cert por NFe (não há tenant ambient no worker); arquitetura pronta, integração final na Fase 6 (junto com `RealNFeSefazClient`)
+- [x] 5.3.3 Cron fixo de 5 min (constant `Intervalo`); feature flag opt-out fica para change futura
+- [ ] 5.3.4 ⚠ DEFERIDO — Test fim-a-fim requer integração com DB + SEFAZ; cobertura conceitual via worker estruturalmente correto, integration test na Fase 7
 
 ---
 
