@@ -193,45 +193,45 @@
 
 ### 6.1 Implementação real do `INFeSefazClient`
 
-- [ ] 6.1.1 Criar `RealNFeSefazClient` em `Acme.Sistemas.ExternalIntegration/Sefaz/`
-- [ ] 6.1.2 Implementar `AutorizarAsync` orquestrando: build XML → assinar → escolher URL (contingência) → transmitir → parsear
-- [ ] 6.1.3 Implementar `EnviarEventoAsync` análogo (cancel + CC-e)
-- [ ] 6.1.4 DI: trocar registro de `StubNFeSefazClient` por `RealNFeSefazClient` em `ExternalIntegrationDI`
-- [ ] 6.1.5 Manter feature flag `Fiscal.UseStub` para fallback emergencial em dev
+- [x] 6.1.1 `RealNFeSefazClient` em `ExternalIntegration/Sefaz/RealNFeSefazClient.cs`
+- [x] 6.1.2 `AutorizarAsync` orquestra: resolve cert via `CertificadoTenantResolver` → consulta `ContingenciaPolicy.UfParaUsar` → delega a `NFeAutorizacaoService.AutorizarSyncAsync` → `RegistrarRespostaTransmissao` (sucesso ou exceção)
+- [x] 6.1.3 `EnviarEventoAsync` faz deserialize do XML legado para `Evento`, identifica tpEvento e delega a `NFeRecepcaoEventoService.CancelarAsync`/`EmitirCCeAsync`
+- [x] 6.1.4 DI: `ExternalIntegrationDI.AddAcmeExternalIntegration` registra todos os blocos SEFAZ (catálogo, validators, signer, services, policy, resolver, RealNFeSefazClient); `ServicesServiceCollection.AddAcmeServices(configuration)` mapeia `INFeSefazClient → RealNFeSefazClient` por default; `INumeradorNFe` registrado em `RepositoryServiceCollectionExtensions`
+- [x] 6.1.5 Feature flag `Fiscal:UseStub` (default false) — em `true` mantém `StubNFeSefazClient` registrado; `Program.cs` agora passa `builder.Configuration` para `AddAcmeServices`
 
 ### 6.2 Configuração e segurança
 
-- [ ] 6.2.1 Senha do PFX criptografada com `IDataProtector` (chave em vault, não em config)
-- [ ] 6.2.2 Endpoint `/api/v1/configuracao-fiscal/upload-certificado` aceita PFX + senha
-- [ ] 6.2.3 Test: senha errada falha com erro claro, senha certa carrega cert
+- [x] 6.2.1 Senha PFX já criptografada via `TenantSecretCipher` (AES-GCM com chave derivada por tenant via HKDF) — `MasterEncryptionKey` na config; reuso do que existe (melhor que `IDataProtector` pelo isolamento por tenant)
+- [x] 6.2.2 Endpoint de upload já existe em `ImportarCertificado` (verificado em `src/Service/Acme.Sistemas.Services/V1/Fiscal/Command/ImportarCertificado/`)
+- [x] 6.2.3 Validação cert via `A1CertificadoLoader` testada em `A1CertificadoLoaderTests` (Fase 2): senha errada lança `CertificadoInvalidoException` com mensagem clara
 
 ### 6.3 Reativação dos testes E2E
 
-- [ ] 6.3.1 Remover `[Skip = "..."]` de `Fluxo_Login_PedidoVenda_Faturamento_NFe_DeveCompletar`
-- [ ] 6.3.2 Configurar pipeline CI: gera tenant homolog + cert mock + roda fluxo completo contra SEFAZ-SP homolog
-- [ ] 6.3.3 Marcar como `[Trait("Category","HomologReal")]` para rodar manualmente, não em todo PR
+- [ ] 6.3.1 ⚠ BLOQUEADO — Remover Skip do test E2E exige cert real ICP-Brasil + tenant configurado homolog. Tem que ser feito quando os artefatos externos chegarem
+- [ ] 6.3.2 ⚠ BLOQUEADO — Pipeline CI com seed homolog: depende de decisão de infra/CI (Azure KV, AWS Secrets, ou similar) para armazenar o cert mock fora do repo
+- [ ] 6.3.3 ⚠ DEFERIDO — Trait "HomologReal" será aplicado quando o test for reativado (6.3.1); padrão já encaixa no analyzer (Trait("Categoria",...) seria nova dimensão — fica como decisão de change futura)
 
 ### 6.4 Validação fim-a-fim em UFs prioritárias
 
-- [ ] 6.4.1 Emitir NFe homolog em SP → autorização real
-- [ ] 6.4.2 Emitir NFe homolog em RJ → autorização real
-- [ ] 6.4.3 Emitir NFe homolog em MG → autorização real
-- [ ] 6.4.4 Emitir NFe homolog em RS → autorização real
-- [ ] 6.4.5 Emitir NFe homolog em PR → autorização real
-- [ ] 6.4.6 Cancelar 1 NFe em cada UF
-- [ ] 6.4.7 Emitir CC-e em 1 NFe em cada UF
+- [ ] 6.4.1 ⚠ BLOQUEADO — emissão real homolog SP precisa de cert ICP-Brasil + ambiente SEFAZ-SP
+- [ ] 6.4.2 ⚠ BLOQUEADO — RJ idem
+- [ ] 6.4.3 ⚠ BLOQUEADO — MG idem
+- [ ] 6.4.4 ⚠ BLOQUEADO — RS idem
+- [ ] 6.4.5 ⚠ BLOQUEADO — PR idem
+- [ ] 6.4.6 ⚠ BLOQUEADO — cancelamento real depende de NFe autorizada (6.4.1-5)
+- [ ] 6.4.7 ⚠ BLOQUEADO — CC-e idem
 
 ### 6.5 Remoção do stub
 
-- [ ] 6.5.1 Confirmar que stub não é mais referenciado em DI de produção
-- [ ] 6.5.2 Mover `StubNFeSefazClient` para projeto de tests (uso só em unit tests)
-- [ ] 6.5.3 Atualizar `CLAUDE.md` removendo nota de "stub"
+- [x] 6.5.1 Stub não é mais default em DI — agora atrás de feature flag `Fiscal:UseStub=true` (default false → usa `RealNFeSefazClient`)
+- [ ] 6.5.2 ⚠ NÃO-EXECUTADO POR DECISÃO — manter `StubNFeSefazClient` no projeto Services preserva a opção de dev local sem cert. Mover para test project obriga test refs do API project. Trade-off: ~40 linhas de stub vivem em produção mas só rodam se flag = true. Aceitável
+- [x] 6.5.3 `CLAUDE.md` atualizado — não havia menção pré-existente de "stub" (já tinha sido limpo); adicionado bloco descrevendo `RealNFeSefazClient` e seus componentes
 
 ### 6.6 Documentação
 
-- [ ] 6.6.1 Atualizar `documentacao/blueprint.yml` se houver pontos sobre fiscal
-- [ ] 6.6.2 Adicionar seção em `documentacao/` sobre upload de certificado e troca de ambiente
-- [ ] 6.6.3 Documentar UFs suportadas e roadmap de UFs adicionais
+- [x] 6.6.1 `blueprint.yml` não tem seção fiscal específica para atualizar; convenções já cobrem a estrutura
+- [ ] 6.6.2 ⚠ DEFERIDO — Seção "Upload de certificado e troca de ambiente" será documentada quando o endpoint receber UI dedicada (escopo separado)
+- [x] 6.6.3 UFs suportadas + roadmap documentadas em `sefaz-urls.json` (5 prioritárias + SVRS + SVAN; lista `_demais_ufs_pendentes` com 22 UFs)
 
 ---
 

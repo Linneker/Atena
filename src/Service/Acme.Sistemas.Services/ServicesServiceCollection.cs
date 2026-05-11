@@ -1,16 +1,18 @@
 using Acme.Sistemas.Core;
 using Acme.Sistemas.Domain.Interfaces.Fiscal;
+using Acme.Sistemas.ExternalIntegration.Sefaz;
 using Acme.Sistemas.Services.V1.ConciliacaoBancaria.Services;
 using Acme.Sistemas.Services.V1.Estoque.Services;
 using Acme.Sistemas.Services.V1.Fiscal.Services;
 using FluentValidation;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Acme.Sistemas.Services;
 
 public static class ServicesServiceCollection
 {
-    public static IServiceCollection AddAcmeServices(this IServiceCollection services)
+    public static IServiceCollection AddAcmeServices(this IServiceCollection services, IConfiguration? configuration = null)
     {
         var assembly = typeof(ServicesServiceCollection).Assembly;
 
@@ -27,7 +29,18 @@ public static class ServicesServiceCollection
         // Fiscal NF-e — implementações que vivem em Services
         services.AddSingleton<INFeXmlBuilder, NFeXmlBuilder>();
         services.AddSingleton<INFeXmlSigner, StubNFeXmlSigner>();
-        services.AddSingleton<INFeSefazClient, StubNFeSefazClient>();
+
+        // Cliente SEFAZ: default = Real (Fase 6 do nfe-cliente-sefaz-proprio).
+        // Stub fica disponível como fallback emergencial em dev via flag Fiscal:UseStub=true.
+        var useStub = configuration?.GetValue<bool>("Fiscal:UseStub") ?? false;
+        if (useStub)
+        {
+            services.AddSingleton<INFeSefazClient, StubNFeSefazClient>();
+        }
+        else
+        {
+            services.AddScoped<INFeSefazClient>(sp => sp.GetRequiredService<RealNFeSefazClient>());
+        }
 
         return services;
     }

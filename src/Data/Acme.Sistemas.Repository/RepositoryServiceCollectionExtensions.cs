@@ -1,3 +1,5 @@
+using Acme.Sistemas.Domain.Interfaces.Fiscal;
+using Acme.Sistemas.Repository.Repositories.V1.Fiscal;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Acme.Sistemas.Repository;
@@ -22,6 +24,9 @@ public static class RepositoryServiceCollectionExtensions
                 services.AddScoped(iface, implementation);
             }
         }
+
+        // Fiscal NF-e — registros explícitos para serviços que não seguem o sufixo "Repository"
+        services.AddScoped<INumeradorNFe, NumeradorNFe>();
 
         return services;
     }

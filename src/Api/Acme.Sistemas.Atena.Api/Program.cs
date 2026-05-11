@@ -32,7 +32,7 @@ builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(JwtOptio
 builder.Services.Configure<PublicAppOptions>(builder.Configuration.GetSection(PublicAppOptions.SectionName));
 
 builder.Services.AddAcmeSecurity();
-builder.Services.AddAcmeServices();
+builder.Services.AddAcmeServices(builder.Configuration);
 builder.Services.AddAcmeRepositories();
 builder.Services.AddAcmeInfrastructure(builder.Configuration);
 builder.Services.AddAcmeExternalIntegration();

@@ -145,6 +145,7 @@ O pipeline transversal aplica em ordem: **Validation → CacheLookup → Audit �
 - **JWT + Refresh + Blacklist**: Login retorna access (claims com permissões) + refresh; logout joga refresh na `token_blacklist`
 - **Auditoria**: `AuditBehavior` no pipeline (antes/depois) + `ApiRequestAuditMiddleware`
 - **NF-e assíncrona**: Emissão via fila RabbitMQ; worker `NFeTransmissaoWorker` consome e transmite à SEFAZ; XMLs no S3 (`{tenant_id}/{ano}/{mes}/{chave}.xml`); contingência SVRS automática
+- **Cliente SEFAZ próprio**: `RealNFeSefazClient` em `Acme.Sistemas.ExternalIntegration/Sefaz/` orquestra cert do tenant (`CertificadoTenantResolver` + AES-GCM), assinatura XMLDSig C14N (`XmlSignerC14N`, SHA-1 conforme SEFAZ), SOAP/HTTPS mTLS (`SefazSoapClient` com Polly retry), catálogo de URLs (5 UFs prioritárias + SVRS + SVAN), e contingência (`ContingenciaPolicy`). Modelos POCO em `Acme.Sistemas.Domain/Entities/Fiscal/Xml/`. Sem dependência de lib externa de NF-e. Stub legado (`StubNFeSefazClient`) fica disponível como fallback dev via flag `Fiscal:UseStub=true` no `appsettings`
 
 ### Frontend (`site/atena-web/`)
 
