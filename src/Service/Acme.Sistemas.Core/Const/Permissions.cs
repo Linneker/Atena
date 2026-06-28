@@ -12,6 +12,9 @@ public static class Permissions
         public const string Faturar = "faturar";
         public const string Cancelar = "cancelar";
         public const string Exportar = "exportar";
+        public const string SeedTenant = "seed-tenant";
+        // RH: gestor vê/edita apenas funcionários sob sua hierarquia (lateral à CRUD padrão).
+        public const string GerirEquipe = "gerir-equipe";
     }
 
     public static class Recursos
@@ -50,6 +53,17 @@ public static class Permissions
         public const string Auditoria = "auditoria";
         public const string ApiKey = "api-key";
         public const string FeatureFlags = "feature-flags";
+        public const string Admin = "admin";
+
+        // RH (rh-fundacao W1) — módulo de Recursos Humanos / Folha / eSocial.
+        public const string Rh = "rh";
+        public const string RhFuncionario = "rh-funcionario";
+        public const string RhJornada = "rh-jornada";
+        public const string RhCargo = "rh-cargo";
+        public const string RhLotacao = "rh-lotacao";
+        public const string RhBeneficio = "rh-beneficio";
+        public const string RhDependente = "rh-dependente";
+        public const string RhDepartamento = "rh-departamento";
     }
 
     public static string Of(string recurso, string acao) => $"{recurso}:{acao}";

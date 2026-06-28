@@ -2,7 +2,7 @@ namespace Acme.Sistemas.Core.Security;
 
 public interface IJwtTokenService
 {
-    JwtTokenPair Issue(Guid tenantId, Guid userId, string email, IReadOnlyCollection<string> permissions);
+    JwtTokenPair Issue(Guid tenantId, Guid userId, string email, string nomeCompleto, IReadOnlyCollection<string> permissions);
     bool TryValidate(string accessToken, out Guid jti, out Guid tenantId, out Guid userId);
 }
 

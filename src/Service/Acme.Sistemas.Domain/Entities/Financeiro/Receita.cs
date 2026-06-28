@@ -14,6 +14,8 @@ public sealed class Receita : BaseEntity
     public Guid? CentroDeCustoId { get; set; }
     public Guid? ClienteId { get; set; }
     public Guid? OrigemVendaId { get; set; }
+    /// <summary>Referência à receita template (ReceitaFixa=true) que originou esta instância via recorrência.</summary>
+    public Guid? OrigemReceitaId { get; set; }
 
     public StatusPagamento StatusRecebimento { get; set; } = StatusPagamento.Pendente;
     public decimal? ValorRecebido { get; set; }

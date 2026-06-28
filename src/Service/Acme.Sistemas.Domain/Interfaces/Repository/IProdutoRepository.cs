@@ -12,4 +12,9 @@ public interface IProdutoRepository : IBaseRepository<Produto>
     Task<IReadOnlyList<ValorProduto>> ListPrecosAsync(Guid produtoId, CancellationToken cancellationToken = default);
     Task UpsertPrecoAsync(ValorProduto preco, CancellationToken cancellationToken = default);
     Task ExpirarPrecosAtuaisAsync(Guid produtoId, Guid tipoValorProdutoId, DateTime dataFim, CancellationToken cancellationToken = default);
+
+    /// <summary>Batch lookup id → descricao, escopado por tenant. Retorna dicionário vazio se ids vazio.</summary>
+    Task<IReadOnlyDictionary<Guid, string>> GetNomesByIdsAsync(
+        IEnumerable<Guid> ids,
+        CancellationToken cancellationToken = default);
 }

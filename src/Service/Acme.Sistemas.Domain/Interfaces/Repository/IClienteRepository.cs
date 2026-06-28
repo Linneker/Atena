@@ -10,4 +10,9 @@ public interface IClienteRepository : IBaseRepository<Cliente>
         CancellationToken cancellationToken = default);
     Task<long> CountByFiltroAsync(string? termo, bool? inadimplente, CancellationToken cancellationToken = default);
     Task UpdateInadimplenciaAsync(Guid id, bool inadimplente, bool bloqueadoVendas, CancellationToken cancellationToken = default);
+
+    /// <summary>Batch lookup id → nome, escopado por tenant. Retorna dicionário vazio se ids vazio.</summary>
+    Task<IReadOnlyDictionary<Guid, string>> GetNomesByIdsAsync(
+        IEnumerable<Guid> ids,
+        CancellationToken cancellationToken = default);
 }

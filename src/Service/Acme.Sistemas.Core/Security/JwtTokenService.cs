@@ -32,7 +32,7 @@ public sealed class JwtTokenService : IJwtTokenService
         };
     }
 
-    public JwtTokenPair Issue(Guid tenantId, Guid userId, string email, IReadOnlyCollection<string> permissions)
+    public JwtTokenPair Issue(Guid tenantId, Guid userId, string email, string nomeCompleto, IReadOnlyCollection<string> permissions)
     {
         var now = DateTime.UtcNow;
         var accessJti = Guid.NewGuid();
@@ -45,6 +45,7 @@ public sealed class JwtTokenService : IJwtTokenService
             new("tenant_id", tenantId.ToString()),
             new("sub", userId.ToString()),
             new("email", email),
+            new("nome", nomeCompleto),
             new("jti", accessJti.ToString())
         };
         foreach (var p in permissions) claims.Add(new Claim("perm", p));

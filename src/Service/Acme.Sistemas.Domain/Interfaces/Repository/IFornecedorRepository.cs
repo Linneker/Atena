@@ -8,4 +8,9 @@ public interface IFornecedorRepository : IBaseRepository<Fornecedor>
     Task<IReadOnlyList<Fornecedor>> ListByFiltroAsync(
         string? termo, int skip, int take, CancellationToken cancellationToken = default);
     Task<long> CountByFiltroAsync(string? termo, CancellationToken cancellationToken = default);
+
+    /// <summary>Batch lookup id → nome, escopado por tenant. Retorna dicionário vazio se ids vazio.</summary>
+    Task<IReadOnlyDictionary<Guid, string>> GetNomesByIdsAsync(
+        IEnumerable<Guid> ids,
+        CancellationToken cancellationToken = default);
 }
