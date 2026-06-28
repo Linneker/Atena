@@ -8,9 +8,9 @@ public static class ListarFuncionariosMap
         => new(request.Skip, request.Take);
 
     public static ListarFuncionariosResponse ToResponse(this ListarFuncionariosQueryResult result)
-        => new(result.Items.Select(i => i.ToResponseItem()).ToArray());
+        => new(result.Items.Select(i => i.ToResponseItem()).ToArray(), result.Total);
 
     private static ListarFuncionariosResponseItem ToResponseItem(this ListarFuncionariosQueryItem item)
         => new(item.Id, item.NomeCompleto, item.Cpf, item.Email, item.Cargo, item.Departamento,
-            item.CentroDeCustoId, item.DataAdmissao, item.DataDemissao, item.Status);
+            item.CentroDeCustoId, item.CentroDeCustoNome, item.DataAdmissao, item.DataDemissao, item.Status);
 }

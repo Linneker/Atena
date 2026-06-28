@@ -10,8 +10,11 @@ public sealed record ListarFuncionariosResponseItem(
     string? Cargo,
     string? Departamento,
     Guid? CentroDeCustoId,
+    string? CentroDeCustoNome,
     DateTime? DataAdmissao,
     DateTime? DataDemissao,
     StatusAtivo Status);
 
-public sealed record ListarFuncionariosResponse(IReadOnlyList<ListarFuncionariosResponseItem> Items);
+public sealed record ListarFuncionariosResponse(
+    IReadOnlyList<ListarFuncionariosResponseItem> Items,
+    long Total);

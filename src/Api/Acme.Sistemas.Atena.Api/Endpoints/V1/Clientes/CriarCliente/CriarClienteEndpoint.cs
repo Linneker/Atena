@@ -1,13 +1,13 @@
 using Acme.Sistemas.Core.Mediators;
 
-namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Empresas.CriarEmpresa;
+namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Clientes.CriarCliente;
 
-public sealed class CriarEmpresaEndpoint : IEndpoint
+public sealed class CriarClienteEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("/api/v1/empresas", async (
-            CriarEmpresaRequest request,
+        app.MapPost("/api/v1/clientes", async (
+            CriarClienteRequest request,
             IMediator mediator,
             CancellationToken cancellationToken) =>
         {
@@ -16,13 +16,12 @@ public sealed class CriarEmpresaEndpoint : IEndpoint
                 return Results.Json(result, statusCode: result.Status);
 
             var response = result.Content.ToResponse();
-            return Results.Created($"/api/v1/empresas/{response.Id}", response);
+            return Results.Created($"/api/v1/clientes/{response.Id}", response);
         })
         .RequireAuthorization()
-        .WithTags("Empresas")
-        .WithName("CriarEmpresa")
-        .Produces<CriarEmpresaResponse>(StatusCodes.Status201Created)
-        .ProducesValidationProblem()
-        .ProducesProblem(StatusCodes.Status409Conflict);
+        .WithTags("Clientes")
+        .WithName("CriarCliente")
+        .Produces<CriarClienteResponse>(StatusCodes.Status201Created)
+        .ProducesValidationProblem();
     }
 }

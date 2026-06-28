@@ -11,6 +11,7 @@ public sealed record PrecoVigente(
 public sealed record ObterProdutoQueryResult(
     Guid Id, string Codigo, string Nome, string? Descricao,
     string? CodigoBarras, string UnidadeMedida,
-    Guid? TipoProdutoId, Guid? FornecedorId,
+    Guid? TipoProdutoId,
+    Guid? FornecedorId, string? FornecedorNome,
     decimal? CustoMedio, decimal? EstoqueMinimo,
     StatusAtivo Status, IReadOnlyList<PrecoVigente> Precos);

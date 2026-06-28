@@ -1,14 +1,14 @@
 using Acme.Sistemas.Core.Mediators;
 
-namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Empresas.AlterarEmpresa;
+namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Produtos.AlterarProduto;
 
-public sealed class AlterarEmpresaEndpoint : IEndpoint
+public sealed class AlterarProdutoEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPut("/api/v1/empresas/{id:guid}", async (
+        app.MapPut("/api/v1/produtos/{id:guid}", async (
             Guid id,
-            AlterarEmpresaRequest request,
+            AlterarProdutoRequest request,
             IMediator mediator,
             CancellationToken cancellationToken) =>
         {
@@ -19,11 +19,9 @@ public sealed class AlterarEmpresaEndpoint : IEndpoint
             return Results.Ok(result.Content.ToResponse());
         })
         .RequireAuthorization()
-        .WithTags("Empresas")
-        .WithName("AlterarEmpresa")
-        .Produces<AlterarEmpresaResponse>()
-        .ProducesValidationProblem()
-        .ProducesProblem(StatusCodes.Status404NotFound)
-        .ProducesProblem(StatusCodes.Status409Conflict);
+        .WithTags("Produtos")
+        .WithName("AlterarProduto")
+        .Produces<AlterarProdutoResponse>()
+        .ProducesValidationProblem();
     }
 }
