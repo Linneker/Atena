@@ -215,10 +215,44 @@ public sealed class SeedTenantCommandHandler
             Permissions.Recursos.RhJornada, Permissions.Recursos.RhCargo,
             Permissions.Recursos.RhLotacao, Permissions.Recursos.RhBeneficio,
             Permissions.Recursos.RhDependente, Permissions.Recursos.RhDepartamento,
+            // W2 — RH gerencia ponto interno (incluindo aprovações + fechamento + banco de horas)
+            Permissions.Recursos.RhPonto, Permissions.Recursos.RhBancoHoras,
+            Permissions.Recursos.RhPoliticasPonto,
         };
         await CriarRoleAsync(tenantId, "RH",
-            "Recursos Humanos: funcionários, jornadas, cargos, benefícios e dependentes.",
+            "Recursos Humanos: funcionários, jornadas, cargos, benefícios, dependentes e ponto interno.",
             all.Where(p => rhRecursos.Contains(p.Recurso)), cancellationToken);
+
+        // Role Gestor — aprova ponto da equipe e vê hierarquia direta.
+        var gestorRecursos = new HashSet<string>
+        {
+            Permissions.Recursos.RhPonto, Permissions.Recursos.RhBancoHoras,
+            Permissions.Recursos.RhFuncionario,
+        };
+        var gestorAcoes = new HashSet<string>
+        {
+            Permissions.Acoes.Ler, Permissions.Acoes.Editar,
+            Permissions.Acoes.BaterPonto, Permissions.Acoes.AjustarPonto,
+            Permissions.Acoes.AprovarPonto, Permissions.Acoes.GerirEquipe,
+        };
+        await CriarRoleAsync(tenantId, "Gestor",
+            "Aprova ponto e ajustes da própria equipe; visualiza ficha dos subordinados.",
+            all.Where(p => gestorRecursos.Contains(p.Recurso) && gestorAcoes.Contains(p.Acao)),
+            cancellationToken);
+
+        // Role Funcionário — vinculada automaticamente a todo funcionário criado.
+        // Permite bater o próprio ponto + ler/ajustar próprio + ver banco de horas próprio.
+        var funcionarioPerms = new[]
+        {
+            Permissions.Of(Permissions.Recursos.RhPonto, Permissions.Acoes.BaterPonto),
+            Permissions.Of(Permissions.Recursos.RhPonto, Permissions.Acoes.Ler),
+            Permissions.Of(Permissions.Recursos.RhPonto, Permissions.Acoes.AjustarPonto),
+            Permissions.Of(Permissions.Recursos.RhBancoHoras, Permissions.Acoes.Ler),
+        };
+        await CriarRoleAsync(tenantId, "Funcionario",
+            "Bate ponto próprio + visualiza próprio espelho + solicita ajustes próprios.",
+            all.Where(p => funcionarioPerms.Contains(p.Codigo, StringComparer.OrdinalIgnoreCase)),
+            cancellationToken);
 
         return adminId;
     }

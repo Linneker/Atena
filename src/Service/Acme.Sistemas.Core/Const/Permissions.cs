@@ -15,6 +15,12 @@ public static class Permissions
         public const string SeedTenant = "seed-tenant";
         // RH: gestor vê/edita apenas funcionários sob sua hierarquia (lateral à CRUD padrão).
         public const string GerirEquipe = "gerir-equipe";
+        // RH-Ponto: workflow de ponto (W2)
+        public const string BaterPonto = "bater-ponto";
+        public const string AjustarPonto = "ajustar-ponto";
+        public const string AprovarPonto = "aprovar-ponto";
+        public const string FecharCompetencia = "fechar-competencia";
+        public const string ReabrirCompetencia = "reabrir-competencia";
     }
 
     public static class Recursos
@@ -64,6 +70,10 @@ public static class Permissions
         public const string RhBeneficio = "rh-beneficio";
         public const string RhDependente = "rh-dependente";
         public const string RhDepartamento = "rh-departamento";
+        // RH-Ponto (rh-ponto-interno W2)
+        public const string RhPonto = "rh-ponto";
+        public const string RhBancoHoras = "rh-banco-horas";
+        public const string RhPoliticasPonto = "rh-politicas-ponto";
     }
 
     public static string Of(string recurso, string acao) => $"{recurso}:{acao}";
