@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Acme.Sistemas.Atena.Mobile.ViewModels"
+             x:Class="Acme.Sistemas.Atena.Mobile.Views.EspelhoMensalPage"
+             x:DataType="vm:EspelhoMensalViewModel"
+             Title="Espelho mensal">
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="12">
+            <HorizontalStackLayout Spacing="8">
+                <Entry Placeholder="YYYY-MM" Text="{Binding Competencia}" WidthRequest="120" />
+                <Button Text="Carregar" Command="{Binding CarregarCommand}" />
+            </HorizontalStackLayout>
+
+            <ActivityIndicator IsRunning="{Binding Carregando}" IsVisible="{Binding Carregando}" />
+            <Label Text="{Binding Erro}" TextColor="{StaticResource Danger}"
+                   IsVisible="{Binding Erro, Converter={StaticResource StringNotEmptyConverter}}" />
+
+            <CollectionView ItemsSource="{Binding Espelho.Dias}" IsVisible="{Binding Espelho, Converter={StaticResource NotNullConverter}}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="12" Margin="0,2" BorderColor="#ddd" CornerRadius="6">
+                            <Grid ColumnDefinitions="Auto,*,Auto">
+                                <Label Grid.Column="0" Text="{Binding Data, StringFormat='{0:dd/MM}'}" FontAttributes="Bold" />
+                                <Label Grid.Column="1" Text="{Binding DiaSemana}" Margin="12,0,0,0" />
+                                <Label Grid.Column="2" Text="{Binding TrabalhadoMinutos, StringFormat='{0}min'}" FontSize="12" />
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

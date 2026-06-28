@@ -33,12 +33,19 @@ public sealed class JwtTokenService : IJwtTokenService
     }
 
     public JwtTokenPair Issue(Guid tenantId, Guid userId, string email, string nomeCompleto, IReadOnlyCollection<string> permissions)
+        => IssueInterno(tenantId, userId, email, nomeCompleto, permissions, _options.RefreshTokenDays);
+
+    public JwtTokenPair IssueMobile(Guid tenantId, Guid userId, string email, string nomeCompleto, IReadOnlyCollection<string> permissions)
+        => IssueInterno(tenantId, userId, email, nomeCompleto, permissions, _options.RefreshTokenDaysMobile);
+
+    private JwtTokenPair IssueInterno(Guid tenantId, Guid userId, string email, string nomeCompleto,
+        IReadOnlyCollection<string> permissions, int refreshTokenDays)
     {
         var now = DateTime.UtcNow;
         var accessJti = Guid.NewGuid();
         var refreshJti = Guid.NewGuid();
         var accessExpires = now.AddMinutes(_options.AccessTokenMinutes);
-        var refreshExpires = now.AddDays(_options.RefreshTokenDays);
+        var refreshExpires = now.AddDays(refreshTokenDays);
 
         var claims = new List<Claim>
         {

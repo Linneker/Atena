@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Acme.Sistemas.Atena.Mobile.ViewModels"
+             x:Class="Acme.Sistemas.Atena.Mobile.Views.LoginPage"
+             x:DataType="vm:LoginViewModel"
+             Title="Entrar"
+             Shell.NavBarIsVisible="False">
+    <Grid Padding="24" RowDefinitions="*,Auto,*" BackgroundColor="{StaticResource Background}">
+        <VerticalStackLayout Grid.Row="1" Spacing="16">
+            <Label Text="Atena Mobile" FontSize="32" FontAttributes="Bold"
+                   HorizontalOptions="Center" TextColor="{StaticResource Primary}" />
+            <Label Text="Bater ponto. Ver espelho. Solicitar ajuste." HorizontalOptions="Center"
+                   FontSize="14" TextColor="#666" />
+
+            <Entry Placeholder="E-mail" Text="{Binding Email}" Keyboard="Email"
+                   ClearButtonVisibility="WhileEditing" />
+            <Entry Placeholder="Senha" Text="{Binding Senha}" IsPassword="True" />
+
+            <Button Text="Entrar" Command="{Binding EntrarCommand}"
+                    BackgroundColor="{StaticResource Primary}" TextColor="White"
+                    HeightRequest="50" CornerRadius="8"
+                    IsEnabled="{Binding Carregando, Converter={StaticResource InverseBoolConverter}}" />
+
+            <ActivityIndicator IsRunning="{Binding Carregando}" IsVisible="{Binding Carregando}"
+                               Color="{StaticResource Primary}" />
+
+            <Label Text="{Binding Erro}" TextColor="{StaticResource Danger}"
+                   IsVisible="{Binding Erro, Converter={StaticResource StringNotEmptyConverter}}"
+                   HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

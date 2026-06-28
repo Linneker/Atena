@@ -3,6 +3,7 @@ using Acme.Sistemas.Core.Response;
 using Acme.Sistemas.Domain.Enums;
 using Acme.Sistemas.Domain.Interfaces.Repository;
 using Acme.Sistemas.Domain.Interfaces.Repository.Rh;
+using Acme.Sistemas.Services.V1.Rh.Mobile.Push;
 using Acme.Sistemas.Services.V1.Rh.Ponto.Engine;
 using MarcacaoEntity = Acme.Sistemas.Domain.Entities.Rh.MarcacaoPonto;
 
@@ -18,15 +19,18 @@ public sealed class AprovarAjusteCommandHandler
     private readonly IAjustePontoRepository _ajusteRepo;
     private readonly IMarcacaoPontoRepository _marcacaoRepo;
     private readonly ITenantContext _tenantContext;
+    private readonly INotificacaoPushService _push;
 
     public AprovarAjusteCommandHandler(
         IAjustePontoRepository ajusteRepo,
         IMarcacaoPontoRepository marcacaoRepo,
-        ITenantContext tenantContext)
+        ITenantContext tenantContext,
+        INotificacaoPushService push)
     {
         _ajusteRepo = ajusteRepo;
         _marcacaoRepo = marcacaoRepo;
         _tenantContext = tenantContext;
+        _push = push;
     }
 
     public async Task<ResponseDefault<AprovarAjusteCommandResult>> Handle(
@@ -78,6 +82,17 @@ public sealed class AprovarAjusteCommandHandler
         ajuste.MarcacaoResultanteId = marcacaoResultanteId;
         ajuste.UpdatedBy = userId;
         await _ajusteRepo.UpdateAsync(ajuste, cancellationToken);
+
+        await _push.EnviarParaTopicoAsync(
+            $"funcionario:{ajuste.FuncionarioId}",
+            "Ajuste aprovado",
+            "Sua solicitação de ajuste de ponto foi aprovada.",
+            new Dictionary<string, string>
+            {
+                ["ajusteId"] = ajuste.Id.ToString(),
+                ["tipo"] = "ajuste-aprovado",
+            },
+            cancellationToken);
 
         return ResponseDefault<AprovarAjusteCommandResult>.Ok(
             new AprovarAjusteCommandResult(ajuste.Id, marcacaoResultanteId));

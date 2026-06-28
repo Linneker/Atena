@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+    <key>UIDeviceFamily</key>
+    <array>
+        <integer>1</integer>
+        <integer>2</integer>
+    </array>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>UIRequiredDeviceCapabilities</key>
+    <array>
+        <string>armv7</string>
+    </array>
+    <key>MinimumOSVersion</key>
+    <string>14.0</string>
+    <key>UILaunchStoryboardName</key>
+    <string>MauiSplash</string>
+
+    <!-- Permissões — texto exibido ao usuário -->
+    <key>NSCameraUsageDescription</key>
+    <string>O Atena usa a câmera para fotografar sua batida de ponto.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>O Atena pode salvar comprovantes de batida em sua galeria.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>O Atena registra a localização da batida (opcional, não bloqueia).</string>
+    <key>NSFaceIDUsageDescription</key>
+    <string>O Atena usa Face ID/Touch ID para validar sua identidade ao bater ponto.</string>
+
+    <!-- Push notifications -->
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>remote-notification</string>
+        <string>fetch</string>
+    </array>
+</dict>
+</plist>

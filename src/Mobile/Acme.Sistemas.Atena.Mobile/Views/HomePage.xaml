@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Acme.Sistemas.Atena.Mobile.ViewModels"
+             x:Class="Acme.Sistemas.Atena.Mobile.Views.HomePage"
+             x:DataType="vm:HomeViewModel"
+             Title="Início">
+    <Grid RowDefinitions="Auto,*,Auto" Padding="24" BackgroundColor="{StaticResource Background}">
+        <VerticalStackLayout Grid.Row="0" Spacing="8" HorizontalOptions="Center" Margin="0,32,0,0">
+            <Label Text="Hora atual" FontSize="14" TextColor="#666" HorizontalOptions="Center" />
+            <Label Text="{Binding HoraAtual}" FontSize="60" FontAttributes="Bold"
+                   TextColor="{StaticResource Primary}" HorizontalOptions="Center" />
+        </VerticalStackLayout>
+
+        <Button Grid.Row="1"
+                Text="⏰ BATER PONTO"
+                Command="{Binding IrParaBaterPontoCommand}"
+                BackgroundColor="{StaticResource Primary}" TextColor="White"
+                FontSize="22" FontAttributes="Bold"
+                HeightRequest="120" CornerRadius="60"
+                HorizontalOptions="Center" WidthRequest="240"
+                VerticalOptions="Center" />
+
+        <HorizontalStackLayout Grid.Row="2" HorizontalOptions="Center" Spacing="8" Margin="0,0,0,16">
+            <Ellipse WidthRequest="10" HeightRequest="10"
+                     Fill="{Binding Online, Converter={StaticResource BoolToColorConverter},
+                            ConverterParameter='Success,Danger'}" />
+            <Label Text="{Binding Online, Converter={StaticResource BoolToStringConverter},
+                          ConverterParameter='Online,Offline'}" FontSize="12" TextColor="#666" />
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>

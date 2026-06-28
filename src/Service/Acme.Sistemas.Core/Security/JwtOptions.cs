@@ -9,4 +9,6 @@ public sealed class JwtOptions
     public string SigningKey { get; set; } = string.Empty;
     public int AccessTokenMinutes { get; set; } = 15;
     public int RefreshTokenDays { get; set; } = 7;
+    /// <summary>Refresh token de longa duração para clientes mobile (default 90 dias).</summary>
+    public int RefreshTokenDaysMobile { get; set; } = 90;
 }

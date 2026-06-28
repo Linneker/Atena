@@ -3,6 +3,8 @@ namespace Acme.Sistemas.Core.Security;
 public interface IJwtTokenService
 {
     JwtTokenPair Issue(Guid tenantId, Guid userId, string email, string nomeCompleto, IReadOnlyCollection<string> permissions);
+    /// <summary>Variante mobile com refresh token de longa duração (RefreshTokenDaysMobile).</summary>
+    JwtTokenPair IssueMobile(Guid tenantId, Guid userId, string email, string nomeCompleto, IReadOnlyCollection<string> permissions);
     bool TryValidate(string accessToken, out Guid jti, out Guid tenantId, out Guid userId);
 }
 

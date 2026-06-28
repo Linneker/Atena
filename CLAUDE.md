@@ -147,6 +147,36 @@ O pipeline transversal aplica em ordem: **Validation → CacheLookup → Audit �
 - **NF-e assíncrona**: Emissão via fila RabbitMQ; worker `NFeTransmissaoWorker` consome e transmite à SEFAZ; XMLs no S3 (`{tenant_id}/{ano}/{mes}/{chave}.xml`); contingência SVRS automática
 - **Cliente SEFAZ próprio**: `RealNFeSefazClient` em `Acme.Sistemas.ExternalIntegration/Sefaz/` orquestra cert do tenant (`CertificadoTenantResolver` + AES-GCM), assinatura XMLDSig C14N (`XmlSignerC14N`, SHA-1 conforme SEFAZ), SOAP/HTTPS mTLS (`SefazSoapClient` com Polly retry), catálogo de URLs (5 UFs prioritárias + SVRS + SVAN), e contingência (`ContingenciaPolicy`). Modelos POCO em `Acme.Sistemas.Domain/Entities/Fiscal/Xml/`. Sem dependência de lib externa de NF-e. Stub legado (`StubNFeSefazClient`) fica disponível como fallback dev via flag `Fiscal:UseStub=true` no `appsettings`
 
+### Mobile MAUI (`src/Mobile/`)
+
+App nativo multi-plataforma (Android, iOS, Mac Catalyst, Windows) — alvo `net10.0-*`:
+
+```
+src/Mobile/
+├── Acme.Sistemas.Atena.Mobile/         ← MAUI app (DI, Shell, ViewModels, Pages, Platforms/*)
+├── Acme.Sistemas.Atena.Mobile.Shared/  ← DTOs + Helpers puros (net10.0, testáveis)
+test/Mobile/
+└── Acme.Sistemas.Atena.Mobile.Tests/   ← xUnit + FluentAssertions + Moq
+```
+
+- **MVVM** com `CommunityToolkit.Mvvm` (ObservableObject, [RelayCommand], [ObservableProperty])
+- **HTTP** via `Refit` (`IAtenaApi`) com `AuthDelegatingHandler` (Bearer + refresh em 401) + Polly retry
+- **Token store**: `SecureTokenStore` envolve `Microsoft.Maui.Storage.SecureStorage`
+  (Keystore Android / Keychain iOS / PasswordVault Windows)
+- **Offline queue**: `SqliteOfflineQueue` (sqlite-net-pcl) — enfileira batidas sem rede e sincroniza em `App.OnResume`/connectivity change
+- **Bater ponto**: hash SHA-256 calculado no app (`HashHelpers.CalcularHashBatida`) e validado no servidor (`BaterPontoMobileCommandHandler`); foto via `MediaPicker`, GPS via `Geolocation`, biometria via stub (integração nativa em PR follow-up)
+- **JWT mobile**: refresh token de **90 dias** (`Jwt:RefreshTokenDaysMobile`) vs 7 do web — `IJwtTokenService.IssueMobile()`
+- **Endpoints backend**:
+  - `POST /api/v1/autenticacao/login-mobile` (variante refresh longo)
+  - `POST /api/v1/rh/ponto/bater-mobile` (multipart com foto + provaBiometriaLocal + hashBatida + timestampLocal ±5min + GPS)
+  - `POST /api/v1/mobile/dispositivos/registrar` (idempotente por device_id, UNIQUE `tenant_id+usuario_id+device_id`)
+  - `POST /api/v1/mobile/dispositivos/{deviceId}/desregistrar`
+  - `GET /api/v1/mobile/configuracao` (versão mínima, banners, branding)
+  - `GET /api/v1/admin/mobile/dispositivos` + `POST /api/v1/admin/mobile/dispositivos/{id}/revogar` (admin)
+- **Push notifications**: `INotificacaoPushService` registrado como `StubNotificacaoPushService` (loga); `AprovarAjusteCommandHandler` publica para tópico `funcionario:{id}` quando ajuste é aprovado. Integração real Firebase Admin SDK / APNs HTTP/2 fica em PR `rh-mobile-push-fcm`/`rh-mobile-push-apns`.
+- **CI/CD**: workflows em `.github/workflows/mobile-{android,ios,windows}.yml` com publicação opcional para Play Console (internal track) e TestFlight via `workflow_dispatch`
+- **Docs operacionais**: `documentacao/rh/mobile/{setup-dev-windows,setup-dev-mac,distribuicao-android,distribuicao-ios,troubleshooting-usuario}.md`
+
 ### Frontend (`site/atena-web/`)
 
 Angular 17 standalone com signals:

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Acme.Sistemas.Atena.Mobile.ViewModels"
+             x:Class="Acme.Sistemas.Atena.Mobile.Views.BaterPontoPage"
+             x:DataType="vm:BaterPontoViewModel"
+             Title="Bater ponto">
+    <VerticalStackLayout Padding="24" Spacing="16" VerticalOptions="Center">
+        <Label Text="Tire uma foto sua para registrar o ponto." HorizontalOptions="Center" />
+
+        <Button Text="📷 Capturar foto e bater"
+                Command="{Binding BaterCommand}"
+                BackgroundColor="{StaticResource Primary}" TextColor="White"
+                HeightRequest="60" FontSize="18" CornerRadius="8"
+                IsEnabled="{Binding Enviando, Converter={StaticResource InverseBoolConverter}}" />
+
+        <ActivityIndicator IsRunning="{Binding Enviando}" IsVisible="{Binding Enviando}"
+                           Color="{StaticResource Primary}" />
+
+        <Label Text="{Binding ResultadoMensagem}" FontSize="16" HorizontalOptions="Center"
+               IsVisible="{Binding ResultadoMensagem, Converter={StaticResource StringNotEmptyConverter}}" />
+
+        <Label Text="{Binding ResultadoHash, StringFormat='Hash: {0}'}" FontSize="11" TextColor="#888"
+               HorizontalOptions="Center"
+               IsVisible="{Binding ResultadoHash, Converter={StaticResource StringNotEmptyConverter}}" />
+    </VerticalStackLayout>
+</ContentPage>

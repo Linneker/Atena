@@ -14,6 +14,8 @@ public sealed class MarcacaoPonto : BaseEntity
     public string? UserAgent { get; set; }
     public string? DeviceId { get; set; }
     public string? FotoUrl { get; set; }
+    public string? ProvaBiometriaLocal { get; set; }
+    public DateTime? TimestampLocal { get; set; }
     public string? HashAnterior { get; set; }
     public string HashIntegridade { get; set; } = string.Empty;
     public StatusMarcacao Status { get; set; } = StatusMarcacao.Valida;

@@ -1,0 +1,2 @@
+Any asset files (e.g., text files, zip files) placed in this folder are bundled into the app.
+Access via FileSystem.OpenAppPackageFileAsync("filename.ext").

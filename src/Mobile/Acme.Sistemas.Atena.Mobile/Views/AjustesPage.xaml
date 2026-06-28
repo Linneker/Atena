@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Acme.Sistemas.Atena.Mobile.ViewModels"
+             x:Class="Acme.Sistemas.Atena.Mobile.Views.AjustesPage"
+             x:DataType="vm:AjustesPageViewModel"
+             Title="Meus ajustes">
+    <Grid RowDefinitions="Auto,*,Auto" Padding="16">
+        <Button Grid.Row="0" Text="↻ Recarregar" Command="{Binding CarregarCommand}" />
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Ajustes}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="12" Margin="0,4" BorderColor="#ddd">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="{Binding TipoAjuste}" FontAttributes="Bold" />
+                            <Label Text="{Binding Motivo}" FontSize="13" />
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="{Binding SolicitadoEm, StringFormat='{0:dd/MM HH:mm}'}" FontSize="11" TextColor="#666" />
+                                <Label Text="{Binding Status}" FontSize="11" FontAttributes="Bold" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Grid.Row="2" Text="+ Solicitar novo ajuste" Command="{Binding SolicitarNovoAjusteCommand}"
+                BackgroundColor="{StaticResource Primary}" TextColor="White" HeightRequest="50" />
+    </Grid>
+</ContentPage>

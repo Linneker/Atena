@@ -20,11 +20,11 @@ public sealed class MarcacaoPontoRepository : BaseRepository<MarcacaoPonto>, IMa
         => Db.ExecuteAsync(@"
             INSERT INTO marcacoes_ponto
                 (id, tenant_id, funcionario_id, tipo, data_hora, origem, latitude, longitude,
-                 ip_origem, user_agent, device_id, foto_url, hash_anterior, hash_integridade,
-                 status, marcacao_origem_id, created_at, created_by)
+                 ip_origem, user_agent, device_id, foto_url, prova_biometria_local, timestamp_local,
+                 hash_anterior, hash_integridade, status, marcacao_origem_id, created_at, created_by)
             VALUES (@id, @t, @fid, @tipo, @dh, @origem, @lat, @lng,
-                    @ip, @ua, @did, @foto, @hashAnt, @hash,
-                    @status, @origemId, @createdAt, @createdBy)",
+                    @ip, @ua, @did, @foto, @provaBio, @tsLocal,
+                    @hashAnt, @hash, @status, @origemId, @createdAt, @createdBy)",
             BuildParams(m, isUpdate: false), cancellationToken);
 
     public override Task UpdateAsync(MarcacaoPonto m, CancellationToken cancellationToken = default)
@@ -106,6 +106,8 @@ public sealed class MarcacaoPontoRepository : BaseRepository<MarcacaoPonto>, IMa
         ["@ua"] = m.UserAgent,
         ["@did"] = m.DeviceId,
         ["@foto"] = m.FotoUrl,
+        ["@provaBio"] = m.ProvaBiometriaLocal,
+        ["@tsLocal"] = m.TimestampLocal,
         ["@hashAnt"] = m.HashAnterior,
         ["@hash"] = m.HashIntegridade,
         ["@status"] = m.Status.ToString(),
@@ -128,6 +130,8 @@ public sealed class MarcacaoPontoRepository : BaseRepository<MarcacaoPonto>, IMa
         UserAgent = r.GetValueOrDefault<string>("user_agent"),
         DeviceId = r.GetValueOrDefault<string>("device_id"),
         FotoUrl = r.GetValueOrDefault<string>("foto_url"),
+        ProvaBiometriaLocal = r.GetValueOrDefault<string>("prova_biometria_local"),
+        TimestampLocal = r.GetValueOrDefault<DateTime?>("timestamp_local"),
         HashAnterior = r.GetValueOrDefault<string>("hash_anterior"),
         HashIntegridade = r.GetValueOrDefault<string>("hash_integridade") ?? string.Empty,
         Status = Enum.TryParse<StatusMarcacao>(r.GetValueOrDefault<string>("status"), out var s) ? s : StatusMarcacao.Valida,

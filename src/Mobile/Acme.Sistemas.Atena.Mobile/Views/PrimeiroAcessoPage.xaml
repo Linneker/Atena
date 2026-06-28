@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Acme.Sistemas.Atena.Mobile.ViewModels"
+             x:Class="Acme.Sistemas.Atena.Mobile.Views.PrimeiroAcessoPage"
+             x:DataType="vm:PrimeiroAcessoViewModel"
+             Title="Primeiro acesso"
+             Shell.NavBarIsVisible="False">
+    <VerticalStackLayout Padding="24" Spacing="16" VerticalOptions="Center">
+        <Label Text="Bem-vindo ao Atena!" FontSize="28" FontAttributes="Bold" HorizontalOptions="Center" />
+        <Label Text="Vamos verificar se seu dispositivo tem o necessário para bater ponto." HorizontalOptions="Center" />
+
+        <Label Text="{Binding StatusCamera}" />
+        <Label Text="{Binding StatusBio}" />
+
+        <Button Text="Registrar dispositivo e continuar"
+                Command="{Binding RegistrarDispositivoCommand}"
+                BackgroundColor="{StaticResource Primary}" TextColor="White"
+                HeightRequest="50" />
+    </VerticalStackLayout>
+</ContentPage>

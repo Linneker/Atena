@@ -4,6 +4,7 @@ using Acme.Sistemas.ExternalIntegration.Sefaz;
 using Acme.Sistemas.Services.V1.ConciliacaoBancaria.Services;
 using Acme.Sistemas.Services.V1.Estoque.Services;
 using Acme.Sistemas.Services.V1.Fiscal.Services;
+using Acme.Sistemas.Services.V1.Rh.Mobile.Push;
 using Acme.Sistemas.Services.V1.Rh.Ponto.Engine;
 using FluentValidation;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +30,9 @@ public static class ServicesServiceCollection
 
         // RH-Ponto W2: gerador de PDF do espelho mensal (QuestPDF)
         services.AddSingleton<IGeradorEspelhoPdf, GeradorEspelhoPdfQuestPdf>();
+
+        // RH-Mobile W3: push notification (stub MVP; FCM/APNs reais em PR dedicada)
+        services.AddSingleton<INotificacaoPushService, StubNotificacaoPushService>();
 
         // Fiscal NF-e — implementações que vivem em Services
         services.AddSingleton<INFeXmlBuilder, NFeXmlBuilder>();
