@@ -1,0 +1,6 @@
+using Acme.Sistemas.Core.Mediators.Handler;
+using Acme.Sistemas.Core.Response;
+
+namespace Acme.Sistemas.Services.V1.Uf.Query.ListarUfs;
+
+public sealed record ListarUfsQuery : IRequest<ResponseDefault<ListarUfsQueryResult>>;
