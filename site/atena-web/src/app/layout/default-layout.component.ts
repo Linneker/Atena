@@ -117,7 +117,8 @@ export class DefaultLayoutComponent implements OnInit {
     {
       chave: 'rh', rotulo: 'RH', rotaBase: '/rh',
       permissoes: ['rh-funcionario:ler', 'rh-jornada:ler', 'rh-cargo:ler',
-                   'rh-lotacao:ler', 'rh-departamento:ler', 'rh-beneficio:ler'],
+                   'rh-lotacao:ler', 'rh-departamento:ler', 'rh-beneficio:ler',
+                   'rh-ponto:ler', 'rh-banco-horas:ler'],
       filhos: [
         { rotulo: 'Funcionários', rota: '/rh/funcionarios' },
         { rotulo: 'Cargos', rota: '/rh/cargos' },
@@ -125,6 +126,13 @@ export class DefaultLayoutComponent implements OnInit {
         { rotulo: 'Lotações', rota: '/rh/lotacoes' },
         { rotulo: 'Jornadas', rota: '/rh/jornadas' },
         { rotulo: 'Catálogo de Benefícios', rota: '/rh/beneficios' },
+        // Ponto (W2)
+        { rotulo: 'Meu ponto', rota: '/rh/ponto/meu-ponto' },
+        { rotulo: 'Espelho mensal', rota: '/rh/ponto/espelho' },
+        { rotulo: 'Aprovações pendentes', rota: '/rh/ponto/aprovacoes' },
+        { rotulo: 'Banco de horas', rota: '/rh/ponto/banco-horas' },
+        { rotulo: 'Políticas BH', rota: '/rh/ponto/politicas' },
+        { rotulo: 'Fechamento de competência', rota: '/rh/ponto/fechamento' },
       ],
     },
     {

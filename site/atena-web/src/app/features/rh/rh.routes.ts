@@ -21,4 +21,7 @@ export const RH_ROUTES: Routes = [
   { path: 'funcionarios', loadComponent: () => import('./funcionarios/funcionario-list.component').then((m) => m.FuncionarioRhListComponent) },
   { path: 'funcionarios/novo', loadComponent: () => import('./funcionarios/funcionario-wizard.component').then((m) => m.FuncionarioWizardComponent) },
   { path: 'funcionarios/:id', loadComponent: () => import('./funcionarios/funcionario-ficha.component').then((m) => m.FuncionarioFichaComponent) },
+
+  // W2 — rh-ponto-interno
+  { path: 'ponto', loadChildren: () => import('./ponto/ponto.routes').then((m) => m.PONTO_ROUTES) },
 ];
