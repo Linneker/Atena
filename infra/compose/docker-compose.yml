@@ -12,9 +12,11 @@ services:
       ASPNETCORE_URLS: http://+:8080
       ConnectionStrings__Default: server=mysql;port=3306;database=atena;user=atena;password=atena123;
       Redis__Connection: redis:6379
-      RabbitMq__Host: rabbitmq
-      RabbitMq__User: atena
+      RabbitMq__HostName: rabbitmq
+      RabbitMq__Port: 5672
+      RabbitMq__Username: atena
       RabbitMq__Password: atena123
+      RabbitMq__VirtualHost: /
       Storage__Provider: S3
       Storage__S3__Endpoint: http://minio:9000
       Storage__S3__AccessKey: atena
@@ -72,8 +74,9 @@ services:
       RABBITMQ_DEFAULT_USER: atena
       RABBITMQ_DEFAULT_PASS: atena123
     ports:
-      - "5672:5672"
       - "15672:15672"
+      - "5672:5672"
+      - "15692:15692"
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
     healthcheck:
@@ -98,11 +101,17 @@ services:
       - minio-data:/data
     networks: [atena]
 
+# Volumes nomeados explicitamente (sem prefixo do project name)
+# Sobrevivem a docker compose down/up e mudanças no diretório de execução.
 volumes:
   mysql-data:
+    name: atena-mysql-data
   redis-data:
+    name: atena-redis-data
   rabbitmq-data:
+    name: atena-rabbitmq-data
   minio-data:
+    name: atena-minio-data
 
 networks:
   atena:
