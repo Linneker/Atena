@@ -12,8 +12,8 @@ import { FornecedorService } from '../cadastros.services';
 export class FornecedorFormComponent {
   readonly servico = inject(FornecedorService);
   readonly campos: CampoFormulario[] = [
-    { nome: 'razaoSocial', rotulo: 'Razão Social', obrigatorio: true },
-    { nome: 'cnpj', rotulo: 'CNPJ', obrigatorio: true },
+    { nome: 'nome', rotulo: 'Nome / Razão Social', obrigatorio: true },
+    { nome: 'documento', rotulo: 'CPF/CNPJ', obrigatorio: true },
     { nome: 'email', rotulo: 'E-mail', tipo: 'email' },
     { nome: 'telefone', rotulo: 'Telefone' },
   ];

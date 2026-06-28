@@ -43,7 +43,7 @@ export class AuthStore {
 
   login(req: LoginRequest): Observable<boolean> {
     return this.http
-      .post<LoginResponse>(`${environment.apiUrl}/${environment.apiVersion}/autenticacao/login`, req)
+      .post<LoginResponse>(`${environment.apiUrl}/${environment.apiVersion}/auth/login`, req)
       .pipe(
         map((res) => {
           this.persist(res);
@@ -57,7 +57,7 @@ export class AuthStore {
     const current = this.sessionSig();
     if (!current) return of(false);
     return this.http
-      .post<LoginResponse>(`${environment.apiUrl}/${environment.apiVersion}/autenticacao/renovar`, {
+      .post<LoginResponse>(`${environment.apiUrl}/${environment.apiVersion}/auth/refresh`, {
         refreshToken: current.refreshToken,
       })
       .pipe(
@@ -74,7 +74,7 @@ export class AuthStore {
     const current = this.sessionSig();
     if (current) {
       this.http
-        .post(`${environment.apiUrl}/${environment.apiVersion}/autenticacao/logout`, {
+        .post(`${environment.apiUrl}/${environment.apiVersion}/auth/logout`, {
           refreshToken: current.refreshToken,
         })
         .subscribe({ error: () => {} });
@@ -102,6 +102,9 @@ export class AuthStore {
       this.clear();
       return;
     }
+    const rawPerm = payload.perm;
+    const permissions = Array.isArray(rawPerm) ? rawPerm : rawPerm ? [rawPerm] : [];
+
     const session: AuthSession = {
       accessToken: res.accessToken,
       refreshToken: res.refreshToken,
@@ -111,7 +114,7 @@ export class AuthStore {
         email: payload.email,
         nome: payload.nome,
         tenantId: payload.tenant_id,
-        permissions: payload.permissions ?? [],
+        permissions,
       },
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(session));

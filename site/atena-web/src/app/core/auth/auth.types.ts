@@ -3,7 +3,9 @@ export interface JwtPayload {
   email: string;
   nome: string;
   tenant_id: string;
-  permissions: string[];
+  // Backend emite cada permissão como Claim("perm", ...). Múltiplas claims com
+  // mesmo Type viram array no payload JWT; uma única vira string.
+  perm?: string | string[];
   exp: number;
   iat: number;
 }

@@ -14,8 +14,9 @@ export class ProdutoListComponent {
   readonly servico = inject(ProdutoService);
   readonly colunas: ColunaTabela<Produto>[] = [
     { campo: 'codigo', titulo: 'Código' },
-    { campo: 'descricao', titulo: 'Descrição' },
-    { campo: 'unidade', titulo: 'Un.' },
-    { campo: 'precoVenda', titulo: 'Preço', formato: (l) => l.precoVenda.toFixed(2) },
+    { campo: 'nome', titulo: 'Nome' },
+    { campo: 'unidadeMedida', titulo: 'Un.' },
+    { campo: 'custoMedio', titulo: 'Custo médio', tipo: 'moeda' },
+    { campo: 'status', titulo: 'Status' },
   ];
 }

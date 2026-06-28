@@ -13,8 +13,8 @@ import { Fornecedor, FornecedorService } from '../cadastros.services';
 export class FornecedorListComponent {
   readonly servico = inject(FornecedorService);
   readonly colunas: ColunaTabela<Fornecedor>[] = [
-    { campo: 'razaoSocial', titulo: 'Razão Social' },
-    { campo: 'cnpj', titulo: 'CNPJ' },
+    { campo: 'nome', titulo: 'Nome / Razão Social' },
+    { campo: 'documento', titulo: 'CPF/CNPJ' },
     { campo: 'email', titulo: 'E-mail' },
     { campo: 'telefone', titulo: 'Telefone' },
   ];

@@ -9,6 +9,46 @@ export interface SaldoEstoque { produtoId: string; codigo: string; descricao: st
 export interface MovimentacaoEstoque { id?: string; produto: string; tipo: 'ENTRADA' | 'SAIDA'; quantidade: number; data: string; motivo: string; }
 export interface Inventario { id?: string; descricao: string; status: string; abertoEm: string; fechadoEm?: string; }
 
+export interface EstoqueResumo {
+  id: string;
+  codigo: string;
+  nome: string;
+  localizacao?: string | null;
+  ativo: boolean;
+}
+
+export interface SaldoPorEstoque {
+  estoqueId: string;
+  saldoTotal: number;
+  saldoReservado: number;
+  saldoDisponivel: number;
+}
+
+export interface ConsultarSaldoResposta {
+  produtoId: string;
+  totalGeral: number;
+  reservadoGeral: number;
+  disponivelGeral: number;
+  porEstoque: SaldoPorEstoque[];
+}
+
+@Injectable({ providedIn: 'root' })
+export class EstoquesService {
+  private readonly http = inject(HttpClient);
+  private readonly base = `${environment.apiUrl}/${environment.apiVersion}`;
+
+  listar(): Observable<{ items: EstoqueResumo[]; total: number }> {
+    return this.http.get<{ items: EstoqueResumo[]; total: number }>(`${this.base}/estoques`);
+  }
+
+  consultarSaldoProduto(produtoId: string, estoqueId?: string): Observable<ConsultarSaldoResposta> {
+    let params = new HttpParams();
+    if (estoqueId) params = params.set('estoqueId', estoqueId);
+    return this.http.get<ConsultarSaldoResposta>(
+      `${this.base}/estoque/produtos/${produtoId}/saldo`, { params });
+  }
+}
+
 @Injectable({ providedIn: 'root' })
 export class SaldoEstoqueService {
   private readonly http = inject(HttpClient);

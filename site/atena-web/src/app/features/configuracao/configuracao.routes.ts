@@ -9,4 +9,6 @@ export const CONFIGURACAO_ROUTES: Routes = [
   { path: 'permissoes', loadComponent: () => import('./roles/permissoes.component').then((m) => m.PermissoesComponent) },
   { path: 'parametros', loadComponent: () => import('./parametros/parametros.component').then((m) => m.ParametrosComponent) },
   { path: 'branding', loadComponent: () => import('./branding.component').then((m) => m.BrandingComponent) },
+  { path: 'tenants', loadComponent: () => import('./tenants/tenant-list.component').then((m) => m.TenantListComponent) },
+  { path: 'tenants/:id', loadComponent: () => import('./tenants/tenant-form.component').then((m) => m.TenantFormComponent) },
 ];

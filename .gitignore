@@ -442,3 +442,5 @@ prova-*.png
 
 # Cache local da API (SQLite log de cache)
 src/Api/Acme.Sistemas.Atena.Api/cache-log.db
+site/atena-web/.angular
+site/atena-web/package-lock.json

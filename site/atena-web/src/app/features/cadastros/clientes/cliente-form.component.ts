@@ -12,8 +12,8 @@ import { ClienteService } from '../cadastros.services';
 export class ClienteFormComponent {
   readonly servico = inject(ClienteService);
   readonly campos: CampoFormulario[] = [
-    { nome: 'nome', rotulo: 'Nome', obrigatorio: true },
-    { nome: 'cpfCnpj', rotulo: 'CPF/CNPJ', obrigatorio: true },
+    { nome: 'nome', rotulo: 'Nome / Razão Social', obrigatorio: true },
+    { nome: 'documento', rotulo: 'CPF/CNPJ', obrigatorio: true },
     { nome: 'email', rotulo: 'E-mail', tipo: 'email' },
     { nome: 'telefone', rotulo: 'Telefone' },
   ];

@@ -27,8 +27,16 @@ export const FINANCEIRO_ROUTES: Routes = [
     loadComponent: () => import('./contas-pagar/contas-pagar-list.component').then((m) => m.ContasPagarListComponent),
   },
   {
+    path: 'contas-pagar/:id',
+    loadComponent: () => import('./contas-pagar/contas-pagar-form.component').then((m) => m.ContasPagarFormComponent),
+  },
+  {
     path: 'contas-receber',
     loadComponent: () => import('./contas-receber/contas-receber-list.component').then((m) => m.ContasReceberListComponent),
+  },
+  {
+    path: 'contas-receber/:id',
+    loadComponent: () => import('./contas-receber/contas-receber-form.component').then((m) => m.ContasReceberFormComponent),
   },
   {
     path: 'conciliacao',

@@ -13,9 +13,10 @@ import { Cliente, ClienteService } from '../cadastros.services';
 export class ClienteListComponent {
   readonly servico = inject(ClienteService);
   readonly colunas: ColunaTabela<Cliente>[] = [
-    { campo: 'nome', titulo: 'Nome' },
-    { campo: 'cpfCnpj', titulo: 'CPF/CNPJ' },
+    { campo: 'nome', titulo: 'Nome / Razão Social' },
+    { campo: 'documento', titulo: 'CPF/CNPJ' },
     { campo: 'email', titulo: 'E-mail' },
     { campo: 'telefone', titulo: 'Telefone' },
+    { campo: 'status', titulo: 'Status' },
   ];
 }
