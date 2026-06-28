@@ -100,6 +100,7 @@ builder.Services.AddHostedService<Acme.Sistemas.Atena.Api.Hosted.CertificadoVenc
 builder.Services.AddHostedService<Acme.Sistemas.Atena.Api.Hosted.EmailDispatcherHostedService>();
 builder.Services.AddHostedService<Acme.Sistemas.Atena.Api.Hosted.CacheCleanupWorker>();
 builder.Services.AddHostedService<Acme.Sistemas.Atena.Api.Hosted.RecorrenciaFinanceiraWorker>();
+builder.Services.AddHostedService<Acme.Sistemas.Atena.Api.Hosted.JobVerificarIntegridadePontoWorker>();
 
 // Bootstrap de tenant demo: somente em Development (proteção dupla com a flag Seed:AutoBootstrap).
 if (builder.Environment.IsDevelopment())
