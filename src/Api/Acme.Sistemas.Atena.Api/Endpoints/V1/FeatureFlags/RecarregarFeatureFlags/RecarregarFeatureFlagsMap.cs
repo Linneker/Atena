@@ -1,3 +1,12 @@
+using Acme.Sistemas.Services.V1.FeatureFlags.Command.RecarregarFeatureFlags;
+
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.FeatureFlags.RecarregarFeatureFlags;
 
-// RecarregarFeatureFlags: mapping inline no próprio Endpoint. Map.cs vazio mantido por convenção.
+public static class RecarregarFeatureFlagsMap
+{
+    public static RecarregarFeatureFlagsCommand ToCommand(this RecarregarFeatureFlagsRequest _)
+        => new();
+
+    public static RecarregarFeatureFlagsResponse ToResponse(this RecarregarFeatureFlagsCommandResult result)
+        => new(result.RecarregadoEm);
+}
