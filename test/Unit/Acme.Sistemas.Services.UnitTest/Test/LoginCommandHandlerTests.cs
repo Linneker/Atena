@@ -13,8 +13,6 @@ namespace Acme.Sistemas.Services.UnitTest.Test;
 
 public class LoginCommandHandlerTests
 {
-    private const string TenantCnpj = "12345678000199";
-
     private static (LoginCommandHandler sut,
                     Mock<IUsuarioRepository> users,
                     Mock<ITenantRepository> tenants,
@@ -37,12 +35,12 @@ public class LoginCommandHandlerTests
         {
             Id = Guid.NewGuid(),
             RazaoSocial = "Acme",
-            Cnpj = TenantCnpj,
+            Cnpj = "12345678000199",
             Plano = "FREE",
             Status = StatusAtivo.Ativo,
             FusoHorario = "America/Sao_Paulo"
         };
-        tenants.Setup(t => t.GetByCnpjAsync(TenantCnpj, It.IsAny<CancellationToken>()))
+        tenants.Setup(t => t.GetByIdAsync(tenant.Id, It.IsAny<CancellationToken>()))
                .ReturnsAsync(tenant);
 
         var sut = new LoginCommandHandler(users.Object, tenants.Object, rps.Object, refresh.Object, jwt);
@@ -65,13 +63,13 @@ public class LoginCommandHandlerTests
             Status = StatusAtivo.Ativo,
             EmailConfirmedAt = DateTime.UtcNow
         };
-        users.Setup(u => u.GetByEmailAsync(tenant.Id, "admin@atena.com", It.IsAny<CancellationToken>()))
+        users.Setup(u => u.GetByEmailAcrossTenantsAsync("admin@atena.com", It.IsAny<CancellationToken>()))
              .ReturnsAsync(user);
         rps.Setup(r => r.GetCodigosByUserAsync(user.Id, It.IsAny<CancellationToken>()))
            .ReturnsAsync(new[] { "tenant:ler" });
 
         var result = await sut.Handle(
-            new LoginCommand(TenantCnpj, "admin@atena.com", "Atena@2026", null, null), default);
+            new LoginCommand("admin@atena.com", "Atena@2026", null, null), default);
 
         result.IsSuccess.Should().BeTrue();
         result.Content!.AccessToken.Should().NotBeNullOrEmpty();
@@ -95,7 +93,7 @@ public class LoginCommandHandlerTests
             EmailConfirmedAt = DateTime.UtcNow,
             FailedLoginAttempts = 4
         };
-        users.Setup(u => u.GetByEmailAsync(tenant.Id, "user@atena.com", It.IsAny<CancellationToken>()))
+        users.Setup(u => u.GetByEmailAcrossTenantsAsync("user@atena.com", It.IsAny<CancellationToken>()))
              .ReturnsAsync(user);
 
         DateTime? capturedLock = null;
@@ -104,7 +102,7 @@ public class LoginCommandHandlerTests
              .Returns(Task.CompletedTask);
 
         var result = await sut.Handle(
-            new LoginCommand(TenantCnpj, "user@atena.com", "errada", null, null), default);
+            new LoginCommand("user@atena.com", "errada", null, null), default);
 
         result.IsSuccess.Should().BeFalse();
         capturedLock.Should().NotBeNull();
@@ -127,11 +125,11 @@ public class LoginCommandHandlerTests
             EmailConfirmedAt = DateTime.UtcNow,
             LockedUntil = DateTime.UtcNow.AddMinutes(10)
         };
-        users.Setup(u => u.GetByEmailAsync(tenant.Id, "locked@atena.com", It.IsAny<CancellationToken>()))
+        users.Setup(u => u.GetByEmailAcrossTenantsAsync("locked@atena.com", It.IsAny<CancellationToken>()))
              .ReturnsAsync(user);
 
         var result = await sut.Handle(
-            new LoginCommand(TenantCnpj, "locked@atena.com", "Senha@123", null, null), default);
+            new LoginCommand("locked@atena.com", "Senha@123", null, null), default);
 
         result.IsSuccess.Should().BeFalse();
         result.Status.Should().Be(400);
@@ -151,11 +149,11 @@ public class LoginCommandHandlerTests
             PasswordHash = PasswordHelper.Hash("Senha@123"),
             Status = StatusAtivo.PendenteConfirmacao
         };
-        users.Setup(u => u.GetByEmailAsync(tenant.Id, "novo@atena.com", It.IsAny<CancellationToken>()))
+        users.Setup(u => u.GetByEmailAcrossTenantsAsync("novo@atena.com", It.IsAny<CancellationToken>()))
              .ReturnsAsync(user);
 
         var result = await sut.Handle(
-            new LoginCommand(TenantCnpj, "novo@atena.com", "Senha@123", null, null), default);
+            new LoginCommand("novo@atena.com", "Senha@123", null, null), default);
 
         result.IsSuccess.Should().BeFalse();
         result.Message.Should().Contain("confirmado");

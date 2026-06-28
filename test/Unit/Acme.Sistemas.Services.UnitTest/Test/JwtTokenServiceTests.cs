@@ -26,7 +26,7 @@ public class JwtTokenServiceTests
         var tenantId = Guid.NewGuid();
         var userId = Guid.NewGuid();
 
-        var pair = sut.Issue(tenantId, userId, "admin@atena.com", new[] { "vendas:criar", "vendas:ler" });
+        var pair = sut.Issue(tenantId, userId, "admin@atena.com", "Admin", new[] { "vendas:criar", "vendas:ler" });
 
         pair.AccessToken.Should().NotBeNullOrEmpty();
         pair.RefreshToken.Should().NotBeNullOrEmpty();
@@ -42,7 +42,7 @@ public class JwtTokenServiceTests
         var sut = CreateService();
         var tenantId = Guid.NewGuid();
         var userId = Guid.NewGuid();
-        var pair = sut.Issue(tenantId, userId, "user@atena.com", Array.Empty<string>());
+        var pair = sut.Issue(tenantId, userId, "user@atena.com", "User", Array.Empty<string>());
 
         var ok = sut.TryValidate(pair.AccessToken, out var jti, out var t, out var u);
 
@@ -58,7 +58,7 @@ public class JwtTokenServiceTests
     public void TryValidate_DeveRejeitarTokenAdulterado()
     {
         var sut = CreateService();
-        var pair = sut.Issue(Guid.NewGuid(), Guid.NewGuid(), "x@y.com", Array.Empty<string>());
+        var pair = sut.Issue(Guid.NewGuid(), Guid.NewGuid(), "x@y.com", "X", Array.Empty<string>());
 
         var adulterado = pair.AccessToken[..^4] + "AAAA";
         var ok = sut.TryValidate(adulterado, out _, out _, out _);
