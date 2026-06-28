@@ -80,6 +80,15 @@ public sealed class FaturamentoRepository : BaseRepository<Faturamento>, IFatura
         return Db.QueryAsync(sql.ToString(), Map, p, cancellationToken);
     }
 
+    public Task<long> CountByFiltroAsync(DateTime? inicio, DateTime? fim, CancellationToken cancellationToken = default)
+    {
+        var sql = new StringBuilder("SELECT COUNT(*) FROM faturamentos WHERE tenant_id = @tenantId AND deleted_at IS NULL");
+        var p = new Dictionary<string, object?> { ["@tenantId"] = TenantContext.TenantId };
+        if (inicio.HasValue) { sql.Append(" AND data_faturamento >= @ini"); p["@ini"] = inicio.Value; }
+        if (fim.HasValue) { sql.Append(" AND data_faturamento <= @fim"); p["@fim"] = fim.Value; }
+        return Db.ExecuteScalarAsync<long>(sql.ToString(), p, cancellationToken);
+    }
+
     public Task<IReadOnlyList<FaturamentoItem>> ListItensAsync(Guid faturamentoId, CancellationToken cancellationToken = default)
         => Db.QueryAsync(
             $"SELECT {ItemCols} FROM faturamento_itens WHERE tenant_id = @tenantId AND faturamento_id = @fid AND deleted_at IS NULL",
