@@ -1,17 +1,6 @@
 using Acme.Sistemas.Core.Mediators;
-using Acme.Sistemas.Services.V1.Despesa.Command.AlterarDespesa;
 
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Despesa.AlterarDespesa;
-public sealed record AlterarDespesaRequest(
-    string Nome,
-    string? Descricao,
-    string? Categoria,
-    decimal Valor,
-    bool DespesaFixa,
-    DateTime DataVencimento,
-    Guid? CompetenciaId,
-    Guid? CentroDeCustoId,
-    Guid? FornecedorId);
 
 public sealed class AlterarDespesaEndpoint : IEndpoint
 {
@@ -23,20 +12,16 @@ public sealed class AlterarDespesaEndpoint : IEndpoint
             IMediator mediator,
             CancellationToken cancellationToken) =>
         {
-            var command = new AlterarDespesaCommand(
-                id, request.Nome, request.Descricao, request.Categoria,
-                request.Valor, request.DespesaFixa, request.DataVencimento,
-                request.CompetenciaId, request.CentroDeCustoId, request.FornecedorId);
+            var result = await mediator.Send(request.ToCommand(id), cancellationToken);
+            if (!result.IsSuccess || result.Content is null)
+                return Results.Json(result, statusCode: result.Status);
 
-            var response = await mediator.Send(command, cancellationToken);
-            return response.IsSuccess
-                ? Results.Ok(response.Content)
-                : Results.Json(response, statusCode: response.Status);
+            return Results.Ok(result.Content.ToResponse());
         })
         .RequireAuthorization()
         .WithTags("Despesas")
         .WithName("AlterarDespesa")
-        .Produces<AlterarDespesaCommandResult>()
+        .Produces<AlterarDespesaResponse>()
         .ProducesValidationProblem()
         .ProducesProblem(StatusCodes.Status404NotFound);
     }

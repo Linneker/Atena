@@ -8,10 +8,12 @@ public sealed class ListarContasReceberQueryHandler
     : IRequestHandler<ListarContasReceberQuery, ResponseDefault<ListarContasReceberQueryResult>>
 {
     private readonly IContaReceberRepository _repo;
+    private readonly IClienteRepository _clientes;
 
-    public ListarContasReceberQueryHandler(IContaReceberRepository repo)
+    public ListarContasReceberQueryHandler(IContaReceberRepository repo, IClienteRepository clientes)
     {
         _repo = repo;
+        _clientes = clientes;
     }
 
     public async Task<ResponseDefault<ListarContasReceberQueryResult>> Handle(ListarContasReceberQuery request, CancellationToken cancellationToken)
@@ -25,9 +27,14 @@ public sealed class ListarContasReceberQueryHandler
             request.Status, request.VencimentoInicio, request.VencimentoFim,
             request.ClienteId, request.DiasAtrasoMinimo, cancellationToken);
 
+        var clienteIds = contas.Where(c => c.ClienteId.HasValue).Select(c => c.ClienteId!.Value);
+        var nomesCliente = await _clientes.GetNomesByIdsAsync(clienteIds, cancellationToken);
+
         var hoje = DateTime.UtcNow.Date;
         var items = contas.Select(c => new ListarContasReceberQueryItem(
-            c.Id, c.Descricao, c.ClienteId,
+            c.Id, c.Descricao,
+            c.ClienteId,
+            c.ClienteId.HasValue && nomesCliente.TryGetValue(c.ClienteId.Value, out var nome) ? nome : null,
             c.ValorOriginal, c.ValorRecebido, c.Saldo,
             c.DataVencimento, c.Status, c.DiasAtrasoEm(hoje))).ToList();
 

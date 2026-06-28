@@ -1,13 +1,6 @@
 using Acme.Sistemas.Core.Mediators;
-using Acme.Sistemas.Domain.Enums;
-using Acme.Sistemas.Services.V1.Receita.Command.ReceberReceita;
 
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Receita.ReceberReceita;
-public sealed record ReceberReceitaRequest(
-    decimal ValorRecebido,
-    DateTime DataRecebimento,
-    FormaPagamento FormaPagamento,
-    string? Observacao);
 
 public sealed class ReceberReceitaEndpoint : IEndpoint
 {
@@ -19,19 +12,16 @@ public sealed class ReceberReceitaEndpoint : IEndpoint
             IMediator mediator,
             CancellationToken cancellationToken) =>
         {
-            var command = new ReceberReceitaCommand(
-                id, request.ValorRecebido, request.DataRecebimento,
-                request.FormaPagamento, request.Observacao);
+            var result = await mediator.Send(request.ToCommand(id), cancellationToken);
+            if (!result.IsSuccess || result.Content is null)
+                return Results.Json(result, statusCode: result.Status);
 
-            var response = await mediator.Send(command, cancellationToken);
-            return response.IsSuccess
-                ? Results.Ok(response.Content)
-                : Results.Json(response, statusCode: response.Status);
+            return Results.Ok(result.Content.ToResponse());
         })
         .RequireAuthorization()
         .WithTags("Receitas")
         .WithName("ReceberReceita")
-        .Produces<ReceberReceitaCommandResult>()
+        .Produces<ReceberReceitaResponse>()
         .ProducesValidationProblem()
         .ProducesProblem(StatusCodes.Status404NotFound)
         .ProducesProblem(StatusCodes.Status409Conflict);

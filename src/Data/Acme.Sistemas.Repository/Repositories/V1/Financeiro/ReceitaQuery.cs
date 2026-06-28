@@ -3,18 +3,18 @@ namespace Acme.Sistemas.Repository.Repositories.V1.Financeiro;
 internal static class ReceitaQuery
 {
     public const string Cols = @"id, tenant_id, nome, descricao, categoria, valor, receita_fixa,
-        data_prevista_recebimento, competencia_id, centro_de_custo_id, cliente_id, origem_venda_id,
+        data_prevista_recebimento, competencia_id, centro_de_custo_id, cliente_id, origem_venda_id, origem_receita_id,
         status_recebimento, valor_recebido, data_recebimento, forma_pagamento, observacao_recebimento,
         created_at, created_by, updated_at, updated_by, deleted_at, deleted_by";
 
     public const string Insert = @"
         INSERT INTO receitas
         (id, tenant_id, nome, descricao, categoria, valor, receita_fixa,
-         data_prevista_recebimento, competencia_id, centro_de_custo_id, cliente_id, origem_venda_id,
+         data_prevista_recebimento, competencia_id, centro_de_custo_id, cliente_id, origem_venda_id, origem_receita_id,
          status_recebimento, created_at, created_by)
         VALUES
         (@id, @tenant_id, @nome, @descricao, @categoria, @valor, @receita_fixa,
-         @data_prevista_recebimento, @competencia_id, @centro_de_custo_id, @cliente_id, @origem_venda_id,
+         @data_prevista_recebimento, @competencia_id, @centro_de_custo_id, @cliente_id, @origem_venda_id, @origem_receita_id,
          @status_recebimento, @created_at, @created_by)";
 
     public const string Update = @"

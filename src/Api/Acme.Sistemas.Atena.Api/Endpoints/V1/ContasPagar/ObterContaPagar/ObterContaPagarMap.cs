@@ -8,7 +8,8 @@ public static class ObterContaPagarMap
         => new(request.Id);
 
     public static ObterContaPagarResponse ToResponse(this ObterContaPagarQueryResult result)
-        => new(result.Id, result.Descricao, result.FornecedorId, result.DespesaId, result.PlanoDeContasId,
+        => new(result.Id, result.Descricao, result.FornecedorId, result.FornecedorNome,
+            result.DespesaId, result.PlanoDeContasId,
             result.ValorOriginal, result.ValorPago, result.Saldo, result.DataVencimento, result.DataPagamento,
             result.Status, result.Observacao, result.CreatedAt);
 }

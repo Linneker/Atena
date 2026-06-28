@@ -6,6 +6,7 @@ public sealed record ObterContaPagarResponse(
     Guid Id,
     string Descricao,
     Guid? FornecedorId,
+    string? FornecedorNome,
     Guid? DespesaId,
     Guid? PlanoDeContasId,
     decimal ValorOriginal,

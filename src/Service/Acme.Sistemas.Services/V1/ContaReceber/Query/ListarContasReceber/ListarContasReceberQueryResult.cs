@@ -5,7 +5,7 @@ using Acme.Sistemas.Domain.Enums;
 namespace Acme.Sistemas.Services.V1.ContaReceber.Query.ListarContasReceber;
 
 public sealed record ListarContasReceberQueryItem(
-    Guid Id, string Descricao, Guid? ClienteId,
+    Guid Id, string Descricao, Guid? ClienteId, string? ClienteNome,
     decimal ValorOriginal, decimal ValorRecebido, decimal Saldo,
     DateTime DataVencimento, StatusConta Status, int DiasAtraso);
 

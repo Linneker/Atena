@@ -12,6 +12,7 @@ public sealed record ObterDespesaQueryResult(
     DateTime DataVencimento,
     Guid? CompetenciaId,
     Guid? CentroDeCustoId,
+    string? CentroDeCustoNome,
     Guid? FornecedorId,
     StatusPagamento StatusPagamento,
     decimal? ValorPago,

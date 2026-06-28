@@ -1,7 +1,7 @@
 using Acme.Sistemas.Core.Mediators;
-using Acme.Sistemas.Services.V1.ConciliacaoBancaria.Command.ImportarExtrato;
 
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.ConciliacaoBancaria.ImportarExtrato;
+
 public sealed class ImportarExtratoEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
@@ -26,23 +26,25 @@ public sealed class ImportarExtratoEndpoint : IEndpoint
             using var ms = new MemoryStream();
             await file.CopyToAsync(ms, cancellationToken);
 
-            var cmd = new ImportarExtratoCommand(
+            var request = new ImportarExtratoRequest(
                 banco,
                 string.IsNullOrWhiteSpace(agencia) ? null : agencia,
                 string.IsNullOrWhiteSpace(conta) ? null : conta,
                 string.IsNullOrWhiteSpace(formato) ? "CSV" : formato,
                 ms.ToArray());
 
-            var response = await mediator.Send(cmd, cancellationToken);
-            return response.IsSuccess
-                ? Results.Created($"/api/v1/conciliacao-bancaria/{response.Content!.ConciliacaoId}", response.Content)
-                : Results.Json(response, statusCode: response.Status);
+            var result = await mediator.Send(request.ToCommand(), cancellationToken);
+            if (!result.IsSuccess || result.Content is null)
+                return Results.Json(result, statusCode: result.Status);
+
+            var response = result.Content.ToResponse();
+            return Results.Created($"/api/v1/conciliacao-bancaria/{response.ConciliacaoId}", response);
         })
         .RequireAuthorization()
         .WithTags("ConciliacaoBancaria")
         .WithName("ImportarExtrato")
         .DisableAntiforgery()
-        .Produces<ImportarExtratoCommandResult>(StatusCodes.Status201Created)
+        .Produces<ImportarExtratoResponse>(StatusCodes.Status201Created)
         .ProducesValidationProblem();
     }
 }

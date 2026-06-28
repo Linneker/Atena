@@ -1,7 +1,7 @@
 using Acme.Sistemas.Core.Mediators;
-using Acme.Sistemas.Services.V1.Receita.Query.ObterReceita;
 
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Receita.ObterReceita;
+
 public sealed class ObterReceitaEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
@@ -11,15 +11,17 @@ public sealed class ObterReceitaEndpoint : IEndpoint
             IMediator mediator,
             CancellationToken cancellationToken) =>
         {
-            var response = await mediator.Send(new ObterReceitaQuery(id), cancellationToken);
-            return response.IsSuccess
-                ? Results.Ok(response.Content)
-                : Results.Json(response, statusCode: response.Status);
+            var request = new ObterReceitaRequest(id);
+            var result = await mediator.Send(request.ToQuery(), cancellationToken);
+            if (!result.IsSuccess || result.Content is null)
+                return Results.Json(result, statusCode: result.Status);
+
+            return Results.Ok(result.Content.ToResponse());
         })
         .RequireAuthorization()
         .WithTags("Receitas")
         .WithName("ObterReceita")
-        .Produces<ObterReceitaQueryResult>()
+        .Produces<ObterReceitaResponse>()
         .ProducesProblem(StatusCodes.Status404NotFound);
     }
 }

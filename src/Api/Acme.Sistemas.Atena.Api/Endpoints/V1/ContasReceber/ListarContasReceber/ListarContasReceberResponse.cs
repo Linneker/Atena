@@ -6,6 +6,7 @@ public sealed record ListarContasReceberResponseItem(
     Guid Id,
     string Descricao,
     Guid? ClienteId,
+    string? ClienteNome,
     decimal ValorOriginal,
     decimal ValorRecebido,
     decimal Saldo,

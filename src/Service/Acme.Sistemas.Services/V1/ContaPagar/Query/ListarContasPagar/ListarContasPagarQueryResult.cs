@@ -5,7 +5,7 @@ using Acme.Sistemas.Domain.Enums;
 namespace Acme.Sistemas.Services.V1.ContaPagar.Query.ListarContasPagar;
 
 public sealed record ListarContasPagarQueryItem(
-    Guid Id, string Descricao, Guid? FornecedorId,
+    Guid Id, string Descricao, Guid? FornecedorId, string? FornecedorNome,
     decimal ValorOriginal, decimal ValorPago, decimal Saldo,
     DateTime DataVencimento, StatusConta Status,
     bool Vencida, int DiasParaVencer);

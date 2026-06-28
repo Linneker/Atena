@@ -13,6 +13,7 @@ public sealed record ListarReceitasQueryItem(
     DateTime? DataRecebimento,
     Guid? CompetenciaId,
     Guid? CentroDeCustoId,
+    string? CentroDeCustoNome,
     Guid? ClienteId,
     Guid? OrigemVendaId,
     bool ReceitaFixa);

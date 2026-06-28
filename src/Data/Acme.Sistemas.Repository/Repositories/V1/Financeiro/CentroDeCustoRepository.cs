@@ -67,6 +67,35 @@ public sealed class CentroDeCustoRepository : BaseRepository<CentroDeCusto>, ICe
                 ["@codigo"] = codigo
             }, cancellationToken);
 
+    public async Task<IReadOnlyDictionary<Guid, string>> GetNomesByIdsAsync(
+        IEnumerable<Guid> ids,
+        CancellationToken cancellationToken = default)
+    {
+        var list = ids?.Distinct().ToList() ?? new List<Guid>();
+        if (list.Count == 0) return new Dictionary<Guid, string>();
+
+        var parameters = new Dictionary<string, object?> { ["@tenantId"] = TenantContext.TenantId };
+        var placeholders = new List<string>(list.Count);
+        for (var i = 0; i < list.Count; i++)
+        {
+            var name = $"@id{i}";
+            placeholders.Add(name);
+            parameters[name] = list[i];
+        }
+
+        var sql = $@"SELECT id, nome FROM centros_de_custo
+                     WHERE tenant_id = @tenantId AND deleted_at IS NULL
+                       AND id IN ({string.Join(", ", placeholders)})";
+
+        var rows = await Db.QueryAsync(
+            sql,
+            r => (Id: r.GetValueOrDefault<Guid>("id"), Nome: r.GetValueOrDefault<string>("nome") ?? string.Empty),
+            parameters,
+            cancellationToken);
+
+        return rows.ToDictionary(x => x.Id, x => x.Nome);
+    }
+
     public Task<long> CountVinculosAsync(Guid centroId, CancellationToken cancellationToken = default)
         => Db.ExecuteScalarAsync<long>(@"
             SELECT

@@ -1,7 +1,7 @@
 using Acme.Sistemas.Core.Mediators;
-using Acme.Sistemas.Services.V1.Despesa.Command.ExcluirDespesa;
 
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Despesa.ExcluirDespesa;
+
 public sealed class ExcluirDespesaEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
@@ -11,10 +11,11 @@ public sealed class ExcluirDespesaEndpoint : IEndpoint
             IMediator mediator,
             CancellationToken cancellationToken) =>
         {
-            var response = await mediator.Send(new ExcluirDespesaCommand(id), cancellationToken);
-            return response.IsSuccess
+            var request = new ExcluirDespesaRequest(id);
+            var result = await mediator.Send(request.ToCommand(), cancellationToken);
+            return result.IsSuccess
                 ? Results.NoContent()
-                : Results.Json(response, statusCode: response.Status);
+                : Results.Json(result, statusCode: result.Status);
         })
         .RequireAuthorization()
         .WithTags("Despesas")

@@ -1,35 +1,26 @@
 using Acme.Sistemas.Core.Mediators;
-using Acme.Sistemas.Domain.Enums;
-using Acme.Sistemas.Services.V1.Despesa.Query.ListarDespesas;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Despesa.ListarDespesas;
+
 public sealed class ListarDespesasEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
         app.MapGet("/api/v1/despesas", async (
-            StatusPagamento? status,
-            DateTime? vencimentoInicio,
-            DateTime? vencimentoFim,
-            string? categoria,
-            Guid? competenciaId,
-            int? skip,
-            int? take,
+            [AsParameters] ListarDespesasRequest request,
             IMediator mediator,
             CancellationToken cancellationToken) =>
         {
-            var query = new ListarDespesasQuery(
-                status, vencimentoInicio, vencimentoFim, categoria,
-                competenciaId, skip ?? 0, take ?? 50);
+            var result = await mediator.Send(request.ToQuery(), cancellationToken);
+            if (!result.IsSuccess || result.Content is null)
+                return Results.Json(result, statusCode: result.Status);
 
-            var response = await mediator.Send(query, cancellationToken);
-            return response.IsSuccess
-                ? Results.Ok(response.Content)
-                : Results.Json(response, statusCode: response.Status);
+            return Results.Ok(result.Content.ToResponse());
         })
         .RequireAuthorization()
         .WithTags("Despesas")
         .WithName("ListarDespesas")
-        .Produces<ListarDespesasQueryResult>();
+        .Produces<ListarDespesasResponse>();
     }
 }

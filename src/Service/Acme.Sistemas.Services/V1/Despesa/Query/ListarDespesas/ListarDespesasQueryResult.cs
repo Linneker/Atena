@@ -13,6 +13,7 @@ public sealed record ListarDespesasQueryItem(
     DateTime? DataPagamento,
     Guid? CompetenciaId,
     Guid? CentroDeCustoId,
+    string? CentroDeCustoNome,
     Guid? FornecedorId,
     bool DespesaFixa);
 

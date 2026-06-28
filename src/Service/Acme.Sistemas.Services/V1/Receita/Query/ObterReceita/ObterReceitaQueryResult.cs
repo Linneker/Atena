@@ -12,6 +12,7 @@ public sealed record ObterReceitaQueryResult(
     DateTime DataPrevistaRecebimento,
     Guid? CompetenciaId,
     Guid? CentroDeCustoId,
+    string? CentroDeCustoNome,
     Guid? ClienteId,
     Guid? OrigemVendaId,
     StatusPagamento StatusRecebimento,

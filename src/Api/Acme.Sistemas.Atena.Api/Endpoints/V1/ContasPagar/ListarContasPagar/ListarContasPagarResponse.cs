@@ -6,6 +6,7 @@ public sealed record ListarContasPagarResponseItem(
     Guid Id,
     string Descricao,
     Guid? FornecedorId,
+    string? FornecedorNome,
     decimal ValorOriginal,
     decimal ValorPago,
     decimal Saldo,

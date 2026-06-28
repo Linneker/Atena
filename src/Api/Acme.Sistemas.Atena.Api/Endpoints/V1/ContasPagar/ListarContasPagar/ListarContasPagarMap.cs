@@ -12,6 +12,7 @@ public static class ListarContasPagarMap
         => new(result.Items.Select(i => i.ToResponseItem()).ToArray(), result.Total, result.Skip, result.Take);
 
     private static ListarContasPagarResponseItem ToResponseItem(this ListarContasPagarQueryItem item)
-        => new(item.Id, item.Descricao, item.FornecedorId, item.ValorOriginal, item.ValorPago,
+        => new(item.Id, item.Descricao, item.FornecedorId, item.FornecedorNome,
+            item.ValorOriginal, item.ValorPago,
             item.Saldo, item.DataVencimento, item.Status, item.Vencida, item.DiasParaVencer);
 }

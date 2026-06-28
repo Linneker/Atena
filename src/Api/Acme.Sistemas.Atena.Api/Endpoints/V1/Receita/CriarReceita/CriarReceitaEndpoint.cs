@@ -1,25 +1,27 @@
 using Acme.Sistemas.Core.Mediators;
-using Acme.Sistemas.Services.V1.Receita.Command.CriarReceita;
 
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Receita.CriarReceita;
+
 public sealed class CriarReceitaEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
         app.MapPost("/api/v1/receitas", async (
-            CriarReceitaCommand command,
+            CriarReceitaRequest request,
             IMediator mediator,
             CancellationToken cancellationToken) =>
         {
-            var response = await mediator.Send(command, cancellationToken);
-            return response.IsSuccess
-                ? Results.Created($"/api/v1/receitas/{response.Content!.Id}", response.Content)
-                : Results.Json(response, statusCode: response.Status);
+            var result = await mediator.Send(request.ToCommand(), cancellationToken);
+            if (!result.IsSuccess || result.Content is null)
+                return Results.Json(result, statusCode: result.Status);
+
+            var response = result.Content.ToResponse();
+            return Results.Created($"/api/v1/receitas/{response.Id}", response);
         })
         .RequireAuthorization()
         .WithTags("Receitas")
         .WithName("CriarReceita")
-        .Produces<CriarReceitaCommandResult>(StatusCodes.Status201Created)
+        .Produces<CriarReceitaResponse>(StatusCodes.Status201Created)
         .ProducesValidationProblem();
     }
 }

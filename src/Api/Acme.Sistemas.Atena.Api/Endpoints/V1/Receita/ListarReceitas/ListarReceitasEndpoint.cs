@@ -1,35 +1,26 @@
 using Acme.Sistemas.Core.Mediators;
-using Acme.Sistemas.Domain.Enums;
-using Acme.Sistemas.Services.V1.Receita.Query.ListarReceitas;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Receita.ListarReceitas;
+
 public sealed class ListarReceitasEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
         app.MapGet("/api/v1/receitas", async (
-            StatusPagamento? status,
-            DateTime? recebimentoInicio,
-            DateTime? recebimentoFim,
-            string? categoria,
-            Guid? competenciaId,
-            int? skip,
-            int? take,
+            [AsParameters] ListarReceitasRequest request,
             IMediator mediator,
             CancellationToken cancellationToken) =>
         {
-            var query = new ListarReceitasQuery(
-                status, recebimentoInicio, recebimentoFim, categoria,
-                competenciaId, skip ?? 0, take ?? 50);
+            var result = await mediator.Send(request.ToQuery(), cancellationToken);
+            if (!result.IsSuccess || result.Content is null)
+                return Results.Json(result, statusCode: result.Status);
 
-            var response = await mediator.Send(query, cancellationToken);
-            return response.IsSuccess
-                ? Results.Ok(response.Content)
-                : Results.Json(response, statusCode: response.Status);
+            return Results.Ok(result.Content.ToResponse());
         })
         .RequireAuthorization()
         .WithTags("Receitas")
         .WithName("ListarReceitas")
-        .Produces<ListarReceitasQueryResult>();
+        .Produces<ListarReceitasResponse>();
     }
 }

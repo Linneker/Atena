@@ -1,13 +1,6 @@
 using Acme.Sistemas.Core.Mediators;
-using Acme.Sistemas.Domain.Enums;
-using Acme.Sistemas.Services.V1.Despesa.Command.BaixarDespesa;
 
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Despesa.BaixarDespesa;
-public sealed record BaixarDespesaRequest(
-    decimal ValorPago,
-    DateTime DataPagamento,
-    FormaPagamento FormaPagamento,
-    string? Observacao);
 
 public sealed class BaixarDespesaEndpoint : IEndpoint
 {
@@ -19,19 +12,16 @@ public sealed class BaixarDespesaEndpoint : IEndpoint
             IMediator mediator,
             CancellationToken cancellationToken) =>
         {
-            var command = new BaixarDespesaCommand(
-                id, request.ValorPago, request.DataPagamento,
-                request.FormaPagamento, request.Observacao);
+            var result = await mediator.Send(request.ToCommand(id), cancellationToken);
+            if (!result.IsSuccess || result.Content is null)
+                return Results.Json(result, statusCode: result.Status);
 
-            var response = await mediator.Send(command, cancellationToken);
-            return response.IsSuccess
-                ? Results.Ok(response.Content)
-                : Results.Json(response, statusCode: response.Status);
+            return Results.Ok(result.Content.ToResponse());
         })
         .RequireAuthorization()
         .WithTags("Despesas")
         .WithName("BaixarDespesa")
-        .Produces<BaixarDespesaCommandResult>()
+        .Produces<BaixarDespesaResponse>()
         .ProducesValidationProblem()
         .ProducesProblem(StatusCodes.Status404NotFound)
         .ProducesProblem(StatusCodes.Status409Conflict);

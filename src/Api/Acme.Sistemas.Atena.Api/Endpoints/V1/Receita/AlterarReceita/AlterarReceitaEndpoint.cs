@@ -1,18 +1,6 @@
 using Acme.Sistemas.Core.Mediators;
-using Acme.Sistemas.Services.V1.Receita.Command.AlterarReceita;
 
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Receita.AlterarReceita;
-public sealed record AlterarReceitaRequest(
-    string Nome,
-    string? Descricao,
-    string? Categoria,
-    decimal Valor,
-    bool ReceitaFixa,
-    DateTime DataPrevistaRecebimento,
-    Guid? CompetenciaId,
-    Guid? CentroDeCustoId,
-    Guid? ClienteId,
-    Guid? OrigemVendaId);
 
 public sealed class AlterarReceitaEndpoint : IEndpoint
 {
@@ -24,21 +12,16 @@ public sealed class AlterarReceitaEndpoint : IEndpoint
             IMediator mediator,
             CancellationToken cancellationToken) =>
         {
-            var command = new AlterarReceitaCommand(
-                id, request.Nome, request.Descricao, request.Categoria,
-                request.Valor, request.ReceitaFixa, request.DataPrevistaRecebimento,
-                request.CompetenciaId, request.CentroDeCustoId,
-                request.ClienteId, request.OrigemVendaId);
+            var result = await mediator.Send(request.ToCommand(id), cancellationToken);
+            if (!result.IsSuccess || result.Content is null)
+                return Results.Json(result, statusCode: result.Status);
 
-            var response = await mediator.Send(command, cancellationToken);
-            return response.IsSuccess
-                ? Results.Ok(response.Content)
-                : Results.Json(response, statusCode: response.Status);
+            return Results.Ok(result.Content.ToResponse());
         })
         .RequireAuthorization()
         .WithTags("Receitas")
         .WithName("AlterarReceita")
-        .Produces<AlterarReceitaCommandResult>()
+        .Produces<AlterarReceitaResponse>()
         .ProducesValidationProblem()
         .ProducesProblem(StatusCodes.Status404NotFound);
     }

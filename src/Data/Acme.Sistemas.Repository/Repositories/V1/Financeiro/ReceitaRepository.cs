@@ -32,6 +32,7 @@ public sealed class ReceitaRepository : BaseRepository<Receita>, IReceitaReposit
             ["@centro_de_custo_id"] = r.CentroDeCustoId,
             ["@cliente_id"] = r.ClienteId,
             ["@origem_venda_id"] = r.OrigemVendaId,
+            ["@origem_receita_id"] = r.OrigemReceitaId,
             ["@status_recebimento"] = (int)r.StatusRecebimento,
             ["@created_at"] = r.CreatedAt,
             ["@created_by"] = r.CreatedBy
@@ -169,6 +170,7 @@ public sealed class ReceitaRepository : BaseRepository<Receita>, IReceitaReposit
         CentroDeCustoId = r.GetValueOrDefault<Guid?>("centro_de_custo_id"),
         ClienteId = r.GetValueOrDefault<Guid?>("cliente_id"),
         OrigemVendaId = r.GetValueOrDefault<Guid?>("origem_venda_id"),
+        OrigemReceitaId = r.GetValueOrDefault<Guid?>("origem_receita_id"),
         StatusRecebimento = (StatusPagamento)r.GetValueOrDefault<int>("status_recebimento"),
         ValorRecebido = r.GetValueOrDefault<decimal?>("valor_recebido"),
         DataRecebimento = r.GetValueOrDefault<DateTime?>("data_recebimento"),

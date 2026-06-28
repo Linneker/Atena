@@ -11,15 +11,18 @@ public sealed class BaixarContaPagarCommandHandler
 {
     private readonly IContaPagarRepository _repo;
     private readonly IPagamentoRepository _pagamentos;
+    private readonly IDespesaRepository _despesas;
     private readonly ITenantContext _tenantContext;
 
     public BaixarContaPagarCommandHandler(
         IContaPagarRepository repo,
         IPagamentoRepository pagamentos,
+        IDespesaRepository despesas,
         ITenantContext tenantContext)
     {
         _repo = repo;
         _pagamentos = pagamentos;
+        _despesas = despesas;
         _tenantContext = tenantContext;
     }
 
@@ -59,6 +62,47 @@ public sealed class BaixarContaPagarCommandHandler
             Observacao = request.Observacao,
             CreatedBy = _tenantContext.UserId
         }, cancellationToken);
+
+        // Propagação para Despesa.
+        // - Se a conta veio de uma Despesa prevista (DespesaId != null), apenas atualiza essa despesa.
+        // - Se a conta não tem origem (gerada por RecebimentoCompra ou criada direto na conta),
+        //   gera Despesa Variável marcada como Paga para refletir no caixa.
+        if (conta.DespesaId.HasValue)
+        {
+            var despesa = await _despesas.GetByIdAsync(conta.DespesaId.Value, cancellationToken);
+            if (despesa is not null)
+            {
+                despesa.ValorPago = (despesa.ValorPago ?? 0) + request.ValorPago;
+                despesa.DataPagamento = request.DataPagamento;
+                despesa.FormaPagamento = request.FormaPagamento;
+                despesa.ObservacaoPagamento = request.Observacao;
+                despesa.UpdatedBy = _tenantContext.UserId;
+                if (conta.Status == StatusConta.Pago)
+                {
+                    despesa.StatusPagamento = StatusPagamento.Pago;
+                }
+                await _despesas.BaixarAsync(despesa, cancellationToken);
+            }
+        }
+        else if (conta.Status == StatusConta.Pago)
+        {
+            var despesa = new Domain.Entities.Financeiro.Despesa
+            {
+                TenantId = _tenantContext.TenantId,
+                Nome = conta.Descricao,
+                Valor = conta.ValorOriginal,
+                DespesaFixa = false,
+                DataVencimento = conta.DataVencimento,
+                FornecedorId = conta.FornecedorId,
+                StatusPagamento = StatusPagamento.Pago,
+                ValorPago = conta.ValorPago,
+                DataPagamento = request.DataPagamento,
+                FormaPagamento = request.FormaPagamento,
+                ObservacaoPagamento = request.Observacao,
+                CreatedBy = _tenantContext.UserId
+            };
+            await _despesas.AddAsync(despesa, cancellationToken);
+        }
 
         return ResponseDefault<BaixarContaPagarCommandResult>.Ok(
             new BaixarContaPagarCommandResult(conta.Id, conta.Status, conta.ValorPago, conta.Saldo));

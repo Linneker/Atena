@@ -12,6 +12,7 @@ public static class ListarContasReceberMap
         => new(result.Items.Select(i => i.ToResponseItem()).ToArray(), result.Total, result.Skip, result.Take);
 
     private static ListarContasReceberResponseItem ToResponseItem(this ListarContasReceberQueryItem item)
-        => new(item.Id, item.Descricao, item.ClienteId, item.ValorOriginal, item.ValorRecebido,
+        => new(item.Id, item.Descricao, item.ClienteId, item.ClienteNome,
+            item.ValorOriginal, item.ValorRecebido,
             item.Saldo, item.DataVencimento, item.Status, item.DiasAtraso);
 }

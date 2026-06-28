@@ -1,4 +1,12 @@
+using Acme.Sistemas.Services.V1.Despesa.Command.BaixarDespesa;
+
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Despesa.BaixarDespesa;
 
-// BaixarDespesa: mapping inline (parâmetros HTTP → Command/Query) feito no próprio
-// BaixarDespesaEndpoint. Map.cs vazio mantido por convenção do blueprint.
+public static class BaixarDespesaMap
+{
+    public static BaixarDespesaCommand ToCommand(this BaixarDespesaRequest request, Guid id)
+        => new(id, request.ValorPago, request.DataPagamento, request.FormaPagamento, request.Observacao);
+
+    public static BaixarDespesaResponse ToResponse(this BaixarDespesaCommandResult result)
+        => new(result.Id, result.StatusPagamento, result.ValorPago, result.DataPagamento);
+}

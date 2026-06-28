@@ -1,4 +1,9 @@
+using Acme.Sistemas.Services.V1.Receita.Command.ExcluirReceita;
+
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Receita.ExcluirReceita;
 
-// ExcluirReceita: mapping inline (parâmetros HTTP → Command/Query) feito no próprio
-// ExcluirReceitaEndpoint. Map.cs vazio mantido por convenção do blueprint.
+public static class ExcluirReceitaMap
+{
+    public static ExcluirReceitaCommand ToCommand(this ExcluirReceitaRequest request)
+        => new(request.Id);
+}

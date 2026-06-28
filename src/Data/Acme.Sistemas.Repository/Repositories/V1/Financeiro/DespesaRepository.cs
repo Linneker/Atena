@@ -32,6 +32,7 @@ public sealed class DespesaRepository : BaseRepository<Despesa>, IDespesaReposit
             ["@competencia_id"] = d.CompetenciaId,
             ["@centro_de_custo_id"] = d.CentroDeCustoId,
             ["@fornecedor_id"] = d.FornecedorId,
+            ["@origem_despesa_id"] = d.OrigemDespesaId,
             ["@status_pagamento"] = (int)d.StatusPagamento,
             ["@created_at"] = d.CreatedAt,
             ["@created_by"] = d.CreatedBy
@@ -167,6 +168,7 @@ public sealed class DespesaRepository : BaseRepository<Despesa>, IDespesaReposit
         CompetenciaId = r.GetValueOrDefault<Guid?>("competencia_id"),
         CentroDeCustoId = r.GetValueOrDefault<Guid?>("centro_de_custo_id"),
         FornecedorId = r.GetValueOrDefault<Guid?>("fornecedor_id"),
+        OrigemDespesaId = r.GetValueOrDefault<Guid?>("origem_despesa_id"),
         StatusPagamento = (StatusPagamento)r.GetValueOrDefault<int>("status_pagamento"),
         ValorPago = r.GetValueOrDefault<decimal?>("valor_pago"),
         DataPagamento = r.GetValueOrDefault<DateTime?>("data_pagamento"),

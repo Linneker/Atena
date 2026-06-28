@@ -8,10 +8,12 @@ public sealed class ObterDespesaQueryHandler
     : IRequestHandler<ObterDespesaQuery, ResponseDefault<ObterDespesaQueryResult>>
 {
     private readonly IDespesaRepository _despesas;
+    private readonly ICentroDeCustoRepository _centros;
 
-    public ObterDespesaQueryHandler(IDespesaRepository despesas)
+    public ObterDespesaQueryHandler(IDespesaRepository despesas, ICentroDeCustoRepository centros)
     {
         _despesas = despesas;
+        _centros = centros;
     }
 
     public async Task<ResponseDefault<ObterDespesaQueryResult>> Handle(
@@ -24,9 +26,16 @@ public sealed class ObterDespesaQueryHandler
             return ResponseDefault<ObterDespesaQueryResult>.NotFound("Despesa não encontrada.");
         }
 
+        string? centroNome = null;
+        if (d.CentroDeCustoId.HasValue)
+        {
+            var nomes = await _centros.GetNomesByIdsAsync(new[] { d.CentroDeCustoId.Value }, cancellationToken);
+            nomes.TryGetValue(d.CentroDeCustoId.Value, out centroNome);
+        }
+
         return ResponseDefault<ObterDespesaQueryResult>.Ok(new ObterDespesaQueryResult(
             d.Id, d.Nome, d.Descricao, d.Categoria, d.Valor, d.DespesaFixa,
-            d.DataVencimento, d.CompetenciaId, d.CentroDeCustoId, d.FornecedorId,
+            d.DataVencimento, d.CompetenciaId, d.CentroDeCustoId, centroNome, d.FornecedorId,
             d.StatusPagamento, d.ValorPago, d.DataPagamento, d.FormaPagamento,
             d.ObservacaoPagamento, d.CreatedAt, d.UpdatedAt));
     }

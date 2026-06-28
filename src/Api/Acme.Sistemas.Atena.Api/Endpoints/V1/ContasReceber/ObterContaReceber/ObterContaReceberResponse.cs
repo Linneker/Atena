@@ -6,6 +6,7 @@ public sealed record ObterContaReceberResponse(
     Guid Id,
     string Descricao,
     Guid? ClienteId,
+    string? ClienteNome,
     Guid? ReceitaId,
     Guid? PlanoDeContasId,
     decimal ValorOriginal,
