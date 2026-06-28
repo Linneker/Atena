@@ -6,7 +6,7 @@ using Acme.Sistemas.ExternalIntegration.Methods;
 
 namespace Acme.Sistemas.ExternalIntegration.Proxys;
 
-public sealed class HttpClientProxy<TInterface> : DispatchProxy where TInterface : class, IExternalApiClient
+public class HttpClientProxy<TInterface> : DispatchProxy where TInterface : class, IExternalApiClient
 {
     private HttpClient _httpClient = null!;
     private static readonly JsonSerializerOptions JsonOptions = new()
