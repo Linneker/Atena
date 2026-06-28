@@ -431,3 +431,14 @@ cache.db
 
 # Feature flags override de desenvolvimento
 featureflags.local.json
+
+# Migrations de seed root — contêm credenciais por ambiente.
+# Cada dev/ambiente gera localmente; nunca versionar.
+src/Data/Acme.Sistemas.Infrastructure/Databases/Migrations/V*_SeedRootAdmin.cs
+
+# Screenshots de provas visuais (Playwright) — geradas localmente, não versionar.
+prova-*.png
+.playwright-mcp/
+
+# Cache local da API (SQLite log de cache)
+src/Api/Acme.Sistemas.Atena.Api/cache-log.db
