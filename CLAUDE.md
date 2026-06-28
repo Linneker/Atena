@@ -178,6 +178,7 @@ src/app/
 | Compras | SolicitacaoCompra, PedidoCompra, PedidoCompraItem, RecebimentoCompra |
 | Vendas | Orcamento, PedidoVenda, PedidoVendaItem, Faturamento, DevolucaoVenda, ComissaoVendedor |
 | Fiscal | ConfiguracaoFiscal, NFe, NFeItem, NFeEvento |
+| **RH** (rh-fundacao W1) | **Jornada, Cargo, Lotacao, Departamento, EscalaFuncionario, HistoricoSalario, BeneficioCatalogo, BeneficioFuncionario, Dependente, Cbo (referência nacional). `Funcionario` estendido com cargo_id/lotacao_id/departamento_id, PIS/CTPS/RG, endereço JSON, conta bancária JSON. Validadores em `Core/Helper`: `PisHelper`, `CtpsHelper`, `ContaBancariaHelper`. Endpoints em `/api/v1/rh/*` (rh-funcionario, rh-cargo, rh-lotacao, rh-departamento, rh-beneficio, rh-jornada, rh-dependente). Frontend em `features/rh/` (wizard 4 passos + ficha completa em abas). Detalhes em `documentacao/rh/funcionario-modelo.md`.** |
 | Auditoria | AuditLog, ApiRequestAudit |
 
 ## Database
@@ -186,6 +187,42 @@ src/app/
 - Connection strings em `appsettings.json`
 - EF Core migrations em `Acme.Sistemas.Infrastructure`
 - Todo `Repository` herda `BaseRepository` que aplica filtro `WHERE tenant_id = @tenantId` automático
+
+### Seed do super-admin (root)
+
+A migration `V*_SeedRootAdmin.cs` em `src/Data/Acme.Sistemas.Infrastructure/Databases/Migrations/`
+cria o tenant raiz, a role `Root` (com **todas** as permissões — incluindo `tenant:criar`, que é
+filtrada para roles `Administrador` de tenants comuns em `CriarTenantCommandHandler`) e o usuário
+super-admin com `Status=Ativo` e e-mail já confirmado.
+
+**Convenção de versionamento:** o arquivo é **gitignored** (`.gitignore` linha `V*_SeedRootAdmin.cs`)
+porque contém o e-mail e a senha do super-admin daquele ambiente. Cada dev / ambiente / cluster
+mantém localmente a sua própria versão. Em CI a migration simplesmente não existe → o root não é
+seedado, o que é intencional (ambientes de teste não devem ter credenciais hardcoded).
+
+Para criar a sua: copiar o template `V20260512001_SeedRootAdmin.cs` (se ainda existir local)
+ou pedir a um colega; trocar `RootEmail`, `RootSenha`, `AcmeCnpj`, `AcmeRazao` e `Version`
+(timestamp único, formato `Vyyyymmddxxx`); rodar `dotnet build` + restart da API.
+
+A migration roda dentro do `MigrationRunner` no boot, antes do host subir os hosted services.
+
+### Seeds estáticos brasileiros e provisionamento de tenant
+
+Migrations `V20260514xxx_*` semeiam catálogos de referência **nacionais** (não tenant-scoped):
+`ufs` (27), `cfops` (subset curado), `csts_*` (ICMS/PIS/COFINS/IPI) e `codigos_servico_lc116`
+(subset). Consultáveis via `GET /api/v1/cadastros/ufs` e `GET /api/v1/fiscal/{cfops|csts/{tipo}|codigos-servico}`.
+Datasets volumosos (CFOP completo, NCM, Municípios) são opt-in/drop-in — ver `documentacao/seeds/README.md`.
+
+**Provisionamento de tenant:** `POST /api/v1/admin/seed-tenant` (permissão `admin:seed-tenant`,
+exclusiva do `Root`) cria tenant + admin + 5 roles + empresa + plano de contas + centros de custo
++ cliente/fornecedor/produto demo + config fiscal placeholder, **idempotente por CNPJ**. Rotas
+`/api/v1/admin/*` passam pelo `AdminIpAllowlistMiddleware` (config `Admin:AllowedIps`, CIDRs;
+loopback sempre liberado; lista vazia = sem restrição).
+
+**Bootstrap dev:** em Development, com `Seed:AutoBootstrap=true` (default em
+`appsettings.Development.json`) e banco sem tenant, o `DevTenantBootstrapHostedService` cria
+`demo@atena.test` no boot e loga a senha no console. Nunca roda em Production (proteção dupla).
+Detalhes em `documentacao/onboarding-tenant.md`.
 
 ## API Documentation
 

@@ -1,0 +1,12 @@
+[
+  { "codigo": "252305", "titulo": "Analista de sistemas computacionais", "grandeGrupo": "2", "familia": "2523" },
+  { "codigo": "212405", "titulo": "Engenheiro de software", "grandeGrupo": "2", "familia": "2124" },
+  { "codigo": "411005", "titulo": "Auxiliar de escritório", "grandeGrupo": "4", "familia": "4110" },
+  { "codigo": "414115", "titulo": "Almoxarife", "grandeGrupo": "4", "familia": "4141" },
+  { "codigo": "521110", "titulo": "Vendedor de comércio varejista", "grandeGrupo": "5", "familia": "5211" },
+  { "codigo": "411010", "titulo": "Assistente administrativo", "grandeGrupo": "4", "familia": "4110" },
+  { "codigo": "252210", "titulo": "Contador", "grandeGrupo": "2", "familia": "2522" },
+  { "codigo": "514120", "titulo": "Faxineiro", "grandeGrupo": "5", "familia": "5141" },
+  { "codigo": "782505", "titulo": "Motorista de caminhão", "grandeGrupo": "7", "familia": "7825" },
+  { "codigo": "517330", "titulo": "Porteiro de edifício", "grandeGrupo": "5", "familia": "5173" }
+]
