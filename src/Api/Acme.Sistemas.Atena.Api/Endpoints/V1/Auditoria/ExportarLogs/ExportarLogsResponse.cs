@@ -1,4 +1,7 @@
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Auditoria.ExportarLogs;
 
-// /exportar retorna application/json (file download); /exportar/hash retorna { totalRegistros, hashSha256 }.
-// Sem record de Response — payload definido inline.
+// Endpoint /exportar retorna application/json (file download), sem corpo tipado.
+// Endpoint complementar /exportar/hash retorna este DTO de verificação.
+public sealed record ExportarLogsHashResponse(
+    int TotalRegistros,
+    string HashSha256);

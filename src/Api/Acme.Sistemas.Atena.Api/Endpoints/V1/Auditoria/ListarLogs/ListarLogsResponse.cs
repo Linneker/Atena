@@ -1,4 +1,16 @@
+using Acme.Sistemas.Domain.Entities.Auditoria;
+
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Auditoria.ListarLogs;
 
-// Response do ListarLogsEndpoint é o `ListarLogsQueryResult` da camada de Services
-// (record { Items, Total }) — endpoint repassa direto sem reshape.
+public sealed record ListarLogsResponseItem(
+    Guid Id,
+    Guid? UserId,
+    string Entidade,
+    Guid? EntidadeId,
+    OperacaoAuditoria Operacao,
+    string CommandTipo,
+    DateTime OcorridoEm);
+
+public sealed record ListarLogsResponse(
+    IReadOnlyList<ListarLogsResponseItem> Items,
+    long Total);
