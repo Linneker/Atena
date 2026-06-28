@@ -1,8 +1,6 @@
 using Acme.Sistemas.Core.Mediators;
-using Acme.Sistemas.Services.V1.Autenticacao.Command.Logout;
 
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Auth.Logout;
-public sealed record LogoutRequest(string RefreshToken);
 
 public sealed class LogoutEndpoint : IEndpoint
 {
@@ -13,7 +11,7 @@ public sealed class LogoutEndpoint : IEndpoint
             IMediator mediator,
             CancellationToken cancellationToken) =>
         {
-            var response = await mediator.Send(new LogoutCommand(request.RefreshToken), cancellationToken);
+            await mediator.Send(request.ToCommand(), cancellationToken);
             return Results.NoContent();
         })
         .RequireAuthorization()

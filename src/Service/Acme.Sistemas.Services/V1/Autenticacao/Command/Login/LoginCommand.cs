@@ -4,7 +4,6 @@ using Acme.Sistemas.Core.Response;
 namespace Acme.Sistemas.Services.V1.Autenticacao.Command.Login;
 
 public sealed record LoginCommand(
-    string Cnpj,
     string Email,
     string Senha,
     string? UserAgent,

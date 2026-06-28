@@ -49,7 +49,7 @@ public sealed class RenovarTokenCommandHandler
         }
 
         var permissions = await _rolePermissions.GetCodigosByUserAsync(dbUser.Id, cancellationToken);
-        var newTokens = _jwt.Issue(dbUser.TenantId, dbUser.Id, dbUser.Email, permissions);
+        var newTokens = _jwt.Issue(dbUser.TenantId, dbUser.Id, dbUser.Email, dbUser.NomeCompleto, permissions);
         var newHash = JwtTokenService.HashRefreshToken(newTokens.RefreshToken);
         var now = DateTime.UtcNow;
 

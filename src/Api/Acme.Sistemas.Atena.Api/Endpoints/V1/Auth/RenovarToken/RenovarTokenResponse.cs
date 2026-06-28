@@ -1,4 +1,7 @@
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Auth.RenovarToken;
 
-// Response do RenovarTokenEndpoint = Result do Command/Query correspondente.
-// Endpoint repassa direto sem reshape adicional.
+public sealed record RenovarTokenResponse(
+    string AccessToken,
+    string RefreshToken,
+    DateTime AccessExpiresAt,
+    DateTime RefreshExpiresAt);

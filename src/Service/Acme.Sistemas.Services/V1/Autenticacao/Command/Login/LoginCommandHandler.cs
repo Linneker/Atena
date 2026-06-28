@@ -39,16 +39,16 @@ public sealed class LoginCommandHandler
         LoginCommand request,
         CancellationToken cancellationToken)
     {
-        var cnpjDigits = new string(request.Cnpj.Where(char.IsDigit).ToArray());
-        var tenant = await _tenants.GetByCnpjAsync(cnpjDigits, cancellationToken);
-        if (tenant is null || tenant.Status != StatusAtivo.Ativo)
+        // Login global por email — multi-tenant resolvido pelo tenant_id do usuário.
+        var user = await _users.GetByEmailAcrossTenantsAsync(request.Email, cancellationToken);
+        if (user is null)
         {
             return ResponseDefault<LoginCommandResult>.BadRequest(
                 Error.Unauthorized(MessageErros.CredenciaisInvalidas));
         }
 
-        var user = await _users.GetByEmailAsync(tenant.Id, request.Email, cancellationToken);
-        if (user is null)
+        var tenant = await _tenants.GetByIdAsync(user.TenantId, cancellationToken);
+        if (tenant is null || tenant.Status != StatusAtivo.Ativo)
         {
             return ResponseDefault<LoginCommandResult>.BadRequest(
                 Error.Unauthorized(MessageErros.CredenciaisInvalidas));
@@ -86,7 +86,7 @@ public sealed class LoginCommandHandler
         await _users.UpdateLoginStatusAsync(user.Id, 0, null, now, cancellationToken);
 
         var permissions = await _rolePermissions.GetCodigosByUserAsync(user.Id, cancellationToken);
-        var tokens = _jwt.Issue(user.TenantId, user.Id, user.Email, permissions);
+        var tokens = _jwt.Issue(user.TenantId, user.Id, user.Email, user.NomeCompleto, permissions);
 
         var refreshHash = JwtTokenService.HashRefreshToken(tokens.RefreshToken);
         await _refreshTokens.AddAsync(new RefreshToken

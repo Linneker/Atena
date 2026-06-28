@@ -1,4 +1,5 @@
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Auth.Logout;
 
-// Response do LogoutEndpoint = Result do Command/Query correspondente.
-// Endpoint repassa direto sem reshape adicional.
+// Logout retorna HTTP 204 NoContent — sem corpo de response.
+// Tipo definido como marker para manter consistência do padrão (Endpoint+Request+Response+Map).
+public sealed record LogoutResponse;

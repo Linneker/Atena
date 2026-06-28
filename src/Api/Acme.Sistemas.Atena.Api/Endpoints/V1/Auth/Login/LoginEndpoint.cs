@@ -1,8 +1,6 @@
 using Acme.Sistemas.Core.Mediators;
-using Acme.Sistemas.Services.V1.Autenticacao.Command.Login;
 
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Auth.Login;
-public sealed record LoginRequest(string Cnpj, string Email, string Senha);
 
 public sealed class LoginEndpoint : IEndpoint
 {
@@ -16,18 +14,18 @@ public sealed class LoginEndpoint : IEndpoint
         {
             var userAgent = httpContext.Request.Headers.UserAgent.ToString();
             var ip = httpContext.Connection.RemoteIpAddress?.ToString();
-            var command = new LoginCommand(request.Cnpj, request.Email, request.Senha, userAgent, ip);
 
-            var response = await mediator.Send(command, cancellationToken);
-            return response.IsSuccess
-                ? Results.Ok(response.Content)
-                : Results.Json(response, statusCode: response.Status);
+            var result = await mediator.Send(request.ToCommand(userAgent, ip), cancellationToken);
+            if (!result.IsSuccess || result.Content is null)
+                return Results.Json(result, statusCode: result.Status);
+
+            return Results.Ok(result.Content.ToResponse());
         })
         .AllowAnonymous()
         .RequireRateLimiting("auth-login")
         .WithTags("Auth")
         .WithName("Login")
-        .Produces<LoginCommandResult>()
+        .Produces<LoginResponse>()
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status401Unauthorized);
     }

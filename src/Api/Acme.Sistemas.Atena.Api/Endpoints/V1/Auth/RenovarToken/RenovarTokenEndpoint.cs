@@ -1,8 +1,6 @@
 using Acme.Sistemas.Core.Mediators;
-using Acme.Sistemas.Services.V1.Autenticacao.Command.RenovarToken;
 
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Auth.RenovarToken;
-public sealed record RenovarTokenRequest(string RefreshToken);
 
 public sealed class RenovarTokenEndpoint : IEndpoint
 {
@@ -16,17 +14,17 @@ public sealed class RenovarTokenEndpoint : IEndpoint
         {
             var userAgent = httpContext.Request.Headers.UserAgent.ToString();
             var ip = httpContext.Connection.RemoteIpAddress?.ToString();
-            var command = new RenovarTokenCommand(request.RefreshToken, userAgent, ip);
 
-            var response = await mediator.Send(command, cancellationToken);
-            return response.IsSuccess
-                ? Results.Ok(response.Content)
-                : Results.Json(response, statusCode: response.Status);
+            var result = await mediator.Send(request.ToCommand(userAgent, ip), cancellationToken);
+            if (!result.IsSuccess || result.Content is null)
+                return Results.Json(result, statusCode: result.Status);
+
+            return Results.Ok(result.Content.ToResponse());
         })
         .AllowAnonymous()
         .WithTags("Auth")
         .WithName("RenovarToken")
-        .Produces<RenovarTokenCommandResult>()
+        .Produces<RenovarTokenResponse>()
         .ProducesProblem(StatusCodes.Status401Unauthorized);
     }
 }
