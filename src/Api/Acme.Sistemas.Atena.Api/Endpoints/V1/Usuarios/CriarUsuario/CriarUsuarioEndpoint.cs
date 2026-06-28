@@ -1,25 +1,27 @@
 using Acme.Sistemas.Core.Mediators;
-using Acme.Sistemas.Services.V1.Usuario.Command.CriarUsuario;
 
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Usuarios.CriarUsuario;
+
 public sealed class CriarUsuarioEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
         app.MapPost("/api/v1/usuarios", async (
-            CriarUsuarioCommand command,
+            CriarUsuarioRequest request,
             IMediator mediator,
             CancellationToken cancellationToken) =>
         {
-            var response = await mediator.Send(command, cancellationToken);
-            return response.IsSuccess
-                ? Results.Created($"/api/v1/usuarios/{response.Content!.Id}", response.Content)
-                : Results.Json(response, statusCode: response.Status);
+            var result = await mediator.Send(request.ToCommand(), cancellationToken);
+            if (!result.IsSuccess || result.Content is null)
+                return Results.Json(result, statusCode: result.Status);
+
+            var response = result.Content.ToResponse();
+            return Results.Created($"/api/v1/usuarios/{response.Id}", response);
         })
         .RequireAuthorization()
         .WithTags("Usuarios")
         .WithName("CriarUsuario")
-        .Produces<CriarUsuarioCommandResult>(StatusCodes.Status201Created)
+        .Produces<CriarUsuarioResponse>(StatusCodes.Status201Created)
         .ProducesValidationProblem()
         .ProducesProblem(StatusCodes.Status409Conflict);
     }

@@ -1,4 +1,3 @@
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Tenants.AlterarTenant;
 
-// Response do AlterarTenantEndpoint = Result do Command/Query correspondente.
-// Endpoint repassa direto sem reshape adicional.
+public sealed record AlterarTenantResponse(Guid Id);

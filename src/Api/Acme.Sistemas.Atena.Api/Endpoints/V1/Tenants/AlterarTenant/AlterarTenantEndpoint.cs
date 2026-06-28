@@ -1,5 +1,4 @@
 using Acme.Sistemas.Core.Mediators;
-using Acme.Sistemas.Services.V1.Tenant.Command.AlterarTenant;
 
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Tenants.AlterarTenant;
 
@@ -13,18 +12,16 @@ public sealed class AlterarTenantEndpoint : IEndpoint
             IMediator mediator,
             CancellationToken cancellationToken) =>
         {
-            var command = new AlterarTenantCommand(
-                id, request.RazaoSocial, request.Plano, request.Status,
-                request.LogoUrl, request.CorPrimaria, request.FusoHorario);
-            var response = await mediator.Send(command, cancellationToken);
-            return response.IsSuccess
-                ? Results.Ok(response.Content)
-                : Results.Json(response, statusCode: response.Status);
+            var result = await mediator.Send(request.ToCommand(id), cancellationToken);
+            if (!result.IsSuccess || result.Content is null)
+                return Results.Json(result, statusCode: result.Status);
+
+            return Results.Ok(result.Content.ToResponse());
         })
         .RequireAuthorization()
         .WithTags("Tenants")
         .WithName("AlterarTenant")
-        .Produces<AlterarTenantCommandResult>()
+        .Produces<AlterarTenantResponse>()
         .ProducesValidationProblem()
         .ProducesProblem(StatusCodes.Status404NotFound);
     }

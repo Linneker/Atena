@@ -1,5 +1,4 @@
 using Acme.Sistemas.Core.Mediators;
-using Acme.Sistemas.Services.V1.Tenant.Command.ExcluirTenant;
 
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Tenants.ExcluirTenant;
 
@@ -12,10 +11,11 @@ public sealed class ExcluirTenantEndpoint : IEndpoint
             IMediator mediator,
             CancellationToken cancellationToken) =>
         {
-            var response = await mediator.Send(new ExcluirTenantCommand(id), cancellationToken);
-            return response.IsSuccess
+            var request = new ExcluirTenantRequest(id);
+            var result = await mediator.Send(request.ToCommand(), cancellationToken);
+            return result.IsSuccess
                 ? Results.NoContent()
-                : Results.Json(response, statusCode: response.Status);
+                : Results.Json(result, statusCode: result.Status);
         })
         .RequireAuthorization()
         .WithTags("Tenants")

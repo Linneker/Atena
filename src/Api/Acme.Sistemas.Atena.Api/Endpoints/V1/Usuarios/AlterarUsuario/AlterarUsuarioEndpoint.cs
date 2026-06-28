@@ -1,9 +1,6 @@
 using Acme.Sistemas.Core.Mediators;
-using Acme.Sistemas.Domain.Enums;
-using Acme.Sistemas.Services.V1.Usuario.Command.AlterarUsuario;
 
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Usuarios.AlterarUsuario;
-public sealed record AlterarUsuarioRequest(string NomeCompleto, string Email, StatusAtivo Status);
 
 public sealed class AlterarUsuarioEndpoint : IEndpoint
 {
@@ -15,16 +12,16 @@ public sealed class AlterarUsuarioEndpoint : IEndpoint
             IMediator mediator,
             CancellationToken cancellationToken) =>
         {
-            var command = new AlterarUsuarioCommand(id, request.NomeCompleto, request.Email, request.Status);
-            var response = await mediator.Send(command, cancellationToken);
-            return response.IsSuccess
-                ? Results.Ok(response.Content)
-                : Results.Json(response, statusCode: response.Status);
+            var result = await mediator.Send(request.ToCommand(id), cancellationToken);
+            if (!result.IsSuccess || result.Content is null)
+                return Results.Json(result, statusCode: result.Status);
+
+            return Results.Ok(result.Content.ToResponse());
         })
         .RequireAuthorization()
         .WithTags("Usuarios")
         .WithName("AlterarUsuario")
-        .Produces<AlterarUsuarioCommandResult>()
+        .Produces<AlterarUsuarioResponse>()
         .ProducesValidationProblem()
         .ProducesProblem(StatusCodes.Status404NotFound)
         .ProducesProblem(StatusCodes.Status409Conflict);

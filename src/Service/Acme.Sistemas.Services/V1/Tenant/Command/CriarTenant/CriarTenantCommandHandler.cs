@@ -98,11 +98,23 @@ public sealed class CriarTenantCommandHandler
         await _roles.AddAsync(adminRole, cancellationToken);
 
         var allPermissions = await _permissions.ListAllAsync(cancellationToken);
-        if (allPermissions.Count > 0)
+
+        // tenant:criar é exclusiva da role Root (criada pelo seed do super-admin
+        // em V20260512001_SeedRootAdmin). Admins de tenants comuns não devem
+        // poder criar outros tenants — só o root global.
+        var rootOnly = Acme.Sistemas.Core.Const.Permissions.Of(
+            Acme.Sistemas.Core.Const.Permissions.Recursos.Tenant,
+            Acme.Sistemas.Core.Const.Permissions.Acoes.Criar);
+
+        var grantable = allPermissions
+            .Where(p => !string.Equals(p.Codigo, rootOnly, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+
+        if (grantable.Count > 0)
         {
             await _rolePermissions.GrantAllToRoleAsync(
                 adminRole.Id,
-                allPermissions.Select(p => p.Id),
+                grantable.Select(p => p.Id),
                 grantedBy: null,
                 cancellationToken);
         }

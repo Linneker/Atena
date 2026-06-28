@@ -1,4 +1,4 @@
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Tenants.ExcluirTenant;
 
-// Response do ExcluirTenantEndpoint = Result do Command/Query correspondente.
-// Endpoint repassa direto sem reshape adicional.
+// ExcluirTenant retorna HTTP 204 NoContent — sem corpo de response.
+public sealed record ExcluirTenantResponse;

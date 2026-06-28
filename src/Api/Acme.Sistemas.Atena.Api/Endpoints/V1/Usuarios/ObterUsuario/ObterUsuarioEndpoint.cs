@@ -1,7 +1,7 @@
 using Acme.Sistemas.Core.Mediators;
-using Acme.Sistemas.Services.V1.Usuario.Query.ObterUsuario;
 
 namespace Acme.Sistemas.Atena.Api.Endpoints.V1.Usuarios.ObterUsuario;
+
 public sealed class ObterUsuarioEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
@@ -11,15 +11,17 @@ public sealed class ObterUsuarioEndpoint : IEndpoint
             IMediator mediator,
             CancellationToken cancellationToken) =>
         {
-            var response = await mediator.Send(new ObterUsuarioQuery(id), cancellationToken);
-            return response.IsSuccess
-                ? Results.Ok(response.Content)
-                : Results.Json(response, statusCode: response.Status);
+            var request = new ObterUsuarioRequest(id);
+            var result = await mediator.Send(request.ToQuery(), cancellationToken);
+            if (!result.IsSuccess || result.Content is null)
+                return Results.Json(result, statusCode: result.Status);
+
+            return Results.Ok(result.Content.ToResponse());
         })
         .RequireAuthorization()
         .WithTags("Usuarios")
         .WithName("ObterUsuario")
-        .Produces<ObterUsuarioQueryResult>()
+        .Produces<ObterUsuarioResponse>()
         .ProducesProblem(StatusCodes.Status404NotFound);
     }
 }
