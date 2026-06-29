@@ -1,20 +1,22 @@
 # Tasks — rh-tabelas-legais
 
 ## Fase 1 — Modelo
-- [ ] 1.1 Migration `AddTabelaInss` (com seed 2026)
-- [ ] 1.2 Migration `AddTabelaIrrf` (com seed 2026)
-- [ ] 1.3 Migration `AddTabelaFgts` (8% + 40% multa)
-- [ ] 1.4 Migration `AddTabelaSalarioMinimoNacional`
-- [ ] 1.5 Migration `AddTabelaSalarioMinimoRegional`
-- [ ] 1.6 Migration `AddTabelaSalarioFamilia`
-- [ ] 1.7 Migration `AddTabelaValeTransporte` (regra fixa)
-- [ ] 1.8 Migration `AddTabelaFeriadosNacionais` (com seed 2026)
-- [ ] 1.9 Migration `AddTabelaFeriadosEstaduais` (vazia, opt-in)
-- [ ] 1.10 Migration `AddTabelaFeriadosMunicipais` (vazia, opt-in)
-- [ ] 1.11 Migration `AddTabelaNaturezasRubricaEsocial` (seed completo S-1010)
-- [ ] 1.12 Migration `AddTabelaRubricasCatalogoNacional` (seed ~30 rubricas modelo)
-- [ ] 1.13 Migration `AddTabelaRubricasTenant` (vazia, tenant-scoped)
-- [ ] 1.14 Domain: classes por tabela + enum `TipoRubrica`, `OrigemRubrica`
+- [x] 1.1 Migration `AddTabelaInss` (com seed 2026) — `V20260701001_AddTabelaInss.cs`
+- [x] 1.2 Migration `AddTabelaIrrf` (com seed 2026) — `V20260701002_AddTabelaIrrf.cs`
+- [x] 1.3 Migration `AddTabelaFgts` (8% + 40% multa) — `V20260701003_AddTabelaFgts.cs`
+- [x] 1.4 Migration `AddTabelaSalarioMinimoNacional` — `V20260701004_*.cs`
+- [x] 1.5 Migration `AddTabelaSalarioMinimoRegional` — `V20260701005_*.cs` (vazia, opt-in)
+- [x] 1.6 Migration `AddTabelaSalarioFamilia` — `V20260701006_*.cs`
+- [x] 1.7 Migration `AddTabelaValeTransporte` (regra fixa) — `V20260701007_*.cs`
+- [x] 1.8 Migration `AddTabelaFeriadosNacionais` (com seed 2026) — reusa tabela `feriados` do W4 (`V20260629007_AddTabelaFeriadosBasicos.cs`); seed 2026 já presente
+- [x] 1.9 Migration `AddTabelaFeriadosEstaduais` (vazia, opt-in) — mesma tabela `feriados` com `tipo='Estadual'` + `uf`
+- [x] 1.10 Migration `AddTabelaFeriadosMunicipais` (vazia, opt-in) — mesma tabela `feriados` com `tipo='Municipal'` + `municipio_ibge`
+- [x] 1.11 Migration `AddTabelaNaturezasRubricaEsocial` (seed S-1010) — `V20260701008_*.cs` (~70 códigos principais; catálogo completo via upload admin W5 Fase 3)
+- [x] 1.12 Migration `AddTabelaRubricasCatalogoNacional` (seed ~30 rubricas modelo) — `V20260701009_*.cs` (30 rubricas — sal-base, HE 50/70/100, adicionais, INSS/IRRF/FGTS, VT/VR, férias, 13º, DSR, sal-família, descontos, informativas)
+- [x] 1.13 Migration `AddTabelaRubricasTenant` (vazia, tenant-scoped) — `V20260701010_*.cs`
+- [x] 1.14 Domain: classes por tabela + enum `TipoRubrica`, `OrigemRubrica`, `TipoGrupoEsocial`. Catálogos nacionais (POCO, sem `BaseEntity`) em `Domain/Entities/Referencia/Rh/`; `RubricaTenant` (`BaseEntity`, tenant-scoped) em `Domain/Entities/Rh/`.
+
+> **Nota — feriados (tasks 1.8/1.9/1.10):** o W4 já criou a tabela `feriados` unificada (com `tipo`/`uf`/`municipio_ibge`) que cobre os 3 escopos do design (nacional/estadual/municipal). Reuso evita duplicação. O upload admin da Fase 3 popula a mesma tabela com filtros por `tipo`. Caso o engine de folha (W6) exija separação física, criar as 3 tabelas no momento da necessidade — não há custo de evolução além de uma migration extra.
 
 ## Fase 2 — Repositórios e Queries
 
