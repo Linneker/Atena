@@ -20,6 +20,7 @@ public sealed class EmpresaRepository : BaseRepository<Empresa>, IEmpresaReposit
         inscricao_estadual, inscricao_municipal, email, telefone, status,
         endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento,
         endereco_bairro, endereco_cidade, endereco_uf, endereco_pais,
+        COALESCE(usa_rep_oficial, 0) AS usa_rep_oficial,
         created_at, created_by, updated_at, updated_by, deleted_at, deleted_by";
 
     public override Task AddAsync(Empresa e, CancellationToken cancellationToken = default)
@@ -73,6 +74,13 @@ public sealed class EmpresaRepository : BaseRepository<Empresa>, IEmpresaReposit
                 ["@tenantId"] = TenantContext.TenantId,
                 ["@cnpj"] = cnpj
             }, cancellationToken);
+
+    public Task<Empresa?> GetPrimeiraAtivaAsync(CancellationToken cancellationToken = default)
+        => Db.QueryFirstOrDefaultAsync(
+            $"SELECT {Cols} FROM empresas WHERE tenant_id = @tenantId AND status = 1 AND deleted_at IS NULL ORDER BY created_at LIMIT 1",
+            Map,
+            new Dictionary<string, object?> { ["@tenantId"] = TenantContext.TenantId },
+            cancellationToken);
 
     private Dictionary<string, object?> BuildParameters(Empresa e, bool isInsert)
     {
@@ -134,6 +142,7 @@ public sealed class EmpresaRepository : BaseRepository<Empresa>, IEmpresaReposit
             Uf = r.GetValueOrDefault<string>("endereco_uf"),
             Pais = r.GetValueOrDefault<string>("endereco_pais")
         },
+        UsaRepOficial = r.GetValueOrDefault<int>("usa_rep_oficial") != 0,
         CreatedAt = r.GetValueOrDefault<DateTime>("created_at"),
         CreatedBy = r.GetValueOrDefault<Guid?>("created_by"),
         UpdatedAt = r.GetValueOrDefault<DateTime?>("updated_at"),

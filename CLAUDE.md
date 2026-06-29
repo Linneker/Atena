@@ -2,6 +2,22 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## 📚 Knowledge Base RAG — leia primeiro
+
+Antes de mexer em qualquer feature, **consulte o índice da knowledge base**:
+**[`documentacao/rag/INDEX.md`](documentacao/rag/INDEX.md)**
+
+Estrutura: 1 arquivo por funcionalidade (plataforma, cadastros, financeiro,
+estoque, compras, vendas, fiscal-nfe, rh-fundacao-w1, rh-ponto-interno-w2,
+rh-mobile-w3, rh-ponto-oficial-671-w4, frontend-angular, mobile-maui,
+auditoria-observabilidade, infraestrutura). Cada arquivo é auto-contido com
+entidades, endpoints, handlers, decisões e paths concretos.
+
+**Regra de manutenção**: toda PR que altera uma funcionalidade DEVE atualizar
+o arquivo `documentacao/rag/<funcionalidade>.md` correspondente — o checklist
+da PR (`.github/pull_request_template.md`) tem item dedicado. Sem essa
+disciplina, o RAG envelhece e queries semânticas vão dar respostas erradas.
+
 ## Project Overview
 
 **Atena** is a multi-tenant ERP (Enterprise Resource Planning) covering financial management, sales, purchases, inventory, fiscal (NF-e), reports and configuration. The system has a .NET 8 Minimal API backend and a single Angular 17 frontend.
@@ -146,6 +162,32 @@ O pipeline transversal aplica em ordem: **Validation → CacheLookup → Audit �
 - **Auditoria**: `AuditBehavior` no pipeline (antes/depois) + `ApiRequestAuditMiddleware`
 - **NF-e assíncrona**: Emissão via fila RabbitMQ; worker `NFeTransmissaoWorker` consome e transmite à SEFAZ; XMLs no S3 (`{tenant_id}/{ano}/{mes}/{chave}.xml`); contingência SVRS automática
 - **Cliente SEFAZ próprio**: `RealNFeSefazClient` em `Acme.Sistemas.ExternalIntegration/Sefaz/` orquestra cert do tenant (`CertificadoTenantResolver` + AES-GCM), assinatura XMLDSig C14N (`XmlSignerC14N`, SHA-1 conforme SEFAZ), SOAP/HTTPS mTLS (`SefazSoapClient` com Polly retry), catálogo de URLs (5 UFs prioritárias + SVRS + SVAN), e contingência (`ContingenciaPolicy`). Modelos POCO em `Acme.Sistemas.Domain/Entities/Fiscal/Xml/`. Sem dependência de lib externa de NF-e. Stub legado (`StubNFeSefazClient`) fica disponível como fallback dev via flag `Fiscal:UseStub=true` no `appsettings`
+
+### Ponto Oficial 671 (`Acme.Sistemas.Services/V1/Rh/Oficial671/` + endpoints `/api/v1/rh/ponto/671/*`)
+
+Conformidade do W4 com a **Portaria MTP 671/2021** — REP-C (cloud). Quando
+`Empresa.UsaRepOficial=true`, toda batida do W2/Mobile chama o subfluxo 671:
+
+- **NSR atômico** por `(tenant, empresa)`: `NumeradorNsr` reusa o idiom
+  `INSERT … ON DUPLICATE KEY UPDATE LAST_INSERT_ID(col+1)` do `NumeradorNFe`.
+  Pulos proibidos pela Portaria; auditados em 24h por `JobAuditarGapsNsrWorker`.
+- **Comprovante anexo II** (`payload texto pipe-separated` + assinatura RSA-SHA-256
+  ICP-Brasil) via `EmitirComprovante671` (`GeradorComprovantePontoTexto` →
+  `AssinadorComprovante671` → `IComprovantePontoRepository`). PDF QuestPDF
+  determinístico para 1ª via + 2ª via.
+- **AFD** layout texto fixo 003 (`LayoutAfd003Writer` — tipos 1, 2, 3, 5, 9 cobertos
+  no MVP; 4 e 6 zerados em PR follow-up). Hash SHA-256 do conteúdo no trailer.
+- **AEJ** JSON v1 (`GeradorAejV1`) + JWS detached RFC 7515 (`AssinadorAej`).
+- **Configuração REP** por empresa (`ConfiguracaoRep`): tipo (P/C), CNPJ/CEI/CNO,
+  endereço, certificado vinculado, responsável legal. Auto-diagnóstico em
+  `GET /671/validar/{empresaId}` checa cert + CNPJ no subject.
+- **Endpoints**: `/671/configuracao`, `/671/validar`, `/671/comprovantes/{m}.pdf`,
+  `/671/afd/exportar` + `/download`, `/671/aej/exportar` + `/download?formato={json|jws}`.
+- **Permissões**: recurso `rh-ponto-oficial` + ações `configurar-rep`, `exportar-afd`,
+  `exportar-aej`, `emitir-comprovante-2via`.
+- **Frontend**: 3 telas em `site/atena-web/src/app/features/rh/ponto/oficial-671/`
+  (`configuracao-rep`, `auto-diagnostico`, `exportar-afd-aej`).
+- **Docs operacionais**: `documentacao/rh/ponto-oficial-671.md`.
 
 ### Mobile MAUI (`src/Mobile/`)
 

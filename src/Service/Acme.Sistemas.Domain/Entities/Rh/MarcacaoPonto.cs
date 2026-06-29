@@ -20,4 +20,10 @@ public sealed class MarcacaoPonto : BaseEntity
     public string HashIntegridade { get; set; } = string.Empty;
     public StatusMarcacao Status { get; set; } = StatusMarcacao.Valida;
     public Guid? MarcacaoOrigemId { get; set; }
+
+    /// <summary>NSR atribuído quando a empresa usa REP oficial (Portaria 671 W4).</summary>
+    public long? Nsr { get; set; }
+
+    /// <summary>FK 1:1 para <c>ComprovantePonto</c> emitido (671 W4).</summary>
+    public Guid? ComprovanteId { get; set; }
 }

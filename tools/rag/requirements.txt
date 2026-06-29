@@ -1,0 +1,11 @@
+# RAG tooling — Python 3.10+
+# Mantém deps mínimas; troca o vector store/embedder via flags se quiser.
+
+chromadb==0.5.5           # Vector store embedded; persiste em ./.rag-index/
+sentence-transformers==3.0.1  # Embeddings locais (default) — sem API key
+tiktoken==0.7.0            # Tokenização para chunking consistente
+rich==13.7.1               # CLI bonita
+typer==0.12.3              # CLI ergonômico
+
+# Opcional: descomente para usar OpenAI embeddings em vez de local
+# openai==1.40.0

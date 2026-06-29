@@ -1,5 +1,7 @@
 using Acme.Sistemas.Domain.Interfaces.Fiscal;
+using Acme.Sistemas.Domain.Interfaces.Rh;
 using Acme.Sistemas.ExternalIntegration.Clients.ViaCep;
+using Acme.Sistemas.ExternalIntegration.Rh.Oficial671;
 using Acme.Sistemas.ExternalIntegration.Proxys;
 using Acme.Sistemas.ExternalIntegration.Sefaz;
 using Acme.Sistemas.ExternalIntegration.Sefaz.Certificado;
@@ -40,6 +42,9 @@ public static class ExternalIntegrationDI
         services.AddScoped<NFeRecepcaoEventoService>();
         services.AddScoped<NFeInutilizacaoService>();
         services.AddScoped<RealNFeSefazClient>();
+
+        // RH ponto-oficial-671: assinador ICP-Brasil do comprovante de marcação
+        services.AddSingleton<IAssinadorComprovante671, AssinadorComprovante671>();
 
         return services;
     }

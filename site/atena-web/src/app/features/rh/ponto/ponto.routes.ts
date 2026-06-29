@@ -8,4 +8,7 @@ export const PONTO_ROUTES: Routes = [
   { path: 'banco-horas', loadComponent: () => import('./banco-horas/banco-horas.component').then((m) => m.BancoHorasComponent) },
   { path: 'politicas', loadComponent: () => import('./banco-horas/politicas-list.component').then((m) => m.PoliticasListComponent) },
   { path: 'fechamento', loadComponent: () => import('./fechamento/fechamento.component').then((m) => m.FechamentoComponent) },
+  { path: '671/configuracao', loadComponent: () => import('./oficial-671/configuracao-rep.component').then((m) => m.ConfiguracaoRepComponent) },
+  { path: '671/diagnostico', loadComponent: () => import('./oficial-671/auto-diagnostico.component').then((m) => m.AutoDiagnosticoRepComponent) },
+  { path: '671/exportar', loadComponent: () => import('./oficial-671/exportar-afd-aej.component').then((m) => m.ExportarAfdAejComponent) },
 ];

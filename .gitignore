@@ -444,3 +444,9 @@ prova-*.png
 src/Api/Acme.Sistemas.Atena.Api/cache-log.db
 site/atena-web/.angular
 site/atena-web/package-lock.json
+
+# RAG tooling (índice vetorial local + venv)
+tools/rag/.rag-index/
+tools/rag/.venv/
+tools/rag/__pycache__/
+tools/rag/*.pyc

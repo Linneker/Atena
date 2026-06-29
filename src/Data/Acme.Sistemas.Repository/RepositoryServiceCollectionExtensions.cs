@@ -1,5 +1,7 @@
 using Acme.Sistemas.Domain.Interfaces.Fiscal;
+using Acme.Sistemas.Domain.Interfaces.Rh;
 using Acme.Sistemas.Repository.Repositories.V1.Fiscal;
+using Acme.Sistemas.Repository.Repositories.V1.Rh.Oficial671;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Acme.Sistemas.Repository;
@@ -27,6 +29,9 @@ public static class RepositoryServiceCollectionExtensions
 
         // Fiscal NF-e — registros explícitos para serviços que não seguem o sufixo "Repository"
         services.AddScoped<INumeradorNFe, NumeradorNFe>();
+
+        // RH ponto-oficial-671: numerador atômico de NSR (mesmo idiom do NumeradorNFe)
+        services.AddScoped<INumeradorNsr, NumeradorNsr>();
 
         return services;
     }

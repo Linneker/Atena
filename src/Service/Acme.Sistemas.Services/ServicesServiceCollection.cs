@@ -34,6 +34,17 @@ public static class ServicesServiceCollection
         // RH-Mobile W3: push notification (stub MVP; FCM/APNs reais em PR dedicada)
         services.AddSingleton<INotificacaoPushService, StubNotificacaoPushService>();
 
+        // RH ponto-oficial-671 (W4): geradores de texto + PDF do comprovante de marcação
+        services.AddSingleton<Acme.Sistemas.Domain.Interfaces.Rh.IGeradorComprovantePontoTexto,
+            V1.Rh.Oficial671.Servicos.GeradorComprovantePontoTexto>();
+        services.AddSingleton<Acme.Sistemas.Domain.Interfaces.Rh.IGeradorComprovantePontoPdf,
+            V1.Rh.Oficial671.Servicos.GeradorComprovantePontoPdf>();
+        services.AddScoped<V1.Rh.Oficial671.Servicos.IEmitirComprovante671,
+            V1.Rh.Oficial671.Servicos.EmitirComprovante671>();
+        services.AddSingleton<V1.Rh.Oficial671.Afd.LayoutAfd003Writer>();
+        services.AddSingleton<V1.Rh.Oficial671.Aej.GeradorAejV1>();
+        services.AddSingleton<V1.Rh.Oficial671.Aej.AssinadorAej>();
+
         // Fiscal NF-e — implementações que vivem em Services
         services.AddSingleton<INFeXmlBuilder, NFeXmlBuilder>();
         services.AddSingleton<INFeXmlSigner, StubNFeXmlSigner>();

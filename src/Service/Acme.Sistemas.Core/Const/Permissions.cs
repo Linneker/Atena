@@ -21,6 +21,11 @@ public static class Permissions
         public const string AprovarPonto = "aprovar-ponto";
         public const string FecharCompetencia = "fechar-competencia";
         public const string ReabrirCompetencia = "reabrir-competencia";
+        // RH-Ponto-Oficial-671 (W4)
+        public const string ConfigurarRep = "configurar-rep";
+        public const string ExportarAfd = "exportar-afd";
+        public const string ExportarAej = "exportar-aej";
+        public const string EmitirComprovante2via = "emitir-comprovante-2via";
     }
 
     public static class Recursos
@@ -74,6 +79,8 @@ public static class Permissions
         public const string RhPonto = "rh-ponto";
         public const string RhBancoHoras = "rh-banco-horas";
         public const string RhPoliticasPonto = "rh-politicas-ponto";
+        // RH-Ponto-Oficial-671 (W4)
+        public const string RhPontoOficial = "rh-ponto-oficial";
     }
 
     public static string Of(string recurso, string acao) => $"{recurso}:{acao}";
